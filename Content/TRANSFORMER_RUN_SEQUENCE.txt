@@ -1,0 +1,1057 @@
+================================================================================
+TRANSFORMER EXPERIMENT SEQUENCE — COMPLETE RUN LIST
+Replicate Table 4 of EMNLP 2024 Findings paper
+================================================================================
+
+HOW TO READ THIS FILE
+--------------------------------------------------------------------------------
+Each step = one experiment run.
+TRAIN FILE  = load this file, fine-tune the model on it
+TEST FILE   = after training, evaluate the model on this file
+TYPE        = IN-DOMAIN (source==target) or CROSS-DOMAIN (source!=target)
+RESULT FILE = save macro-F1 + accuracy + classification report here
+
+Complete ALL runs for one model before starting the next model.
+Within a model, complete ALL runs for one task before the next task.
+
+HYPERPARAMETERS (same for every run):
+  Model checkpoint:  see MODEL ID column per section
+  Max epochs:        5
+  Early stopping:    patience=3 on validation loss (10% of train set)
+  Learning rate:     2e-5
+  Batch size:        16 (reduce to 8 if GPU OOM)
+  Max seq length:    128
+  Optimizer:         AdamW with linear warmup
+  Metric:            macro-F1 (primary), accuracy (secondary)
+
+
+================================================================================
+MODEL: XLM-R Large
+  HuggingFace ID : xlm-roberta-large
+  Note           : RUN THIS MODEL FIRST — primary model
+================================================================================
+
+  ── T1: Nastaliq Sentiment Analysis (5 domains, 25 runs) ──
+     Labels : binary: 0=Negative 1=Positive
+     Folder : Research Datasets/Nastaliq/Sentiment Analysis/
+
+    Step 001 | IN-DOMAIN    | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/XLM-R_Large/A_Twitter_Social_Media__vs__A_Twitter_Social_Media.json
+    Step 002 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/XLM-R_Large/A_Twitter_Social_Media__vs__B_Movie_Reviews.json
+    Step 003 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/XLM-R_Large/A_Twitter_Social_Media__vs__C_Civic_Social_Topics.json
+    Step 004 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/XLM-R_Large/A_Twitter_Social_Media__vs__D_Governance_Political.json
+    Step 005 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/XLM-R_Large/A_Twitter_Social_Media__vs__E_Socioeconomic_Agricultural.json
+    Step 006 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/XLM-R_Large/B_Movie_Reviews__vs__A_Twitter_Social_Media.json
+    Step 007 | IN-DOMAIN    | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/XLM-R_Large/B_Movie_Reviews__vs__B_Movie_Reviews.json
+    Step 008 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/XLM-R_Large/B_Movie_Reviews__vs__C_Civic_Social_Topics.json
+    Step 009 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/XLM-R_Large/B_Movie_Reviews__vs__D_Governance_Political.json
+    Step 010 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/XLM-R_Large/B_Movie_Reviews__vs__E_Socioeconomic_Agricultural.json
+    Step 011 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/XLM-R_Large/C_Civic_Social_Topics__vs__A_Twitter_Social_Media.json
+    Step 012 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/XLM-R_Large/C_Civic_Social_Topics__vs__B_Movie_Reviews.json
+    Step 013 | IN-DOMAIN    | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/XLM-R_Large/C_Civic_Social_Topics__vs__C_Civic_Social_Topics.json
+    Step 014 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/XLM-R_Large/C_Civic_Social_Topics__vs__D_Governance_Political.json
+    Step 015 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/XLM-R_Large/C_Civic_Social_Topics__vs__E_Socioeconomic_Agricultural.json
+    Step 016 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/XLM-R_Large/D_Governance_Political__vs__A_Twitter_Social_Media.json
+    Step 017 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/XLM-R_Large/D_Governance_Political__vs__B_Movie_Reviews.json
+    Step 018 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/XLM-R_Large/D_Governance_Political__vs__C_Civic_Social_Topics.json
+    Step 019 | IN-DOMAIN    | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/XLM-R_Large/D_Governance_Political__vs__D_Governance_Political.json
+    Step 020 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/XLM-R_Large/D_Governance_Political__vs__E_Socioeconomic_Agricultural.json
+    Step 021 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/XLM-R_Large/E_Socioeconomic_Agricultural__vs__A_Twitter_Social_Media.json
+    Step 022 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/XLM-R_Large/E_Socioeconomic_Agricultural__vs__B_Movie_Reviews.json
+    Step 023 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/XLM-R_Large/E_Socioeconomic_Agricultural__vs__C_Civic_Social_Topics.json
+    Step 024 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/XLM-R_Large/E_Socioeconomic_Agricultural__vs__D_Governance_Political.json
+    Step 025 | IN-DOMAIN    | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/XLM-R_Large/E_Socioeconomic_Agricultural__vs__E_Socioeconomic_Agricultural.json
+
+     T1 subtotal for XLM-R Large: 25 runs completed above.
+
+  ── T2: Nastaliq Hate Speech Detection (5 domains, 25 runs) ──
+     Labels : binary: 0=Not-Hate 1=Hate
+     Folder : Research Datasets/Nastaliq/Hate Speech/
+
+    Step 026 | IN-DOMAIN    | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/XLM-R_Large/A_Social_Media_Offensive__vs__A_Social_Media_Offensive.json
+    Step 027 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/XLM-R_Large/A_Social_Media_Offensive__vs__B_Social_Media_Hate_Speech.json
+    Step 028 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/XLM-R_Large/A_Social_Media_Offensive__vs__C_Politics_Sports_Health_Family.json
+    Step 029 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/XLM-R_Large/A_Social_Media_Offensive__vs__D_Sports_Labor_Arts_Education.json
+    Step 030 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/XLM-R_Large/A_Social_Media_Offensive__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 031 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/XLM-R_Large/B_Social_Media_Hate_Speech__vs__A_Social_Media_Offensive.json
+    Step 032 | IN-DOMAIN    | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/XLM-R_Large/B_Social_Media_Hate_Speech__vs__B_Social_Media_Hate_Speech.json
+    Step 033 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/XLM-R_Large/B_Social_Media_Hate_Speech__vs__C_Politics_Sports_Health_Family.json
+    Step 034 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/XLM-R_Large/B_Social_Media_Hate_Speech__vs__D_Sports_Labor_Arts_Education.json
+    Step 035 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/XLM-R_Large/B_Social_Media_Hate_Speech__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 036 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/XLM-R_Large/C_Politics_Sports_Health_Family__vs__A_Social_Media_Offensive.json
+    Step 037 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/XLM-R_Large/C_Politics_Sports_Health_Family__vs__B_Social_Media_Hate_Speech.json
+    Step 038 | IN-DOMAIN    | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/XLM-R_Large/C_Politics_Sports_Health_Family__vs__C_Politics_Sports_Health_Family.json
+    Step 039 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/XLM-R_Large/C_Politics_Sports_Health_Family__vs__D_Sports_Labor_Arts_Education.json
+    Step 040 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/XLM-R_Large/C_Politics_Sports_Health_Family__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 041 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/XLM-R_Large/D_Sports_Labor_Arts_Education__vs__A_Social_Media_Offensive.json
+    Step 042 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/XLM-R_Large/D_Sports_Labor_Arts_Education__vs__B_Social_Media_Hate_Speech.json
+    Step 043 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/XLM-R_Large/D_Sports_Labor_Arts_Education__vs__C_Politics_Sports_Health_Family.json
+    Step 044 | IN-DOMAIN    | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/XLM-R_Large/D_Sports_Labor_Arts_Education__vs__D_Sports_Labor_Arts_Education.json
+    Step 045 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/XLM-R_Large/D_Sports_Labor_Arts_Education__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 046 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/XLM-R_Large/E_Inter_Faith_Sectarian_Ethnic__vs__A_Social_Media_Offensive.json
+    Step 047 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/XLM-R_Large/E_Inter_Faith_Sectarian_Ethnic__vs__B_Social_Media_Hate_Speech.json
+    Step 048 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/XLM-R_Large/E_Inter_Faith_Sectarian_Ethnic__vs__C_Politics_Sports_Health_Family.json
+    Step 049 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/XLM-R_Large/E_Inter_Faith_Sectarian_Ethnic__vs__D_Sports_Labor_Arts_Education.json
+    Step 050 | IN-DOMAIN    | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/XLM-R_Large/E_Inter_Faith_Sectarian_Ethnic__vs__E_Inter_Faith_Sectarian_Ethnic.json
+
+     T2 subtotal for XLM-R Large: 25 runs completed above.
+
+  ── T3: Nastaliq Fake News Detection (4 domains, 16 runs) ──
+     Labels : binary: 0=Fake 1=Real
+     Folder : Research Datasets/Nastaliq/Fake News Detection/
+
+    Step 051 | IN-DOMAIN    | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/XLM-R_Large/A_Multi_Topic_News__vs__A_Multi_Topic_News.json
+    Step 052 | CROSS-DOMAIN | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/XLM-R_Large/A_Multi_Topic_News__vs__B_Ax_to_Grind.json
+    Step 053 | CROSS-DOMAIN | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/XLM-R_Large/A_Multi_Topic_News__vs__C_General_Pakistani_News.json
+    Step 054 | CROSS-DOMAIN | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/XLM-R_Large/A_Multi_Topic_News__vs__D_Fact_Checking_Platform.json
+    Step 055 | CROSS-DOMAIN | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/XLM-R_Large/B_Ax_to_Grind__vs__A_Multi_Topic_News.json
+    Step 056 | IN-DOMAIN    | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/XLM-R_Large/B_Ax_to_Grind__vs__B_Ax_to_Grind.json
+    Step 057 | CROSS-DOMAIN | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/XLM-R_Large/B_Ax_to_Grind__vs__C_General_Pakistani_News.json
+    Step 058 | CROSS-DOMAIN | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/XLM-R_Large/B_Ax_to_Grind__vs__D_Fact_Checking_Platform.json
+    Step 059 | CROSS-DOMAIN | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/XLM-R_Large/C_General_Pakistani_News__vs__A_Multi_Topic_News.json
+    Step 060 | CROSS-DOMAIN | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/XLM-R_Large/C_General_Pakistani_News__vs__B_Ax_to_Grind.json
+    Step 061 | IN-DOMAIN    | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/XLM-R_Large/C_General_Pakistani_News__vs__C_General_Pakistani_News.json
+    Step 062 | CROSS-DOMAIN | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/XLM-R_Large/C_General_Pakistani_News__vs__D_Fact_Checking_Platform.json
+    Step 063 | CROSS-DOMAIN | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/XLM-R_Large/D_Fact_Checking_Platform__vs__A_Multi_Topic_News.json
+    Step 064 | CROSS-DOMAIN | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/XLM-R_Large/D_Fact_Checking_Platform__vs__B_Ax_to_Grind.json
+    Step 065 | CROSS-DOMAIN | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/XLM-R_Large/D_Fact_Checking_Platform__vs__C_General_Pakistani_News.json
+    Step 066 | IN-DOMAIN    | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/XLM-R_Large/D_Fact_Checking_Platform__vs__D_Fact_Checking_Platform.json
+
+     T3 subtotal for XLM-R Large: 16 runs completed above.
+
+  ── T4: Nastaliq Question Answering (4 domains, 16 runs) ──
+     Labels : text=question label=answer (generative/extractive)
+     Folder : Research Datasets/Nastaliq/QA/
+
+    Step 067 | IN-DOMAIN    | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/XLM-R_Large/A_Religious_Hadith__vs__A_Religious_Hadith.json
+    Step 068 | CROSS-DOMAIN | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/XLM-R_Large/A_Religious_Hadith__vs__B_General_Knowledge.json
+    Step 069 | CROSS-DOMAIN | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/XLM-R_Large/A_Religious_Hadith__vs__C_Long_Form_QnA.json
+    Step 070 | CROSS-DOMAIN | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/XLM-R_Large/A_Religious_Hadith__vs__D_Short_Form_QnA.json
+    Step 071 | CROSS-DOMAIN | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/XLM-R_Large/B_General_Knowledge__vs__A_Religious_Hadith.json
+    Step 072 | IN-DOMAIN    | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/XLM-R_Large/B_General_Knowledge__vs__B_General_Knowledge.json
+    Step 073 | CROSS-DOMAIN | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/XLM-R_Large/B_General_Knowledge__vs__C_Long_Form_QnA.json
+    Step 074 | CROSS-DOMAIN | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/XLM-R_Large/B_General_Knowledge__vs__D_Short_Form_QnA.json
+    Step 075 | CROSS-DOMAIN | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/XLM-R_Large/C_Long_Form_QnA__vs__A_Religious_Hadith.json
+    Step 076 | CROSS-DOMAIN | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/XLM-R_Large/C_Long_Form_QnA__vs__B_General_Knowledge.json
+    Step 077 | IN-DOMAIN    | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/XLM-R_Large/C_Long_Form_QnA__vs__C_Long_Form_QnA.json
+    Step 078 | CROSS-DOMAIN | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/XLM-R_Large/C_Long_Form_QnA__vs__D_Short_Form_QnA.json
+    Step 079 | CROSS-DOMAIN | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/XLM-R_Large/D_Short_Form_QnA__vs__A_Religious_Hadith.json
+    Step 080 | CROSS-DOMAIN | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/XLM-R_Large/D_Short_Form_QnA__vs__B_General_Knowledge.json
+    Step 081 | CROSS-DOMAIN | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/XLM-R_Large/D_Short_Form_QnA__vs__C_Long_Form_QnA.json
+    Step 082 | IN-DOMAIN    | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/XLM-R_Large/D_Short_Form_QnA__vs__D_Short_Form_QnA.json
+
+     T4 subtotal for XLM-R Large: 16 runs completed above.
+
+  ── T5: Roman Product/E-Commerce Reviews (3 domains, 9 runs) ──
+     Labels : 3-class: Negative/Neutral/Positive
+     Folder : Research Datasets/Roman/Product or eCommerce Reviews/
+
+    Step 083 | IN-DOMAIN    | Train: Domain_A_Daraz_Ecommerce/train.csv  →  Test: Domain_A_Daraz_Ecommerce/test.csv
+             Save : results/T5/XLM-R_Large/A_Daraz_Ecommerce__vs__A_Daraz_Ecommerce.json
+    Step 084 | CROSS-DOMAIN | Train: Domain_A_Daraz_Ecommerce/train.csv  →  Test: Domain_B_Restaurant_Food/test.csv
+             Save : results/T5/XLM-R_Large/A_Daraz_Ecommerce__vs__B_Restaurant_Food.json
+    Step 085 | CROSS-DOMAIN | Train: Domain_A_Daraz_Ecommerce/train.csv  →  Test: Domain_D_Electronics_Gaming_Delivery/test.csv
+             Save : results/T5/XLM-R_Large/A_Daraz_Ecommerce__vs__D_Electronics_Gaming_Delivery.json
+    Step 086 | CROSS-DOMAIN | Train: Domain_B_Restaurant_Food/train.csv  →  Test: Domain_A_Daraz_Ecommerce/test.csv
+             Save : results/T5/XLM-R_Large/B_Restaurant_Food__vs__A_Daraz_Ecommerce.json
+    Step 087 | IN-DOMAIN    | Train: Domain_B_Restaurant_Food/train.csv  →  Test: Domain_B_Restaurant_Food/test.csv
+             Save : results/T5/XLM-R_Large/B_Restaurant_Food__vs__B_Restaurant_Food.json
+    Step 088 | CROSS-DOMAIN | Train: Domain_B_Restaurant_Food/train.csv  →  Test: Domain_D_Electronics_Gaming_Delivery/test.csv
+             Save : results/T5/XLM-R_Large/B_Restaurant_Food__vs__D_Electronics_Gaming_Delivery.json
+    Step 089 | CROSS-DOMAIN | Train: Domain_D_Electronics_Gaming_Delivery/train.csv  →  Test: Domain_A_Daraz_Ecommerce/test.csv
+             Save : results/T5/XLM-R_Large/D_Electronics_Gaming_Delivery__vs__A_Daraz_Ecommerce.json
+    Step 090 | CROSS-DOMAIN | Train: Domain_D_Electronics_Gaming_Delivery/train.csv  →  Test: Domain_B_Restaurant_Food/test.csv
+             Save : results/T5/XLM-R_Large/D_Electronics_Gaming_Delivery__vs__B_Restaurant_Food.json
+    Step 091 | IN-DOMAIN    | Train: Domain_D_Electronics_Gaming_Delivery/train.csv  →  Test: Domain_D_Electronics_Gaming_Delivery/test.csv
+             Save : results/T5/XLM-R_Large/D_Electronics_Gaming_Delivery__vs__D_Electronics_Gaming_Delivery.json
+
+     T5 subtotal for XLM-R Large: 9 runs completed above.
+
+  ── T6: Roman Sentiment Analysis (4 domains, 16 runs) ──
+     Labels : binary: 0=Negative 1=Positive
+     Folder : Research Datasets/Roman/Sentiment Analysis/
+
+    Step 092 | IN-DOMAIN    | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/XLM-R_Large/A_Mixed_Public_Discourse__vs__A_Mixed_Public_Discourse.json
+    Step 093 | CROSS-DOMAIN | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/XLM-R_Large/A_Mixed_Public_Discourse__vs__B_Social_Media_Politics_Drama.json
+    Step 094 | CROSS-DOMAIN | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/XLM-R_Large/A_Mixed_Public_Discourse__vs__C_YouTube_Entertainment.json
+    Step 095 | CROSS-DOMAIN | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/XLM-R_Large/A_Mixed_Public_Discourse__vs__D_Utilities_Apps_Courses.json
+    Step 096 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/XLM-R_Large/B_Social_Media_Politics_Drama__vs__A_Mixed_Public_Discourse.json
+    Step 097 | IN-DOMAIN    | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/XLM-R_Large/B_Social_Media_Politics_Drama__vs__B_Social_Media_Politics_Drama.json
+    Step 098 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/XLM-R_Large/B_Social_Media_Politics_Drama__vs__C_YouTube_Entertainment.json
+    Step 099 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/XLM-R_Large/B_Social_Media_Politics_Drama__vs__D_Utilities_Apps_Courses.json
+    Step 100 | CROSS-DOMAIN | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/XLM-R_Large/C_YouTube_Entertainment__vs__A_Mixed_Public_Discourse.json
+    Step 101 | CROSS-DOMAIN | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/XLM-R_Large/C_YouTube_Entertainment__vs__B_Social_Media_Politics_Drama.json
+    Step 102 | IN-DOMAIN    | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/XLM-R_Large/C_YouTube_Entertainment__vs__C_YouTube_Entertainment.json
+    Step 103 | CROSS-DOMAIN | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/XLM-R_Large/C_YouTube_Entertainment__vs__D_Utilities_Apps_Courses.json
+    Step 104 | CROSS-DOMAIN | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/XLM-R_Large/D_Utilities_Apps_Courses__vs__A_Mixed_Public_Discourse.json
+    Step 105 | CROSS-DOMAIN | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/XLM-R_Large/D_Utilities_Apps_Courses__vs__B_Social_Media_Politics_Drama.json
+    Step 106 | CROSS-DOMAIN | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/XLM-R_Large/D_Utilities_Apps_Courses__vs__C_YouTube_Entertainment.json
+    Step 107 | IN-DOMAIN    | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/XLM-R_Large/D_Utilities_Apps_Courses__vs__D_Utilities_Apps_Courses.json
+
+     T6 subtotal for XLM-R Large: 16 runs completed above.
+
+  ── T7: Roman Cyber Abuse Detection (4 domains, 16 runs) ──
+     Labels : binary: 0=Not-Abusive 1=Abusive
+     Folder : Research Datasets/Roman/Cyber Abuse or Abusive Language/
+
+    Step 108 | IN-DOMAIN    | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/XLM-R_Large/A_YouTube_Comments__vs__A_YouTube_Comments.json
+    Step 109 | CROSS-DOMAIN | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/XLM-R_Large/A_YouTube_Comments__vs__B_Content_Creator_Comments.json
+    Step 110 | CROSS-DOMAIN | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/XLM-R_Large/A_YouTube_Comments__vs__C_Social_Media_Diverse_Vocab.json
+    Step 111 | CROSS-DOMAIN | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/XLM-R_Large/A_YouTube_Comments__vs__D_General_Online_Video.json
+    Step 112 | CROSS-DOMAIN | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/XLM-R_Large/B_Content_Creator_Comments__vs__A_YouTube_Comments.json
+    Step 113 | IN-DOMAIN    | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/XLM-R_Large/B_Content_Creator_Comments__vs__B_Content_Creator_Comments.json
+    Step 114 | CROSS-DOMAIN | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/XLM-R_Large/B_Content_Creator_Comments__vs__C_Social_Media_Diverse_Vocab.json
+    Step 115 | CROSS-DOMAIN | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/XLM-R_Large/B_Content_Creator_Comments__vs__D_General_Online_Video.json
+    Step 116 | CROSS-DOMAIN | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/XLM-R_Large/C_Social_Media_Diverse_Vocab__vs__A_YouTube_Comments.json
+    Step 117 | CROSS-DOMAIN | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/XLM-R_Large/C_Social_Media_Diverse_Vocab__vs__B_Content_Creator_Comments.json
+    Step 118 | IN-DOMAIN    | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/XLM-R_Large/C_Social_Media_Diverse_Vocab__vs__C_Social_Media_Diverse_Vocab.json
+    Step 119 | CROSS-DOMAIN | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/XLM-R_Large/C_Social_Media_Diverse_Vocab__vs__D_General_Online_Video.json
+    Step 120 | CROSS-DOMAIN | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/XLM-R_Large/D_General_Online_Video__vs__A_YouTube_Comments.json
+    Step 121 | CROSS-DOMAIN | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/XLM-R_Large/D_General_Online_Video__vs__B_Content_Creator_Comments.json
+    Step 122 | CROSS-DOMAIN | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/XLM-R_Large/D_General_Online_Video__vs__C_Social_Media_Diverse_Vocab.json
+    Step 123 | IN-DOMAIN    | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/XLM-R_Large/D_General_Online_Video__vs__D_General_Online_Video.json
+
+     T7 subtotal for XLM-R Large: 16 runs completed above.
+
+  ── T8: Roman Twitter/Social Media Opinions (4 domains, 16 runs) ──
+     Labels : 3-class: Negative/Neutral/Positive
+     Folder : Research Datasets/Roman/Twitter or Social Media Opinions/
+
+    Step 124 | IN-DOMAIN    | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/XLM-R_Large/A_Twitter_Political_Social__vs__A_Twitter_Political_Social.json
+    Step 125 | CROSS-DOMAIN | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/XLM-R_Large/A_Twitter_Political_Social__vs__B_Consumer_Electronics_Gaming.json
+    Step 126 | CROSS-DOMAIN | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/XLM-R_Large/A_Twitter_Political_Social__vs__C_Public_Civic_Services.json
+    Step 127 | CROSS-DOMAIN | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/XLM-R_Large/A_Twitter_Political_Social__vs__D_Mixed_Social_Commentary.json
+    Step 128 | CROSS-DOMAIN | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/XLM-R_Large/B_Consumer_Electronics_Gaming__vs__A_Twitter_Political_Social.json
+    Step 129 | IN-DOMAIN    | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/XLM-R_Large/B_Consumer_Electronics_Gaming__vs__B_Consumer_Electronics_Gaming.json
+    Step 130 | CROSS-DOMAIN | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/XLM-R_Large/B_Consumer_Electronics_Gaming__vs__C_Public_Civic_Services.json
+    Step 131 | CROSS-DOMAIN | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/XLM-R_Large/B_Consumer_Electronics_Gaming__vs__D_Mixed_Social_Commentary.json
+    Step 132 | CROSS-DOMAIN | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/XLM-R_Large/C_Public_Civic_Services__vs__A_Twitter_Political_Social.json
+    Step 133 | CROSS-DOMAIN | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/XLM-R_Large/C_Public_Civic_Services__vs__B_Consumer_Electronics_Gaming.json
+    Step 134 | IN-DOMAIN    | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/XLM-R_Large/C_Public_Civic_Services__vs__C_Public_Civic_Services.json
+    Step 135 | CROSS-DOMAIN | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/XLM-R_Large/C_Public_Civic_Services__vs__D_Mixed_Social_Commentary.json
+    Step 136 | CROSS-DOMAIN | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/XLM-R_Large/D_Mixed_Social_Commentary__vs__A_Twitter_Political_Social.json
+    Step 137 | CROSS-DOMAIN | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/XLM-R_Large/D_Mixed_Social_Commentary__vs__B_Consumer_Electronics_Gaming.json
+    Step 138 | CROSS-DOMAIN | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/XLM-R_Large/D_Mixed_Social_Commentary__vs__C_Public_Civic_Services.json
+    Step 139 | IN-DOMAIN    | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/XLM-R_Large/D_Mixed_Social_Commentary__vs__D_Mixed_Social_Commentary.json
+
+     T8 subtotal for XLM-R Large: 16 runs completed above.
+
+  XLM-R Large TOTAL: 139 runs
+
+================================================================================
+MODEL: mBERT
+  HuggingFace ID : bert-base-multilingual-cased
+  Note           : RUN SECOND
+================================================================================
+
+  ── T1: Nastaliq Sentiment Analysis (5 domains, 25 runs) ──
+     Labels : binary: 0=Negative 1=Positive
+     Folder : Research Datasets/Nastaliq/Sentiment Analysis/
+
+    Step 140 | IN-DOMAIN    | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/mBERT/A_Twitter_Social_Media__vs__A_Twitter_Social_Media.json
+    Step 141 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/mBERT/A_Twitter_Social_Media__vs__B_Movie_Reviews.json
+    Step 142 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/mBERT/A_Twitter_Social_Media__vs__C_Civic_Social_Topics.json
+    Step 143 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/mBERT/A_Twitter_Social_Media__vs__D_Governance_Political.json
+    Step 144 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/mBERT/A_Twitter_Social_Media__vs__E_Socioeconomic_Agricultural.json
+    Step 145 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/mBERT/B_Movie_Reviews__vs__A_Twitter_Social_Media.json
+    Step 146 | IN-DOMAIN    | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/mBERT/B_Movie_Reviews__vs__B_Movie_Reviews.json
+    Step 147 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/mBERT/B_Movie_Reviews__vs__C_Civic_Social_Topics.json
+    Step 148 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/mBERT/B_Movie_Reviews__vs__D_Governance_Political.json
+    Step 149 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/mBERT/B_Movie_Reviews__vs__E_Socioeconomic_Agricultural.json
+    Step 150 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/mBERT/C_Civic_Social_Topics__vs__A_Twitter_Social_Media.json
+    Step 151 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/mBERT/C_Civic_Social_Topics__vs__B_Movie_Reviews.json
+    Step 152 | IN-DOMAIN    | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/mBERT/C_Civic_Social_Topics__vs__C_Civic_Social_Topics.json
+    Step 153 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/mBERT/C_Civic_Social_Topics__vs__D_Governance_Political.json
+    Step 154 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/mBERT/C_Civic_Social_Topics__vs__E_Socioeconomic_Agricultural.json
+    Step 155 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/mBERT/D_Governance_Political__vs__A_Twitter_Social_Media.json
+    Step 156 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/mBERT/D_Governance_Political__vs__B_Movie_Reviews.json
+    Step 157 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/mBERT/D_Governance_Political__vs__C_Civic_Social_Topics.json
+    Step 158 | IN-DOMAIN    | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/mBERT/D_Governance_Political__vs__D_Governance_Political.json
+    Step 159 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/mBERT/D_Governance_Political__vs__E_Socioeconomic_Agricultural.json
+    Step 160 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/mBERT/E_Socioeconomic_Agricultural__vs__A_Twitter_Social_Media.json
+    Step 161 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/mBERT/E_Socioeconomic_Agricultural__vs__B_Movie_Reviews.json
+    Step 162 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/mBERT/E_Socioeconomic_Agricultural__vs__C_Civic_Social_Topics.json
+    Step 163 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/mBERT/E_Socioeconomic_Agricultural__vs__D_Governance_Political.json
+    Step 164 | IN-DOMAIN    | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/mBERT/E_Socioeconomic_Agricultural__vs__E_Socioeconomic_Agricultural.json
+
+     T1 subtotal for mBERT: 25 runs completed above.
+
+  ── T2: Nastaliq Hate Speech Detection (5 domains, 25 runs) ──
+     Labels : binary: 0=Not-Hate 1=Hate
+     Folder : Research Datasets/Nastaliq/Hate Speech/
+
+    Step 165 | IN-DOMAIN    | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/mBERT/A_Social_Media_Offensive__vs__A_Social_Media_Offensive.json
+    Step 166 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/mBERT/A_Social_Media_Offensive__vs__B_Social_Media_Hate_Speech.json
+    Step 167 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/mBERT/A_Social_Media_Offensive__vs__C_Politics_Sports_Health_Family.json
+    Step 168 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/mBERT/A_Social_Media_Offensive__vs__D_Sports_Labor_Arts_Education.json
+    Step 169 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/mBERT/A_Social_Media_Offensive__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 170 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/mBERT/B_Social_Media_Hate_Speech__vs__A_Social_Media_Offensive.json
+    Step 171 | IN-DOMAIN    | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/mBERT/B_Social_Media_Hate_Speech__vs__B_Social_Media_Hate_Speech.json
+    Step 172 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/mBERT/B_Social_Media_Hate_Speech__vs__C_Politics_Sports_Health_Family.json
+    Step 173 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/mBERT/B_Social_Media_Hate_Speech__vs__D_Sports_Labor_Arts_Education.json
+    Step 174 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/mBERT/B_Social_Media_Hate_Speech__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 175 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/mBERT/C_Politics_Sports_Health_Family__vs__A_Social_Media_Offensive.json
+    Step 176 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/mBERT/C_Politics_Sports_Health_Family__vs__B_Social_Media_Hate_Speech.json
+    Step 177 | IN-DOMAIN    | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/mBERT/C_Politics_Sports_Health_Family__vs__C_Politics_Sports_Health_Family.json
+    Step 178 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/mBERT/C_Politics_Sports_Health_Family__vs__D_Sports_Labor_Arts_Education.json
+    Step 179 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/mBERT/C_Politics_Sports_Health_Family__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 180 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/mBERT/D_Sports_Labor_Arts_Education__vs__A_Social_Media_Offensive.json
+    Step 181 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/mBERT/D_Sports_Labor_Arts_Education__vs__B_Social_Media_Hate_Speech.json
+    Step 182 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/mBERT/D_Sports_Labor_Arts_Education__vs__C_Politics_Sports_Health_Family.json
+    Step 183 | IN-DOMAIN    | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/mBERT/D_Sports_Labor_Arts_Education__vs__D_Sports_Labor_Arts_Education.json
+    Step 184 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/mBERT/D_Sports_Labor_Arts_Education__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 185 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/mBERT/E_Inter_Faith_Sectarian_Ethnic__vs__A_Social_Media_Offensive.json
+    Step 186 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/mBERT/E_Inter_Faith_Sectarian_Ethnic__vs__B_Social_Media_Hate_Speech.json
+    Step 187 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/mBERT/E_Inter_Faith_Sectarian_Ethnic__vs__C_Politics_Sports_Health_Family.json
+    Step 188 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/mBERT/E_Inter_Faith_Sectarian_Ethnic__vs__D_Sports_Labor_Arts_Education.json
+    Step 189 | IN-DOMAIN    | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/mBERT/E_Inter_Faith_Sectarian_Ethnic__vs__E_Inter_Faith_Sectarian_Ethnic.json
+
+     T2 subtotal for mBERT: 25 runs completed above.
+
+  ── T3: Nastaliq Fake News Detection (4 domains, 16 runs) ──
+     Labels : binary: 0=Fake 1=Real
+     Folder : Research Datasets/Nastaliq/Fake News Detection/
+
+    Step 190 | IN-DOMAIN    | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/mBERT/A_Multi_Topic_News__vs__A_Multi_Topic_News.json
+    Step 191 | CROSS-DOMAIN | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/mBERT/A_Multi_Topic_News__vs__B_Ax_to_Grind.json
+    Step 192 | CROSS-DOMAIN | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/mBERT/A_Multi_Topic_News__vs__C_General_Pakistani_News.json
+    Step 193 | CROSS-DOMAIN | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/mBERT/A_Multi_Topic_News__vs__D_Fact_Checking_Platform.json
+    Step 194 | CROSS-DOMAIN | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/mBERT/B_Ax_to_Grind__vs__A_Multi_Topic_News.json
+    Step 195 | IN-DOMAIN    | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/mBERT/B_Ax_to_Grind__vs__B_Ax_to_Grind.json
+    Step 196 | CROSS-DOMAIN | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/mBERT/B_Ax_to_Grind__vs__C_General_Pakistani_News.json
+    Step 197 | CROSS-DOMAIN | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/mBERT/B_Ax_to_Grind__vs__D_Fact_Checking_Platform.json
+    Step 198 | CROSS-DOMAIN | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/mBERT/C_General_Pakistani_News__vs__A_Multi_Topic_News.json
+    Step 199 | CROSS-DOMAIN | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/mBERT/C_General_Pakistani_News__vs__B_Ax_to_Grind.json
+    Step 200 | IN-DOMAIN    | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/mBERT/C_General_Pakistani_News__vs__C_General_Pakistani_News.json
+    Step 201 | CROSS-DOMAIN | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/mBERT/C_General_Pakistani_News__vs__D_Fact_Checking_Platform.json
+    Step 202 | CROSS-DOMAIN | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/mBERT/D_Fact_Checking_Platform__vs__A_Multi_Topic_News.json
+    Step 203 | CROSS-DOMAIN | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/mBERT/D_Fact_Checking_Platform__vs__B_Ax_to_Grind.json
+    Step 204 | CROSS-DOMAIN | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/mBERT/D_Fact_Checking_Platform__vs__C_General_Pakistani_News.json
+    Step 205 | IN-DOMAIN    | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/mBERT/D_Fact_Checking_Platform__vs__D_Fact_Checking_Platform.json
+
+     T3 subtotal for mBERT: 16 runs completed above.
+
+  ── T4: Nastaliq Question Answering (4 domains, 16 runs) ──
+     Labels : text=question label=answer (generative/extractive)
+     Folder : Research Datasets/Nastaliq/QA/
+
+    Step 206 | IN-DOMAIN    | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/mBERT/A_Religious_Hadith__vs__A_Religious_Hadith.json
+    Step 207 | CROSS-DOMAIN | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/mBERT/A_Religious_Hadith__vs__B_General_Knowledge.json
+    Step 208 | CROSS-DOMAIN | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/mBERT/A_Religious_Hadith__vs__C_Long_Form_QnA.json
+    Step 209 | CROSS-DOMAIN | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/mBERT/A_Religious_Hadith__vs__D_Short_Form_QnA.json
+    Step 210 | CROSS-DOMAIN | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/mBERT/B_General_Knowledge__vs__A_Religious_Hadith.json
+    Step 211 | IN-DOMAIN    | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/mBERT/B_General_Knowledge__vs__B_General_Knowledge.json
+    Step 212 | CROSS-DOMAIN | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/mBERT/B_General_Knowledge__vs__C_Long_Form_QnA.json
+    Step 213 | CROSS-DOMAIN | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/mBERT/B_General_Knowledge__vs__D_Short_Form_QnA.json
+    Step 214 | CROSS-DOMAIN | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/mBERT/C_Long_Form_QnA__vs__A_Religious_Hadith.json
+    Step 215 | CROSS-DOMAIN | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/mBERT/C_Long_Form_QnA__vs__B_General_Knowledge.json
+    Step 216 | IN-DOMAIN    | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/mBERT/C_Long_Form_QnA__vs__C_Long_Form_QnA.json
+    Step 217 | CROSS-DOMAIN | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/mBERT/C_Long_Form_QnA__vs__D_Short_Form_QnA.json
+    Step 218 | CROSS-DOMAIN | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/mBERT/D_Short_Form_QnA__vs__A_Religious_Hadith.json
+    Step 219 | CROSS-DOMAIN | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/mBERT/D_Short_Form_QnA__vs__B_General_Knowledge.json
+    Step 220 | CROSS-DOMAIN | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/mBERT/D_Short_Form_QnA__vs__C_Long_Form_QnA.json
+    Step 221 | IN-DOMAIN    | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/mBERT/D_Short_Form_QnA__vs__D_Short_Form_QnA.json
+
+     T4 subtotal for mBERT: 16 runs completed above.
+
+  ── T5: Roman Product/E-Commerce Reviews (3 domains, 9 runs) ──
+     Labels : 3-class: Negative/Neutral/Positive
+     Folder : Research Datasets/Roman/Product or eCommerce Reviews/
+
+    Step 222 | IN-DOMAIN    | Train: Domain_A_Daraz_Ecommerce/train.csv  →  Test: Domain_A_Daraz_Ecommerce/test.csv
+             Save : results/T5/mBERT/A_Daraz_Ecommerce__vs__A_Daraz_Ecommerce.json
+    Step 223 | CROSS-DOMAIN | Train: Domain_A_Daraz_Ecommerce/train.csv  →  Test: Domain_B_Restaurant_Food/test.csv
+             Save : results/T5/mBERT/A_Daraz_Ecommerce__vs__B_Restaurant_Food.json
+    Step 224 | CROSS-DOMAIN | Train: Domain_A_Daraz_Ecommerce/train.csv  →  Test: Domain_D_Electronics_Gaming_Delivery/test.csv
+             Save : results/T5/mBERT/A_Daraz_Ecommerce__vs__D_Electronics_Gaming_Delivery.json
+    Step 225 | CROSS-DOMAIN | Train: Domain_B_Restaurant_Food/train.csv  →  Test: Domain_A_Daraz_Ecommerce/test.csv
+             Save : results/T5/mBERT/B_Restaurant_Food__vs__A_Daraz_Ecommerce.json
+    Step 226 | IN-DOMAIN    | Train: Domain_B_Restaurant_Food/train.csv  →  Test: Domain_B_Restaurant_Food/test.csv
+             Save : results/T5/mBERT/B_Restaurant_Food__vs__B_Restaurant_Food.json
+    Step 227 | CROSS-DOMAIN | Train: Domain_B_Restaurant_Food/train.csv  →  Test: Domain_D_Electronics_Gaming_Delivery/test.csv
+             Save : results/T5/mBERT/B_Restaurant_Food__vs__D_Electronics_Gaming_Delivery.json
+    Step 228 | CROSS-DOMAIN | Train: Domain_D_Electronics_Gaming_Delivery/train.csv  →  Test: Domain_A_Daraz_Ecommerce/test.csv
+             Save : results/T5/mBERT/D_Electronics_Gaming_Delivery__vs__A_Daraz_Ecommerce.json
+    Step 229 | CROSS-DOMAIN | Train: Domain_D_Electronics_Gaming_Delivery/train.csv  →  Test: Domain_B_Restaurant_Food/test.csv
+             Save : results/T5/mBERT/D_Electronics_Gaming_Delivery__vs__B_Restaurant_Food.json
+    Step 230 | IN-DOMAIN    | Train: Domain_D_Electronics_Gaming_Delivery/train.csv  →  Test: Domain_D_Electronics_Gaming_Delivery/test.csv
+             Save : results/T5/mBERT/D_Electronics_Gaming_Delivery__vs__D_Electronics_Gaming_Delivery.json
+
+     T5 subtotal for mBERT: 9 runs completed above.
+
+  ── T6: Roman Sentiment Analysis (4 domains, 16 runs) ──
+     Labels : binary: 0=Negative 1=Positive
+     Folder : Research Datasets/Roman/Sentiment Analysis/
+
+    Step 231 | IN-DOMAIN    | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/mBERT/A_Mixed_Public_Discourse__vs__A_Mixed_Public_Discourse.json
+    Step 232 | CROSS-DOMAIN | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/mBERT/A_Mixed_Public_Discourse__vs__B_Social_Media_Politics_Drama.json
+    Step 233 | CROSS-DOMAIN | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/mBERT/A_Mixed_Public_Discourse__vs__C_YouTube_Entertainment.json
+    Step 234 | CROSS-DOMAIN | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/mBERT/A_Mixed_Public_Discourse__vs__D_Utilities_Apps_Courses.json
+    Step 235 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/mBERT/B_Social_Media_Politics_Drama__vs__A_Mixed_Public_Discourse.json
+    Step 236 | IN-DOMAIN    | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/mBERT/B_Social_Media_Politics_Drama__vs__B_Social_Media_Politics_Drama.json
+    Step 237 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/mBERT/B_Social_Media_Politics_Drama__vs__C_YouTube_Entertainment.json
+    Step 238 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/mBERT/B_Social_Media_Politics_Drama__vs__D_Utilities_Apps_Courses.json
+    Step 239 | CROSS-DOMAIN | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/mBERT/C_YouTube_Entertainment__vs__A_Mixed_Public_Discourse.json
+    Step 240 | CROSS-DOMAIN | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/mBERT/C_YouTube_Entertainment__vs__B_Social_Media_Politics_Drama.json
+    Step 241 | IN-DOMAIN    | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/mBERT/C_YouTube_Entertainment__vs__C_YouTube_Entertainment.json
+    Step 242 | CROSS-DOMAIN | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/mBERT/C_YouTube_Entertainment__vs__D_Utilities_Apps_Courses.json
+    Step 243 | CROSS-DOMAIN | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/mBERT/D_Utilities_Apps_Courses__vs__A_Mixed_Public_Discourse.json
+    Step 244 | CROSS-DOMAIN | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/mBERT/D_Utilities_Apps_Courses__vs__B_Social_Media_Politics_Drama.json
+    Step 245 | CROSS-DOMAIN | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/mBERT/D_Utilities_Apps_Courses__vs__C_YouTube_Entertainment.json
+    Step 246 | IN-DOMAIN    | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/mBERT/D_Utilities_Apps_Courses__vs__D_Utilities_Apps_Courses.json
+
+     T6 subtotal for mBERT: 16 runs completed above.
+
+  ── T7: Roman Cyber Abuse Detection (4 domains, 16 runs) ──
+     Labels : binary: 0=Not-Abusive 1=Abusive
+     Folder : Research Datasets/Roman/Cyber Abuse or Abusive Language/
+
+    Step 247 | IN-DOMAIN    | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/mBERT/A_YouTube_Comments__vs__A_YouTube_Comments.json
+    Step 248 | CROSS-DOMAIN | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/mBERT/A_YouTube_Comments__vs__B_Content_Creator_Comments.json
+    Step 249 | CROSS-DOMAIN | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/mBERT/A_YouTube_Comments__vs__C_Social_Media_Diverse_Vocab.json
+    Step 250 | CROSS-DOMAIN | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/mBERT/A_YouTube_Comments__vs__D_General_Online_Video.json
+    Step 251 | CROSS-DOMAIN | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/mBERT/B_Content_Creator_Comments__vs__A_YouTube_Comments.json
+    Step 252 | IN-DOMAIN    | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/mBERT/B_Content_Creator_Comments__vs__B_Content_Creator_Comments.json
+    Step 253 | CROSS-DOMAIN | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/mBERT/B_Content_Creator_Comments__vs__C_Social_Media_Diverse_Vocab.json
+    Step 254 | CROSS-DOMAIN | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/mBERT/B_Content_Creator_Comments__vs__D_General_Online_Video.json
+    Step 255 | CROSS-DOMAIN | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/mBERT/C_Social_Media_Diverse_Vocab__vs__A_YouTube_Comments.json
+    Step 256 | CROSS-DOMAIN | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/mBERT/C_Social_Media_Diverse_Vocab__vs__B_Content_Creator_Comments.json
+    Step 257 | IN-DOMAIN    | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/mBERT/C_Social_Media_Diverse_Vocab__vs__C_Social_Media_Diverse_Vocab.json
+    Step 258 | CROSS-DOMAIN | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/mBERT/C_Social_Media_Diverse_Vocab__vs__D_General_Online_Video.json
+    Step 259 | CROSS-DOMAIN | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/mBERT/D_General_Online_Video__vs__A_YouTube_Comments.json
+    Step 260 | CROSS-DOMAIN | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/mBERT/D_General_Online_Video__vs__B_Content_Creator_Comments.json
+    Step 261 | CROSS-DOMAIN | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/mBERT/D_General_Online_Video__vs__C_Social_Media_Diverse_Vocab.json
+    Step 262 | IN-DOMAIN    | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/mBERT/D_General_Online_Video__vs__D_General_Online_Video.json
+
+     T7 subtotal for mBERT: 16 runs completed above.
+
+  ── T8: Roman Twitter/Social Media Opinions (4 domains, 16 runs) ──
+     Labels : 3-class: Negative/Neutral/Positive
+     Folder : Research Datasets/Roman/Twitter or Social Media Opinions/
+
+    Step 263 | IN-DOMAIN    | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/mBERT/A_Twitter_Political_Social__vs__A_Twitter_Political_Social.json
+    Step 264 | CROSS-DOMAIN | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/mBERT/A_Twitter_Political_Social__vs__B_Consumer_Electronics_Gaming.json
+    Step 265 | CROSS-DOMAIN | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/mBERT/A_Twitter_Political_Social__vs__C_Public_Civic_Services.json
+    Step 266 | CROSS-DOMAIN | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/mBERT/A_Twitter_Political_Social__vs__D_Mixed_Social_Commentary.json
+    Step 267 | CROSS-DOMAIN | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/mBERT/B_Consumer_Electronics_Gaming__vs__A_Twitter_Political_Social.json
+    Step 268 | IN-DOMAIN    | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/mBERT/B_Consumer_Electronics_Gaming__vs__B_Consumer_Electronics_Gaming.json
+    Step 269 | CROSS-DOMAIN | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/mBERT/B_Consumer_Electronics_Gaming__vs__C_Public_Civic_Services.json
+    Step 270 | CROSS-DOMAIN | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/mBERT/B_Consumer_Electronics_Gaming__vs__D_Mixed_Social_Commentary.json
+    Step 271 | CROSS-DOMAIN | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/mBERT/C_Public_Civic_Services__vs__A_Twitter_Political_Social.json
+    Step 272 | CROSS-DOMAIN | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/mBERT/C_Public_Civic_Services__vs__B_Consumer_Electronics_Gaming.json
+    Step 273 | IN-DOMAIN    | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/mBERT/C_Public_Civic_Services__vs__C_Public_Civic_Services.json
+    Step 274 | CROSS-DOMAIN | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/mBERT/C_Public_Civic_Services__vs__D_Mixed_Social_Commentary.json
+    Step 275 | CROSS-DOMAIN | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/mBERT/D_Mixed_Social_Commentary__vs__A_Twitter_Political_Social.json
+    Step 276 | CROSS-DOMAIN | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/mBERT/D_Mixed_Social_Commentary__vs__B_Consumer_Electronics_Gaming.json
+    Step 277 | CROSS-DOMAIN | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/mBERT/D_Mixed_Social_Commentary__vs__C_Public_Civic_Services.json
+    Step 278 | IN-DOMAIN    | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/mBERT/D_Mixed_Social_Commentary__vs__D_Mixed_Social_Commentary.json
+
+     T8 subtotal for mBERT: 16 runs completed above.
+
+  mBERT TOTAL: 139 runs
+
+================================================================================
+MODEL: BERT-Urdu
+  HuggingFace ID : urduhack/roberta-urdu
+  Note           : RUN THIRD — Nastaliq tasks only; use mBERT for Roman tasks if this model fails
+================================================================================
+
+  ── T1: Nastaliq Sentiment Analysis (5 domains, 25 runs) ──
+     Labels : binary: 0=Negative 1=Positive
+     Folder : Research Datasets/Nastaliq/Sentiment Analysis/
+
+    Step 279 | IN-DOMAIN    | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/BERT-Urdu/A_Twitter_Social_Media__vs__A_Twitter_Social_Media.json
+    Step 280 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/BERT-Urdu/A_Twitter_Social_Media__vs__B_Movie_Reviews.json
+    Step 281 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/BERT-Urdu/A_Twitter_Social_Media__vs__C_Civic_Social_Topics.json
+    Step 282 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/BERT-Urdu/A_Twitter_Social_Media__vs__D_Governance_Political.json
+    Step 283 | CROSS-DOMAIN | Train: Domain_A_Twitter_Social_Media/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/BERT-Urdu/A_Twitter_Social_Media__vs__E_Socioeconomic_Agricultural.json
+    Step 284 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/BERT-Urdu/B_Movie_Reviews__vs__A_Twitter_Social_Media.json
+    Step 285 | IN-DOMAIN    | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/BERT-Urdu/B_Movie_Reviews__vs__B_Movie_Reviews.json
+    Step 286 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/BERT-Urdu/B_Movie_Reviews__vs__C_Civic_Social_Topics.json
+    Step 287 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/BERT-Urdu/B_Movie_Reviews__vs__D_Governance_Political.json
+    Step 288 | CROSS-DOMAIN | Train: Domain_B_Movie_Reviews/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/BERT-Urdu/B_Movie_Reviews__vs__E_Socioeconomic_Agricultural.json
+    Step 289 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/BERT-Urdu/C_Civic_Social_Topics__vs__A_Twitter_Social_Media.json
+    Step 290 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/BERT-Urdu/C_Civic_Social_Topics__vs__B_Movie_Reviews.json
+    Step 291 | IN-DOMAIN    | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/BERT-Urdu/C_Civic_Social_Topics__vs__C_Civic_Social_Topics.json
+    Step 292 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/BERT-Urdu/C_Civic_Social_Topics__vs__D_Governance_Political.json
+    Step 293 | CROSS-DOMAIN | Train: Domain_C_Civic_Social_Topics/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/BERT-Urdu/C_Civic_Social_Topics__vs__E_Socioeconomic_Agricultural.json
+    Step 294 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/BERT-Urdu/D_Governance_Political__vs__A_Twitter_Social_Media.json
+    Step 295 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/BERT-Urdu/D_Governance_Political__vs__B_Movie_Reviews.json
+    Step 296 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/BERT-Urdu/D_Governance_Political__vs__C_Civic_Social_Topics.json
+    Step 297 | IN-DOMAIN    | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/BERT-Urdu/D_Governance_Political__vs__D_Governance_Political.json
+    Step 298 | CROSS-DOMAIN | Train: Domain_D_Governance_Political/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/BERT-Urdu/D_Governance_Political__vs__E_Socioeconomic_Agricultural.json
+    Step 299 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_A_Twitter_Social_Media/test.csv
+             Save : results/T1/BERT-Urdu/E_Socioeconomic_Agricultural__vs__A_Twitter_Social_Media.json
+    Step 300 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_B_Movie_Reviews/test.csv
+             Save : results/T1/BERT-Urdu/E_Socioeconomic_Agricultural__vs__B_Movie_Reviews.json
+    Step 301 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_C_Civic_Social_Topics/test.csv
+             Save : results/T1/BERT-Urdu/E_Socioeconomic_Agricultural__vs__C_Civic_Social_Topics.json
+    Step 302 | CROSS-DOMAIN | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_D_Governance_Political/test.csv
+             Save : results/T1/BERT-Urdu/E_Socioeconomic_Agricultural__vs__D_Governance_Political.json
+    Step 303 | IN-DOMAIN    | Train: Domain_E_Socioeconomic_Agricultural/train.csv  →  Test: Domain_E_Socioeconomic_Agricultural/test.csv
+             Save : results/T1/BERT-Urdu/E_Socioeconomic_Agricultural__vs__E_Socioeconomic_Agricultural.json
+
+     T1 subtotal for BERT-Urdu: 25 runs completed above.
+
+  ── T2: Nastaliq Hate Speech Detection (5 domains, 25 runs) ──
+     Labels : binary: 0=Not-Hate 1=Hate
+     Folder : Research Datasets/Nastaliq/Hate Speech/
+
+    Step 304 | IN-DOMAIN    | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/BERT-Urdu/A_Social_Media_Offensive__vs__A_Social_Media_Offensive.json
+    Step 305 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/BERT-Urdu/A_Social_Media_Offensive__vs__B_Social_Media_Hate_Speech.json
+    Step 306 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/BERT-Urdu/A_Social_Media_Offensive__vs__C_Politics_Sports_Health_Family.json
+    Step 307 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/BERT-Urdu/A_Social_Media_Offensive__vs__D_Sports_Labor_Arts_Education.json
+    Step 308 | CROSS-DOMAIN | Train: Domain_A_Social_Media_Offensive/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/BERT-Urdu/A_Social_Media_Offensive__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 309 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/BERT-Urdu/B_Social_Media_Hate_Speech__vs__A_Social_Media_Offensive.json
+    Step 310 | IN-DOMAIN    | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/BERT-Urdu/B_Social_Media_Hate_Speech__vs__B_Social_Media_Hate_Speech.json
+    Step 311 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/BERT-Urdu/B_Social_Media_Hate_Speech__vs__C_Politics_Sports_Health_Family.json
+    Step 312 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/BERT-Urdu/B_Social_Media_Hate_Speech__vs__D_Sports_Labor_Arts_Education.json
+    Step 313 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Hate_Speech/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/BERT-Urdu/B_Social_Media_Hate_Speech__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 314 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/BERT-Urdu/C_Politics_Sports_Health_Family__vs__A_Social_Media_Offensive.json
+    Step 315 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/BERT-Urdu/C_Politics_Sports_Health_Family__vs__B_Social_Media_Hate_Speech.json
+    Step 316 | IN-DOMAIN    | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/BERT-Urdu/C_Politics_Sports_Health_Family__vs__C_Politics_Sports_Health_Family.json
+    Step 317 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/BERT-Urdu/C_Politics_Sports_Health_Family__vs__D_Sports_Labor_Arts_Education.json
+    Step 318 | CROSS-DOMAIN | Train: Domain_C_Politics_Sports_Health_Family/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/BERT-Urdu/C_Politics_Sports_Health_Family__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 319 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/BERT-Urdu/D_Sports_Labor_Arts_Education__vs__A_Social_Media_Offensive.json
+    Step 320 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/BERT-Urdu/D_Sports_Labor_Arts_Education__vs__B_Social_Media_Hate_Speech.json
+    Step 321 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/BERT-Urdu/D_Sports_Labor_Arts_Education__vs__C_Politics_Sports_Health_Family.json
+    Step 322 | IN-DOMAIN    | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/BERT-Urdu/D_Sports_Labor_Arts_Education__vs__D_Sports_Labor_Arts_Education.json
+    Step 323 | CROSS-DOMAIN | Train: Domain_D_Sports_Labor_Arts_Education/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/BERT-Urdu/D_Sports_Labor_Arts_Education__vs__E_Inter_Faith_Sectarian_Ethnic.json
+    Step 324 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_A_Social_Media_Offensive/test.csv
+             Save : results/T2/BERT-Urdu/E_Inter_Faith_Sectarian_Ethnic__vs__A_Social_Media_Offensive.json
+    Step 325 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_B_Social_Media_Hate_Speech/test.csv
+             Save : results/T2/BERT-Urdu/E_Inter_Faith_Sectarian_Ethnic__vs__B_Social_Media_Hate_Speech.json
+    Step 326 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_C_Politics_Sports_Health_Family/test.csv
+             Save : results/T2/BERT-Urdu/E_Inter_Faith_Sectarian_Ethnic__vs__C_Politics_Sports_Health_Family.json
+    Step 327 | CROSS-DOMAIN | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_D_Sports_Labor_Arts_Education/test.csv
+             Save : results/T2/BERT-Urdu/E_Inter_Faith_Sectarian_Ethnic__vs__D_Sports_Labor_Arts_Education.json
+    Step 328 | IN-DOMAIN    | Train: Domain_E_Inter_Faith_Sectarian_Ethnic/train.csv  →  Test: Domain_E_Inter_Faith_Sectarian_Ethnic/test.csv
+             Save : results/T2/BERT-Urdu/E_Inter_Faith_Sectarian_Ethnic__vs__E_Inter_Faith_Sectarian_Ethnic.json
+
+     T2 subtotal for BERT-Urdu: 25 runs completed above.
+
+  ── T3: Nastaliq Fake News Detection (4 domains, 16 runs) ──
+     Labels : binary: 0=Fake 1=Real
+     Folder : Research Datasets/Nastaliq/Fake News Detection/
+
+    Step 329 | IN-DOMAIN    | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/BERT-Urdu/A_Multi_Topic_News__vs__A_Multi_Topic_News.json
+    Step 330 | CROSS-DOMAIN | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/BERT-Urdu/A_Multi_Topic_News__vs__B_Ax_to_Grind.json
+    Step 331 | CROSS-DOMAIN | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/BERT-Urdu/A_Multi_Topic_News__vs__C_General_Pakistani_News.json
+    Step 332 | CROSS-DOMAIN | Train: Domain_A_Multi_Topic_News/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/BERT-Urdu/A_Multi_Topic_News__vs__D_Fact_Checking_Platform.json
+    Step 333 | CROSS-DOMAIN | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/BERT-Urdu/B_Ax_to_Grind__vs__A_Multi_Topic_News.json
+    Step 334 | IN-DOMAIN    | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/BERT-Urdu/B_Ax_to_Grind__vs__B_Ax_to_Grind.json
+    Step 335 | CROSS-DOMAIN | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/BERT-Urdu/B_Ax_to_Grind__vs__C_General_Pakistani_News.json
+    Step 336 | CROSS-DOMAIN | Train: Domain_B_Ax_to_Grind/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/BERT-Urdu/B_Ax_to_Grind__vs__D_Fact_Checking_Platform.json
+    Step 337 | CROSS-DOMAIN | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/BERT-Urdu/C_General_Pakistani_News__vs__A_Multi_Topic_News.json
+    Step 338 | CROSS-DOMAIN | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/BERT-Urdu/C_General_Pakistani_News__vs__B_Ax_to_Grind.json
+    Step 339 | IN-DOMAIN    | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/BERT-Urdu/C_General_Pakistani_News__vs__C_General_Pakistani_News.json
+    Step 340 | CROSS-DOMAIN | Train: Domain_C_General_Pakistani_News/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/BERT-Urdu/C_General_Pakistani_News__vs__D_Fact_Checking_Platform.json
+    Step 341 | CROSS-DOMAIN | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_A_Multi_Topic_News/test.csv
+             Save : results/T3/BERT-Urdu/D_Fact_Checking_Platform__vs__A_Multi_Topic_News.json
+    Step 342 | CROSS-DOMAIN | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_B_Ax_to_Grind/test.csv
+             Save : results/T3/BERT-Urdu/D_Fact_Checking_Platform__vs__B_Ax_to_Grind.json
+    Step 343 | CROSS-DOMAIN | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_C_General_Pakistani_News/test.csv
+             Save : results/T3/BERT-Urdu/D_Fact_Checking_Platform__vs__C_General_Pakistani_News.json
+    Step 344 | IN-DOMAIN    | Train: Domain_D_Fact_Checking_Platform/train.csv  →  Test: Domain_D_Fact_Checking_Platform/test.csv
+             Save : results/T3/BERT-Urdu/D_Fact_Checking_Platform__vs__D_Fact_Checking_Platform.json
+
+     T3 subtotal for BERT-Urdu: 16 runs completed above.
+
+  ── T4: Nastaliq Question Answering (4 domains, 16 runs) ──
+     Labels : text=question label=answer (generative/extractive)
+     Folder : Research Datasets/Nastaliq/QA/
+
+    Step 345 | IN-DOMAIN    | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/BERT-Urdu/A_Religious_Hadith__vs__A_Religious_Hadith.json
+    Step 346 | CROSS-DOMAIN | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/BERT-Urdu/A_Religious_Hadith__vs__B_General_Knowledge.json
+    Step 347 | CROSS-DOMAIN | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/BERT-Urdu/A_Religious_Hadith__vs__C_Long_Form_QnA.json
+    Step 348 | CROSS-DOMAIN | Train: Domain_A_Religious_Hadith/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/BERT-Urdu/A_Religious_Hadith__vs__D_Short_Form_QnA.json
+    Step 349 | CROSS-DOMAIN | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/BERT-Urdu/B_General_Knowledge__vs__A_Religious_Hadith.json
+    Step 350 | IN-DOMAIN    | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/BERT-Urdu/B_General_Knowledge__vs__B_General_Knowledge.json
+    Step 351 | CROSS-DOMAIN | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/BERT-Urdu/B_General_Knowledge__vs__C_Long_Form_QnA.json
+    Step 352 | CROSS-DOMAIN | Train: Domain_B_General_Knowledge/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/BERT-Urdu/B_General_Knowledge__vs__D_Short_Form_QnA.json
+    Step 353 | CROSS-DOMAIN | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/BERT-Urdu/C_Long_Form_QnA__vs__A_Religious_Hadith.json
+    Step 354 | CROSS-DOMAIN | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/BERT-Urdu/C_Long_Form_QnA__vs__B_General_Knowledge.json
+    Step 355 | IN-DOMAIN    | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/BERT-Urdu/C_Long_Form_QnA__vs__C_Long_Form_QnA.json
+    Step 356 | CROSS-DOMAIN | Train: Domain_C_Long_Form_QnA/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/BERT-Urdu/C_Long_Form_QnA__vs__D_Short_Form_QnA.json
+    Step 357 | CROSS-DOMAIN | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_A_Religious_Hadith/test.csv
+             Save : results/T4/BERT-Urdu/D_Short_Form_QnA__vs__A_Religious_Hadith.json
+    Step 358 | CROSS-DOMAIN | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_B_General_Knowledge/test.csv
+             Save : results/T4/BERT-Urdu/D_Short_Form_QnA__vs__B_General_Knowledge.json
+    Step 359 | CROSS-DOMAIN | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_C_Long_Form_QnA/test.csv
+             Save : results/T4/BERT-Urdu/D_Short_Form_QnA__vs__C_Long_Form_QnA.json
+    Step 360 | IN-DOMAIN    | Train: Domain_D_Short_Form_QnA/train.csv  →  Test: Domain_D_Short_Form_QnA/test.csv
+             Save : results/T4/BERT-Urdu/D_Short_Form_QnA__vs__D_Short_Form_QnA.json
+
+     T4 subtotal for BERT-Urdu: 16 runs completed above.
+
+  ── T5: Roman Product/E-Commerce Reviews (3 domains, 9 runs) ──
+     Labels : 3-class: Negative/Neutral/Positive
+     Folder : Research Datasets/Roman/Product or eCommerce Reviews/
+
+    Step 361 | IN-DOMAIN    | Train: Domain_A_Daraz_Ecommerce/train.csv  →  Test: Domain_A_Daraz_Ecommerce/test.csv
+             Save : results/T5/BERT-Urdu/A_Daraz_Ecommerce__vs__A_Daraz_Ecommerce.json
+    Step 362 | CROSS-DOMAIN | Train: Domain_A_Daraz_Ecommerce/train.csv  →  Test: Domain_B_Restaurant_Food/test.csv
+             Save : results/T5/BERT-Urdu/A_Daraz_Ecommerce__vs__B_Restaurant_Food.json
+    Step 363 | CROSS-DOMAIN | Train: Domain_A_Daraz_Ecommerce/train.csv  →  Test: Domain_D_Electronics_Gaming_Delivery/test.csv
+             Save : results/T5/BERT-Urdu/A_Daraz_Ecommerce__vs__D_Electronics_Gaming_Delivery.json
+    Step 364 | CROSS-DOMAIN | Train: Domain_B_Restaurant_Food/train.csv  →  Test: Domain_A_Daraz_Ecommerce/test.csv
+             Save : results/T5/BERT-Urdu/B_Restaurant_Food__vs__A_Daraz_Ecommerce.json
+    Step 365 | IN-DOMAIN    | Train: Domain_B_Restaurant_Food/train.csv  →  Test: Domain_B_Restaurant_Food/test.csv
+             Save : results/T5/BERT-Urdu/B_Restaurant_Food__vs__B_Restaurant_Food.json
+    Step 366 | CROSS-DOMAIN | Train: Domain_B_Restaurant_Food/train.csv  →  Test: Domain_D_Electronics_Gaming_Delivery/test.csv
+             Save : results/T5/BERT-Urdu/B_Restaurant_Food__vs__D_Electronics_Gaming_Delivery.json
+    Step 367 | CROSS-DOMAIN | Train: Domain_D_Electronics_Gaming_Delivery/train.csv  →  Test: Domain_A_Daraz_Ecommerce/test.csv
+             Save : results/T5/BERT-Urdu/D_Electronics_Gaming_Delivery__vs__A_Daraz_Ecommerce.json
+    Step 368 | CROSS-DOMAIN | Train: Domain_D_Electronics_Gaming_Delivery/train.csv  →  Test: Domain_B_Restaurant_Food/test.csv
+             Save : results/T5/BERT-Urdu/D_Electronics_Gaming_Delivery__vs__B_Restaurant_Food.json
+    Step 369 | IN-DOMAIN    | Train: Domain_D_Electronics_Gaming_Delivery/train.csv  →  Test: Domain_D_Electronics_Gaming_Delivery/test.csv
+             Save : results/T5/BERT-Urdu/D_Electronics_Gaming_Delivery__vs__D_Electronics_Gaming_Delivery.json
+
+     T5 subtotal for BERT-Urdu: 9 runs completed above.
+
+  ── T6: Roman Sentiment Analysis (4 domains, 16 runs) ──
+     Labels : binary: 0=Negative 1=Positive
+     Folder : Research Datasets/Roman/Sentiment Analysis/
+
+    Step 370 | IN-DOMAIN    | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/BERT-Urdu/A_Mixed_Public_Discourse__vs__A_Mixed_Public_Discourse.json
+    Step 371 | CROSS-DOMAIN | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/BERT-Urdu/A_Mixed_Public_Discourse__vs__B_Social_Media_Politics_Drama.json
+    Step 372 | CROSS-DOMAIN | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/BERT-Urdu/A_Mixed_Public_Discourse__vs__C_YouTube_Entertainment.json
+    Step 373 | CROSS-DOMAIN | Train: Domain_A_Mixed_Public_Discourse/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/BERT-Urdu/A_Mixed_Public_Discourse__vs__D_Utilities_Apps_Courses.json
+    Step 374 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/BERT-Urdu/B_Social_Media_Politics_Drama__vs__A_Mixed_Public_Discourse.json
+    Step 375 | IN-DOMAIN    | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/BERT-Urdu/B_Social_Media_Politics_Drama__vs__B_Social_Media_Politics_Drama.json
+    Step 376 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/BERT-Urdu/B_Social_Media_Politics_Drama__vs__C_YouTube_Entertainment.json
+    Step 377 | CROSS-DOMAIN | Train: Domain_B_Social_Media_Politics_Drama/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/BERT-Urdu/B_Social_Media_Politics_Drama__vs__D_Utilities_Apps_Courses.json
+    Step 378 | CROSS-DOMAIN | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/BERT-Urdu/C_YouTube_Entertainment__vs__A_Mixed_Public_Discourse.json
+    Step 379 | CROSS-DOMAIN | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/BERT-Urdu/C_YouTube_Entertainment__vs__B_Social_Media_Politics_Drama.json
+    Step 380 | IN-DOMAIN    | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/BERT-Urdu/C_YouTube_Entertainment__vs__C_YouTube_Entertainment.json
+    Step 381 | CROSS-DOMAIN | Train: Domain_C_YouTube_Entertainment/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/BERT-Urdu/C_YouTube_Entertainment__vs__D_Utilities_Apps_Courses.json
+    Step 382 | CROSS-DOMAIN | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_A_Mixed_Public_Discourse/test.csv
+             Save : results/T6/BERT-Urdu/D_Utilities_Apps_Courses__vs__A_Mixed_Public_Discourse.json
+    Step 383 | CROSS-DOMAIN | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_B_Social_Media_Politics_Drama/test.csv
+             Save : results/T6/BERT-Urdu/D_Utilities_Apps_Courses__vs__B_Social_Media_Politics_Drama.json
+    Step 384 | CROSS-DOMAIN | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_C_YouTube_Entertainment/test.csv
+             Save : results/T6/BERT-Urdu/D_Utilities_Apps_Courses__vs__C_YouTube_Entertainment.json
+    Step 385 | IN-DOMAIN    | Train: Domain_D_Utilities_Apps_Courses/train.csv  →  Test: Domain_D_Utilities_Apps_Courses/test.csv
+             Save : results/T6/BERT-Urdu/D_Utilities_Apps_Courses__vs__D_Utilities_Apps_Courses.json
+
+     T6 subtotal for BERT-Urdu: 16 runs completed above.
+
+  ── T7: Roman Cyber Abuse Detection (4 domains, 16 runs) ──
+     Labels : binary: 0=Not-Abusive 1=Abusive
+     Folder : Research Datasets/Roman/Cyber Abuse or Abusive Language/
+
+    Step 386 | IN-DOMAIN    | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/BERT-Urdu/A_YouTube_Comments__vs__A_YouTube_Comments.json
+    Step 387 | CROSS-DOMAIN | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/BERT-Urdu/A_YouTube_Comments__vs__B_Content_Creator_Comments.json
+    Step 388 | CROSS-DOMAIN | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/BERT-Urdu/A_YouTube_Comments__vs__C_Social_Media_Diverse_Vocab.json
+    Step 389 | CROSS-DOMAIN | Train: Domain_A_YouTube_Comments/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/BERT-Urdu/A_YouTube_Comments__vs__D_General_Online_Video.json
+    Step 390 | CROSS-DOMAIN | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/BERT-Urdu/B_Content_Creator_Comments__vs__A_YouTube_Comments.json
+    Step 391 | IN-DOMAIN    | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/BERT-Urdu/B_Content_Creator_Comments__vs__B_Content_Creator_Comments.json
+    Step 392 | CROSS-DOMAIN | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/BERT-Urdu/B_Content_Creator_Comments__vs__C_Social_Media_Diverse_Vocab.json
+    Step 393 | CROSS-DOMAIN | Train: Domain_B_Content_Creator_Comments/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/BERT-Urdu/B_Content_Creator_Comments__vs__D_General_Online_Video.json
+    Step 394 | CROSS-DOMAIN | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/BERT-Urdu/C_Social_Media_Diverse_Vocab__vs__A_YouTube_Comments.json
+    Step 395 | CROSS-DOMAIN | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/BERT-Urdu/C_Social_Media_Diverse_Vocab__vs__B_Content_Creator_Comments.json
+    Step 396 | IN-DOMAIN    | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/BERT-Urdu/C_Social_Media_Diverse_Vocab__vs__C_Social_Media_Diverse_Vocab.json
+    Step 397 | CROSS-DOMAIN | Train: Domain_C_Social_Media_Diverse_Vocab/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/BERT-Urdu/C_Social_Media_Diverse_Vocab__vs__D_General_Online_Video.json
+    Step 398 | CROSS-DOMAIN | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_A_YouTube_Comments/test.csv
+             Save : results/T7/BERT-Urdu/D_General_Online_Video__vs__A_YouTube_Comments.json
+    Step 399 | CROSS-DOMAIN | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_B_Content_Creator_Comments/test.csv
+             Save : results/T7/BERT-Urdu/D_General_Online_Video__vs__B_Content_Creator_Comments.json
+    Step 400 | CROSS-DOMAIN | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_C_Social_Media_Diverse_Vocab/test.csv
+             Save : results/T7/BERT-Urdu/D_General_Online_Video__vs__C_Social_Media_Diverse_Vocab.json
+    Step 401 | IN-DOMAIN    | Train: Domain_D_General_Online_Video/train.csv  →  Test: Domain_D_General_Online_Video/test.csv
+             Save : results/T7/BERT-Urdu/D_General_Online_Video__vs__D_General_Online_Video.json
+
+     T7 subtotal for BERT-Urdu: 16 runs completed above.
+
+  ── T8: Roman Twitter/Social Media Opinions (4 domains, 16 runs) ──
+     Labels : 3-class: Negative/Neutral/Positive
+     Folder : Research Datasets/Roman/Twitter or Social Media Opinions/
+
+    Step 402 | IN-DOMAIN    | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/BERT-Urdu/A_Twitter_Political_Social__vs__A_Twitter_Political_Social.json
+    Step 403 | CROSS-DOMAIN | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/BERT-Urdu/A_Twitter_Political_Social__vs__B_Consumer_Electronics_Gaming.json
+    Step 404 | CROSS-DOMAIN | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/BERT-Urdu/A_Twitter_Political_Social__vs__C_Public_Civic_Services.json
+    Step 405 | CROSS-DOMAIN | Train: Domain_A_Twitter_Political_Social/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/BERT-Urdu/A_Twitter_Political_Social__vs__D_Mixed_Social_Commentary.json
+    Step 406 | CROSS-DOMAIN | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/BERT-Urdu/B_Consumer_Electronics_Gaming__vs__A_Twitter_Political_Social.json
+    Step 407 | IN-DOMAIN    | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/BERT-Urdu/B_Consumer_Electronics_Gaming__vs__B_Consumer_Electronics_Gaming.json
+    Step 408 | CROSS-DOMAIN | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/BERT-Urdu/B_Consumer_Electronics_Gaming__vs__C_Public_Civic_Services.json
+    Step 409 | CROSS-DOMAIN | Train: Domain_B_Consumer_Electronics_Gaming/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/BERT-Urdu/B_Consumer_Electronics_Gaming__vs__D_Mixed_Social_Commentary.json
+    Step 410 | CROSS-DOMAIN | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/BERT-Urdu/C_Public_Civic_Services__vs__A_Twitter_Political_Social.json
+    Step 411 | CROSS-DOMAIN | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/BERT-Urdu/C_Public_Civic_Services__vs__B_Consumer_Electronics_Gaming.json
+    Step 412 | IN-DOMAIN    | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/BERT-Urdu/C_Public_Civic_Services__vs__C_Public_Civic_Services.json
+    Step 413 | CROSS-DOMAIN | Train: Domain_C_Public_Civic_Services/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/BERT-Urdu/C_Public_Civic_Services__vs__D_Mixed_Social_Commentary.json
+    Step 414 | CROSS-DOMAIN | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_A_Twitter_Political_Social/test.csv
+             Save : results/T8/BERT-Urdu/D_Mixed_Social_Commentary__vs__A_Twitter_Political_Social.json
+    Step 415 | CROSS-DOMAIN | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_B_Consumer_Electronics_Gaming/test.csv
+             Save : results/T8/BERT-Urdu/D_Mixed_Social_Commentary__vs__B_Consumer_Electronics_Gaming.json
+    Step 416 | CROSS-DOMAIN | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_C_Public_Civic_Services/test.csv
+             Save : results/T8/BERT-Urdu/D_Mixed_Social_Commentary__vs__C_Public_Civic_Services.json
+    Step 417 | IN-DOMAIN    | Train: Domain_D_Mixed_Social_Commentary/train.csv  →  Test: Domain_D_Mixed_Social_Commentary/test.csv
+             Save : results/T8/BERT-Urdu/D_Mixed_Social_Commentary__vs__D_Mixed_Social_Commentary.json
+
+     T8 subtotal for BERT-Urdu: 16 runs completed above.
+
+  BERT-Urdu TOTAL: 139 runs
+
+================================================================================
+GRAND TOTAL: 417 runs across 3 models
+After all runs complete, run compute_tables.py to produce Table 4.
+================================================================================
