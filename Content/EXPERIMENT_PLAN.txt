@@ -1,0 +1,992 @@
+================================================================================
+EXPERIMENT PLAN — URDU NLP DOMAIN ROBUSTNESS STUDY
+Replicating Tables 4 and 5 of: "Measuring the Robustness of NLP Models to
+Domain Shifts" — Calderon et al., EMNLP 2024 Findings
+Paper: https://aclanthology.org/2024.findings-emnlp.7.pdf
+================================================================================
+Date: 2026-08-08
+Author: Abdullah
+Status: Phase 2 — Professor has approved. Begin experiments.
+================================================================================
+
+
+PART 0 — CONTEXT AND RULES
+────────────────────────────────────────────────────────────────────────────────
+
+The goal is to measure domain robustness of NLP models in Urdu. The setup is:
+  - Language is FIXED (Urdu)
+  - Script is FIXED per task group (Nastaliq or Roman)
+  - NLP Task is FIXED per task group (e.g., hate speech, sentiment)
+  - Only the DOMAIN varies (different sources, topics, styles)
+
+We conduct both IN-DOMAIN and CROSS-DOMAIN experiments:
+  - IN-DOMAIN:    train on Domain A, test on Domain A
+  - CROSS-DOMAIN: train on Domain A, test on Domain B (and all other pairs)
+
+We report averages across all pairs per task, matching the structure of
+Tables 4 and 5 from the EMNLP paper.
+
+DO NOT:
+  - Change the language
+  - Change the script
+  - Mix Nastaliq and Roman tasks
+  - Include multilingual or cross-lingual settings
+
+
+================================================================================
+PART 1 — COMPLETE DATASET INVENTORY (35 DOMAINS ACROSS 8 TASKS)
+================================================================================
+
+A new domain (Domain E — ISE) was added to Nastaliq Hate Speech.
+Total is now 35 domains (was 34).
+
+────────────────────────────────────────────────────────────────────────────────
+TASK 1 — Nastaliq Sentiment Analysis                          [5 Domains]
+────────────────────────────────────────────────────────────────────────────────
+
+  Domain A — Twitter / Social Media
+    Folder:   Nastaliq/Sentiment Analysis/Domain_A_Twitter_Social_Media/
+    File:     urdu-sentiment-corpus-v1.tsv
+    Content:  General social commentary from Twitter
+    Labels:   Positive / Negative / Neutral (3-class)
+    Split:    80/20 (created by split script)
+
+  Domain B — Movie Reviews
+    Folder:   Nastaliq/Sentiment Analysis/Domain_B_Movie_Reviews/
+    Files:    train.csv + test.csv (pre-split)
+    Content:  Urdu-language film critique and audience reviews
+    Labels:   0 / 1 (binary: negative / positive)
+    Split:    PRE-SPLIT — use existing train.csv + test.csv
+    NOTE:     Binary labels — must map to Positive/Negative at training time
+              to unify with other 3-class domains in this task.
+              Map: 0 → Negative, 1 → Positive (drop Neutral class from others
+              OR add a mapping that makes Domain B compatible — see Part 4).
+
+  Domain C — Civic and Social Topics
+    Folder:   Nastaliq/Sentiment Analysis/Domain_C_Civic_Social_Topics/
+    File:     urdu_sentiment_multidomain.csv
+    Content:  Transport, arts, digital banking, sports, food culture
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20 (created by split script)
+
+  Domain D — Governance and Political Topics
+    Folder:   Nastaliq/Sentiment Analysis/Domain_D_Governance_Political/
+    Files:    train.csv + test.csv (pre-split from UrduPoliticalTweets)
+    Content:  Pakistani political events, governance, civic institutions
+    Labels:   Positive / Negative / Neutral
+    Split:    PRE-SPLIT — use existing files
+
+  Domain E — Socio-Economic and Agricultural Topics
+    Folder:   Nastaliq/Sentiment Analysis/Domain_E_Socioeconomic_Agricultural/
+    File:     urdu_sentiments.csv
+    Content:  Agriculture, economy, climate, social welfare discourse
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20 (created by split script)
+
+  LABEL UNIFICATION FOR TASK 1:
+    Domain B is binary (0/1). All others are 3-class.
+    Strategy: Keep 3-class for all. For Domain B:
+      Map 0 → Negative, 1 → Positive. Treat missing Neutral as a class imbalance.
+    During cross-domain experiments where Domain B is the target:
+      Predict only Positive/Negative (3-class model output mapped to 2-class).
+    OR: Drop all Neutral samples from other domains to make everything binary.
+    RECOMMENDED: Drop Neutral at data loading time for Task 1. Binary makes
+    cross-domain evaluation simpler and consistent.
+
+────────────────────────────────────────────────────────────────────────────────
+TASK 2 — Nastaliq Hate Speech Detection                       [5 Domains]
+────────────────────────────────────────────────────────────────────────────────
+
+  Domain A — Social Media (General / Offensiveness-Labeled)
+    Folder:   Nastaliq/Hate Speech/Domain_A_Social_Media_Offensive/
+    File:     22K_Offensive_dataset_Final.xlsx (~21,760 samples)
+    Content:  Mixed online social media, labeled for offensive language
+    Labels:   0 / 1 (binary)
+    Split:    80/20
+
+  Domain B — Social Media (Independently Annotated Hate Speech)
+    Folder:   Nastaliq/Hate Speech/Domain_B_Social_Media_Hate_Speech/
+    File:     Urdu_Hate_Speech.xlsx (~26,198 samples)
+    Content:  Separately collected hate speech corpus
+    Labels:   0 / 1 (binary)
+    Split:    80/20
+
+  Domain C — Politics, Sports, Health, Family Culture
+    Folder:   Nastaliq/Hate Speech/Domain_C_Politics_Sports_Health_Family/
+    File:     urdu_hate_speech_multi_domain.csv
+    Content:  Hate speech across political, health, sports, family topics
+    Labels:   Hateful / Non-hateful
+    Split:    80/20
+
+  Domain D — Sports, Labor, Arts, Education
+    Folder:   Nastaliq/Hate Speech/Domain_D_Sports_Labor_Arts_Education/
+    File:     urdu_hate_speech_multidomain.csv
+    Content:  Hate speech in sports, labor, arts, education commentary
+    Labels:   Hateful / Non-hateful
+    Split:    80/20
+
+  Domain E — Inter-Faith, Sectarian, and Ethnic Hate Speech  *** NEW ***
+    Folder:   Nastaliq/Hate Speech/Domain_E_Inter_Faith_Sectarian_Ethnic/
+    File:     ISE_Level_1_Dataset.xlsx (21,760 samples)
+    Content:  Urdu tweets, ISE hate speech benchmark (binary)
+    Labels:   0 / 1  (0 = not hate: 13,107 | 1 = hate: 8,652)
+    Split:    80/20 (created by split script)
+    USE:      ISE_Level_1_Dataset.xlsx only. Columns: Tweet_Text, Final_decision.
+    SKIP:     ISE_Level_1_Hammad_Khurram.xlsx — same data, annotator columns only
+              ISE_Level_2_Dataset.xlsx / ISE_Level_2_Final_Dataset.xlsx — these
+              classify ISE sub-type (I/S/E/O), which is a different sub-task.
+
+  LABEL UNIFICATION FOR TASK 2:
+    All binary. Map everything to 0=not-hate, 1=hate at loading time.
+
+────────────────────────────────────────────────────────────────────────────────
+TASK 3 — Nastaliq Fake News Detection                         [4 Domains]
+────────────────────────────────────────────────────────────────────────────────
+
+  Domain A — Multi-Topic News Corpus
+    Folder:   Nastaliq/Fake News Detection/Domain_A_Multi_Topic_News/
+    Content:  Text files in Train/Fake/, Train/Real/, Test/Fake/, Test/Real/
+    Labels:   0=Fake (file is in Fake/ subdir), 1=Real
+    Split:    PRE-SPLIT — folder structure already has Train/ and Test/
+    Build:    Read all .txt files, create train.csv from Train/ and test.csv
+              from Test/, with columns: text (file content), label (0 or 1)
+
+  Domain B — Ax-to-Grind Independent Dataset
+    Folder:   Nastaliq/Fake News Detection/Domain_B_Ax_to_Grind/
+    File:     Combined .csv (~10,106 samples)
+    Content:  Agenda-driven fake news
+    Labels:   FAKE / TRUE → map to 0=Fake, 1=True
+    Split:    80/20
+
+  Domain C — General Pakistani News
+    Folder:   Nastaliq/Fake News Detection/Domain_C_General_Pakistani_News/
+    Files:    Fake News 12166.xlsx + Final True News-11012.xlsx (two halves)
+    Content:  Broad Pakistani news; merge both files
+    Labels:   0=Fake (from Fake News xlsx), 1=Real (from True News xlsx)
+    Split:    Merge both → 80/20 stratified split
+
+  Domain D — Fact-Checking Platform
+    Folder:   Nastaliq/Fake News Detection/Domain_D_Fact_Checking_Platform/
+    File:     Notri-Fact_Real_Unreal_Urdu_NEWS.xlsx (~13,388 samples)
+    Content:  News verified by fact-checking platform
+    Labels:   Real / Unreal → map to 0=Unreal, 1=Real
+    Split:    80/20
+
+  LABEL UNIFICATION FOR TASK 3:
+    All binary. Map to 0=Fake/Unreal, 1=Real/True.
+
+────────────────────────────────────────────────────────────────────────────────
+TASK 4 — Nastaliq Question Answering                          [4 Domains]
+────────────────────────────────────────────────────────────────────────────────
+
+  NOTE: QA is fundamentally different from classification tasks.
+  For cross-domain QA experiments:
+    - Fine-tuned models: treat as extractive QA or sequence-to-sequence.
+    - Metric: Exact Match (EM) and Token-level F1 (standard QA metrics).
+    - If using a generative approach, use ROUGE-L or BERTScore.
+  For QA we do: train on source domain QA pairs, evaluate on target domain.
+
+  Domain A — Religious Text (Hadith / Islamic Traditions)
+    Folder:   Nastaliq/QA/Domain_A_Religious_Hadith/
+    File:     qa_ahadis.csv (~820 Q&A pairs)
+    Columns:  question, answer (or similar)
+    Split:    80/20
+
+  Domain B — General Knowledge
+    Folder:   Nastaliq/QA/Domain_B_General_Knowledge/
+    File:     qa_gk.csv (~5,816 Q&A pairs)
+    Split:    80/20
+
+  Domain C — Long-Form Multi-Domain QnA
+    Folder:   Nastaliq/QA/Domain_C_Long_Form_QnA/
+    File:     urdu_qna_long_multidomain.csv
+    Content:  Long-answer QnA across education, health, physics, finance, civic
+    Split:    80/20
+
+  Domain D — Short-Form Multi-Domain QnA
+    Folder:   Nastaliq/QA/Domain_D_Short_Form_QnA/
+    File:     urdu_qna_multidomain.csv
+    Content:  Short-answer QnA across science, nature, health, general knowledge
+    Split:    80/20
+
+────────────────────────────────────────────────────────────────────────────────
+TASK 5 — Roman Urdu Product / E-Commerce Reviews              [5 Domains]
+────────────────────────────────────────────────────────────────────────────────
+
+  Domain A — E-Commerce (Daraz Platform)
+    Folder:   Roman/Product or eCommerce Reviews/Domain_A_Daraz_Ecommerce/
+    File:     daraz-code-mixed-product-reviews.csv
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20
+
+  Domain B — Restaurant and Food Reviews
+    Folder:   Roman/Product or eCommerce Reviews/Domain_B_Restaurant_Food/
+    File:     kababjees_Review_2025.csv
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20
+
+  Domain C — General Product and Service Reviews
+    Folder:   Roman/Product or eCommerce Reviews/Domain_C_General_Product_Service/
+    File:     Roman urdu Reviews and summary - summary 350.csv
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20
+
+  Domain D — Consumer Electronics, Gaming, and Delivery
+    Folder:   Roman/Product or eCommerce Reviews/Domain_D_Electronics_Gaming_Delivery/
+    File:     Roman Urdu reviews Dataset with English translation.csv
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20
+
+  Domain E — Mixed Reviews with Spelling Variation
+    Folder:   Roman/Product or eCommerce Reviews/Domain_E_Mixed_Spelling_Variation/
+    File:     Roman Urdu words and English Translation with spelling variation.csv
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20
+
+────────────────────────────────────────────────────────────────────────────────
+TASK 6 — Roman Urdu Sentiment Analysis                        [4 Domains]
+────────────────────────────────────────────────────────────────────────────────
+
+  Domain A — Mixed Public Discourse
+    Folder:   Roman/Sentiment Analysis/Domain_A_Mixed_Public_Discourse/
+    Files:    HuggingFace parquet (train / validation / test splits)
+    Content:  General public sentiment across online discussions
+    Labels:   Positive / Negative / Neutral
+    Split:    PRE-SPLIT — use existing; merge validation into train if desired
+
+  Domain B — Social Media (Politics, Products, Drama)
+    Folder:   Roman/Sentiment Analysis/Domain_B_Social_Media_Politics_Drama/
+    File:     Dataset 11000 Reviews.tsv (~10,999 samples)
+    Labels:   pos / neg (binary)
+    Split:    80/20
+
+  Domain C — YouTube Comments (Entertainment)
+    Folder:   Roman/Sentiment Analysis/Domain_C_YouTube_Entertainment/
+    File:     RomanUrdu_English_YouTube_Sentiment_27K.csv (~27,187 samples)
+    Labels:   Positive / Negative / Normal (3-class; "Normal" = Neutral)
+    Split:    80/20
+
+  Domain D — General Social Topics (Utilities, Apps, Courses)
+    Folder:   Roman/Sentiment Analysis/Domain_D_Utilities_Apps_Courses/
+    File:     RomanUrduSentiment.csv
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20
+
+  LABEL UNIFICATION FOR TASK 6:
+    Domain B is binary (pos/neg). Others are 3-class.
+    Same strategy as Task 1: map to binary (Positive/Negative) by dropping
+    Neutral samples from 3-class domains when cross-domain evaluation involves
+    Domain B as target/source.
+    RECOMMENDED: Drop Neutral at loading time for Task 6. Map pos/Positive→1,
+    neg/Negative→0, Normal→ignored.
+
+────────────────────────────────────────────────────────────────────────────────
+TASK 7 — Roman Urdu Cyber Abuse / Abusive Language            [4 Domains]
+────────────────────────────────────────────────────────────────────────────────
+
+  Domain A — YouTube Comments
+    Folder:   Roman/Cyber Abuse or Abusive Language/Domain_A_YouTube_Comments/
+    File:     roman_urdu_cyber_abuse_dataset.csv (~5,004 samples)
+    Labels:   Harmful / Non-harmful → map to 1=Abusive, 0=Non-abusive
+    Split:    80/20
+
+  Domain B — Online Content Creator Comments
+    Folder:   Roman/Cyber Abuse or Abusive Language/Domain_B_Content_Creator_Comments/
+    File:     roman_urdu_cyber_abuse.csv
+    Labels:   Abusive / Non-abusive → map to 1=Abusive, 0=Non-abusive
+    Split:    80/20
+
+  Domain C — Social Media (Diverse Vocabulary)
+    Folder:   Roman/Cyber Abuse or Abusive Language/Domain_C_Social_Media_Diverse_Vocab/
+    File:     roman_urdu_cyber_abuse_diverse.csv
+    Labels:   Abusive / Non-abusive
+    Split:    80/20
+
+  Domain D — General Online Video Comments
+    Folder:   Roman/Cyber Abuse or Abusive Language/Domain_D_General_Online_Video/
+    File:     roman_urdu_cyber_abusing.csv
+    Labels:   Abusive / Non-abusive
+    Split:    80/20
+
+────────────────────────────────────────────────────────────────────────────────
+TASK 8 — Roman Urdu Twitter / Social Media Opinions           [4 Domains]
+────────────────────────────────────────────────────────────────────────────────
+
+  Domain A — Twitter Political and Social Opinions
+    Folder:   Roman/Twitter or Social Media Opinions/Domain_A_Twitter_Political_Social/
+    File:     New.csv (~17,899 samples)
+    Labels:   0 / 1 (binary)
+    Split:    80/20
+
+  Domain B — Lifestyle and Consumer Opinions
+    Folder:   Roman/Twitter or Social Media Opinions/Domain_B_Consumer_Electronics_Gaming/
+    File:     roman_urdu_opinions_lifestyle.csv
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20
+
+  Domain C — Public and Civic Services
+    Folder:   Roman/Twitter or Social Media Opinions/Domain_C_Public_Civic_Services/
+    File:     roman_urdu_opinions_public.csv
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20
+
+  Domain D — Mixed Social Commentary
+    Folder:   Roman/Twitter or Social Media Opinions/Domain_D_Mixed_Social_Commentary/
+    File:     roman_urdu_social_opinions.csv
+    Labels:   Positive / Negative / Neutral
+    Split:    80/20
+
+  LABEL UNIFICATION FOR TASK 8:
+    Domain A is binary (0/1). Check polarity direction: does 1=Positive?
+    Verify by inspecting sample rows. Map all domains to Positive/Negative binary
+    (drop Neutral), consistent with Domain A.
+
+
+================================================================================
+PART 2 — ISE DATASET DECISION (data5 in Hate Speech)
+================================================================================
+
+The ISE GitHub repo contains 4 Excel files. Here is exactly which to use:
+
+FILE 1: ISE_Level_1_Dataset.xlsx          ← USE THIS
+  Rows:    21,760
+  Columns: Tweet_ID, Tweet_Text, Hammad, Khurram, Final_decision
+  Labels:  Final_decision: 0 = not hate (13,107), 1 = hate (8,652)
+  Why:     Binary classification consistent with all other hate speech domains.
+           Final_decision is the gold label after adjudication.
+
+FILE 2: ISE_Level_1_Hammad_Khurram.xlsx   ← SKIP
+  Rows:    21,760 (same tweets as File 1)
+  Same structure, just annotator column ordering differs.
+  This is the raw annotator disagreement view. We use the adjudicated labels.
+
+FILE 3: ISE_Level_2_Dataset.xlsx          ← SKIP
+  Rows:    8,703 (subset of hate tweets from Level 1)
+  Labels:  O=Other/Not-ISE (5,421), I=Inter-faith (1,530),
+           S=Sectarian (1,584), E=Ethnic (167)
+  This is a MULTI-CLASS sub-task (classifying TYPE of hate) — not binary.
+  Different task from our binary hate detection framework.
+
+FILE 4: ISE_Level_2_Final_Dataset.xlsx    ← SKIP
+  Same as File 3, just the finalized version. Not needed.
+
+CONCLUSION: Use only ISE_Level_1_Dataset.xlsx.
+  text column  = Tweet_Text
+  label column = Final_decision (0/1)
+
+
+================================================================================
+PART 3 — FOLDER STRUCTURE AFTER ORGANIZATION
+================================================================================
+
+After renaming, the complete folder structure is:
+
+Research Datasets/
+├── Nastaliq/
+│   ├── Sentiment Analysis/
+│   │   ├── Domain_A_Twitter_Social_Media/
+│   │   │   ├── urdu-sentiment-corpus-v1.tsv    (original)
+│   │   │   ├── train.csv                        (80%)
+│   │   │   └── test.csv                         (20%)
+│   │   ├── Domain_B_Movie_Reviews/
+│   │   │   ├── train.csv                        (pre-split)
+│   │   │   └── test.csv                         (pre-split)
+│   │   ├── Domain_C_Civic_Social_Topics/
+│   │   │   ├── urdu_sentiment_multidomain.csv   (original)
+│   │   │   ├── train.csv
+│   │   │   └── test.csv
+│   │   ├── Domain_D_Governance_Political/
+│   │   │   ├── train.csv                        (pre-split)
+│   │   │   └── test.csv
+│   │   └── Domain_E_Socioeconomic_Agricultural/
+│   │       ├── urdu_sentiments.csv              (original)
+│   │       ├── train.csv
+│   │       └── test.csv
+│   │
+│   ├── Hate Speech/
+│   │   ├── Domain_A_Social_Media_Offensive/
+│   │   │   ├── 22K_Offensive_dataset_Final.xlsx (original)
+│   │   │   ├── train.csv
+│   │   │   └── test.csv
+│   │   ├── Domain_B_Social_Media_Hate_Speech/
+│   │   │   ├── Urdu_Hate_Speech.xlsx            (original)
+│   │   │   ├── train.csv
+│   │   │   └── test.csv
+│   │   ├── Domain_C_Politics_Sports_Health_Family/
+│   │   │   ├── urdu_hate_speech_multi_domain.csv (original)
+│   │   │   ├── train.csv
+│   │   │   └── test.csv
+│   │   ├── Domain_D_Sports_Labor_Arts_Education/
+│   │   │   ├── urdu_hate_speech_multidomain.csv  (original)
+│   │   │   ├── train.csv
+│   │   │   └── test.csv
+│   │   └── Domain_E_Inter_Faith_Sectarian_Ethnic/   *** NEW ***
+│   │       ├── ISE_Level_1_Dataset.xlsx          (USE THIS)
+│   │       ├── ISE_Level_1_Hammad_Khurram.xlsx   (IGNORE)
+│   │       ├── ISE_Level_2_Dataset.xlsx           (IGNORE)
+│   │       ├── ISE_Level_2_Final_Dataset.xlsx     (IGNORE)
+│   │       ├── train.csv
+│   │       └── test.csv
+│   │
+│   ├── Fake News Detection/
+│   │   ├── Domain_A_Multi_Topic_News/
+│   │   │   ├── Train/Fake/*.txt + Train/Real/*.txt  (original)
+│   │   │   ├── Test/Fake/*.txt + Test/Real/*.txt    (original)
+│   │   │   ├── train.csv                            (built from Train/ folder)
+│   │   │   └── test.csv                             (built from Test/ folder)
+│   │   ├── Domain_B_Ax_to_Grind/
+│   │   │   ├── Combined .csv                        (original)
+│   │   │   ├── train.csv
+│   │   │   └── test.csv
+│   │   ├── Domain_C_General_Pakistani_News/
+│   │   │   ├── Fake News 12166.xlsx                 (original, label=0)
+│   │   │   ├── Final True News-11012.xlsx           (original, label=1)
+│   │   │   ├── train.csv                            (merged, 80%)
+│   │   │   └── test.csv                             (merged, 20%)
+│   │   └── Domain_D_Fact_Checking_Platform/
+│   │       ├── Notri-Fact_Real_Unreal_Urdu_NEWS.xlsx (original)
+│   │       ├── train.csv
+│   │       └── test.csv
+│   │
+│   └── QA/
+│       ├── Domain_A_Religious_Hadith/
+│       │   ├── qa_ahadis.csv                    (original)
+│       │   ├── train.csv
+│       │   └── test.csv
+│       ├── Domain_B_General_Knowledge/
+│       │   ├── qa_gk.csv                        (original)
+│       │   ├── train.csv
+│       │   └── test.csv
+│       ├── Domain_C_Long_Form_QnA/
+│       │   ├── urdu_qna_long_multidomain.csv    (original)
+│       │   ├── train.csv
+│       │   └── test.csv
+│       └── Domain_D_Short_Form_QnA/
+│           ├── urdu_qna_multidomain.csv         (original)
+│           ├── train.csv
+│           └── test.csv
+│
+├── Roman/
+│   ├── Product or eCommerce Reviews/
+│   │   ├── Domain_A_Daraz_Ecommerce/
+│   │   ├── Domain_B_Restaurant_Food/
+│   │   ├── Domain_C_General_Product_Service/
+│   │   ├── Domain_D_Electronics_Gaming_Delivery/
+│   │   └── Domain_E_Mixed_Spelling_Variation/
+│   │
+│   ├── Sentiment Analysis/
+│   │   ├── Domain_A_Mixed_Public_Discourse/     (parquet pre-split)
+│   │   ├── Domain_B_Social_Media_Politics_Drama/
+│   │   ├── Domain_C_YouTube_Entertainment/
+│   │   └── Domain_D_Utilities_Apps_Courses/
+│   │
+│   ├── Cyber Abuse or Abusive Language/
+│   │   ├── Domain_A_YouTube_Comments/
+│   │   ├── Domain_B_Content_Creator_Comments/
+│   │   ├── Domain_C_Social_Media_Diverse_Vocab/
+│   │   └── Domain_D_General_Online_Video/
+│   │
+│   └── Twitter or Social Media Opinions/
+│       ├── Domain_A_Twitter_Political_Social/
+│       ├── Domain_B_Consumer_Electronics_Gaming/
+│       ├── Domain_C_Public_Civic_Services/
+│       └── Domain_D_Mixed_Social_Commentary/
+│
+├── EXPERIMENT_PLAN.txt                          (this file)
+└── SPLITS_SUMMARY.txt                           (generated by split script)
+
+
+================================================================================
+PART 4 — DATA PREPARATION STEPS (DO THESE BEFORE ANY TRAINING)
+================================================================================
+
+STEP 4.1 — Verify all splits exist
+  - Check that every domain folder has train.csv and test.csv.
+  - Each CSV must have exactly two columns: "text" and "label".
+  - No NaN values in text or label columns.
+  - Verify row counts match expected totals.
+
+STEP 4.2 — Label standardization per task (do at data loading time in code)
+
+  Task 1 — Nastaliq Sentiment Analysis:
+    Map all labels → 0=Negative, 1=Positive
+    Drop all Neutral samples (to make binary, consistent with Domain B).
+    Domain B: 0→0 (Negative), 1→1 (Positive)
+    Others: "Negative"→0, "Positive"→1, "Neutral"→DROP
+
+  Task 2 — Nastaliq Hate Speech:
+    Map all → 0=Not-Hate, 1=Hate
+    Domain A/B: already 0/1
+    Domain C/D: "Hateful"→1, "Non-hateful"→0
+    Domain E: already 0/1
+
+  Task 3 — Nastaliq Fake News:
+    Map all → 0=Fake, 1=Real
+    Domain A: folder-based (Fake/→0, Real/→1)
+    Domain B: "FAKE"→0, "TRUE"→1
+    Domain C: Fake file→0, Real file→1
+    Domain D: "Unreal"→0, "Real"→1
+
+  Task 4 — Nastaliq QA:
+    No label mapping needed (question/answer pairs).
+    text = question, label = answer (string, not numeric).
+
+  Task 5 — Roman Product Reviews:
+    Map → 0=Negative, 1=Neutral, 2=Positive  (3-class)
+    OR binary (drop Neutral): 0=Negative, 1=Positive.
+    CHECK: all 5 domains for label consistency before deciding.
+    RECOMMENDED: Use 3-class if all domains have Neutral; drop Neutral otherwise.
+
+  Task 6 — Roman Sentiment Analysis:
+    Domain B is binary (pos/neg). Drop Neutral from others.
+    Map: pos/Positive→1, neg/Negative→0, Normal/Neutral→DROP
+
+  Task 7 — Roman Cyber Abuse:
+    Map all → 0=Not-Abusive, 1=Abusive
+    Harmful→1, Non-harmful→0, Abusive→1, Non-abusive→0
+
+  Task 8 — Roman Twitter Opinions:
+    Domain A is binary (0/1). Verify: 0=Negative, 1=Positive.
+    Drop Neutral from B/C/D to match binary format.
+
+STEP 4.3 — Validate minimum sample size
+  After label mapping and dropping, ensure every domain has at least:
+    - 200 training samples minimum (for fine-tuning)
+    - 50 test samples minimum
+  If any domain is smaller, flag it and decide: oversample (SMOTE) or skip task.
+
+STEP 4.4 — Create a dataset_info.json file
+  For each task, record:
+    {
+      "task": "task_name",
+      "script": "Nastaliq/Roman",
+      "domains": [
+        {
+          "name": "Domain_A_...",
+          "folder": "relative/path",
+          "train_size": N,
+          "test_size": N,
+          "num_classes": 2,
+          "label_map": {"Hateful": 1, "Non-hateful": 0}
+        }
+      ]
+    }
+
+
+================================================================================
+PART 5 — MODELS
+================================================================================
+
+TABLE 4 MODELS (Fine-tuned Transformers):
+
+  Model 1: mBERT
+    HuggingFace ID: bert-base-multilingual-cased
+    Why: Strong multilingual baseline, commonly used for Urdu NLP.
+    Supports both Nastaliq (Unicode) and Roman script.
+
+  Model 2: XLM-R Large   [PRIMARY — run this first]
+    HuggingFace ID: xlm-roberta-large
+    Why: Consistently the best multilingual model for low-resource languages.
+    Most likely to give highest scores and show clearest domain drops.
+
+  Model 3: BERT-Urdu (UrduBERT or similar)
+    HuggingFace ID: urduhack/roberta-urdu OR
+                    sana-nlp/gu-roberta-urdu OR
+                    ishan/bert-base-uncased-fnc (check availability)
+    Check HuggingFace for: "urdu bert" — pick the most downloaded/cited one.
+    Limitation: May only work on Nastaliq script. Use mBERT for Roman tasks.
+    ALTERNATIVE if no good Urdu BERT: use bert-base-multilingual-uncased
+
+TABLE 5 MODELS (Few-Shot LLMs via Ollama — no paid API):
+
+  Model 4: llama3.1:8b
+    Run via: ollama run llama3.1:8b
+    Prompting: 5-shot classification or QA
+
+  Model 5: gemma2:9b
+    Run via: ollama run gemma2:9b
+
+  Model 6: qwen2.5:7b
+    Run via: ollama run qwen2.5:7b
+    Note: Qwen has strong multilingual support including Urdu.
+
+  Ollama setup: Install from ollama.com. Pull models before experiments.
+  Command: ollama pull llama3.1:8b && ollama pull gemma2:9b && ollama pull qwen2.5:7b
+
+TRAINING HYPERPARAMETERS (for fine-tuned models):
+
+  Max epochs:        5
+  Early stopping:    patience=3 on validation loss
+  Validation split:  10% of training data (random, not a separate domain split)
+  Learning rate:     2e-5 (default for fine-tuning transformers)
+  Batch size:        16 (reduce to 8 if OOM on GPU)
+  Max sequence len:  128 (Urdu text is typically short; try 256 if results are poor)
+  Optimizer:         AdamW with linear warmup (10% of steps)
+  Metric:            Macro-F1 (primary), Accuracy (secondary)
+  Framework:         HuggingFace Transformers + PyTorch
+
+  If hyperparameter tuning is needed (optional):
+    Use Optuna or manual grid on: lr ∈ {1e-5, 2e-5, 5e-5}, batch ∈ {8, 16}
+    Run on one domain only (fastest domain per task) and transfer best params.
+
+
+================================================================================
+PART 6 — EXPERIMENT PROTOCOL (HOW TO RUN IN-DOMAIN AND CROSS-DOMAIN)
+================================================================================
+
+DEFINITIONS:
+  N = number of domains in a task
+  S = source domain (training domain)
+  T = target domain (test domain)
+  SS = train on S_train, test on S_test          ← in-domain score for S
+  TT = train on T_train, test on T_test          ← in-domain score for T
+  ST = train on S_train, test on T_test          ← cross-domain score
+
+METRICS (from the paper):
+  SD (Source Drop)   = SS − ST    (how much the model degrades when tested on T)
+  TD (Target Drop)   = TT − ST    (how much T would have been better with its own data)
+  WSD (Worst SD)     = max over all pairs (S,T) of SD
+  WTD (Worst TD)     = max over all pairs (S,T) of TD
+  Avg In-Domain      = mean of all SS scores (one per domain)
+  Avg Cross-Domain   = mean of all ST scores (one per ordered pair)
+  Avg SD             = mean of all SD values
+  Avg TD             = mean of all TD values
+
+NUMBER OF EXPERIMENTS PER TASK PER MODEL:
+  N domains → N in-domain runs + N×(N-1) cross-domain runs = N² total runs
+  N=4: 16 runs per model per task
+  N=5: 25 runs per model per task
+
+HOW TO ENUMERATE EXPERIMENTS:
+  For a task with domains [D1, D2, D3, D4]:
+    In-domain:    (D1,D1), (D2,D2), (D3,D3), (D4,D4)         = 4 runs
+    Cross-domain: (D1,D2), (D1,D3), (D1,D4),                   = 12 runs
+                  (D2,D1), (D2,D3), (D2,D4),
+                  (D3,D1), (D3,D2), (D3,D4),
+                  (D4,D1), (D4,D2), (D4,D3)
+    Total: 16 runs
+
+  For N=5 (Tasks 1, 2, 5): 25 runs per model per task
+
+TOTAL RUN COUNT:
+  Fine-tuned models (3): mBERT, XLM-R, BERT-Urdu
+    Task 1 (N=5): 3 × 25 = 75
+    Task 2 (N=5): 3 × 25 = 75
+    Task 3 (N=4): 3 × 16 = 48
+    Task 4 (N=4): 3 × 16 = 48
+    Task 5 (N=5): 3 × 25 = 75
+    Task 6 (N=4): 3 × 16 = 48
+    Task 7 (N=4): 3 × 16 = 48
+    Task 8 (N=4): 3 × 16 = 48
+    TOTAL FINE-TUNED RUNS: 465
+
+  Few-shot LLMs (3): llama3.1, gemma2, qwen2.5
+    Only cross-domain runs needed (N×(N-1) per task)
+    Also include in-domain (k-shot from same domain) for fair comparison
+    Same count as above: 465 LLM runs
+    But LLM runs are inference only (no training), so much faster per run.
+
+  GRAND TOTAL: ~930 experiment runs across all models.
+
+OUTPUT PER RUN:
+  Save to: results/task_name/model_name/S_vs_T_results.json
+  Contents: {
+    "source": "Domain_A_...",
+    "target": "Domain_B_...",
+    "task": "hate_speech",
+    "model": "xlm-roberta-large",
+    "train_size": N,
+    "test_size": N,
+    "macro_f1": 0.XX,
+    "accuracy": 0.XX,
+    "classification_report": {...}
+  }
+
+
+================================================================================
+PART 7 — EXPERIMENT SEQUENCE (ORDER OF OPERATIONS — FOLLOW THIS ORDER)
+================================================================================
+
+PHASE 0 — SETUP (do once, before any training)
+─────────────────────────────────────────────
+  STEP 0.1: Install dependencies
+    pip install transformers datasets torch scikit-learn pandas openpyxl
+    pip install accelerate evaluate seqeval
+    ollama pull llama3.1:8b
+    ollama pull gemma2:9b
+    ollama pull qwen2.5:7b
+
+  STEP 0.2: Verify all 35 domain folders have train.csv + test.csv
+    Run: python verify_splits.py
+    Check: no empty files, correct columns (text, label), no NaN rows
+
+  STEP 0.3: Set up results directory
+    Create: results/ with subdirectory per task and per model
+    Create: results/aggregate_table4.csv and results/aggregate_table5.csv
+
+  STEP 0.4: Test the training pipeline end-to-end on one small domain
+    Use Domain_A_Religious_Hadith (QA, ~820 samples = smallest dataset)
+    Verify: training runs, model saves, evaluation works, results JSON written
+
+PHASE 1 — FINE-TUNED EXPERIMENTS FOR TABLE 4
+─────────────────────────────────────────────
+  Run tasks in this order (smallest → largest, to debug with less compute):
+
+  ROUND 1A: XLM-R Large on all tasks (primary model)
+    Run Task 4 (QA, N=4) first        → 16 runs
+    Run Task 3 (Fake News, N=4)        → 16 runs
+    Run Task 6 (Roman SA, N=4)         → 16 runs
+    Run Task 7 (Cyber Abuse, N=4)      → 16 runs
+    Run Task 8 (Twitter Opinions, N=4) → 16 runs
+    Run Task 1 (Nastaliq SA, N=5)      → 25 runs
+    Run Task 2 (Hate Speech, N=5)      → 25 runs
+    Run Task 5 (Roman Reviews, N=5)    → 25 runs
+    Subtotal: 155 runs
+
+  ROUND 1B: mBERT on all tasks
+    Same order as Round 1A
+    Subtotal: 155 runs
+
+  ROUND 1C: BERT-Urdu on all tasks
+    IMPORTANT: BERT-Urdu may not handle Roman Urdu well.
+    For Roman script tasks (5, 6, 7, 8): use mBERT if BERT-Urdu fails.
+    Subtotal: 155 runs
+
+  AFTER ROUND 1A: Compute preliminary Table 4 with XLM-R only.
+  Show to professor for interim update before completing all models.
+
+PHASE 2 — FEW-SHOT LLM EXPERIMENTS FOR TABLE 5
+────────────────────────────────────────────────
+  Prompting strategy for few-shot classification:
+    k = 5 (5 examples per class from source domain training set)
+    For binary (hate/not-hate): 5 hate + 5 not-hate = 10 examples in prompt
+    For 3-class: 5 per class = 15 examples in prompt
+    For QA: 5 question-answer pairs as examples, then ask the test question
+
+  Prompt format (classification example):
+    System: You are a classifier for [task description in English].
+    Below are examples. For each input, respond with only the label.
+    Examples:
+      Text: [example 1 from source domain]
+      Label: Hate
+      ...
+      (5-shot)
+    Text: [test sample from target domain]
+    Label:
+
+  Run the same N² experiment matrix as fine-tuning (same source/target pairs).
+  Results go to: results/task_name/llm_name/S_vs_T_results.json
+
+  Run order: llama3.1 → gemma2 → qwen2.5
+  Run all tasks for one LLM before moving to the next.
+  Subtotal: 465 LLM runs (but each is just inference, ~2-5 seconds per sample)
+
+PHASE 3 — AGGREGATE RESULTS INTO TABLES
+────────────────────────────────────────
+  Run: python compute_tables.py
+
+  This script reads all results JSON files and computes:
+    For Table 4:
+      Per task, per model:
+        - Average In-Domain F1 (mean of all SS scores)
+        - Average Cross-Domain F1 (mean of all ST scores)
+        - Average Source Drop (mean of SS-ST per source)
+        - Average Target Drop (mean of TT-ST per target)
+        - Worst Source Drop
+        - Worst Target Drop
+
+    For Table 5:
+      Per task:
+        - Best fine-tuned model F1 (from Table 4)
+        - Each LLM's Average Cross-Domain F1
+        - Compare directly
+
+
+================================================================================
+PART 8 — TABLE 4 AND TABLE 5 FORMAT (WHAT TO REPORT)
+================================================================================
+
+TABLE 4 FORMAT (replicate exactly from paper):
+
+  Rows: Each NLP task (Hate Speech, Sentiment, Fake News, QA, etc.)
+  Columns per model (mBERT, XLM-R, BERT-Urdu):
+    SS      = Avg In-Domain F1 (averaged over all N domains)
+    ST      = Avg Cross-Domain F1 (averaged over all N×(N-1) pairs)
+    SD      = Avg Source Drop = SS − ST
+    WSD     = Worst Source Drop (max SD across all pairs)
+    TD      = Avg Target Drop = TT − ST (averaged)
+    WTD     = Worst Target Drop
+
+  Example cell values: 0.XX (macro-F1, 2 decimal places)
+
+  Interpretation:
+    High ST = model is domain-robust
+    High SD = model "overfits" to source domain vocabulary/style
+    High TD = training on target domain would have helped significantly
+    Low WSD = no single pair causes catastrophic failure
+
+
+TABLE 5 FORMAT:
+
+  Rows: Each NLP task
+  Columns: Fine-tuned (best model), LLM1 (llama3.1), LLM2 (gemma2), LLM3 (qwen2.5)
+  Metric: Average Cross-Domain F1 (ST) for each
+  Additional: Compare In-Domain fine-tuned vs Cross-Domain LLM
+  Goal: Show whether LLMs generalize better across domains than fine-tuned models
+
+
+================================================================================
+PART 9 — CODE STRUCTURE (FILES TO CREATE)
+================================================================================
+
+Create a folder: Research Datasets/code/ with these files:
+
+FILE: code/config.py
+  Contains:
+  - BASE_DIR = path to Research Datasets folder
+  - TASK_DEFINITIONS dict: maps task name → list of domain folder paths
+  - LABEL_MAPS dict: per task, maps string labels → integers
+  - MODEL_IDS dict: maps model name → HuggingFace model ID
+  - RANDOM_SEED = 42
+  - MAX_SEQ_LEN = 128
+  - BATCH_SIZE = 16
+  - LEARNING_RATE = 2e-5
+  - NUM_EPOCHS = 5
+  - PATIENCE = 3
+
+FILE: code/dataset_loader.py
+  Function: load_domain(task_name, domain_name, split="train")
+    - Reads train.csv or test.csv from the appropriate folder
+    - Applies label mapping from config.py
+    - Returns HuggingFace Dataset object
+  Function: get_all_domain_pairs(task_name)
+    - Returns list of (source_domain, target_domain) tuples
+    - Includes (D, D) pairs for in-domain runs
+
+FILE: code/finetune.py
+  Function: train_and_evaluate(source_domain, target_domain, task_name, model_name)
+    - Loads source train data
+    - Fine-tunes the model
+    - Evaluates on target test data
+    - Saves results JSON
+    - Returns macro-F1
+
+FILE: code/llm_evaluate.py
+  Function: few_shot_evaluate(source_domain, target_domain, task_name, llm_name, k=5)
+    - Samples k examples per class from source_domain train set
+    - Builds prompt
+    - Calls Ollama API (http://localhost:11434/api/generate)
+    - Parses response label
+    - Returns macro-F1 on full target test set
+
+FILE: code/run_experiments.py
+  - Loops over all (task, source, target, model) combinations
+  - Calls train_and_evaluate or few_shot_evaluate
+  - Skips already-completed runs (checks if results JSON exists)
+  - Logs progress to experiment_log.txt
+
+FILE: code/compute_tables.py
+  - Reads all results JSON files from results/ directory
+  - Computes SS, TT, ST, SD, TD, WSD, WTD per task per model
+  - Outputs Table4.csv and Table5.csv
+
+FILE: code/verify_splits.py
+  - Checks all 35 domain folders have train.csv + test.csv
+  - Reports row counts, label distributions, any issues
+
+
+================================================================================
+PART 10 — COMPLETE STEP-BY-STEP EXECUTION ORDER (START TO FINISH)
+================================================================================
+
+Follow each step in order. Do not skip ahead.
+
+[DONE] STEP 1: Rename all data folders with domain names.
+               Folders renamed: data → Domain_X_Name across all 8 tasks.
+
+[DONE] STEP 2: Create train.csv + test.csv splits in every domain folder.
+               80/20 stratified. Columns: text, label.
+               Pre-split folders: standardize column names.
+
+[    ] STEP 3: Run verify_splits.py to confirm all 35 domains have valid splits.
+               Fix any missing or broken splits before continuing.
+
+[    ] STEP 4: Create code/ folder with all 6 Python files from Part 9.
+               Start with config.py and dataset_loader.py.
+
+[    ] STEP 5: Test dataset_loader.py on one domain per task.
+               Print a few rows to confirm text/label are correct.
+
+[    ] STEP 6: Create finetune.py. Test on one small experiment:
+               Task=Hate Speech, Source=Domain_A, Target=Domain_A, Model=mBERT
+               (in-domain run, fastest sanity check)
+               Confirm macro-F1 output is reasonable (>0.5 for in-domain).
+
+[    ] STEP 7: Run ALL XLM-R experiments (Phase 1, Round 1A): 155 runs.
+               Use run_experiments.py. Log all results.
+               This is the most important model. Get these results first.
+
+[    ] STEP 8: After Step 7 completes, run compute_tables.py for XLM-R only.
+               Inspect preliminary Table 4 results.
+               Send a progress update to professor if meaningful results appear.
+
+[    ] STEP 9: Run ALL mBERT experiments (Phase 1, Round 1B): 155 runs.
+
+[    ] STEP 10: Run ALL BERT-Urdu experiments (Phase 1, Round 1C): 155 runs.
+                If BERT-Urdu doesn't support Roman script, fall back to mBERT
+                for Tasks 5, 6, 7, 8 and note this in results.
+
+[    ] STEP 11: Run compute_tables.py with all 3 fine-tuned models.
+                Produce complete Table 4.
+
+[    ] STEP 12: Install Ollama and pull all 3 LLMs.
+                Test one prompt on one sample to confirm models respond correctly.
+
+[    ] STEP 13: Create llm_evaluate.py. Test on one small domain pair.
+
+[    ] STEP 14: Run all LLM experiments (Phase 2): 465 inference runs.
+                Order: llama3.1 → gemma2 → qwen2.5.
+
+[    ] STEP 15: Run compute_tables.py to produce Table 5.
+
+[    ] STEP 16: Analyze results.
+                - Which task shows highest domain drop?
+                - Does XLM-R generalize better than mBERT?
+                - Do LLMs outperform fine-tuned on cross-domain?
+                - Any anomalies (negative drop = cross-domain better than in-domain)?
+
+[    ] STEP 17: Write up results section.
+                Replicate Table 4 and Table 5 format from the EMNLP paper.
+                Add commentary specific to Urdu domain shifts.
+
+
+================================================================================
+PART 11 — DOMAIN COUNT SUMMARY (35 TOTAL)
+================================================================================
+
+  Task                              Script     Domains   Total Runs/Model
+  ─────────────────────────────────────────────────────────────────────
+  1. Nastaliq Sentiment Analysis    Nastaliq   5         25
+  2. Nastaliq Hate Speech           Nastaliq   5 (new)   25
+  3. Nastaliq Fake News             Nastaliq   4         16
+  4. Nastaliq Question Answering    Nastaliq   4         16
+  5. Roman Product/E-Commerce       Roman      3         9
+  6. Roman Sentiment Analysis       Roman      4         16
+  7. Roman Cyber Abuse              Roman      4         16
+  8. Roman Twitter Opinions         Roman      4         16
+  ─────────────────────────────────────────────────────────────────────
+  Total domains:                               33
+  Runs per fine-tuned model:                   139
+  Fine-tuned models:                           3      → 465 runs
+  Few-shot LLM runs (same matrix):             3      → 465 runs
+  GRAND TOTAL:                                          834 experiment runs
+  ─────────────────────────────────────────────────────────────────────
+
+  Previously 34 domains. Task 2 (Hate Speech) increased from 4 → 5 domains
+  by adding Domain E (ISE: Inter-Faith, Sectarian, Ethnic) from the GitHub
+  dataset approved by the professor.
+
+
+================================================================================
+END OF PLAN
+================================================================================

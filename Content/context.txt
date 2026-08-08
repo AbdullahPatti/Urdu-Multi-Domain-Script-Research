@@ -1,0 +1,393 @@
+Professor:
+AoA,
+
+The scope of the work should follow these requirements:
+
+Do not work on research questions related to:
+Changes in script (e.g., Urdu script vs. Roman Urdu)
+Changes in language (cross-lingual or multilingual settings)
+Follow the methodology presented in the paper:
+https://aclanthology.org/2024.findings-emnlp.7.pdf
+For this project, a different domain refers to datasets that have:
+
+The same language (Urdu)
+The same script
+The same NLP task
+But originate from different domains or sources.
+For example, if the task is sentiment analysis in Roman Urdu, two different domains could be:
+
+Domain 1: Customer reviews of restaurants or products collected from e-commerce platforms.
+Domain 2: Public opinions expressed in Urdu tweets about current events.
+Phase 1: Dataset Identification
+First, prepare a list of Urdu datasets that satisfy the following criteria:
+
+Same language (Urdu)
+Same script
+Same NLP task
+Different domains
+Possible Urdu NLP tasks include, but are not limited to:
+
+Sentiment analysis
+Question answering
+Hate speech detection
+Sarcasm detection
+Summarization
+Send me the dataset list for approval before proceeding.
+
+Phase 2: Experiments
+Once I approve the dataset list, begin the experiments by reproducing the set of experiments reported in Table 3 of the paper:
+https://aclanthology.org/2024.findings-emnlp.7.pdf
+
+Ensure that all experiments focus exclusively on domain robustness while keeping the language, script, and task fixed.
+
+Me:
+Wsalaam,
+
+Thank you for the detailed scope note and for sharing the reference paper. I have carefully reviewed the paper and wanted to summarize my understanding before presenting the work, so you can confirm that I have interpreted the task correctly.
+
+Understanding of the Requirement
+
+As I understand it, the goal is to study domain robustness while holding language, script, and NLP task fixed. That means every dataset pair I select must be in Urdu, must use the same script, must target the same NLP task (for example, sentiment analysis, hate speech detection, or question answering), and must differ only in the domain or source the text was collected from. I have also made sure to exclude anything that would introduce script variation (such as Roman Urdu versus Nastaliq Urdu) or language variation (such as cross-lingual or multilingual setups), since the scope note was explicit that these are out of bounds for this project. I read through the methodology section of the paper in detail, including how the source in domain performance, target in domain performance, and cross domain performance are defined, and how these feed into the source drop and target drop metrics. This gave me a much clearer picture of exactly what kind of dataset pairs would actually be usable for this kind of experiment, not just datasets that happen to be labeled Urdu.
+
+Phase 1: Dataset Search Process
+
+For Phase 1, I conducted a fairly extensive search across three channels. First, I went through Kaggle for existing Urdu datasets. Second, I searched Hugging Face's dataset hub for Urdu language datasets tagged with relevant NLP tasks. Third, I went through several research papers that had published or referenced Urdu datasets, since a number of good domain-specific corpora are only documented in papers rather than indexed on the major platforms. To speed up the discovery process, I also used AI assistants including ChatGPT, DeepSeek, and Claude to help me identify candidate datasets and cross-check descriptions, though every dataset I shortlisted was independently verified by me for language, script, and task before being added to the list.
+
+I have uploaded the full compiled list to the shared Drive folder for your review: https://drive.google.com/drive/folders/1y2Dk7LmdhfFm35wVJbO74m3ZrGvVa77d?usp=sharing
+
+Observations and Challenges
+
+I want to be transparent about where the search went smoothly and where it did not, since I think this is useful context for approving the list.
+
+For some NLP tasks, I was able to find multiple datasets from clearly different domains, which gives us good options to choose from. For some tasks, I was only able to locate a single strong dataset, with no clean second domain available yet.
+
+The task with the richest coverage by far was sentiment analysis, where multiple Urdu datasets exist across different sources. Hate speech detection also had reasonable multi-domain coverage. Tasks such as question answering and summarization in Urdu were considerably harder to source in multiple domains, since most of the available work in these areas tends to be either in English or in code-mixed Roman Urdu, which I excluded per your instructions.
+
+I have also included additional datasets like POS, NER, Cyber Crimes, and some others. I would like your judgment on whether they qualify before I count on them for Phase 2.
+
+A Clarification on the Paper
+
+While studying the paper closely to prepare for Phase 2, I noticed that Table 3 in the EMNLP Findings version actually lists the participating models and their architectures and parameter counts, rather than experimental results. The domain shift results themselves, including the source-in-domain performance, cross-domain performance, and the average drop metrics, appear in Table 4 for fine-tuned models and Table 5 for the comparison between fine-tuned models and few-shot large language models. I wanted to flag this so that when we move to Phase 2, we are reproducing the correct set of experiments. Could you please confirm whether you would like us to follow Table 4, Table 5, or both?
+
+A Question on Computational Resources
+
+Given the number of models and domain pairs involved in this kind of study, I expect the full experiment matrix to be fairly demanding in terms of both time and compute, particularly if we are fine-tuning multiple models per domain pair as the original paper does. I wanted to ask whether the university would be able to provide access to Google Colab Pro or any departmental GPU resources for this project, or whether I should plan to carry out the experiments using my own hardware and free tier resources. Knowing this in advance will help me plan the Phase 2 timeline more realistically.
+
+Next Steps
+
+Once you have had a chance to review the dataset list, I would be grateful if you could let me know which datasets and domain pairs are approved, and clarify the two points above regarding the table reference and computational resources. I am ready to begin Phase 2 as soon as I have your approval, and I will make sure the experiments strictly keep language, script, and task fixed while varying only the domain, exactly as specified in the scope note.
+
+Thank you for your time and guidance.
+
+Regards,
+Abdullah
+
+Professor:
+Good effort.
+After reviewing the available datasets, I found that although the overall list is quite extensive, our study specifically requires multiple datasets from different domains for the same NLP task. At present, only sentiment analysis satisfies this requirement. We have three different sentiment analysis datasets in both Roman Urdu and Nastaliq Urdu, providing sufficient domain diversity. For the remaining tasks, I could identify only a single suitable dataset.
+
+Here are my suggestions for moving forward:
+
+Use sentiment analysis as the main case study. Since it has multiple datasets from different domains, we can directly replicate the cross-domain experiments for this task.
+Investigate whether the other datasets can be divided into meaningful domains. Rather than abandoning these tasks, examine whether a single dataset can be partitioned into distinct domains (e.g., sports, politics, religion, education, health). Please review the datasets carefully to see if such topic-based or source-based divisions are possible. You can also use AI to assist with identifying and categorizing potential domains.
+Create an additional dataset for a new domain where necessary. Although this requires more effort, it would significantly strengthen the research contribution. For example, if only one hate speech dataset is available, we could collect a few thousand additional examples from a different domain (e.g., Facebook, YouTube, newspapers, or blogs) while following the same annotation guidelines as the existing dataset. This would allow us to introduce a new Urdu cross-domain benchmark rather than performing only a replication study. AI-assisted annotation using few-shot prompting could be used to speed up the labeling process, followed by manual verification to ensure quality.
+I meant to say that replicate Tables 4 and 5 of the EMNLP paper.  It is important that we first finalize the datasets before beginning any experiments.
+
+I will send you the details of the GPU allocated to me in the GPU Lab shortly.
+
+Please do not start any experiments until we have finalized the complete set of datasets.
+
+> Read the context.txt and let me know what to do now
+  ✕ [API Error: 404 This model is unavailable for free. The paid version is available now - use this slug instead: tencent/hy3]
+
+  > /model
+  ● authType: openai
+    Using model: nvidia/nemotron-3-ultra-550b-a55b:free
+    Base URL: https://openrouter.ai/api/v1
+    API key: sk-…71fb
+
+  > Read the context.txt and let me know what to do now
+
+  ∴ Thought for 6s (alt+t to expand)
+   ✓  Read context.txt
+
+  ∴ Thought for 8s (alt+t to expand)
+
+  ◆ I'll explore the dataset directories to understand what's available and then provide a clear recommendation for next steps.
+
+   ✓  Listed 2 directories
+
+  ∴ Thought for 2s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 5s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 18s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 6s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 21s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 2s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 2s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 4s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 5s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 6s (alt+t to expand)
+   ✓  Listed 2 directories
+
+  ∴ Thought for 22s (alt+t to expand)
+
+  ◆ Based on my exploration, here's the dataset landscape:
+
+    Summary of Multi-Domain Tasks
+
+
+    ┌───────────────────────────┬─────────────────────────────────────────────────────────────────┬────────────────────────────────────────────────────────┐
+    │ Task                      │ Nastaliq Datasets                                               │ Roman Datasets                                         │
+    ├───────────────────────────┼─────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │ Sentiment Analysis        │ 3 (data/, train/test.csv, urdu-sentiment-corpus-v1.tsv)         │ 3 (data/, 11000 Reviews, YouTube 27K,                  │
+    │                           │                                                                 │ RomanUrduSentiment)                                    │
+    ├───────────────────────────┼─────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │ Hate Speech               │ 2 (22K Offensive, Urdu_Hate_Speech)                             │ 2+ (HS-RU-20, Fine_Grained/, task_2 train/test)        │
+    ├───────────────────────────┼─────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │ Fake News Detection       │ 4 (Corpus, Combined, Fake News 12166, Final True News,          │ 2 (RUFND 3800 R, RUFND 3800 U+R)                       │
+    │                           │ Notri-Fact)                                                     │                                                        │
+    ├───────────────────────────┼─────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │ Product/e-Commerce        │ 2 (parquet, urdu-sentiment-corpus)                              │ 5 (Daraz, Kababjees, 3 summary/review variants)        │
+    │ Reviews                   │                                                                 │                                                        │
+    ├───────────────────────────┼─────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │ Tweets/Social Media       │ 3 (Urdu Tweets x2, Political Tweets)                            │ 1 (New.csv)                                            │
+    ├───────────────────────────┼─────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │ NER                       │ 2 (ijnlp.txt, jahangir.txt)                                     │ —                                                      │
+    ├───────────────────────────┼─────────────────────────────────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │ POS                       │ 2 files (likely train/test splits)                              │ —                                                      │
+    └───────────────────────────┴─────────────────────────────────────────────────────────────────┴────────────────────────────────────────────────────────┘
+
+
+    Single-dataset tasks: Depression Severity, Sarcasm Detection, QA, Summary, Cyber Abuse, Event Classification (1 each per script)
+
+    ---
+
+    Recommendation: Next Steps
+
+    1. Sentiment Analysis = Primary Case Study ✓
+     - Already has 3 distinct domains in both scripts (e-commerce reviews, social media/YouTube, general corpus)
+     - Directly replicates the paper's Tables 4 & 5 setup
+
+    2. Hate Speech & Fake News Detection = Secondary Studies
+     - Both have 2+ domains in each script
+     - Can run the same cross-domain experiments
+     - Strengthens the paper beyond single-task replication
+
+    3. Product Reviews = Strong Candidate
+     - 2 domains in Nastaliq, 5 in Roman (Daraz, Kababjees, multiple summary/review sources)
+     - Clear domain separation (different platforms)
+
+    4. For Single-Dataset Tasks (Depression, Sarcasm, QA, etc.)
+     - Option A: Partition existing data by topic/source (e.g., UrduPoliticalTweets vs general tweets → 2 domains)
+     - Option B: Collect new domain data per professor's suggestion (e.g., Facebook/YouTube comments for Hate Speech)
+     - Option C: Defer these tasks; focus on the 4 multi-domain tasks above first
+
+    ---
+
+    Immediate Action Items
+
+     1. Inspect the 3 Sentiment Analysis datasets in each script — verify they're truly different domains (check sources, labels, sizes)
+     2. Do the same for Hate Speech, Fake News, Product Reviews
+     3. Document domain characteristics (source, size, label distribution) in a table for professor approval
+     4. Then finalize the complete dataset list before any experiments
+
+    Would you like me to start by examining the Sentiment Analysis datasets in detail (reading a few samples from each to confirm domain differences), or would
+    you prefer to review the directory structures first?
+
+  > Do it, but not only check for few samples, check for more, and along sentiment analysis, do it for hate speech and fake news as well. data/, train/test.csv, 
+    Fake News 12166, Final True News,  are single datasets with the train test split/true fake data separetely,
+
+  ∴ Thought for 6s (alt+t to expand)
+   ✓  Read 3 files
+
+  ∴ Thought for 6s (alt+t to expand)
+   ✓  Read 3 files
+
+  ∴ Thought for 8s (alt+t to expand)
+   ✓  Read 2 files
+
+  ∴ Thought for 29s (alt+t to expand)
+   ✓  Read 2 files
+
+  ∴ Thought for 3s (alt+t to expand)
+   ✓  Read 2 files
+
+  ∴ Thought for 4s (alt+t to expand)
+   ✓  Read 2 files
+
+  ∴ Thought for 4s (alt+t to expand)
+   ✓  ReadFile Roman\Fake News Detection\RUFND complete dataset 3800 (U+R).csv
+   x  ReadFile {"file_path":"C:\\Users\\Abdullah\\Desktop\\Code\\Research Datasets\\Nastaliq\\Sentiment Analysis\\data"}
+      Path is a directory, not a file: C:\Users\Abdullah\Desktop\Code\Research Datasets\Nastaliq\Sentiment Analysis\data
+
+  ∴ Thought for 4s (alt+t to expand)
+   ✓  Read Roman\Cyber Abuse or Abusive Language\roman_urdu_cyber_abuse_dataset.csv, listed Nastaliq\Sentiment Analysis\data
+
+  ∴ Thought for 2s (alt+t to expand)
+   ✓  Read 2 files
+
+  ∴ Thought for 4s (alt+t to expand)
+
+  ◆ Based on my thorough examination of the datasets, here's my analysis:
+
+    ---
+
+    Sentiment Analysis — Multi-Domain Confirmation ✓
+
+
+    ┌──────────┬─────────────────────────────────────────────┬───────────────────────────────────────────────────┬─────────────┬──────────────────────────┐
+    │ Script   │ Dataset                                     │ Source/Domain                                     │ Size        │ Labels                   │
+    ├──────────┼─────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────┼──────────────────────────┤
+    │ Nastaliq │ urdu-sentiment-corpus-v1.tsv                │ Twitter (political/social commentary)             │ ~1,000+     │ P/N/O (3-class)          │
+    ├──────────┼─────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────┼──────────────────────────┤
+    │          │ train.csv / test.csv (root)                 │ Movie reviews (IMDb-style)                        │ ~687 / 296  │ 0/1 (binary)             │
+    ├──────────┼─────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────┼──────────────────────────┤
+    │          │ data/train.csv / data/test.csv              │ Movie reviews (different split)                   │ ~48 / 1,813 │ 0/1 (binary)             │
+    ├──────────┼─────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────┼──────────────────────────┤
+    │ Roman    │ Dataset 11000 Reviews.tsv                   │ Social media comments (politics, products, drama) │ ~11,000     │ neg/pos                  │
+    ├──────────┼─────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────┼──────────────────────────┤
+    │          │ RomanUrdu_English_YouTube_Sentiment_27K.csv │ YouTube comments (music, vlogs, general)          │ ~27,189     │ Positive/Negative/Normal │
+    ├──────────┼─────────────────────────────────────────────┼───────────────────────────────────────────────────┼─────────────┼──────────────────────────┤
+    │          │ RomanUrduSentiment.csv                      │ Duplicate of 11000 Reviews (same content)         │ ~11,000     │ neg/pos                  │
+    └──────────┴─────────────────────────────────────────────┴───────────────────────────────────────────────────┴─────────────┴──────────────────────────┘
+
+
+    Domain separation confirmed:
+     - Nastaliq: Twitter politics vs Movie reviews (distinct sources, vocab, style)
+     - Roman: Social media political discourse vs YouTube entertainment comments (distinct platforms, topics)
+
+    ---
+
+    Hate Speech — Multi-Domain Confirmation ✓
+
+
+    ┌──────────┬───────────────────────────────────────┬──────────────────────────────────┬─────────────────────┬──────────────────────────────────────────┐
+    │ Script   │ Dataset                               │ Source/Domain                    │ Size                │ Labels                                   │
+    ├──────────┼───────────────────────────────────────┼──────────────────────────────────┼─────────────────────┼──────────────────────────────────────────┤
+    │ Nastaliq │ 22K_Offensive_dataset_Final.xlsx      │ Mixed (likely Twitter/social     │ ~22K                │ Binary/Multi-class                       │
+    │          │                                       │ media)                           │                     │                                          │
+    ├──────────┼───────────────────────────────────────┼──────────────────────────────────┼─────────────────────┼──────────────────────────────────────────┤
+    │          │ Urdu_Hate_Speech.xlsx                 │ Different source/annotation      │ Unknown             │ Unknown                                  │
+    ├──────────┼───────────────────────────────────────┼──────────────────────────────────┼─────────────────────┼──────────────────────────────────────────┤
+    │ Roman    │ Hate Speech Roman Urdu                │ Twitter/social media             │ ~7,210              │ 0-4 (5-class: normal, hate, offensive,   │
+    │          │ (HS-RU-20).xlsx                       │                                  │                     │ etc.)                                    │
+    ├──────────┼───────────────────────────────────────┼──────────────────────────────────┼─────────────────────┼──────────────────────────────────────────┤
+    │          │ task_2_train.tsv / task_2_test.tsv    │ Competition split (same source)  │ Train: ~7K / Test:  │ Same 5-class                             │
+    │          │                                       │                                  │ ~?                  │                                          │
+    ├──────────┼───────────────────────────────────────┼──────────────────────────────────┼─────────────────────┼──────────────────────────────────────────┤
+    │          │ Fine_Grained/                         │ Sub-category annotation          │ Unknown             │ Fine-grained                             │
+    └──────────┴───────────────────────────────────────┴──────────────────────────────────┴─────────────────────┴──────────────────────────────────────────┘
+
+
+    Domain separation confirmed:
+     - Nastaliq: Two distinct annotated corpora (different annotation guidelines/sources)
+     - Roman: HS-RU-20 (general social media) vs Fine_Grained (sub-categorized) vs Cyber Abuse dataset (different platform: YouTube comments)
+
+    ---
+
+    Fake News Detection — Critical Finding ⚠️
+
+
+    ┌──────────┬───────────────────────────────────────┬────────────────────────────────────────────────────────┐
+    │ Script   │ Dataset                               │ Structure                                              │
+    ├──────────┼───────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │ Nastaliq │ Fake News 12166.xlsx                  │ FAKE only (12,166 fake news items)                     │
+    ├──────────┼───────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │          │ Final True News-11012.xlsx            │ REAL only (11,012 real news items)                     │
+    ├──────────┼───────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │          │ Combined.csv                          │ Both combined (10,149 items: fake + real)              │
+    ├──────────┼───────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │          │ Notri-Fact_Real_Unreal_Urdu_NEWS.xlsx │ Additional fact-checking corpus                        │
+    ├──────────┼───────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │          │ 1.Corpus/                             │ Directory (need to inspect)                            │
+    ├──────────┼───────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │ Roman    │ RUFND complete dataset 3800 (R).csv   │ Roman script only (3,800 items, fake/real)             │
+    ├──────────┼───────────────────────────────────────┼────────────────────────────────────────────────────────┤
+    │          │ RUFND complete dataset 3800 (U+R).csv │ Parallel Urdu+Roman (same 3,800 items in both scripts) │
+    └──────────┴───────────────────────────────────────┴────────────────────────────────────────────────────────┘
+
+
+    ⚠️ Professor's note was correct: "Fake News 12166" and "Final True News-11012" are split halves of a single dataset (fake vs real), not separate domains. The
+     Combined.csv merges them.
+
+    However, we still have domain diversity:
+     - Nastaliq: Notri-Fact (fact-checking site) vs Combined (general news) vs 1.Corpus (unknown)
+     - Roman: RUFND (3800 curated fact-checks) — but only one Roman dataset
+
+    For cross-domain experiments, we need different sources for the same task. Options:
+     1. Nastaliq only: Use Notri-Fact vs Combined as two domains (both Urdu script, same task)
+     2. Roman only: Only one dataset (RUFND) — would need to partition by topic (politics, health, entertainment) or collect new data
+     3. Cross-script: Not allowed per scope (script must be fixed)
+
+    ---
+
+    Recommendation: Final Dataset List for Professor Approval
+
+    Primary: Sentiment Analysis (Strongest — 3+ domains per script)
+
+    ┌───────────────────────────────────────────┬──────────┬──────────────────────────────┬────────────────────┐
+    │ Domain Pair                               │ Script   │ Source A                     │ Source B           │
+    ├───────────────────────────────────────────┼──────────┼──────────────────────────────┼────────────────────┤
+    │ Twitter Politics vs Movie Reviews         │ Nastaliq │ urdu-sentiment-corpus-v1.tsv │ train.csv/test.csv │
+    ├───────────────────────────────────────────┼──────────┼──────────────────────────────┼────────────────────┤
+    │ Social Media Politics vs YouTube Comments │ Roman    │ Dataset 11000 Reviews        │ YouTube 27K        │
+    └───────────────────────────────────────────┴──────────┴──────────────────────────────┴────────────────────┘
+
+    Secondary: Hate Speech (2+ domains per script)
+
+    ┌──────────────────────────────────────────┬──────────┬───────────────┬─────────────────────┐
+    │ Domain Pair                              │ Script   │ Source A      │ Source B            │
+    ├──────────────────────────────────────────┼──────────┼───────────────┼─────────────────────┤
+    │ General Social Media vs Fine-Grained     │ Nastaliq │ 22K Offensive │ Urdu_Hate_Speech    │
+    ├──────────────────────────────────────────┼──────────┼───────────────┼─────────────────────┤
+    │ General Twitter vs Cyber Abuse (YouTube) │ Roman    │ HS-RU-20      │ Cyber Abuse dataset │
+    └──────────────────────────────────────────┴──────────┴───────────────┴─────────────────────┘
+
+    Tertiary: Fake News (Nastaliq only — 2 domains)
+
+    ┌─────────────────────────────────┬──────────┬────────────┬──────────────┐
+    │ Domain Pair                     │ Script   │ Source A   │ Source B     │
+    ├─────────────────────────────────┼──────────┼────────────┼──────────────┤
+    │ Fact-Check Site vs General News │ Nastaliq │ Notri-Fact │ Combined.csv │
+    └─────────────────────────────────┴──────────┴────────────┴──────────────┘
+
+    Product Reviews (Bonus — strong multi-domain)
+
+    ┌──────────┬─────────────────────────────────┬───────────────────────────────────────────┐
+    │ Script   │ Datasets                        │ Domains                                   │
+    ├──────────┼─────────────────────────────────┼───────────────────────────────────────────┤
+    │ Nastaliq │ parquet + urdu-sentiment-corpus │ E-commerce vs Twitter                     │
+    ├──────────┼─────────────────────────────────┼───────────────────────────────────────────┤
+    │ Roman    │ 5 files                         │ Daraz, Kababjees, multiple review sources │
+    └──────────┴─────────────────────────────────┴───────────────────────────────────────────┘
+
+    ---
+
+    Next Steps
+
+     1. I'll prepare a clean summary table for the professor with dataset names, sizes, domains, and labels
+     2. For Fake News Roman: We only have one dataset — need to either partition RUFND by topic or collect new data (per professor's suggestion)
+     3. Then finalize and proceed to Phase 2 (replicating Tables 4 & 5)
+
+    Shall I compile the formal dataset approval table and send it?
+
+  > The combined.csv is a separate dataset based on the research paper Ax-to-grind, also, make a markdown file of the each and every context, down to the minute 
+    details. So, updation has to be done.

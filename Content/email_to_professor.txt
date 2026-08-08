@@ -1,0 +1,335 @@
+AoA,
+
+The scope of the work should follow these requirements:
+
+Do not work on research questions related to:
+Changes in script (e.g., Urdu script vs. Roman Urdu)
+Changes in language (cross-lingual or multilingual settings)
+Follow the methodology presented in the paper:
+https://aclanthology.org/2024.findings-emnlp.7.pdf
+For this project, a different domain refers to datasets that have:
+
+The same language (Urdu)
+The same script
+The same NLP task
+But originate from different domains or sources.
+For example, if the task is sentiment analysis in Roman Urdu, two different domains could be:
+
+Domain 1: Customer reviews of restaurants or products collected from e-commerce platforms.
+Domain 2: Public opinions expressed in Urdu tweets about current events.
+
+https://aclanthology.org/2024.findings-emnlp.7.pdf
+
+Ensure that all experiments focus exclusively on domain robustness while keeping the language, script, and task fixed.
+
+After reviewing the available datasets, I found that although the overall list is quite extensive, our study specifically requires multiple datasets from different domains for the same NLP task. At present, only sentiment analysis satisfies this requirement. We have three different sentiment analysis datasets in both Roman Urdu and Nastaliq Urdu, providing sufficient domain diversity. For the remaining tasks, I could identify only a single suitable dataset.
+
+Here are my suggestions for moving forward:
+
+Use sentiment analysis as the main case study. We can directly replicate the cross-domain experiments for this task.
+Investigate whether the other datasets can be divided into meaningful domains. Rather than abandoning these tasks, examine whether a single dataset can be partitioned into distinct domains (e.g., sports, politics, religion, education, health). Please review the datasets carefully to see if such topic-based or source-based divisions are possible. You can also use AI to assist with identifying and categorizing potential domains.
+Create an additional dataset for a new domain where necessary. Although this requires more effort, it would significantly strengthen the research contribution. For example, if only one hate speech dataset is available, we could collect a few thousand additional examples from a different domain (e.g., Facebook, YouTube, newspapers, or blogs) while following the same annotation guidelines as the existing dataset. This would allow us to introduce a new Urdu cross-domain benchmark rather than performing only a replication study. AI-assisted annotation using few-shot prompting could be used to speed up the labeling process, followed by manual verification to ensure quality.
+I meant to say that replicate Tables 4 and 5 of the EMNLP paper.  It is important that we first finalize the datasets before beginning any experiments.
+
+
+
+
+Dear Professor,
+
+Assalam-o-Alaikum.
+
+I sincerely apologize for the confusion in my previous email. I made an error in how I described the domains — I collapsed what are actually distinct datasets into fewer groups, which made the breakdown appear to have only 2–3 domains per task. That was entirely my mistake. The actual dataset configuration has 4 to 5 distinct domains per task as originally described. I have now corrected and verified everything carefully before sending this email.
+
+Below I address each of your specific questions, followed by the complete revised domain breakdown.
+
+──────────────────────────────────────────────────────────────────────────────
+ANSWERS TO YOUR QUESTIONS
+──────────────────────────────────────────────────────────────────────────────
+
+Nastaliq Sentiment Analysis — Twitter vs Political Tweets:
+
+  These are two completely different datasets from different sources and with different
+  thematic focus. "urdu-sentiment-corpus-v1.tsv" is a general-purpose Twitter corpus
+  covering mixed social commentary — everyday opinions, news reactions, and cultural
+  topics. "UrduPoliticalTweets.csv" is a dataset specifically collected around Pakistani
+  political events, governance narratives, and civic discourse. Although both originate
+  from Twitter as a platform, the content domain is clearly distinct — one is broad
+  everyday social text, the other is narrowly focused on political and governance themes.
+
+Roman Urdu Sentiment Analysis — Domain A (Social Media) platform clarification:
+
+  "Dataset 11000 Reviews.tsv" covers multiple content types collected from social media,
+  including political commentary, product opinions, and drama/entertainment discussions.
+  It is not platform-specific; it aggregates text from various online social sources.
+  This domain is labeled "Social Media (Politics, Products, Drama)" to reflect its
+  mixed-source nature. The other domains are clearly distinct: YouTube comments focused
+  on entertainment, and a separate corpus covering general social topics such as
+  utilities, apps, and courses.
+
+Nastaliq Hate Speech — difference between Offensive and Hate Speech datasets:
+
+  These are two independently published datasets collected separately by different
+  research groups with different annotation guidelines and different source corpora.
+  "22K_Offensive_dataset_Final.xlsx" focuses on offensiveness in general online social
+  media text. "Urdu_Hate_Speech.xlsx" is a separately collected corpus specifically
+  targeting hate speech with a different annotation scheme. Beyond these two, we have
+  two additional domain datasets: one covering politics, sports, health, and family
+  culture, and another covering sports, labor, arts, and education — both representing
+  clearly different topical domains.
+
+Nastaliq Fake News — clarification of domain differences:
+
+  The four datasets come from distinctly different sources and contexts:
+    — Multi-Topic News Corpus: structured news articles across business, health, sports,
+      and technology categories, collected from news sources.
+    — Ax-to-Grind Dataset: independently published in its own research paper, focused
+      on agenda-driven fake news — a completely separate collection effort.
+    — General Pakistani News: a merged dataset of fake and real news articles from
+      broad Pakistani online news sources (two halves of one dataset combined).
+    — Notri-Fact Platform: news items verified or refuted by a dedicated fact-checking
+      platform — a fundamentally different source type from news publishers.
+  The domains differ in source type, collection methodology, and topical focus.
+
+──────────────────────────────────────────────────────────────────────────────
+COMPLETE REVISED DOMAIN BREAKDOWN
+──────────────────────────────────────────────────────────────────────────────
+
+NASTALIQ SCRIPT
+───────────────
+
+Task 1 — Sentiment Analysis                             Total Unique Domains: 5
+
+  Domain A — Twitter / Social Media
+    Dataset:  urdu-sentiment-corpus-v1.tsv
+    Content:  General social commentary and opinions from Twitter
+    Labels:   Positive / Negative / Neutral (3-class)
+
+  Domain B — Movie Reviews
+    Dataset:  train.csv + test.csv (pre-split)
+    Content:  Urdu-language film critique and audience reviews
+    Labels:   0 / 1 (binary: negative / positive)
+
+  Domain C — Civic and Social Topics
+    Dataset:  urdu_sentiment_multidomain.csv
+    Content:  Transport, arts, digital banking, sports, food culture
+    Labels:   Positive / Negative / Neutral
+
+  Domain D — Governance and Political Topics
+    Dataset:  UrduPoliticalTweets (pre-split train/test)
+    Content:  Pakistani political events, governance, civic institutions
+    Labels:   Positive / Negative / Neutral
+
+  Domain E — Socio-Economic and Agricultural Topics
+    Dataset:  urdu_sentiments.csv
+    Content:  Agriculture, economy, climate, social welfare discourse
+    Labels:   Positive / Negative / Neutral
+
+
+Task 2 — Hate Speech Detection                          Total Unique Domains: 4
+
+  Domain A — Social Media (General / Offensiveness-Labeled)
+    Dataset:  22K_Offensive_dataset_Final.xlsx (~21,760 samples)
+    Content:  Mixed online social media, labeled for offensive language
+    Labels:   0 / 1 (binary)
+
+  Domain B — Social Media (Independently Annotated Hate Speech)
+    Dataset:  Urdu_Hate_Speech.xlsx (~26,198 samples)
+    Content:  Separately collected corpus with hate speech annotation scheme
+    Labels:   0 / 1 (binary)
+
+  Domain C — Politics, Sports, Health, and Family Culture
+    Dataset:  urdu_hate_speech_multi_domain.csv
+    Content:  Hate speech across political, health, sports, and family topics
+    Labels:   Hateful / Non-hateful
+
+  Domain D — Sports, Labor, Arts, and Education
+    Dataset:  urdu_hate_speech_multidomain.csv
+    Content:  Hate speech in sports commentary, labor discourse, arts, education
+    Labels:   Hateful / Non-hateful
+
+
+Task 3 — Fake News Detection                            Total Unique Domains: 4
+
+  Domain A — Multi-Topic News Corpus
+    Dataset:  1.Corpus/ (text files: business, health, sports, technology)
+    Content:  Structured news articles across four topic categories (~900 docs)
+    Labels:   Fake / Real
+
+  Domain B — Ax-to-Grind Independent Dataset
+    Dataset:  Combined .csv (~10,106 samples)
+    Content:  Agenda-driven fake news; independently published research dataset
+    Labels:   FAKE / TRUE
+
+  Domain C — General Pakistani News
+    Dataset:  Fake News 12166.xlsx + Final True News-11012.xlsx (merged dataset)
+    Content:  Broad Pakistani news articles from general online sources
+    Labels:   Fake / Real
+
+  Domain D — Fact-Checking Platform
+    Dataset:  Notri-Fact_Real_Unreal_Urdu_NEWS.xlsx (~13,388 samples)
+    Content:  News items verified or refuted by a dedicated fact-checking platform
+    Labels:   Real / Unreal
+
+
+Task 4 — Question Answering                             Total Unique Domains: 4
+
+  Domain A — Religious Text (Hadith / Islamic Traditions)
+    Dataset:  qa_ahadis.csv (~820 Q&A pairs)
+    Content:  Questions and answers drawn from Hadith (Islamic narrations)
+
+  Domain B — General Knowledge
+    Dataset:  qa_gk.csv (~5,816 Q&A pairs)
+    Content:  Broad general knowledge questions across varied topics
+
+  Domain C — Multi-Domain Short-Form QnA
+    Dataset:  urdu_qna_multidomain.csv
+    Content:  Short-answer questions across science, nature, health, and general
+              knowledge domains
+
+  Domain D — Multi-Domain Long-Form QnA
+    Dataset:  urdu_qna_long_multidomain.csv
+    Content:  Long-answer questions across education, health, physics, finance,
+              and civic topics
+
+
+ROMAN URDU SCRIPT
+─────────────────
+
+Task 5 — Product / E-Commerce Reviews                  Total Unique Domains: 5
+
+  Domain A — E-Commerce (Daraz Platform)
+    Dataset:  daraz-code-mixed-product-reviews.csv
+    Content:  Product reviews from Daraz, Pakistan's largest e-commerce platform
+    Labels:   Positive / Negative / Neutral
+
+  Domain B — Restaurant and Food Reviews
+    Dataset:  kababjees_Review_2025.csv
+    Content:  Customer reviews of restaurants and food establishments
+    Labels:   Positive / Negative / Neutral
+
+  Domain C — General Product and Service Reviews
+    Dataset:  Roman urdu Reviews and summary - summary 350.csv
+    Content:  Mixed product and service reviews with summaries
+    Labels:   Positive / Negative / Neutral
+
+  Domain D — Consumer Electronics, Gaming, and Delivery
+    Dataset:  Roman Urdu reviews Dataset with English translation.csv
+    Content:  Reviews covering electronics, gaming hardware, and delivery services
+    Labels:   Positive / Negative / Neutral
+
+  Domain E — Mixed Product Reviews with Spelling Variation
+    Dataset:  Roman Urdu words and English Translation with spelling variation.csv
+    Content:  Product reviews with natural spelling variation reflecting real usage
+    Labels:   Positive / Negative / Neutral
+
+
+Task 6 — Sentiment Analysis (Roman Urdu)                Total Unique Domains: 4
+
+  Domain A — Mixed Public Discourse
+    Dataset:  HuggingFace parquet split (train / validation / test)
+    Content:  General public sentiment across various online discussions
+    Labels:   Positive / Negative / Neutral
+
+  Domain B — Social Media (Politics, Products, Drama)
+    Dataset:  Dataset 11000 Reviews.tsv (~10,999 samples)
+    Content:  Mixed social media commentary: political opinions, product feedback,
+              and drama/entertainment discussions
+    Labels:   pos / neg
+
+  Domain C — YouTube Comments (Entertainment)
+    Dataset:  RomanUrdu_English_YouTube_Sentiment_27K.csv (~27,187 samples)
+    Content:  YouTube comments on music, vlogs, and entertainment content
+    Labels:   Positive / Negative / Normal
+
+  Domain D — General Social Topics (Utilities, Apps, Courses)
+    Dataset:  RomanUrduSentiment.csv
+    Content:  Opinions on everyday services: utilities, mobile apps, online courses
+    Labels:   Positive / Negative / Neutral
+
+
+Task 7 — Cyber Abuse / Abusive Language                 Total Unique Domains: 4
+
+  Domain A — YouTube Comments
+    Dataset:  roman_urdu_cyber_abuse_dataset.csv (~5,004 samples)
+    Content:  Abusive and non-abusive comments from YouTube
+    Labels:   Harmful / Non-harmful
+
+  Domain B — Online Content Creator Comments
+    Dataset:  roman_urdu_cyber_abuse.csv
+    Content:  Comments directed at online content creators across platforms
+    Labels:   Abusive / Non-abusive
+
+  Domain C — Social Media (Diverse Vocabulary)
+    Dataset:  roman_urdu_cyber_abuse_diverse.csv
+    Content:  Social media abuse covering diverse regional vocabulary and slang
+    Labels:   Abusive / Non-abusive
+
+  Domain D — General Online Video Comments
+    Dataset:  roman_urdu_cyber_abusing.csv
+    Content:  General abusive language in online video comment sections
+    Labels:   Abusive / Non-abusive
+
+
+Task 8 — Twitter / Social Media Opinions                Total Unique Domains: 4
+
+  Domain A — Twitter Political and Social Opinions
+    Dataset:  New.csv (~17,899 samples)
+    Content:  Binary-labeled tweets covering political and social opinion expression
+    Labels:   0 / 1
+
+  Domain B — Lifestyle and Consumer Opinions
+    Dataset:  roman_urdu_opinions_lifestyle.csv
+    Content:  Consumer electronics, gaming, e-commerce, delivery feedback
+    Labels:   Positive / Negative / Neutral
+
+  Domain C — Public and Civic Services
+    Dataset:  roman_urdu_opinions_public.csv
+    Content:  Public opinions on ATMs, parks, utilities, civic infrastructure
+    Labels:   Positive / Negative / Neutral
+
+  Domain D — Mixed Social Commentary
+    Dataset:  roman_urdu_social_opinions.csv
+    Content:  General social commentary across apps, courses, everyday topics
+    Labels:   Positive / Negative / Neutral
+
+──────────────────────────────────────────────────────────────────────────────
+SUMMARY TABLE
+──────────────────────────────────────────────────────────────────────────────
+
+  Task                               Script       Unique Domains
+  ─────────────────────────────────────────────────────────────
+  1. Sentiment Analysis              Nastaliq      5
+  2. Hate Speech Detection           Nastaliq      4
+  3. Fake News Detection             Nastaliq      4
+  4. Question Answering              Nastaliq      4
+  5. Product / E-Commerce Reviews    Roman Urdu    5
+  6. Sentiment Analysis              Roman Urdu    4
+  7. Cyber Abuse / Abusive Language  Roman Urdu    4
+  8. Twitter / Social Media Opinions Roman Urdu    4
+  ─────────────────────────────────────────────────────────────
+  Total domains across all tasks: 34
+
+Each domain corresponds to a separate dataset. All datasets within a task share
+the same language, same script, and same NLP task — only the domain differs.
+This is exactly the setup required to replicate Tables 4 and 5 of the paper.
+
+I am attaching the full domain details document for your reference.
+
+Please let me know which datasets and domain pairings are approved so I can
+proceed to Phase 2. I will not begin any experiments until I have your confirmation.
+
+Regards,
+Abdullah
+
+
+Reply:
+Please add the following dataset to hate datasets:
+Paper:  ISE-Hate: A benchmark corpus for inter-faith, sectarian, and ethnic hatred detection on social media in Urdu
+    https://github.com/hammad7007/ISE_dataset  
+I hope you understand the paper completely. In Table 4, they report the average in-domain and cross-domain results for each task. This means that you need to conduct both in-domain and cross-domain experiments for each domain and for each task, and then report the average results for each task.
+
+Therefore, the training and test sets should be kept separate for each domain and each task. In other words, you will need to split the training and test data based on the domains before conducting the experiments.
+
+Please go ahead and begin the experiments.
+Please split the datasets based on the domains so that you can implement cross-domain experiments. 
+Read the paper one more time before starting the experiments
