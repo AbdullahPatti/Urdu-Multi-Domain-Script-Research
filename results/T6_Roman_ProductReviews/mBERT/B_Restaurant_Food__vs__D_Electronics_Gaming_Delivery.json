@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "B_Restaurant_Food",
+  "target": "D_Electronics_Gaming_Delivery",
+  "type": "CROSS-DOMAIN",
+  "train_size": 600,
+  "test_size": 5618,
+  "macro_f1": 0.2512,
+  "accuracy": 0.4023,
+  "classification_report": {
+    "0": {
+      "precision": 0.4040632054176072,
+      "recall": 0.08651522474625423,
+      "f1-score": 0.14251592356687898,
+      "support": 2069.0
+    },
+    "1": {
+      "precision": 0.2589928057553957,
+      "recall": 0.027928626842513578,
+      "f1-score": 0.05042016806722689,
+      "support": 1289.0
+    },
+    "2": {
+      "precision": 0.4060762509928515,
+      "recall": 0.9048672566371682,
+      "f1-score": 0.5605811403508771,
+      "support": 2260.0
+    },
+    "accuracy": 0.40227839088643647,
+    "macro avg": {
+      "precision": 0.35637742072195144,
+      "recall": 0.3397703694086453,
+      "f1-score": 0.251172410661661,
+      "support": 5618.0
+    },
+    "weighted avg": {
+      "precision": 0.3715879006535384,
+      "recall": 0.40227839088643647,
+      "f1-score": 0.289563976449183,
+      "support": 5618.0
+    }
+  }
+}

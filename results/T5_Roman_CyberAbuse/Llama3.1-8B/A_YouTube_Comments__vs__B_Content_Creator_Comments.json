@@ -1,0 +1,39 @@
+{
+  "task": "T5_Roman_CyberAbuse",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "A_YouTube_Comments",
+  "target": "B_Content_Creator_Comments",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 150,
+  "macro_f1": 0.5963,
+  "accuracy": 0.6467,
+  "classification_report": {
+    "0": {
+      "precision": 0.5859375,
+      "recall": 1.0,
+      "f1-score": 0.7389162561576355,
+      "support": 75.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 0.29333333333333333,
+      "f1-score": 0.4536082474226804,
+      "support": 75.0
+    },
+    "accuracy": 0.6466666666666666,
+    "macro avg": {
+      "precision": 0.79296875,
+      "recall": 0.6466666666666667,
+      "f1-score": 0.5962622517901579,
+      "support": 150.0
+    },
+    "weighted avg": {
+      "precision": 0.79296875,
+      "recall": 0.6466666666666666,
+      "f1-score": 0.596262251790158,
+      "support": 150.0
+    }
+  }
+}

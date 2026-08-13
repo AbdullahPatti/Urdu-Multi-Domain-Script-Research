@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_FND",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "C_General_Pakistani_News",
+  "target": "B_Ax_to_Grind",
+  "type": "CROSS-DOMAIN",
+  "train_size": 7000,
+  "test_size": 2017,
+  "macro_f1": 0.4177,
+  "accuracy": 0.4432,
+  "classification_report": {
+    "0": {
+      "precision": 0.46078431372549017,
+      "recall": 0.6508407517309595,
+      "f1-score": 0.5395653956539566,
+      "support": 1011.0
+    },
+    "1": {
+      "precision": 0.400679117147708,
+      "recall": 0.2345924453280318,
+      "f1-score": 0.29592476489028213,
+      "support": 1006.0
+    },
+    "accuracy": 0.44323252354982645,
+    "macro avg": {
+      "precision": 0.43073171543659905,
+      "recall": 0.44271659852949563,
+      "f1-score": 0.4177450802721193,
+      "support": 2017.0
+    },
+    "weighted avg": {
+      "precision": 0.430806213697107,
+      "recall": 0.44323252354982645,
+      "f1-score": 0.4180470641972106,
+      "support": 2017.0
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_FND",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "D_Fact_Checking_Platform",
+  "target": "C_General_Pakistani_News",
+  "type": "CROSS-DOMAIN",
+  "train_size": 7000,
+  "test_size": 4636,
+  "macro_f1": 0.4737,
+  "accuracy": 0.5112,
+  "classification_report": {
+    "0": {
+      "precision": 0.5242662016855565,
+      "recall": 0.7414714344430744,
+      "f1-score": 0.6142322097378277,
+      "support": 2433.0
+    },
+    "1": {
+      "precision": 0.47364016736401676,
+      "recall": 0.25692237857467093,
+      "f1-score": 0.3331371394938199,
+      "support": 2203.0
+    },
+    "accuracy": 0.5112165660051768,
+    "macro avg": {
+      "precision": 0.49895318452478665,
+      "recall": 0.49919690650887266,
+      "f1-score": 0.47368467461582375,
+      "support": 4636.0
+    },
+    "weighted avg": {
+      "precision": 0.5002090072053251,
+      "recall": 0.5112165660051768,
+      "f1-score": 0.4806574815783045,
+      "support": 4636.0
+    }
+  }
+}

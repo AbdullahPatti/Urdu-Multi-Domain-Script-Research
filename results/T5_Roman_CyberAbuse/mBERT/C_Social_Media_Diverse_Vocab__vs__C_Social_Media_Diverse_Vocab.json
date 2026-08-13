@@ -1,0 +1,39 @@
+{
+  "task": "T5_Roman_CyberAbuse",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "C_Social_Media_Diverse_Vocab",
+  "target": "C_Social_Media_Diverse_Vocab",
+  "type": "IN-DOMAIN",
+  "train_size": 1040,
+  "test_size": 260,
+  "macro_f1": 1.0,
+  "accuracy": 1.0,
+  "classification_report": {
+    "0": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 120.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 140.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 260.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 260.0
+    }
+  }
+}

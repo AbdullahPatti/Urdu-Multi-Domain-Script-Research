@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "D_Governance_Political",
+  "target": "A_Twitter_Social_Media",
+  "type": "CROSS-DOMAIN",
+  "train_size": 685,
+  "test_size": 196,
+  "macro_f1": 0.7235,
+  "accuracy": 0.7245,
+  "classification_report": {
+    "0": {
+      "precision": 0.7738095238095238,
+      "recall": 0.65,
+      "f1-score": 0.7065217391304348,
+      "support": 100.0
+    },
+    "1": {
+      "precision": 0.6875,
+      "recall": 0.8020833333333334,
+      "f1-score": 0.7403846153846154,
+      "support": 96.0
+    },
+    "accuracy": 0.7244897959183674,
+    "macro avg": {
+      "precision": 0.7306547619047619,
+      "recall": 0.7260416666666667,
+      "f1-score": 0.7234531772575251,
+      "support": 196.0
+    },
+    "weighted avg": {
+      "precision": 0.7315354713313897,
+      "recall": 0.7244897959183674,
+      "f1-score": 0.7231076377039111,
+      "support": 196.0
+    }
+  }
+}

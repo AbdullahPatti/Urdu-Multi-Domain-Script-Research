@@ -1,0 +1,39 @@
+{
+  "task": "T5_Roman_CyberAbuse",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "C_Social_Media_Diverse_Vocab",
+  "target": "C_Social_Media_Diverse_Vocab",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 150,
+  "macro_f1": 0.9133,
+  "accuracy": 0.9133,
+  "classification_report": {
+    "0": {
+      "precision": 0.9305555555555556,
+      "recall": 0.8933333333333333,
+      "f1-score": 0.9115646258503401,
+      "support": 75.0
+    },
+    "1": {
+      "precision": 0.8974358974358975,
+      "recall": 0.9333333333333333,
+      "f1-score": 0.9150326797385621,
+      "support": 75.0
+    },
+    "accuracy": 0.9133333333333333,
+    "macro avg": {
+      "precision": 0.9139957264957266,
+      "recall": 0.9133333333333333,
+      "f1-score": 0.9132986527944511,
+      "support": 150.0
+    },
+    "weighted avg": {
+      "precision": 0.9139957264957265,
+      "recall": 0.9133333333333333,
+      "f1-score": 0.9132986527944511,
+      "support": 150.0
+    }
+  }
+}

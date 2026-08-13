@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "E_Socioeconomic_Agricultural",
+  "target": "D_Governance_Political",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.6989,
+  "accuracy": 0.7,
+  "classification_report": {
+    "0": {
+      "precision": 0.6785714285714286,
+      "recall": 0.76,
+      "f1-score": 0.7169811320754716,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.7272727272727273,
+      "recall": 0.64,
+      "f1-score": 0.6808510638297872,
+      "support": 25.0
+    },
+    "accuracy": 0.7,
+    "macro avg": {
+      "precision": 0.702922077922078,
+      "recall": 0.7,
+      "f1-score": 0.6989160979526294,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.702922077922078,
+      "recall": 0.7,
+      "f1-score": 0.6989160979526295,
+      "support": 50.0
+    }
+  }
+}

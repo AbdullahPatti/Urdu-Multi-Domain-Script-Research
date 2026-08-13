@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "D_Mixed_Social_Commentary",
+  "target": "B_Consumer_Electronics_Gaming",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.8452,
+  "accuracy": 0.8485,
+  "classification_report": {
+    "0": {
+      "precision": 0.8857142857142857,
+      "recall": 0.9393939393939394,
+      "f1-score": 0.9117647058823529,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.8518518518518519,
+      "recall": 0.696969696969697,
+      "f1-score": 0.7666666666666667,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.8108108108108109,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.8571428571428571,
+      "support": 33.0
+    },
+    "accuracy": 0.8484848484848485,
+    "macro avg": {
+      "precision": 0.8494589827923161,
+      "recall": 0.8484848484848485,
+      "f1-score": 0.8451914098972922,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.8494589827923161,
+      "recall": 0.8484848484848485,
+      "f1-score": 0.8451914098972924,
+      "support": 99.0
+    }
+  }
+}

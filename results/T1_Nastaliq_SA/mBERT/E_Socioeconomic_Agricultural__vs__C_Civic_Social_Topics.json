@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "E_Socioeconomic_Agricultural",
+  "target": "C_Civic_Social_Topics",
+  "type": "CROSS-DOMAIN",
+  "train_size": 2000,
+  "test_size": 33,
+  "macro_f1": 0.7556,
+  "accuracy": 0.7576,
+  "classification_report": {
+    "0": {
+      "precision": 0.7368421052631579,
+      "recall": 0.8235294117647058,
+      "f1-score": 0.7777777777777778,
+      "support": 17.0
+    },
+    "1": {
+      "precision": 0.7857142857142857,
+      "recall": 0.6875,
+      "f1-score": 0.7333333333333333,
+      "support": 16.0
+    },
+    "accuracy": 0.7575757575757576,
+    "macro avg": {
+      "precision": 0.7612781954887218,
+      "recall": 0.7555147058823529,
+      "f1-score": 0.7555555555555555,
+      "support": 33.0
+    },
+    "weighted avg": {
+      "precision": 0.760537707906129,
+      "recall": 0.7575757575757576,
+      "f1-score": 0.7562289562289563,
+      "support": 33.0
+    }
+  }
+}

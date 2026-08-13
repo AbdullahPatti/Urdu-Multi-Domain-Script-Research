@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "A_Mixed_Public_Discourse",
+  "target": "D_Utilities_Apps_Courses",
+  "type": "CROSS-DOMAIN",
+  "train_size": 8000,
+  "test_size": 2200,
+  "macro_f1": 0.5768,
+  "accuracy": 0.5941,
+  "classification_report": {
+    "0": {
+      "precision": 0.5551330798479087,
+      "recall": 0.8209934395501406,
+      "f1-score": 0.6623818525519849,
+      "support": 1067.0
+    },
+    "1": {
+      "precision": 0.6929260450160771,
+      "recall": 0.38040600176522504,
+      "f1-score": 0.4911680911680912,
+      "support": 1133.0
+    },
+    "accuracy": 0.5940909090909091,
+    "macro avg": {
+      "precision": 0.6240295624319929,
+      "recall": 0.6006997206576828,
+      "f1-score": 0.576774971860038,
+      "support": 2200.0
+    },
+    "weighted avg": {
+      "precision": 0.6260964569095154,
+      "recall": 0.5940909090909091,
+      "f1-score": 0.5742067654392795,
+      "support": 2200.0
+    }
+  }
+}

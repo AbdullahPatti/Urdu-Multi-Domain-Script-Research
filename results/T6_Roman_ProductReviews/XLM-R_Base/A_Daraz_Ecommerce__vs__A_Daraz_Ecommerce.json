@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "A_Daraz_Ecommerce",
+  "target": "A_Daraz_Ecommerce",
+  "type": "IN-DOMAIN",
+  "train_size": 8000,
+  "test_size": 3398,
+  "macro_f1": 0.8631,
+  "accuracy": 0.9049,
+  "classification_report": {
+    "0": {
+      "precision": 0.9018475750577367,
+      "recall": 0.8956422018348624,
+      "f1-score": 0.8987341772151899,
+      "support": 872.0
+    },
+    "1": {
+      "precision": 0.7172675521821632,
+      "recall": 0.7682926829268293,
+      "f1-score": 0.7419038272816487,
+      "support": 492.0
+    },
+    "2": {
+      "precision": 0.9556109725685785,
+      "recall": 0.9419862340216323,
+      "f1-score": 0.9487496905174548,
+      "support": 2034.0
+    },
+    "accuracy": 0.9049440847557386,
+    "macro avg": {
+      "precision": 0.8582420332694928,
+      "recall": 0.8686403729277746,
+      "f1-score": 0.8631292316714312,
+      "support": 3398.0
+    },
+    "weighted avg": {
+      "precision": 0.9073041316446319,
+      "recall": 0.9049440847557386,
+      "f1-score": 0.9059652019030959,
+      "support": 3398.0
+    }
+  }
+}

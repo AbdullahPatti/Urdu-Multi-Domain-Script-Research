@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_QA",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "D_Short_Form_QnA",
+  "target": "A_Religious_Hadith",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.6094,
+  "accuracy": 0.64,
+  "classification_report": {
+    "0": {
+      "precision": 0.5897435897435898,
+      "recall": 0.92,
+      "f1-score": 0.71875,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.8181818181818182,
+      "recall": 0.36,
+      "f1-score": 0.5,
+      "support": 25.0
+    },
+    "accuracy": 0.64,
+    "macro avg": {
+      "precision": 0.703962703962704,
+      "recall": 0.64,
+      "f1-score": 0.609375,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.7039627039627041,
+      "recall": 0.64,
+      "f1-score": 0.609375,
+      "support": 50.0
+    }
+  }
+}

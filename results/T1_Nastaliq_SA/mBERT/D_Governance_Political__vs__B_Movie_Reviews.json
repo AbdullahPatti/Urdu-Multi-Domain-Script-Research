@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "D_Governance_Political",
+  "target": "B_Movie_Reviews",
+  "type": "CROSS-DOMAIN",
+  "train_size": 685,
+  "test_size": 1812,
+  "macro_f1": 0.3975,
+  "accuracy": 0.5221,
+  "classification_report": {
+    "0": {
+      "precision": 0.5109699769053118,
+      "recall": 0.9789823008849557,
+      "f1-score": 0.6714719271623673,
+      "support": 904.0
+    },
+    "1": {
+      "precision": 0.7625,
+      "recall": 0.0671806167400881,
+      "f1-score": 0.12348178137651822,
+      "support": 908.0
+    },
+    "accuracy": 0.522075055187638,
+    "macro avg": {
+      "precision": 0.6367349884526559,
+      "recall": 0.5230814588125219,
+      "f1-score": 0.39747685426944274,
+      "support": 1812.0
+    },
+    "weighted avg": {
+      "precision": 0.637012615409714,
+      "recall": 0.522075055187638,
+      "f1-score": 0.3968720086339175,
+      "support": 1812.0
+    }
+  }
+}

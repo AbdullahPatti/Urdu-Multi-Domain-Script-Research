@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "A_Twitter_Social_Media",
+  "target": "A_Twitter_Social_Media",
+  "type": "IN-DOMAIN",
+  "train_size": 783,
+  "test_size": 196,
+  "macro_f1": 0.6082,
+  "accuracy": 0.6122,
+  "classification_report": {
+    "0": {
+      "precision": 0.603448275862069,
+      "recall": 0.7,
+      "f1-score": 0.6481481481481481,
+      "support": 100.0
+    },
+    "1": {
+      "precision": 0.625,
+      "recall": 0.5208333333333334,
+      "f1-score": 0.5681818181818182,
+      "support": 96.0
+    },
+    "accuracy": 0.6122448979591837,
+    "macro avg": {
+      "precision": 0.6142241379310345,
+      "recall": 0.6104166666666666,
+      "f1-score": 0.6081649831649831,
+      "support": 196.0
+    },
+    "weighted avg": {
+      "precision": 0.6140042223786066,
+      "recall": 0.6122448979591837,
+      "f1-score": 0.6089809661238232,
+      "support": 196.0
+    }
+  }
+}

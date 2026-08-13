@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "C_Civic_Social_Topics",
+  "target": "E_Socioeconomic_Agricultural",
+  "type": "CROSS-DOMAIN",
+  "train_size": 129,
+  "test_size": 500,
+  "macro_f1": 0.4537,
+  "accuracy": 0.542,
+  "classification_report": {
+    "0": {
+      "precision": 0.7142857142857143,
+      "recall": 0.14,
+      "f1-score": 0.23411371237458195,
+      "support": 250.0
+    },
+    "1": {
+      "precision": 0.5232815964523282,
+      "recall": 0.944,
+      "f1-score": 0.6733238231098431,
+      "support": 250.0
+    },
+    "accuracy": 0.542,
+    "macro avg": {
+      "precision": 0.6187836553690212,
+      "recall": 0.542,
+      "f1-score": 0.45371876774221254,
+      "support": 500.0
+    },
+    "weighted avg": {
+      "precision": 0.6187836553690212,
+      "recall": 0.542,
+      "f1-score": 0.4537187677422125,
+      "support": 500.0
+    }
+  }
+}

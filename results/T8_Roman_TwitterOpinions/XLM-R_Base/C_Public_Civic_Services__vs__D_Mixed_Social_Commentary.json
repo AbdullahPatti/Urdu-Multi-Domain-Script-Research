@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "C_Public_Civic_Services",
+  "target": "D_Mixed_Social_Commentary",
+  "type": "CROSS-DOMAIN",
+  "train_size": 1160,
+  "test_size": 320,
+  "macro_f1": 0.4949,
+  "accuracy": 0.5938,
+  "classification_report": {
+    "0": {
+      "precision": 0.6068965517241379,
+      "recall": 0.8,
+      "f1-score": 0.6901960784313725,
+      "support": 110.0
+    },
+    "1": {
+      "precision": 0.8333333333333334,
+      "recall": 0.04854368932038835,
+      "f1-score": 0.09174311926605505,
+      "support": 103.0
+    },
+    "2": {
+      "precision": 0.5739644970414202,
+      "recall": 0.9065420560747663,
+      "f1-score": 0.7028985507246377,
+      "support": 107.0
+    },
+    "accuracy": 0.59375,
+    "macro avg": {
+      "precision": 0.6713981273662971,
+      "recall": 0.5850285817983849,
+      "f1-score": 0.49494591614068845,
+      "support": 320.0
+    },
+    "weighted avg": {
+      "precision": 0.668769235020064,
+      "recall": 0.59375,
+      "f1-score": 0.5018164213730965,
+      "support": 320.0
+    }
+  }
+}

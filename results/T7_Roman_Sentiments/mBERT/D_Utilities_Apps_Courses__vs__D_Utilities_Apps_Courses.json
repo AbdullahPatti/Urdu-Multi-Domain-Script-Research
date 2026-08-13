@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "D_Utilities_Apps_Courses",
+  "target": "D_Utilities_Apps_Courses",
+  "type": "IN-DOMAIN",
+  "train_size": 8000,
+  "test_size": 2200,
+  "macro_f1": 0.8263,
+  "accuracy": 0.8264,
+  "classification_report": {
+    "0": {
+      "precision": 0.8093947606142728,
+      "recall": 0.8397375820056232,
+      "f1-score": 0.8242870285188593,
+      "support": 1067.0
+    },
+    "1": {
+      "precision": 0.8435498627630376,
+      "recall": 0.8137687555163283,
+      "f1-score": 0.8283917340521114,
+      "support": 1133.0
+    },
+    "accuracy": 0.8263636363636364,
+    "macro avg": {
+      "precision": 0.8264723116886552,
+      "recall": 0.8267531687609757,
+      "f1-score": 0.8263393812854853,
+      "support": 2200.0
+    },
+    "weighted avg": {
+      "precision": 0.8269846382208867,
+      "recall": 0.8263636363636364,
+      "f1-score": 0.8264009518684841,
+      "support": 2200.0
+    }
+  }
+}

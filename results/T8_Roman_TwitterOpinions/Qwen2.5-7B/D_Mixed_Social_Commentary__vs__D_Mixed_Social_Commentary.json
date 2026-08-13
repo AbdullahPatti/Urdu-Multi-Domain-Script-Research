@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "D_Mixed_Social_Commentary",
+  "target": "D_Mixed_Social_Commentary",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.9076,
+  "accuracy": 0.9091,
+  "classification_report": {
+    "0": {
+      "precision": 0.9393939393939394,
+      "recall": 0.9393939393939394,
+      "f1-score": 0.9393939393939394,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.9629629629629629,
+      "recall": 0.7878787878787878,
+      "f1-score": 0.8666666666666667,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.8461538461538461,
+      "recall": 1.0,
+      "f1-score": 0.9166666666666666,
+      "support": 33.0
+    },
+    "accuracy": 0.9090909090909091,
+    "macro avg": {
+      "precision": 0.9161702495035828,
+      "recall": 0.9090909090909092,
+      "f1-score": 0.9075757575757576,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.9161702495035827,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.9075757575757575,
+      "support": 99.0
+    }
+  }
+}

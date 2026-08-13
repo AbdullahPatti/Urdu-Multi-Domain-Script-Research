@@ -1,0 +1,6 @@
+model,avg_SS,avg_ST,type
+XLM-R_Base (fine-tuned),0.8528,0.5488,fine-tuned
+mBERT (fine-tuned),0.9424,0.6422,fine-tuned
+Qwen2.5-7B (5-shot),0.5648,0.5106,few-shot
+Llama3.1-8B (5-shot),0.5764,0.519,few-shot
+Mistral-7B (5-shot),0.5508,0.4204,few-shot

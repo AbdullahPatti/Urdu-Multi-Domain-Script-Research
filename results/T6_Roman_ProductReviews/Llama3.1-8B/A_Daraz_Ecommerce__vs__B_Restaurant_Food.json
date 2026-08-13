@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "A_Daraz_Ecommerce",
+  "target": "B_Restaurant_Food",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 65,
+  "macro_f1": 0.4772,
+  "accuracy": 0.6,
+  "classification_report": {
+    "0": {
+      "precision": 0.5714285714285714,
+      "recall": 0.5,
+      "f1-score": 0.5333333333333333,
+      "support": 8.0
+    },
+    "1": {
+      "precision": 0.6666666666666666,
+      "recall": 0.08333333333333333,
+      "f1-score": 0.14814814814814814,
+      "support": 24.0
+    },
+    "2": {
+      "precision": 0.6,
+      "recall": 1.0,
+      "f1-score": 0.75,
+      "support": 33.0
+    },
+    "accuracy": 0.6,
+    "macro avg": {
+      "precision": 0.6126984126984127,
+      "recall": 0.5277777777777778,
+      "f1-score": 0.4771604938271605,
+      "support": 65.0
+    },
+    "weighted avg": {
+      "precision": 0.621098901098901,
+      "recall": 0.6,
+      "f1-score": 0.5011111111111112,
+      "support": 65.0
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "E_Inter_Faith_Sectarian_Ethnic",
+  "target": "A_Social_Media_Offensive",
+  "type": "CROSS-DOMAIN",
+  "train_size": 10000,
+  "test_size": 4352,
+  "macro_f1": 0.8776,
+  "accuracy": 0.883,
+  "classification_report": {
+    "0": {
+      "precision": 0.8827893175074184,
+      "recall": 0.9249902837155072,
+      "f1-score": 0.903397229075726,
+      "support": 2573.0
+    },
+    "1": {
+      "precision": 0.8834541062801933,
+      "recall": 0.822372119168072,
+      "f1-score": 0.8518195050946142,
+      "support": 1779.0
+    },
+    "accuracy": 0.8830422794117647,
+    "macro avg": {
+      "precision": 0.8831217118938058,
+      "recall": 0.8736812014417896,
+      "f1-score": 0.8776083670851701,
+      "support": 4352.0
+    },
+    "weighted avg": {
+      "precision": 0.883061068248863,
+      "recall": 0.8830422794117647,
+      "f1-score": 0.8823134122185573,
+      "support": 4352.0
+    }
+  }
+}

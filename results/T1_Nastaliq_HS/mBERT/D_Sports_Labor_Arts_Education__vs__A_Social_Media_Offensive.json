@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "D_Sports_Labor_Arts_Education",
+  "target": "A_Social_Media_Offensive",
+  "type": "CROSS-DOMAIN",
+  "train_size": 1360,
+  "test_size": 4352,
+  "macro_f1": 0.3396,
+  "accuracy": 0.4223,
+  "classification_report": {
+    "0": {
+      "precision": 0.6234309623430963,
+      "recall": 0.057909055577147296,
+      "f1-score": 0.10597439544807966,
+      "support": 2573.0
+    },
+    "1": {
+      "precision": 0.41064916119620715,
+      "recall": 0.9494097807757167,
+      "f1-score": 0.5733197556008147,
+      "support": 1779.0
+    },
+    "accuracy": 0.42233455882352944,
+    "macro avg": {
+      "precision": 0.5170400617696517,
+      "recall": 0.503659418176432,
+      "f1-score": 0.3396470755244472,
+      "support": 4352.0
+    },
+    "weighted avg": {
+      "precision": 0.5364505339790531,
+      "recall": 0.42233455882352944,
+      "f1-score": 0.2970146977715437,
+      "support": 4352.0
+    }
+  }
+}

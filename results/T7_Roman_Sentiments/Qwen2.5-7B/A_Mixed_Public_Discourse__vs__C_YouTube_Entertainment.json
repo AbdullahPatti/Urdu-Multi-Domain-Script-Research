@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "A_Mixed_Public_Discourse",
+  "target": "C_YouTube_Entertainment",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 100,
+  "macro_f1": 0.5623,
+  "accuracy": 0.61,
+  "classification_report": {
+    "0": {
+      "precision": 0.8235294117647058,
+      "recall": 0.28,
+      "f1-score": 0.417910447761194,
+      "support": 50.0
+    },
+    "1": {
+      "precision": 0.5662650602409639,
+      "recall": 0.94,
+      "f1-score": 0.706766917293233,
+      "support": 50.0
+    },
+    "accuracy": 0.61,
+    "macro avg": {
+      "precision": 0.6948972360028349,
+      "recall": 0.61,
+      "f1-score": 0.5623386825272135,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.6948972360028348,
+      "recall": 0.61,
+      "f1-score": 0.5623386825272135,
+      "support": 100.0
+    }
+  }
+}

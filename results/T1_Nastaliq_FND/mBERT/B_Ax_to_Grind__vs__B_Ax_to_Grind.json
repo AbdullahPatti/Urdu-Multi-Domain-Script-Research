@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_FND",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "B_Ax_to_Grind",
+  "target": "B_Ax_to_Grind",
+  "type": "IN-DOMAIN",
+  "train_size": 7000,
+  "test_size": 2017,
+  "macro_f1": 0.9286,
+  "accuracy": 0.9286,
+  "classification_report": {
+    "0": {
+      "precision": 0.9455292908530318,
+      "recall": 0.9099901088031652,
+      "f1-score": 0.9274193548387096,
+      "support": 1011.0
+    },
+    "1": {
+      "precision": 0.9128352490421456,
+      "recall": 0.9473161033797217,
+      "f1-score": 0.9297560975609757,
+      "support": 1006.0
+    },
+    "accuracy": 0.9286068418443233,
+    "macro avg": {
+      "precision": 0.9291822699475887,
+      "recall": 0.9286531060914435,
+      "f1-score": 0.9285877261998426,
+      "support": 2017.0
+    },
+    "weighted avg": {
+      "precision": 0.9292227930534526,
+      "recall": 0.9286068418443233,
+      "f1-score": 0.9285848298900728,
+      "support": 2017.0
+    }
+  }
+}

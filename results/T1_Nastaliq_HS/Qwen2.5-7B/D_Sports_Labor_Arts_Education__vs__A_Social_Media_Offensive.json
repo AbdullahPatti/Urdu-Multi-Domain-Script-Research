@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "D_Sports_Labor_Arts_Education",
+  "target": "A_Social_Media_Offensive",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.6532,
+  "accuracy": 0.66,
+  "classification_report": {
+    "0": {
+      "precision": 0.7222222222222222,
+      "recall": 0.52,
+      "f1-score": 0.6046511627906976,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.625,
+      "recall": 0.8,
+      "f1-score": 0.7017543859649122,
+      "support": 25.0
+    },
+    "accuracy": 0.66,
+    "macro avg": {
+      "precision": 0.6736111111111112,
+      "recall": 0.66,
+      "f1-score": 0.6532027743778049,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.6736111111111112,
+      "recall": 0.66,
+      "f1-score": 0.6532027743778049,
+      "support": 50.0
+    }
+  }
+}

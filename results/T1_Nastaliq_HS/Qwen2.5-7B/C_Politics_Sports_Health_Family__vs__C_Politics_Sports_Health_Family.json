@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "C_Politics_Sports_Health_Family",
+  "target": "C_Politics_Sports_Health_Family",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.7585,
+  "accuracy": 0.76,
+  "classification_report": {
+    "0": {
+      "precision": 0.7241379310344828,
+      "recall": 0.84,
+      "f1-score": 0.7777777777777778,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.8095238095238095,
+      "recall": 0.68,
+      "f1-score": 0.7391304347826086,
+      "support": 25.0
+    },
+    "accuracy": 0.76,
+    "macro avg": {
+      "precision": 0.7668308702791462,
+      "recall": 0.76,
+      "f1-score": 0.7584541062801933,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.7668308702791461,
+      "recall": 0.76,
+      "f1-score": 0.7584541062801933,
+      "support": 50.0
+    }
+  }
+}

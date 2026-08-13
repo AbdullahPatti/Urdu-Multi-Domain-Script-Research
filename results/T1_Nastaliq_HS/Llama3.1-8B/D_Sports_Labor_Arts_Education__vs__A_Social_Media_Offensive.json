@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "D_Sports_Labor_Arts_Education",
+  "target": "A_Social_Media_Offensive",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.5404,
+  "accuracy": 0.6,
+  "classification_report": {
+    "0": {
+      "precision": 0.8571428571428571,
+      "recall": 0.24,
+      "f1-score": 0.375,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.5581395348837209,
+      "recall": 0.96,
+      "f1-score": 0.7058823529411765,
+      "support": 25.0
+    },
+    "accuracy": 0.6,
+    "macro avg": {
+      "precision": 0.707641196013289,
+      "recall": 0.6,
+      "f1-score": 0.5404411764705883,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.707641196013289,
+      "recall": 0.6,
+      "f1-score": 0.5404411764705883,
+      "support": 50.0
+    }
+  }
+}

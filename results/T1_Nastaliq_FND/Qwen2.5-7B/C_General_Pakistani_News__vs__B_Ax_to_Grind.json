@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_FND",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "C_General_Pakistani_News",
+  "target": "B_Ax_to_Grind",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 150,
+  "macro_f1": 0.4923,
+  "accuracy": 0.5267,
+  "classification_report": {
+    "0": {
+      "precision": 0.5555555555555556,
+      "recall": 0.26666666666666666,
+      "f1-score": 0.36036036036036034,
+      "support": 75.0
+    },
+    "1": {
+      "precision": 0.5175438596491229,
+      "recall": 0.7866666666666666,
+      "f1-score": 0.6243386243386243,
+      "support": 75.0
+    },
+    "accuracy": 0.5266666666666666,
+    "macro avg": {
+      "precision": 0.5365497076023392,
+      "recall": 0.5266666666666666,
+      "f1-score": 0.4923494923494923,
+      "support": 150.0
+    },
+    "weighted avg": {
+      "precision": 0.5365497076023392,
+      "recall": 0.5266666666666666,
+      "f1-score": 0.49234949234949227,
+      "support": 150.0
+    }
+  }
+}

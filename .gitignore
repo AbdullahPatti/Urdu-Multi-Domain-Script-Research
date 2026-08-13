@@ -1,0 +1,12 @@
+.venv312/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.egg-info/
+.env
+# Model checkpoints and weights (too large for git)
+results/**/hf_upload_model/
+results/**/hf_upload_xlmr/
+*.safetensors
+*.pt
+*.bin

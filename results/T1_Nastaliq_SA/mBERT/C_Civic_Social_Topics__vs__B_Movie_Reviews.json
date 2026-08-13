@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "C_Civic_Social_Topics",
+  "target": "B_Movie_Reviews",
+  "type": "CROSS-DOMAIN",
+  "train_size": 129,
+  "test_size": 1812,
+  "macro_f1": 0.5104,
+  "accuracy": 0.5408,
+  "classification_report": {
+    "0": {
+      "precision": 0.5264705882352941,
+      "recall": 0.7920353982300885,
+      "f1-score": 0.6325088339222615,
+      "support": 904.0
+    },
+    "1": {
+      "precision": 0.584070796460177,
+      "recall": 0.2907488986784141,
+      "f1-score": 0.38823529411764707,
+      "support": 908.0
+    },
+    "accuracy": 0.5408388520971302,
+    "macro avg": {
+      "precision": 0.5552706923477355,
+      "recall": 0.5413921484542513,
+      "f1-score": 0.5103720640199543,
+      "support": 1812.0
+    },
+    "weighted avg": {
+      "precision": 0.5553342687365047,
+      "recall": 0.5408388520971302,
+      "f1-score": 0.5101024464263509,
+      "support": 1812.0
+    }
+  }
+}

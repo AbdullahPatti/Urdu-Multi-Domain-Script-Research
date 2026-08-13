@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "B_Restaurant_Food",
+  "target": "B_Restaurant_Food",
+  "type": "IN-DOMAIN",
+  "train_size": 600,
+  "test_size": 150,
+  "macro_f1": 0.3876,
+  "accuracy": 0.72,
+  "classification_report": {
+    "0": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 8.0
+    },
+    "1": {
+      "precision": 0.2903225806451613,
+      "recall": 0.375,
+      "f1-score": 0.32727272727272727,
+      "support": 24.0
+    },
+    "2": {
+      "precision": 0.8319327731092437,
+      "recall": 0.8389830508474576,
+      "f1-score": 0.8354430379746836,
+      "support": 118.0
+    },
+    "accuracy": 0.72,
+    "macro avg": {
+      "precision": 0.37408511791813503,
+      "recall": 0.4046610169491525,
+      "f1-score": 0.3875719217491369,
+      "support": 150.0
+    },
+    "weighted avg": {
+      "precision": 0.7009053944158309,
+      "recall": 0.72,
+      "f1-score": 0.7095788262370541,
+      "support": 150.0
+    }
+  }
+}

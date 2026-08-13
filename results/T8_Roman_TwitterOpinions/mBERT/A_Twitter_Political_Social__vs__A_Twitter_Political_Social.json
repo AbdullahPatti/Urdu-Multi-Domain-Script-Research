@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "A_Twitter_Political_Social",
+  "target": "A_Twitter_Political_Social",
+  "type": "IN-DOMAIN",
+  "train_size": 8000,
+  "test_size": 3580,
+  "macro_f1": 0.7792,
+  "accuracy": 0.7846,
+  "classification_report": {
+    "0": {
+      "precision": 0.723018147086915,
+      "recall": 0.7081384471468662,
+      "f1-score": 0.7155009451795841,
+      "support": 1069.0
+    },
+    "1": {
+      "precision": 0.858433734939759,
+      "recall": 0.852017937219731,
+      "f1-score": 0.8552138034508627,
+      "support": 1338.0
+    },
+    "2": {
+      "precision": 0.7568464730290456,
+      "recall": 0.7774936061381074,
+      "f1-score": 0.767031118587048,
+      "support": 1173.0
+    },
+    "accuracy": 0.7846368715083799,
+    "macro avg": {
+      "precision": 0.7794327850185733,
+      "recall": 0.7792166635015683,
+      "f1-score": 0.7792486224058316,
+      "support": 3580.0
+    },
+    "weighted avg": {
+      "precision": 0.7847127512425643,
+      "recall": 0.7846368715083799,
+      "f1-score": 0.7846016987477198,
+      "support": 3580.0
+    }
+  }
+}

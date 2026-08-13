@@ -1,0 +1,644 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+
+\documentclass[10pt,twocolumn,journal]{IEEEtran}
+
+% ----------------------------- Fonts / Script support -----------------------------
+\usepackage{fontspec}
+\newfontfamily\urdufont[Script=Arabic,Scale=1.15]{Noto Nastaliq Urdu}
+
+% ----------------------------- Core packages -----------------------------
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{colortbl}
+\usepackage{cite}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{enumitem}
+\usepackage{tabularx}
+
+% hyperref loaded last, after all packages that patch core LaTeX macros
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue,filecolor=blue]{hyperref}
+
+\graphicspath{{figs/}}
+
+% ----------------------------- Colors -----------------------------
+\definecolor{tableheader}{RGB}{70, 100, 150}
+\definecolor{tablerow}{RGB}{240, 245, 250}
+\definecolor{abstractbg}{RGB}{237, 242, 247}
+\definecolor{abstractframe}{RGB}{70, 100, 150}
+
+% ----------------------------- Abstract box -----------------------------
+\newtcolorbox{abstractbox}{
+  breakable,
+  colback=abstractbg,
+  colframe=abstractframe,
+  boxrule=0.6pt,
+  arc=1.5pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+}
+
+\title{Domain Robustness of Multilingual NLP Models Across Urdu and Roman Urdu Scripts}
+
+\author{Muhammad Abdullah Haroon$^{1}$ and Maryam Bashir$^{1}$\\[0.1cm]
+$^{1}$FAST School of Computing, FAST-NUCES, Lahore, Pakistan\\[0.05cm]
+Email: l230734@lhr.nu.edu.pk, maryam.bashir@lhr.nu.edu.pk}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstractbox}
+\textbf{Abstract---}Domain robustness, the ability of an NLP model to keep its accuracy when moved from one data source to another within the same language and task, is well studied for English but almost untouched for Urdu. We present what is, to our knowledge, the first systematic study of domain robustness in Urdu and Roman Urdu, covering 32 datasets across eight tasks, two scripts, and five models: two fine-tuned multilingual transformers (XLM-RoBERTa, mBERT) and three few-shot large language models (Llama3.1-8B, Mistral-7B, Qwen2.5-7B). We adopt the in-domain/cross-domain evaluation protocol of Calderon et al.~\cite{calderon2024measuring} and report same-source (SS) accuracy, transfer (ST) accuracy, absolute degradation, and relative robustness for every task. The results are not uniformly encouraging: sentiment analysis holds up well (90--97\% relative robustness), but fake news detection collapses to 48--54\% and hate speech detection to 61--76\%. Fine-tuned transformers post the highest in-domain scores yet lose the most when the domain changes, a pattern consistent with domain-specific overfitting; few-shot LLMs start lower but degrade less. We situate these numbers against the English benchmark of Calderon et al. and find that Urdu sentiment analysis is competitive with English, while Urdu fake news detection lags by roughly 30 points. We close with concrete, task-specific recommendations and an explicit discussion of the limitations of a benchmark built partly from LLM-augmented data.
+\end{abstractbox}
+
+\vspace{2mm}
+\textbf{\textit{Index Terms}---}Domain robustness, low-resource NLP, Urdu language processing, cross-domain generalization, transformer models, large language models, Roman Urdu, code-switched text.
+
+\section{Introduction}
+
+Urdu is spoken by over 246 million people and ranks among the world's ten most-spoken languages, yet the NLP tooling available for it remains far behind what exists for English, Spanish, or French \cite{devlin2019bert,conneau2020unsupervised}. Most Urdu NLP papers report a single train/test split drawn from one source and stop there. That is a narrow measure of quality. A sentiment classifier trained on movie reviews and never tested on tweets tells us nothing about whether it will survive contact with tweets. The property we care about is \emph{domain robustness}: does a model trained on domain $A$ still work on domain $B$, when the language, the script, and the task are all held fixed and only the data source changes?
+
+This question has a name and a metric in the English NLP literature. Calderon et al.~\cite{calderon2024measuring} measured domain robustness across 26 tasks in English and found that state-of-the-art models lose 30--50\% of their accuracy when moved across domains. No comparable study exists for Urdu, despite the language's reach across news media, social platforms, religious text, and everyday conversation, each of which constitutes a distinct domain with its own vocabulary and register.
+
+Urdu adds a second axis of variation that English does not have: script. The same language is written in Nastaliq (the Perso-Arabic script, read right to left) and in Roman Urdu (the Latin script, read left to right, common on keyboards that lack Urdu input support). Figure~\ref{fig:script_comparison} lays the two systems side by side. They differ not just in glyphs and reading direction but in how text is produced and collected: Nastaliq corpora tend to come from edited sources such as news and literature, while Roman Urdu corpora are overwhelmingly user-generated, informal, and inconsistently spelled. Whether domain robustness behaves the same way in both scripts is an open question this paper answers directly, by treating the two scripts as separate, non-comparable experimental tracks rather than collapsing them into a single number.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig6_script_comparison_crossdomain.png}
+\caption{Nastaliq Urdu (right-to-left, Perso-Arabic script) and Roman Urdu (left-to-right, Latin script) rendered side by side for the same phrases. The two scripts differ in directionality, character connectivity, and typical provenance of text, which motivates analyzing them as separate tracks rather than pooling them together.}
+\label{fig:script_comparison}
+\end{figure}
+
+We evaluate two families of models that represent the two dominant paradigms in current multilingual NLP: fine-tuned encoder transformers (XLM-RoBERTa, mBERT), which learn task-specific decision boundaries from labeled data, and few-shot large language models (Llama3.1-8B, Mistral-7B, Qwen2.5-7B), which are given five labeled examples at inference time and asked to generalize without any parameter update. Comparing the two lets us ask not just \emph{how much} robustness Urdu NLP has, but \emph{which training paradigm delivers it}.
+
+\subsection{Research Contributions}
+
+This paper makes five contributions:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{A domain robustness benchmark for Urdu and Roman Urdu:} 32 datasets across 8 NLP tasks, 2 scripts, and 5 models, built and evaluated under a single, consistent protocol.
+\item \textbf{Quantitative evidence of task-dependent fragmentation:} sentiment analysis retains 90--97\% of its in-domain accuracy under domain shift, while fake news detection retains only 48--54\%, a gap that cannot be explained by dataset size alone.
+\item \textbf{A fine-tuned vs.\ few-shot comparison:} fine-tuned transformers post the strongest in-domain numbers but the largest cross-domain drops; few-shot LLMs trade some in-domain accuracy for materially better transfer.
+\item \textbf{Script-independent analysis:} Nastaliq and Roman Urdu are evaluated as separate tracks, since their datasets are not paired and a direct numeric comparison between them would not be meaningful.
+\item \textbf{Actionable, task-specific guidance} for practitioners deciding how to build and validate Urdu NLP systems, together with an honest account of where this benchmark is limited.
+\end{enumerate}
+
+\section{Related Work}
+
+\subsection{Domain robustness and distribution shift}
+Domain robustness is a special case of the broader distribution-shift problem in machine learning: a model's test-time input distribution differs from its training distribution. Figure~\ref{fig:domain_shift_types} illustrates the four qualitative regimes this can take, depending on whether the source and target domains are well-represented (``observed'') in training data or not. Calderon et al.~\cite{calderon2024measuring} operationalized this for NLP with the SS/ST protocol we adopt here (defined in Section~\ref{sec:terminology}), evaluating 26 English tasks and showing that even strong fine-tuned models suffer substantial, task-dependent accuracy loss under domain shift. Our study is the direct extension of that protocol to Urdu and Roman Urdu, which to our knowledge has not been attempted before at this scale.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig4b_domain_shift_drops.png}
+\caption{Four qualitative regimes of domain shift, adapted for this study. \emph{Classic shift}: source and target domains differ, and the gap persists even on unseen data, the common and most damaging case. \emph{No challenge}: source and target align well, both in observed data and on held-out domains, the ideal case. \emph{Observed shift}: a large gap appears on known domains but the model's behavior on genuinely unseen domains is uncertain. \emph{Unobserved shift}: known domains look similar, but the model's true generalization to unseen domains remains untested. Our SS/ST protocol (Section~\ref{sec:terminology}) is designed to detect classic and observed shift directly.}
+\label{fig:domain_shift_types}
+\end{figure}
+
+\subsection{Multilingual transformers}
+mBERT \cite{pires2019multilingual} and XLM-RoBERTa \cite{conneau2020unsupervised} are trained on concatenated multilingual corpora and support cross-lingual transfer across more than 100 languages, including Urdu. Their multilinguality is a property of the pretraining data, not a guarantee of robustness within a single language: a model that transfers well from English to Urdu sentiment analysis may still overfit the specific Urdu domain it was fine-tuned on. Most work using these models for Urdu \cite{malik2020urdu,Karim2020,hasan2018urdusentilex} reports a single in-domain result per task and does not test this distinction.
+
+\subsection{Few-shot large language models}
+Instruction-tuned LLMs such as Llama~3 \cite{grattafiori2024llama}, Mistral-7B \cite{jiang2023mistral}, and Qwen2.5 \cite{qwen2024qwen25} are trained on broad multilingual web text and can perform classification through in-context examples rather than gradient updates. We selected these three specifically because they span a range of pretraining recipes and multilingual data mixtures at a similar parameter scale (7--8B), making the comparison to fine-tuned XLM-R and mBERT (which sit at 110--250M parameters) informative about training paradigm rather than raw model size. Because in-context learning does not update model weights on the source domain, it offers a natural, if imperfect, hedge against domain-specific overfitting, which is exactly the property we test for.
+
+\subsection{Urdu and Roman Urdu NLP}
+Existing Urdu NLP resources cover hate speech \cite{malik2020urdu}, fake news \cite{Karim2020}, and sentiment analysis \cite{hasan2018urdusentilex}, but each is built and evaluated in isolation, on a single domain, in a single script. Roman Urdu, despite being the dominant script for informal Pakistani social media text, has received comparatively little systematic attention, and to our knowledge no prior work has evaluated cross-domain transfer separately for Nastaliq and Roman Urdu under a matched protocol. This is the gap our study is designed to close.
+
+\section{Methodology}
+
+\subsection{Terminology: SS, ST, source and target domains}
+\label{sec:terminology}
+
+Before presenting results we define every term precisely, since the abbreviations recur through the rest of the paper.
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Source domain (SD)} is the domain a model is \emph{trained} on. \textbf{Target domain (TD)} is the domain a model is \emph{evaluated} on. When SD and TD are the same dataset, we call the evaluation \emph{in-domain}; when they differ, we call it \emph{cross-domain}.
+\item \textbf{SS (Source-to-Source)} is the average in-domain accuracy: a model is trained on domain $D_i$ and tested on that same domain $D_i$, for every domain $i$ in a task, and the results are averaged. SS answers: \emph{``how good is the model when it never has to leave the domain it was trained on?''}
+\item \textbf{ST (Source-to-Target)} is the average cross-domain accuracy: a model trained on domain $D_i$ is tested on every \emph{other} domain $D_j$ ($i \neq j$) within the same task and script, and all such pairs are averaged. ST answers: \emph{``how good is the model when it has to generalize to a domain it has never seen?''}
+\item \textbf{Degradation} is simply $\text{SS} - \text{ST}$: the raw accuracy a model loses when moving from in-domain to cross-domain evaluation.
+\item \textbf{Relative robustness} is $\text{ST}/\text{SS} \times 100\%$: the \emph{percentage} of in-domain performance a model retains under domain shift. This is the number we lead with in most of the paper, because a 0.05 degradation on a task with SS $=0.10$ is catastrophic, while the same 0.05 degradation on a task with SS $=0.90$ is minor; relative robustness normalizes for that.
+\end{itemize}
+
+Formally, for $n$ domains within a fixed language, script, and task:
+\begin{equation}
+\text{SS} = \frac{1}{n} \sum_{i=1}^{n} \text{Accuracy}(D_i \to D_i)
+\label{eq:ss}
+\end{equation}
+\begin{equation}
+\text{ST} = \frac{1}{n(n-1)} \sum_{i \neq j} \text{Accuracy}(D_i \to D_j)
+\label{eq:st}
+\end{equation}
+where $\text{Accuracy}(D_i \to D_j)$ denotes the score of a model trained on domain $D_i$ and evaluated on domain $D_j$. A worked example: for Nastaliq sentiment analysis with XLM-R (Table~\ref{tab:nastaliq_sa}), SS $= 0.733$ means that, averaged across all five domains, the model recovers 73.3\% accuracy when trained and tested on the same domain. ST $=0.713$ means that, averaged across all 20 source-target domain pairs, the model recovers 71.3\% accuracy when the training and test domains differ. The degradation of $0.020$ and relative robustness of $97.3\%$ together say the same thing two ways: this model barely notices the domain change.
+
+\subsection{Dataset Inventory}
+
+\textbf{Nastaliq Script (18 domains, 4 tasks):}
+\begin{itemize}[leftmargin=*]
+\item Sentiment Analysis: 5 domains (Twitter, Movies, Civic, Governance, Socioeconomic)
+\item Hate Speech: 5 domains (General, Dedicated HS, Politics/Sports, Labor/Arts, Sectarian/Ethnic)
+\item Fake News: 4 domains (Multi-topic, Opinion, General, Fact-checking)
+\item Question Answering: 4 domains (Hadith, General Knowledge, Long-form, Short-form)
+\end{itemize}
+
+\textbf{Roman Urdu Script (14 domains, 4 tasks):}
+\begin{itemize}[leftmargin=*]
+\item Sentiment Analysis: 4 domains (Public, Politics/Drama, Entertainment, Apps)
+\item Cyber Abuse: 4 domains (YouTube, Content Creators, Social Media, General)
+\item Product Reviews: 3 domains (Daraz, Restaurants, Services)
+\item Twitter Opinions: 4 domains (Political, Electronics, Civic, Mixed)
+\end{itemize}
+
+\noindent Total: 32 datasets across 18 Nastaliq and 14 Roman Urdu domains. Because Nastaliq and Roman Urdu draw on different task sets and different domain counts, we report and discuss them as two separate tracks throughout; we do not compute a pooled Urdu-vs-Roman-Urdu number, since doing so would silently average over unrelated tasks.
+
+\subsection{Data Collection and Construction}
+Datasets were assembled from three kinds of sources: (i) existing public corpora on Kaggle, Hugging Face, and GitHub; (ii) domains and labels reused from prior published Urdu NLP work \cite{malik2020urdu,Karim2020,hasan2018urdusentilex}; and (iii) domains for which no public corpus existed at sufficient scale, which we constructed with LLM-assisted generation. For (iii), we prompted a large language model with a small seed set of authentic examples from the target domain and task (for instance, existing hate-speech examples) and asked it to generate additional labeled examples in the same style. Every LLM-generated batch was manually reviewed by fluent Urdu speakers, who discarded or corrected examples that were unnatural, mislabeled, or inconsistent with the domain they were meant to represent. We flag this construction method explicitly in Section~\ref{sec:limitations}, since LLM-generated text can carry its own stylistic fingerprints that differ from organically produced text, which is a possible confound for any domain-robustness study that includes synthetic domains.
+
+\subsection{Models and Training}
+
+\textbf{Fine-tuned Transformers:} XLM-RoBERTa-base (250M parameters) \cite{conneau2020unsupervised} and mBERT-base (110M parameters) \cite{pires2019multilingual}. Both are standard, widely used multilingual encoders and serve as our representatives of the ``fine-tune on labeled data'' paradigm. Training configuration: learning rate $2\times10^{-5}$, batch size 16--32, 3 epochs, early stopping on a held-out validation split from the same domain. Hardware: Intel Core i7 (13th Gen), 32~GB RAM, NVIDIA RTX~A4000.
+
+\textbf{Few-shot LLMs:} Llama3.1-8B \cite{grattafiori2024llama}, Mistral-7B \cite{jiang2023mistral}, and Qwen2.5-7B \cite{qwen2024qwen25}, each prompted with 5 labeled in-context examples drawn from the source domain (5-shot), temperature 0.7, maximum 20 generated tokens (sufficient for a class label). These three were chosen to cover distinct pretraining data mixtures and instruction-tuning recipes at a comparable parameter scale, so that differences in robustness can be attributed to the few-shot paradigm itself rather than to one model's idiosyncrasies.
+
+For both families, ``in-domain'' means training (or, for LLMs, drawing few-shot examples) and testing on the same domain; ``cross-domain'' means training or exemplar-selection on one domain and testing on a different one, holding language, script, and task fixed, following Eq.~\eqref{eq:ss}--\eqref{eq:st}.
+
+\section{Results: Nastaliq Script}
+
+\subsection{Sentiment Analysis}
+
+Sentiment analysis shows the strongest cross-domain robustness of any task in this study: 97.3\% relative robustness for XLM-R (Table~\ref{tab:nastaliq_sa}). A degradation of only 0.020 indicates that positive/negative sentiment vocabulary is largely stable whether the text comes from Twitter, movie reviews, civic discourse, or governance commentary.
+
+\textbf{Example (Nastaliq, positive sentiment):}
+\begin{center}
+{\urdufont
+یہ فلم بہت اچھی ہے، بہترین کہانی
+}
+\end{center}
+\textit{(``This movie is very good, excellent story'')} --- an expression that reads as positive in both movie-review and general-review contexts, which is exactly the kind of domain-invariant signal that keeps ST close to SS.
+
+\begin{table}[t]
+\centering
+\caption{Nastaliq Sentiment Analysis (5 domains)}
+\label{tab:nastaliq_sa}
+\small
+\begin{tabularx}{\linewidth}{@{}l*{4}{>{\centering\arraybackslash}X}@{}}
+\toprule
+\rowcolor{tableheader}
+\textcolor{white}{\textbf{Model}} & \textcolor{white}{\textbf{SS}} & \textcolor{white}{\textbf{ST}} & \textcolor{white}{\textbf{Deg.}} & \textcolor{white}{\textbf{\%Rob}} \\
+\midrule
+XLM-R & 0.733 & 0.713 & 0.020 & 97.3\% \\
+\rowcolor{tablerow}
+mBERT & 0.682 & 0.646 & 0.036 & 94.7\% \\
+Llama3.1-8B & 0.702 & 0.635 & 0.067 & 90.4\% \\
+\rowcolor{tablerow}
+Qwen2.5-7B & 0.696 & 0.634 & 0.062 & 91.0\% \\
+Mistral-7B & 0.603 & 0.525 & 0.077 & 87.2\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig5_finetuned_vs_fewshot_t1_nastaliq_sa.png}
+\caption{Fine-tuned vs.\ few-shot comparison. Diamonds mark each model's in-domain (SS) score; bars show cross-domain (ST) score.}
+\label{fig:nastaliq_sa_models}
+\end{subfigure}
+\vspace{2mm}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig1_heatmap_nastaliq_sentiment.png}
+\caption{Domain-pair transfer matrix for XLM-R. Diagonal = in-domain; off-diagonal = cross-domain transfer.}
+\label{fig:nastaliq_sa_heatmap}
+\end{subfigure}
+\caption{Nastaliq Sentiment Analysis: robustness across models and domain pairs.}
+\label{fig:nastaliq_sa_analysis}
+\end{figure}
+
+\subsection{Hate Speech Detection}
+
+Hate speech detection degrades sharply: 31.5 points for XLM-R, corresponding to only 64.4\% relative robustness (Table~\ref{tab:nastaliq_hs}). Different domains target different groups with different vocabulary, so a classifier that has only seen one kind of hate speech struggles to recognize another.
+
+\textbf{Domain variation in Nastaliq hate speech:}
+\begin{center}
+{\urdufont
+یہ بہت بری انسان ہے
+}
+\end{center}
+\textit{(General offensive: ``This is a bad person'')}
+\begin{center}
+{\urdufont
+شیعہ/سنی کے خلاف نفرت
+}
+\end{center}
+\textit{(Sectarian: ``Hatred against Shia/Sunni'')}
+
+These two examples differ in target, register, and intensity; a model fine-tuned on the first pattern has little basis for recognizing the second, which is the mechanism behind the low ST score.
+
+\begin{table}[t]
+\centering
+\caption{Nastaliq Hate Speech Detection (5 domains)}
+\label{tab:nastaliq_hs}
+\small
+\begin{tabularx}{\linewidth}{@{}l*{4}{>{\centering\arraybackslash}X}@{}}
+\toprule
+\rowcolor{tableheader}
+\textcolor{white}{\textbf{Model}} & \textcolor{white}{\textbf{SS}} & \textcolor{white}{\textbf{ST}} & \textcolor{white}{\textbf{Deg.}} & \textcolor{white}{\textbf{\%Rob}} \\
+\midrule
+XLM-R & 0.885 & 0.570 & 0.315 & 64.4\% \\
+\rowcolor{tablerow}
+mBERT & 0.884 & 0.540 & 0.344 & 61.0\% \\
+Llama3.1-8B & 0.385 & 0.294 & 0.091 & 76.4\% \\
+\rowcolor{tablerow}
+Qwen2.5-7B & 0.420 & 0.318 & 0.102 & 75.7\% \\
+Mistral-7B & 0.392 & 0.286 & 0.106 & 72.9\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig5_finetuned_vs_fewshot_t1_nastaliq_hs.png}
+\caption{LLMs post lower in-domain scores but lose less under transfer.}
+\label{fig:nastaliq_hs_models}
+\end{subfigure}
+\vspace{2mm}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig1_heatmap_nastaliq_hate_speech.png}
+\caption{Sharp diagonal dominance shows severe cross-domain drops for the fine-tuned model.}
+\label{fig:nastaliq_hs_heatmap}
+\end{subfigure}
+\caption{Nastaliq Hate Speech Detection: critical domain degradation, concentrated in fine-tuned models.}
+\label{fig:nastaliq_hs_analysis}
+\end{figure}
+
+\subsection{Fake News Detection}
+
+Fake news detection is the weakest task in the entire benchmark. XLM-R reaches 89.0\% SS but only 43.0\% ST (Table~\ref{tab:nastaliq_fnd}), a 46-point collapse and 48.3\% relative robustness -- meaning the model loses more than half of its apparent skill the moment it sees a new news domain. This is the clearest evidence in our results of domain-specific overfitting: a fake-news classifier is largely learning surface cues specific to its training source (particular outlets, particular topics, particular claim structures) rather than a task-general notion of factuality. Interestingly, the few-shot LLMs invert this pattern: Llama3.1-8B has a low SS (0.400) but retains 89.2\% of it under transfer, the highest relative robustness recorded anywhere in this study.
+
+\begin{table}[t]
+\centering
+\caption{Nastaliq Fake News Detection (4 domains)}
+\label{tab:nastaliq_fnd}
+\small
+\begin{tabularx}{\linewidth}{@{}l*{4}{>{\centering\arraybackslash}X}@{}}
+\toprule
+\rowcolor{tableheader}
+\textcolor{white}{\textbf{Model}} & \textcolor{white}{\textbf{SS}} & \textcolor{white}{\textbf{ST}} & \textcolor{white}{\textbf{Deg.}} & \textcolor{white}{\textbf{\%Rob}} \\
+\midrule
+XLM-R & 0.890 & 0.430 & 0.460 & 48.3\% \\
+\rowcolor{tablerow}
+mBERT & 0.899 & 0.483 & 0.417 & 53.7\% \\
+Llama3.1-8B & 0.400 & 0.357 & 0.043 & 89.2\% \\
+\rowcolor{tablerow}
+Qwen2.5-7B & 0.440 & 0.373 & 0.067 & 84.9\% \\
+Mistral-7B & 0.413 & 0.346 & 0.067 & 83.8\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig5_finetuned_vs_fewshot_t1_nastaliq_fnd.png}
+\caption{Fine-tuned models achieve the highest in-domain scores yet the largest cross-domain gap of any task.}
+\label{fig:nastaliq_fnd_models}
+\end{subfigure}
+\vspace{2mm}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig1_heatmap_nastaliq_fake_news.png}
+\caption{Near-diagonal-only structure: strong performance is confined almost entirely to the training domain.}
+\label{fig:nastaliq_fnd_heatmap}
+\end{subfigure}
+\caption{Nastaliq Fake News Detection: the clearest case of domain-specific overfitting in the benchmark.}
+\label{fig:nastaliq_fnd_analysis}
+\end{figure}
+
+\subsection{Question Answering}
+
+QA shows moderate degradation of 24.7 points for XLM-R (Table~\ref{tab:nastaliq_qa}). Religious/Hadith questions differ structurally from general-knowledge trivia, and long-form explanatory answers differ from short factual ones, both of which introduce a domain gap that is real but far less severe than fake news or hate speech.
+
+\begin{table}[t]
+\centering
+\caption{Nastaliq Question Answering (4 domains)}
+\label{tab:nastaliq_qa}
+\small
+\begin{tabularx}{\linewidth}{@{}l*{4}{>{\centering\arraybackslash}X}@{}}
+\toprule
+\rowcolor{tableheader}
+\textcolor{white}{\textbf{Model}} & \textcolor{white}{\textbf{SS}} & \textcolor{white}{\textbf{ST}} & \textcolor{white}{\textbf{Deg.}} & \textcolor{white}{\textbf{\%Rob}} \\
+\midrule
+XLM-R & 0.765 & 0.518 & 0.247 & 67.7\% \\
+\rowcolor{tablerow}
+mBERT & 0.742 & 0.496 & 0.246 & 66.8\% \\
+Llama3.1-8B & 0.510 & 0.405 & 0.105 & 79.4\% \\
+\rowcolor{tablerow}
+Qwen2.5-7B & 0.533 & 0.421 & 0.112 & 79.0\% \\
+Mistral-7B & 0.498 & 0.384 & 0.114 & 77.1\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig5_finetuned_vs_fewshot_t1_nastaliq_qa.png}
+\caption{Moderate degradation; LLMs show more consistent relative robustness than fine-tuned models.}
+\label{fig:nastaliq_qa_models}
+\end{subfigure}
+\vspace{2mm}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig1_heatmap_nastaliq_qa.png}
+\caption{Domain-pair transfer reflects differing question types and answer formats across domains.}
+\label{fig:nastaliq_qa_heatmap}
+\end{subfigure}
+\caption{Nastaliq Question Answering: moderate, task-structural cross-domain degradation.}
+\label{fig:nastaliq_qa_analysis}
+\end{figure}
+
+\section{Results: Roman Urdu Script}
+
+\subsection{Sentiment Analysis}
+
+Roman Urdu sentiment analysis is nearly as robust as its Nastaliq counterpart: 90.8\% relative robustness for XLM-R (Table~\ref{tab:roman_sa}), despite the spelling inconsistency that is characteristic of romanized, user-generated text.
+
+\textbf{Example (Roman Urdu, negative sentiment):}
+\begin{quote}
+\textit{yeh app bilkul bekar hai, very frustrating}
+\end{quote}
+\textit{(``This app is completely useless, very frustrating'')} -- negative sentiment that is legible whether the domain is app reviews or general service complaints.
+
+\begin{table}[t]
+\centering
+\caption{Roman Urdu Sentiment Analysis (4 domains)}
+\label{tab:roman_sa}
+\small
+\begin{tabularx}{\linewidth}{@{}l*{4}{>{\centering\arraybackslash}X}@{}}
+\toprule
+\rowcolor{tableheader}
+\textcolor{white}{\textbf{Model}} & \textcolor{white}{\textbf{SS}} & \textcolor{white}{\textbf{ST}} & \textcolor{white}{\textbf{Deg.}} & \textcolor{white}{\textbf{\%Rob}} \\
+\midrule
+XLM-R & 0.754 & 0.685 & 0.069 & 90.8\% \\
+\rowcolor{tablerow}
+mBERT & 0.712 & 0.642 & 0.070 & 90.2\% \\
+Llama3.1-8B & 0.698 & 0.628 & 0.070 & 90.0\% \\
+\rowcolor{tablerow}
+Qwen2.5-7B & 0.684 & 0.612 & 0.072 & 89.5\% \\
+Mistral-7B & 0.610 & 0.545 & 0.065 & 89.3\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Cyber Abuse Detection}
+
+XLM-R achieves a near-perfect 99.7\% SS but drops 18.0 points cross-domain (82.0\% relative robustness, Table~\ref{tab:roman_abuse}). YouTube comments, content-creator call-outs, general social media, and broader online abuse each carry platform-specific intensity and phrasing.
+
+\textbf{Domain variation in Roman Urdu abuse:}
+\begin{quote}
+\textit{Domain A (YouTube style): ``YouTuber ki acting bilkul ghalat tha''} \\
+(``YouTuber's acting was completely wrong'')
+\end{quote}
+\begin{quote}
+\textit{Domain B (content-creator style): ``teri acting bekar hai, sab ignore kar dete hain''} \\
+(``Your acting is useless, everyone ignores you'')
+\end{quote}
+
+\begin{table}[t]
+\centering
+\caption{Roman Urdu Cyber Abuse Detection (4 domains)}
+\label{tab:roman_abuse}
+\small
+\begin{tabularx}{\linewidth}{@{}l*{4}{>{\centering\arraybackslash}X}@{}}
+\toprule
+\rowcolor{tableheader}
+\textcolor{white}{\textbf{Model}} & \textcolor{white}{\textbf{SS}} & \textcolor{white}{\textbf{ST}} & \textcolor{white}{\textbf{Deg.}} & \textcolor{white}{\textbf{\%Rob}} \\
+\midrule
+XLM-R & 0.997 & 0.817 & 0.180 & 82.0\% \\
+\rowcolor{tablerow}
+mBERT & 0.989 & 0.763 & 0.226 & 77.2\% \\
+Llama3.1-8B & 0.762 & 0.605 & 0.157 & 79.4\% \\
+\rowcolor{tablerow}
+Qwen2.5-7B & 0.785 & 0.623 & 0.162 & 79.3\% \\
+Mistral-7B & 0.734 & 0.582 & 0.152 & 79.3\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig5_finetuned_vs_fewshot_t5_roman_cyberabuse.png}
+\caption{XLM-R's 99.7\% in-domain score masks an 18-point cross-domain drop.}
+\label{fig:roman_abuse_models}
+\end{subfigure}
+\vspace{2mm}
+\begin{subfigure}{\linewidth}
+\centering
+\includegraphics[width=\linewidth]{fig1_heatmap_roman_cyber_abuse.png}
+\caption{Off-diagonal cells remain reasonably strong, indicating shared but not identical abuse vocabulary across platforms.}
+\label{fig:roman_abuse_heatmap}
+\end{subfigure}
+\caption{Roman Urdu Cyber Abuse Detection: high in-domain accuracy conceals moderate cross-domain fragmentation.}
+\label{fig:roman_abuse_analysis}
+\end{figure}
+
+\subsection{Product Reviews and Twitter Opinions}
+
+Product reviews (Daraz, restaurants, services) show 15.3 points of degradation (82.3\% relative robustness); Twitter opinions (political, electronics, civic, mixed) show 14.3 points (82.8\%), summarized in Table~\ref{tab:roman_other}. Both fall in the same moderate-robustness band as cyber abuse and QA, consistent with the idea that opinion- and platform-conditioned tasks sit between the extremes of sentiment (very robust) and fake news (very fragile).
+
+\begin{table}[t]
+\centering
+\caption{Roman Urdu: Product Reviews \& Twitter Opinions (XLM-R)}
+\label{tab:roman_other}
+\small
+\begin{tabularx}{\linewidth}{@{}l*{4}{>{\centering\arraybackslash}X}@{}}
+\toprule
+\rowcolor{tableheader}
+\textcolor{white}{\textbf{Task}} & \textcolor{white}{\textbf{SS}} & \textcolor{white}{\textbf{ST}} & \textcolor{white}{\textbf{Deg.}} & \textcolor{white}{\textbf{\%Rob}} \\
+\midrule
+Product Reviews & 0.865 & 0.712 & 0.153 & 82.3\% \\
+\rowcolor{tablerow}
+Twitter Opinions & 0.832 & 0.689 & 0.143 & 82.8\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=0.85\textwidth]{fig3a_domain_drop_violin_by_task.png}
+\caption{Distribution of in-domain minus cross-domain F1 drop, by task, across all Nastaliq and Roman Urdu tasks. Violin width shows the spread of the drop across domain pairs and models. Sentiment tasks are narrow and centered near zero (2--9\% drop); fake news and Twitter opinions are wide and shifted high (46--65\% drop); hate speech sits in between with a wide, bimodal spread. mBERT (blue) and XLM-R (red) show largely consistent patterns, indicating the effect is task-driven rather than model-specific.}
+\label{fig:task_drop_distribution}
+\end{figure*}
+
+\section{Analysis}
+
+\subsection{Task-Dependent Robustness Hierarchy}
+
+Three tiers emerge clearly from Figure~\ref{fig:task_drop_distribution} and the tables above:
+
+\textbf{High robustness (90--97\%): Sentiment analysis.} Sentiment is a coarse, high-level semantic signal: a small, relatively closed vocabulary of positive and negative markers recurs across Twitter posts, movie reviews, e-commerce feedback, and civic commentary alike. A model does not need domain-specific world knowledge to recognize that \textit{bekar} (``useless'') is negative, wherever it appears.
+
+\textbf{Moderate robustness (67--83\%): QA, Cyber Abuse, Product Reviews, Twitter Opinions.} These tasks are shaped by platform conventions and community norms that shift somewhat across domains -- a Hadith question is not phrased like a trivia question, and abuse on YouTube is not phrased like abuse in a general forum -- but the underlying task signal (is this an insult, does this answer the question) still transfers reasonably well.
+
+\textbf{Low robustness (48--76\%): Fake News, Hate Speech.} These are the tasks where domain-specific surface patterns dominate. What counts as a ``fake news'' cue in political commentary (unverified claims about public figures) looks nothing like a fake news cue in fact-checked general news (subtle factual inconsistency), and what counts as sectarian hate speech uses an entirely different vocabulary from general online insults. A model that has only learned one domain's cues has, in effect, learned a narrower task than the one it was asked to solve.
+
+\subsection{Fine-tuned Transformers vs. Few-shot LLMs}
+
+A consistent, and to us the most important, pattern holds across almost every task:
+
+\textbf{Fine-tuned transformers} post the highest in-domain (SS) scores in the benchmark, 70--99\%, but also the largest cross-domain (ST) drops, 2--46 percentage points. Gradient-based fine-tuning on a single domain's labeled examples appears to encourage the model to fit domain-idiosyncratic shortcuts (specific phrasings, specific topical cues) rather than the more abstract task boundary, which is precisely what produces high SS and low ST simultaneously.
+
+\textbf{Few-shot LLMs} post lower in-domain scores, 38--79\%, but noticeably better relative robustness, 73--89\% of their own in-domain score. Because in-context learning does not modify the model's weights, it cannot overfit to a single source domain's idiosyncrasies in the same way; the five in-context examples act as a light steer rather than a hard-fit decision boundary, which costs some peak accuracy but buys transfer.
+
+\begin{table}[t]
+\centering
+\caption{Fine-tuned Transformers vs.\ Few-shot LLMs: Summary}
+\label{tab:model_comp}
+\small
+\begin{tabularx}{\linewidth}{@{}l*{2}{>{\centering\arraybackslash}X}@{}}
+\toprule
+\rowcolor{tableheader}
+\textcolor{white}{\textbf{Aspect}} & \textcolor{white}{\textbf{XLM-R / mBERT}} & \textcolor{white}{\textbf{Few-shot LLMs}} \\
+\midrule
+In-domain (SS) & 70--99\% & 38--79\% \\
+\rowcolor{tablerow}
+Cross-domain drop & 2--46 pts & 4--16 pts \\
+Relative robustness & 48--97\% & 73--89\% \\
+\rowcolor{tablerow}
+Consistency across tasks & Highly variable & Comparatively uniform \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure*}[t]
+\centering
+\begin{subfigure}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig10a_avg_performance_by_model.png}
+\caption{Average in-domain vs.\ cross-domain performance, pooled across all tasks. Both fine-tuned models show a large gap between in-domain (blue) and cross-domain (orange) scores.}
+\label{fig:overall_performance}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig10b_worst_case_drops.png}
+\caption{Worst-case F1 drop by task. Fake News and Hate Speech produce the most damaging single-domain-pair failures in the benchmark.}
+\label{fig:worst_case_drops}
+\end{subfigure}
+\caption{Pooled and worst-case views of the fine-tuning overfitting effect described in Section~\ref{sec:terminology}.}
+\label{fig:overall_model_analysis}
+\end{figure*}
+
+\subsection{Do the two scripts behave differently?}
+
+Figure~\ref{fig:script_robustness_bars} compares the mean F1 drop for Nastaliq and Roman Urdu, pooling across each script's own task set. The two scripts are close: Nastaliq shows a mean drop around 0.25 for both XLM-R and mBERT, and Roman Urdu shows a similar 0.23--0.27. The error bars, however, are wide in both cases, wider than the small gap between scripts. We read this as evidence that \emph{robustness is governed by task identity, not script identity}: sentiment is robust in both scripts, fake news and its Roman Urdu relative (Twitter opinions) are fragile in both. This matters for practitioners, since it means script-specific engineering effort is less urgent than task-specific effort.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{fig10f_script_robustness.png}
+\caption{Mean F1 drop by script, averaged across each script's task set, for XLM-R and mBERT. The gap between Nastaliq and Roman Urdu is small relative to the within-script variance (error bars), consistent with task identity, not script, being the dominant driver of robustness.}
+\label{fig:script_robustness_bars}
+\end{figure}
+
+\begin{figure*}[t]
+\centering
+\begin{subfigure}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig15_ft_vs_llm_radar_nastaliq.png}
+\caption{Nastaliq script: fine-tuned models (inner, blue) show high task-to-task variance in relative robustness; the best few-shot LLM (outer, orange) is more uniform.}
+\label{fig:radar_nastaliq}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.48\textwidth}
+\centering
+\includegraphics[width=\textwidth]{fig15_ft_vs_llm_radar_roman.png}
+\caption{Roman Urdu script: the same qualitative pattern holds, supporting the claim that training paradigm, not script, drives the fine-tuned/few-shot gap.}
+\label{fig:radar_roman}
+\end{subfigure}
+\caption{Relative robustness profiles (\%) across tasks, fine-tuned average vs.\ best few-shot LLM, per script.}
+\label{fig:radar_comparison}
+\end{figure*}
+
+\section{Key Findings}
+
+\textbf{Finding 1 -- Urdu shows selective, not uniform, domain fragility.} Urdu sentiment analysis (90--97\% relative robustness) is competitive with the English sentiment robustness reported by Calderon et al.\ (91--94\%~\cite{calderon2024measuring}), but Urdu fake news detection (48--54\%) trails the English figure they report (78--85\%) by roughly 30 points. Urdu NLP is not uniformly behind English; it is behind specifically on tasks that depend on fine-grained, domain-specific cues.
+
+\textbf{Finding 2 -- Fine-tuned models overfit to the training domain.} The systematic pattern of high SS paired with low ST, most extreme in fake news detection, indicates that gradient-based fine-tuning on a single Urdu domain is learning domain-idiosyncratic shortcuts rather than task-general decision boundaries.
+
+\textbf{Finding 3 -- Few-shot LLMs generalize better, at an accuracy cost.} Despite 10--40 points lower absolute in-domain accuracy, few-shot LLMs retain 73--89\% of their own performance under domain shift, consistently higher than the fine-tuned models' 48--97\% (and far higher on the tasks where fine-tuned models struggle most).
+
+\textbf{Finding 4 -- Task structure, not script, is the primary driver of robustness.} The same task hierarchy (sentiment $>$ moderate tasks $>$ fake news/hate speech) appears in both Nastaliq and Roman Urdu, and the script-level gap in mean F1 drop (Figure~\ref{fig:script_robustness_bars}) is small relative to its own variance.
+
+\section{Limitations}
+\label{sec:limitations}
+
+We want to be direct about where this benchmark is weaker than we would like, since an honest account of limitations is, in our view, more useful to the field than an overstated one.
+
+\begin{itemize}[leftmargin=*]
+\item \textbf{Partly synthetic domains.} Some domains, particularly in fake news and hate speech, were expanded using LLM-generated text seeded from authentic examples and manually reviewed. Manual review filters out obviously wrong or unnatural examples, but it cannot guarantee that LLM-generated text carries exactly the same statistical fingerprint as organic, naturally occurring text in that domain. This is a possible confound: some of the cross-domain degradation we attribute to genuine domain shift could in part reflect models detecting synthetic-vs-organic style differences rather than topic differences alone. We recommend future work replicate the fake news and hate speech results on domains built entirely from organic data before treating the exact percentages as final.
+\item \textbf{Domain counts are small (3--5 per task).} With only 3--5 domains per task, ST estimates average over a modest number of domain pairs (as few as 6 for the 3-domain product-reviews task), so individual pairwise transfer numbers in the heatmaps (Figures~\ref{fig:nastaliq_sa_analysis}--\ref{fig:roman_abuse_analysis}) should be read as illustrative rather than as tight estimates.
+\item \textbf{Single training run per model-domain pair.} Fine-tuned models were trained once per domain rather than across multiple random seeds, so the SS and ST figures do not carry variance estimates from training stochasticity, only from domain-pair averaging.
+\item \textbf{Nastaliq and Roman Urdu are not paired.} Because the two scripts have different task sets and domain counts, any script-level comparison (Section~VI-C, Figure~\ref{fig:script_robustness_bars}) is necessarily coarser than the task-level comparisons and should be read as suggestive rather than conclusive.
+\item \textbf{Automatic labels for some domains.} A subset of labels, particularly for LLM-augmented domains, were assigned by the same class of model family used for generation and then spot-checked rather than independently re-annotated by a second human pass, which is a weaker label-quality guarantee than full double annotation.
+\end{itemize}
+
+None of these limitations overturn the paper's central, task-level finding, that domain robustness in Urdu is highly task-dependent and that fine-tuning overfits more than few-shot prompting does, since that pattern is consistent across both the organically sourced and the LLM-augmented portions of the benchmark. They do mean the precise numeric gaps (e.g., ``30-point gap to English fake news'') should be treated as a first estimate to be refined by follow-up work on fully organic corpora.
+
+\section{Practical Recommendations}
+
+\textbf{For sentiment analysis:} a fine-tuned XLM-R is a safe default; expect 90--97\% of in-domain accuracy to survive a change of domain.
+
+\textbf{For fake news or hate speech detection:} do not rely on a single-domain fine-tuned model in production. Either train on data pooled across several domains, use domain-adaptation techniques, or fall back to a few-shot LLM, which will start lower but degrade far less when the input distribution shifts.
+
+\textbf{Under annotation or compute constraints:} few-shot LLMs offer a reasonable robustness/cost trade-off, since they need no fine-tuning data at all and still retain 73--89\% of their own peak accuracy across domains.
+
+\textbf{Model selection at a glance:} choose XLM-R when in-domain accuracy is the priority and the deployment domain is known and fixed (80--99\% in-domain); choose Llama3.1-8B or Qwen2.5-7B when the deployment domain is unknown or expected to drift (73--89\% relative robustness); choose mBERT or Mistral-7B under tighter compute budgets, accepting a modest robustness cost.
+
+\section{Conclusion}
+
+We presented the first systematic domain-robustness benchmark for Urdu and Roman Urdu, covering 32 datasets, 8 tasks, 2 scripts, and 5 models under a single SS/ST protocol adapted from Calderon et al.~\cite{calderon2024measuring}. The picture that emerges is neither uniformly encouraging nor uniformly discouraging: Urdu sentiment analysis is domain-robust and competitive with English, while Urdu fake news and hate speech detection are fragile, dropping 30--50 points under domain shift and trailing published English figures by a wide margin. Fine-tuned transformers reliably win on in-domain accuracy and reliably lose the most under domain shift; few-shot LLMs are the more conservative, if less accurate, choice when the deployment domain cannot be guaranteed in advance. We see three natural next steps: extending this protocol to fully organic (non-LLM-augmented) fake news and hate speech domains to isolate the synthetic-data confound noted in Section~\ref{sec:limitations}; testing lightweight domain-adaptation and multi-domain training strategies specifically on the low-robustness tasks identified here; and extending the SS/ST protocol to additional low-resource South Asian languages that share Urdu's script duality, such as Punjabi and Sindhi.
+
+\section*{Acknowledgments}
+We acknowledge Kaggle, Hugging Face, and GitHub for the public release of the Urdu and Roman Urdu datasets this study builds on, and the fluent Urdu speakers who reviewed and verified LLM-augmented examples. Experiments were run on an Intel Core i7 (13th Gen) workstation with 32~GB RAM and an NVIDIA RTX~A4000 GPU.
+
+\begin{thebibliography}{99}
+
+\bibitem{calderon2024measuring} N. Calderon, S. Ben-David, A. Feder, and R. Reichart, ``Measuring the robustness of NLP models to domain shifts,'' in \emph{Findings of the Association for Computational Linguistics: EMNLP 2024}, 2024, pp. 4780--4808.
+
+\bibitem{devlin2019bert} J. Devlin, M.-W. Chang, K. Lee, and K. Toutanova, ``BERT: Pre-training of deep bidirectional transformers for language understanding,'' in \emph{Proc. 2019 Conf. North American Chapter Assoc. Comput. Linguistics (NAACL-HLT)}, 2019, pp. 4171--4186.
+
+\bibitem{conneau2020unsupervised} A. Conneau, K. Khandelwal, N. Goyal, V. Chaudhary, G. Wenzek, F. Guzm\'an, E. Grave, M. Ott, L. Zettlemoyer, and V. Stoyanov, ``Unsupervised cross-lingual representation learning at scale,'' in \emph{Proc. 58th Annu. Meeting Assoc. Comput. Linguistics (ACL)}, 2020, pp. 8440--8451.
+
+\bibitem{pires2019multilingual} T. Pires, E. Schlinger, and D. Garrette, ``How multilingual is multilingual BERT?'' in \emph{Proc. 57th Annu. Meeting Assoc. Comput. Linguistics (ACL)}, 2019, pp. 4996--5001.
+
+\bibitem{grattafiori2024llama} A. Grattafiori et al., ``The Llama 3 herd of models,'' \emph{arXiv preprint arXiv:2407.21783}, 2024.
+
+\bibitem{jiang2023mistral} A. Q. Jiang et al., ``Mistral 7B,'' \emph{arXiv preprint arXiv:2310.06825}, 2023.
+
+\bibitem{qwen2024qwen25} Qwen Team, ``Qwen2.5 technical report,'' \emph{arXiv preprint arXiv:2412.15115}, 2024.
+
+\bibitem{malik2020urdu} M. K. Malik, Z. Habib, and A. Karim, ``Urdu fake news detection: A deep learning-based approach,'' in \emph{Proc. 2020 Int. Conf. Comput., Commun., Instrum. (IC3I)}, 2020, pp. 1--6.
+
+\bibitem{Karim2020} M. R. Karim, S. K. Dey, T. Islam, S. Sarker, M. H. Menon, K. Hossain, M. A. Hossain, and S. Decker, ``DeepHateExplainer: Explainable hate speech detection in under-resourced Bengali language,'' \emph{Comput. Linguistics Natural Lang. Process.}, vol. 12, no. 3, pp. 25--45, 2020.
+
+\bibitem{hasan2018urdusentilex} K. Hasan, A. Rahman, and H. Ahmad, ``UrduSentiLex: A lexicon-based sentiment analysis resource for Urdu,'' in \emph{Proc. 2018 Lang. Resour. Eval. Conf. (LREC)}, 2018, pp. 2705--2711.
+
+\end{thebibliography}
+
+\end{document}

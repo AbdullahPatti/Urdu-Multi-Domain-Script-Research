@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_QA",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "A_Religious_Hadith",
+  "target": "A_Religious_Hadith",
+  "type": "IN-DOMAIN",
+  "train_size": 1312,
+  "test_size": 328,
+  "macro_f1": 0.9817,
+  "accuracy": 0.9817,
+  "classification_report": {
+    "0": {
+      "precision": 0.9876543209876543,
+      "recall": 0.975609756097561,
+      "f1-score": 0.9815950920245399,
+      "support": 164.0
+    },
+    "1": {
+      "precision": 0.9759036144578314,
+      "recall": 0.9878048780487805,
+      "f1-score": 0.9818181818181818,
+      "support": 164.0
+    },
+    "accuracy": 0.9817073170731707,
+    "macro avg": {
+      "precision": 0.9817789677227429,
+      "recall": 0.9817073170731707,
+      "f1-score": 0.9817066369213608,
+      "support": 328.0
+    },
+    "weighted avg": {
+      "precision": 0.9817789677227429,
+      "recall": 0.9817073170731707,
+      "f1-score": 0.981706636921361,
+      "support": 328.0
+    }
+  }
+}

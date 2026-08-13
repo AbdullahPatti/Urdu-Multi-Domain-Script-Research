@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "A_Daraz_Ecommerce",
+  "target": "A_Daraz_Ecommerce",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.3269,
+  "accuracy": 0.4242,
+  "classification_report": {
+    "0": {
+      "precision": 0.8888888888888888,
+      "recall": 0.24242424242424243,
+      "f1-score": 0.38095238095238093,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 0.030303030303030304,
+      "f1-score": 0.058823529411764705,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.3707865168539326,
+      "recall": 1.0,
+      "f1-score": 0.5409836065573771,
+      "support": 33.0
+    },
+    "accuracy": 0.42424242424242425,
+    "macro avg": {
+      "precision": 0.753225135247607,
+      "recall": 0.42424242424242425,
+      "f1-score": 0.3269198389738409,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.7532251352476071,
+      "recall": 0.42424242424242425,
+      "f1-score": 0.32691983897384086,
+      "support": 99.0
+    }
+  }
+}

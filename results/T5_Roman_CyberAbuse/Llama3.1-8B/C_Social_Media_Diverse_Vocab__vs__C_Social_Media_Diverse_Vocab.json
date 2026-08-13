@@ -1,0 +1,39 @@
+{
+  "task": "T5_Roman_CyberAbuse",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "C_Social_Media_Diverse_Vocab",
+  "target": "C_Social_Media_Diverse_Vocab",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 150,
+  "macro_f1": 0.8717,
+  "accuracy": 0.8733,
+  "classification_report": {
+    "0": {
+      "precision": 0.8043478260869565,
+      "recall": 0.9866666666666667,
+      "f1-score": 0.8862275449101796,
+      "support": 75.0
+    },
+    "1": {
+      "precision": 0.9827586206896551,
+      "recall": 0.76,
+      "f1-score": 0.8571428571428571,
+      "support": 75.0
+    },
+    "accuracy": 0.8733333333333333,
+    "macro avg": {
+      "precision": 0.8935532233883059,
+      "recall": 0.8733333333333333,
+      "f1-score": 0.8716852010265184,
+      "support": 150.0
+    },
+    "weighted avg": {
+      "precision": 0.8935532233883059,
+      "recall": 0.8733333333333333,
+      "f1-score": 0.8716852010265185,
+      "support": 150.0
+    }
+  }
+}

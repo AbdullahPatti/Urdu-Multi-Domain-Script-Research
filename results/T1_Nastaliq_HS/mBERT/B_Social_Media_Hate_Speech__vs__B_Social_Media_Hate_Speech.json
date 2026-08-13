@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "B_Social_Media_Hate_Speech",
+  "target": "B_Social_Media_Hate_Speech",
+  "type": "IN-DOMAIN",
+  "train_size": 10000,
+  "test_size": 5233,
+  "macro_f1": 0.7723,
+  "accuracy": 0.7724,
+  "classification_report": {
+    "0": {
+      "precision": 0.7549836897426604,
+      "recall": 0.8017705927636644,
+      "f1-score": 0.7776740713085682,
+      "support": 2598.0
+    },
+    "1": {
+      "precision": 0.7918350848827809,
+      "recall": 0.7434535104364326,
+      "f1-score": 0.7668819729888432,
+      "support": 2635.0
+    },
+    "accuracy": 0.7724058857252054,
+    "macro avg": {
+      "precision": 0.7734093873127206,
+      "recall": 0.7726120516000485,
+      "f1-score": 0.7722780221487058,
+      "support": 5233.0
+    },
+    "weighted avg": {
+      "precision": 0.7735396664661875,
+      "recall": 0.7724058857252054,
+      "f1-score": 0.7722398693073309,
+      "support": 5233.0
+    }
+  }
+}

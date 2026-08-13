@@ -1,0 +1,3 @@
+model,task,avg_SS,avg_ST,avg_SD,WSD,avg_TD,WTD
+XLM-R_Base,T1_Nastaliq_HS,0.885,0.5701,0.3149,0.5941,0.3149,0.719
+mBERT,T1_Nastaliq_HS,0.884,0.54,0.344,0.6725,0.344,0.6979

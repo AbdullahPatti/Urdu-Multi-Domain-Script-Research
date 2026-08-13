@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "E_Inter_Faith_Sectarian_Ethnic",
+  "target": "A_Social_Media_Offensive",
+  "type": "CROSS-DOMAIN",
+  "train_size": 10000,
+  "test_size": 4352,
+  "macro_f1": 0.849,
+  "accuracy": 0.8587,
+  "classification_report": {
+    "0": {
+      "precision": 0.8399305555555555,
+      "recall": 0.9401476875242907,
+      "f1-score": 0.8872180451127819,
+      "support": 2573.0
+    },
+    "1": {
+      "precision": 0.8953804347826086,
+      "recall": 0.7408656548622822,
+      "f1-score": 0.8108274377114734,
+      "support": 1779.0
+    },
+    "accuracy": 0.8586856617647058,
+    "macro avg": {
+      "precision": 0.867655495169082,
+      "recall": 0.8405066711932865,
+      "f1-score": 0.8490227414121276,
+      "support": 4352.0
+    },
+    "weighted avg": {
+      "precision": 0.8625972226384891,
+      "recall": 0.8586856617647058,
+      "f1-score": 0.855991277978837,
+      "support": 4352.0
+    }
+  }
+}

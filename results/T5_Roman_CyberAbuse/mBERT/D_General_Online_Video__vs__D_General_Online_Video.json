@@ -1,0 +1,39 @@
+{
+  "task": "T5_Roman_CyberAbuse",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "D_General_Online_Video",
+  "target": "D_General_Online_Video",
+  "type": "IN-DOMAIN",
+  "train_size": 960,
+  "test_size": 240,
+  "macro_f1": 0.9577,
+  "accuracy": 0.9583,
+  "classification_report": {
+    "0": {
+      "precision": 1.0,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.9523809523809523,
+      "support": 110.0
+    },
+    "1": {
+      "precision": 0.9285714285714286,
+      "recall": 1.0,
+      "f1-score": 0.9629629629629629,
+      "support": 130.0
+    },
+    "accuracy": 0.9583333333333334,
+    "macro avg": {
+      "precision": 0.9642857142857143,
+      "recall": 0.9545454545454546,
+      "f1-score": 0.9576719576719577,
+      "support": 240.0
+    },
+    "weighted avg": {
+      "precision": 0.9613095238095238,
+      "recall": 0.9583333333333334,
+      "f1-score": 0.9581128747795413,
+      "support": 240.0
+    }
+  }
+}

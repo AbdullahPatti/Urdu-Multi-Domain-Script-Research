@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "B_Restaurant_Food",
+  "target": "D_Electronics_Gaming_Delivery",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.2116,
+  "accuracy": 0.3131,
+  "classification_report": {
+    "0": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.2222222222222222,
+      "recall": 0.12121212121212122,
+      "f1-score": 0.1568627450980392,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.3375,
+      "recall": 0.8181818181818182,
+      "f1-score": 0.4778761061946903,
+      "support": 33.0
+    },
+    "accuracy": 0.31313131313131315,
+    "macro avg": {
+      "precision": 0.1865740740740741,
+      "recall": 0.31313131313131315,
+      "f1-score": 0.21157961709757647,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.1865740740740741,
+      "recall": 0.31313131313131315,
+      "f1-score": 0.2115796170975765,
+      "support": 99.0
+    }
+  }
+}

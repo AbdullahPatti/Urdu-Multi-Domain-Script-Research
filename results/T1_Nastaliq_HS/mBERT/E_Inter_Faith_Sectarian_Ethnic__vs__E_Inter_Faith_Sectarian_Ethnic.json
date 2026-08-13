@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "E_Inter_Faith_Sectarian_Ethnic",
+  "target": "E_Inter_Faith_Sectarian_Ethnic",
+  "type": "IN-DOMAIN",
+  "train_size": 10000,
+  "test_size": 4352,
+  "macro_f1": 0.8253,
+  "accuracy": 0.8318,
+  "classification_report": {
+    "0": {
+      "precision": 0.8679906542056075,
+      "recall": 0.8501144164759725,
+      "f1-score": 0.8589595375722543,
+      "support": 2622.0
+    },
+    "1": {
+      "precision": 0.7797085201793722,
+      "recall": 0.8040462427745665,
+      "f1-score": 0.7916903813318156,
+      "support": 1730.0
+    },
+    "accuracy": 0.8318014705882353,
+    "macro avg": {
+      "precision": 0.8238495871924898,
+      "recall": 0.8270803296252696,
+      "f1-score": 0.8253249594520349,
+      "support": 4352.0
+    },
+    "weighted avg": {
+      "precision": 0.8328968830968329,
+      "recall": 0.8318014705882353,
+      "f1-score": 0.8322188114013078,
+      "support": 4352.0
+    }
+  }
+}

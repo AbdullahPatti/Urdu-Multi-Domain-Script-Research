@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "B_Movie_Reviews",
+  "target": "B_Movie_Reviews",
+  "type": "IN-DOMAIN",
+  "train_size": 7356,
+  "test_size": 1812,
+  "macro_f1": 0.7847,
+  "accuracy": 0.7853,
+  "classification_report": {
+    "0": {
+      "precision": 0.8182941903584673,
+      "recall": 0.7323008849557522,
+      "f1-score": 0.772913018096906,
+      "support": 904.0
+    },
+    "1": {
+      "precision": 0.7587238285144566,
+      "recall": 0.8381057268722467,
+      "f1-score": 0.7964416535845107,
+      "support": 908.0
+    },
+    "accuracy": 0.7853200883002207,
+    "macro avg": {
+      "precision": 0.788509009436462,
+      "recall": 0.7852033059139994,
+      "f1-score": 0.7846773358407084,
+      "support": 1812.0
+    },
+    "weighted avg": {
+      "precision": 0.7884432584851994,
+      "recall": 0.7853200883002207,
+      "f1-score": 0.7847033056370523,
+      "support": 1812.0
+    }
+  }
+}

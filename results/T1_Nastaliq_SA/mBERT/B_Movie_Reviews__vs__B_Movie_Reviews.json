@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "B_Movie_Reviews",
+  "target": "B_Movie_Reviews",
+  "type": "IN-DOMAIN",
+  "train_size": 7356,
+  "test_size": 1812,
+  "macro_f1": 0.7505,
+  "accuracy": 0.7506,
+  "classification_report": {
+    "0": {
+      "precision": 0.7585812356979404,
+      "recall": 0.7334070796460177,
+      "f1-score": 0.7457817772778402,
+      "support": 904.0
+    },
+    "1": {
+      "precision": 0.7430703624733476,
+      "recall": 0.7676211453744494,
+      "f1-score": 0.7551462621885157,
+      "support": 908.0
+    },
+    "accuracy": 0.7505518763796909,
+    "macro avg": {
+      "precision": 0.750825799085644,
+      "recall": 0.7505141125102335,
+      "f1-score": 0.750464019733178,
+      "support": 1812.0
+    },
+    "weighted avg": {
+      "precision": 0.7508086789165219,
+      "recall": 0.7505518763796909,
+      "f1-score": 0.7504743558092383,
+      "support": 1812.0
+    }
+  }
+}

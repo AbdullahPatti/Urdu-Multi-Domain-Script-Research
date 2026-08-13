@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "D_Governance_Political",
+  "target": "D_Governance_Political",
+  "type": "IN-DOMAIN",
+  "train_size": 685,
+  "test_size": 294,
+  "macro_f1": 0.7381,
+  "accuracy": 0.7381,
+  "classification_report": {
+    "0": {
+      "precision": 0.7605633802816901,
+      "recall": 0.7152317880794702,
+      "f1-score": 0.7372013651877133,
+      "support": 151.0
+    },
+    "1": {
+      "precision": 0.7171052631578947,
+      "recall": 0.7622377622377622,
+      "f1-score": 0.7389830508474576,
+      "support": 143.0
+    },
+    "accuracy": 0.7380952380952381,
+    "macro avg": {
+      "precision": 0.7388343217197924,
+      "recall": 0.7387347751586162,
+      "f1-score": 0.7380922080175855,
+      "support": 294.0
+    },
+    "weighted avg": {
+      "precision": 0.739425588619436,
+      "recall": 0.7380952380952381,
+      "f1-score": 0.7380679673963645,
+      "support": 294.0
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "task": "T5_Roman_CyberAbuse",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "D_General_Online_Video",
+  "target": "C_Social_Media_Diverse_Vocab",
+  "type": "CROSS-DOMAIN",
+  "train_size": 960,
+  "test_size": 260,
+  "macro_f1": 0.7584,
+  "accuracy": 0.7769,
+  "classification_report": {
+    "0": {
+      "precision": 0.9558823529411765,
+      "recall": 0.5416666666666666,
+      "f1-score": 0.6914893617021277,
+      "support": 120.0
+    },
+    "1": {
+      "precision": 0.7135416666666666,
+      "recall": 0.9785714285714285,
+      "f1-score": 0.8253012048192772,
+      "support": 140.0
+    },
+    "accuracy": 0.7769230769230769,
+    "macro avg": {
+      "precision": 0.8347120098039216,
+      "recall": 0.7601190476190476,
+      "f1-score": 0.7583952832607024,
+      "support": 260.0
+    },
+    "weighted avg": {
+      "precision": 0.825391214177979,
+      "recall": 0.7769230769230769,
+      "f1-score": 0.763541892611362,
+      "support": 260.0
+    }
+  }
+}

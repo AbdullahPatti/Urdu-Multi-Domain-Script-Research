@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_QA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "D_Short_Form_QnA",
+  "target": "D_Short_Form_QnA",
+  "type": "IN-DOMAIN",
+  "train_size": 2768,
+  "test_size": 692,
+  "macro_f1": 0.9421,
+  "accuracy": 0.9422,
+  "classification_report": {
+    "0": {
+      "precision": 0.9903846153846154,
+      "recall": 0.8930635838150289,
+      "f1-score": 0.939209726443769,
+      "support": 346.0
+    },
+    "1": {
+      "precision": 0.9026315789473685,
+      "recall": 0.9913294797687862,
+      "f1-score": 0.9449035812672176,
+      "support": 346.0
+    },
+    "accuracy": 0.9421965317919075,
+    "macro avg": {
+      "precision": 0.9465080971659919,
+      "recall": 0.9421965317919075,
+      "f1-score": 0.9420566538554933,
+      "support": 692.0
+    },
+    "weighted avg": {
+      "precision": 0.9465080971659919,
+      "recall": 0.9421965317919075,
+      "f1-score": 0.9420566538554933,
+      "support": 692.0
+    }
+  }
+}

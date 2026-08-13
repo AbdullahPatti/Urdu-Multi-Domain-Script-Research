@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_FND",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "A_Multi_Topic_News",
+  "target": "B_Ax_to_Grind",
+  "type": "CROSS-DOMAIN",
+  "train_size": 638,
+  "test_size": 2017,
+  "macro_f1": 0.6516,
+  "accuracy": 0.6624,
+  "classification_report": {
+    "0": {
+      "precision": 0.7530674846625767,
+      "recall": 0.4856577645895153,
+      "f1-score": 0.5904990980156344,
+      "support": 1011.0
+    },
+    "1": {
+      "precision": 0.6190476190476191,
+      "recall": 0.8399602385685885,
+      "f1-score": 0.7127794179671025,
+      "support": 1006.0
+    },
+    "accuracy": 0.6623698562221121,
+    "macro avg": {
+      "precision": 0.6860575518550979,
+      "recall": 0.6628090015790519,
+      "f1-score": 0.6516392579913685,
+      "support": 2017.0
+    },
+    "weighted avg": {
+      "precision": 0.6862236647276994,
+      "recall": 0.6623698562221121,
+      "f1-score": 0.6514876958694653,
+      "support": 2017.0
+    }
+  }
+}

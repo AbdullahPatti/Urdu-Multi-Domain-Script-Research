@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_FND",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "B_Ax_to_Grind",
+  "target": "B_Ax_to_Grind",
+  "type": "IN-DOMAIN",
+  "train_size": 8000,
+  "test_size": 2017,
+  "macro_f1": 0.938,
+  "accuracy": 0.938,
+  "classification_report": {
+    "0": {
+      "precision": 0.9585921325051759,
+      "recall": 0.9159248269040554,
+      "f1-score": 0.9367728882144664,
+      "support": 1011.0
+    },
+    "1": {
+      "precision": 0.9191246431969553,
+      "recall": 0.9602385685884692,
+      "f1-score": 0.9392318911035489,
+      "support": 1006.0
+    },
+    "accuracy": 0.9380267724343084,
+    "macro avg": {
+      "precision": 0.9388583878510657,
+      "recall": 0.9380816977462623,
+      "f1-score": 0.9380023896590076,
+      "support": 2017.0
+    },
+    "weighted avg": {
+      "precision": 0.9389073064049924,
+      "recall": 0.9380267724343084,
+      "f1-score": 0.937999341812095,
+      "support": 2017.0
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "D_Mixed_Social_Commentary",
+  "target": "C_Public_Civic_Services",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.8862,
+  "accuracy": 0.8889,
+  "classification_report": {
+    "0": {
+      "precision": 0.9166666666666666,
+      "recall": 1.0,
+      "f1-score": 0.9565217391304348,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.8928571428571429,
+      "recall": 0.7575757575757576,
+      "f1-score": 0.819672131147541,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.8571428571428571,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.8823529411764706,
+      "support": 33.0
+    },
+    "accuracy": 0.8888888888888888,
+    "macro avg": {
+      "precision": 0.8888888888888888,
+      "recall": 0.8888888888888888,
+      "f1-score": 0.8861822704848153,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.8888888888888888,
+      "recall": 0.8888888888888888,
+      "f1-score": 0.8861822704848153,
+      "support": 99.0
+    }
+  }
+}

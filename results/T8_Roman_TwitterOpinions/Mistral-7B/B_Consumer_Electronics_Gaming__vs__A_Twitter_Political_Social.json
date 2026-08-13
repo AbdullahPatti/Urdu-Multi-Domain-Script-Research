@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "B_Consumer_Electronics_Gaming",
+  "target": "A_Twitter_Political_Social",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.3646,
+  "accuracy": 0.4242,
+  "classification_report": {
+    "0": {
+      "precision": 0.8,
+      "recall": 0.24242424242424243,
+      "f1-score": 0.37209302325581395,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.4,
+      "recall": 0.12121212121212122,
+      "f1-score": 0.18604651162790697,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.379746835443038,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.5357142857142857,
+      "support": 33.0
+    },
+    "accuracy": 0.42424242424242425,
+    "macro avg": {
+      "precision": 0.5265822784810127,
+      "recall": 0.42424242424242425,
+      "f1-score": 0.3646179401993355,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.5265822784810127,
+      "recall": 0.42424242424242425,
+      "f1-score": 0.3646179401993355,
+      "support": 99.0
+    }
+  }
+}

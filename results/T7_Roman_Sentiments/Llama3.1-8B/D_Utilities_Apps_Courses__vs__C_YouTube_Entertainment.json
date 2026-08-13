@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "D_Utilities_Apps_Courses",
+  "target": "C_YouTube_Entertainment",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 100,
+  "macro_f1": 0.4357,
+  "accuracy": 0.55,
+  "classification_report": {
+    "0": {
+      "precision": 1.0,
+      "recall": 0.1,
+      "f1-score": 0.18181818181818182,
+      "support": 50.0
+    },
+    "1": {
+      "precision": 0.5263157894736842,
+      "recall": 1.0,
+      "f1-score": 0.6896551724137931,
+      "support": 50.0
+    },
+    "accuracy": 0.55,
+    "macro avg": {
+      "precision": 0.763157894736842,
+      "recall": 0.55,
+      "f1-score": 0.4357366771159875,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.763157894736842,
+      "recall": 0.55,
+      "f1-score": 0.4357366771159875,
+      "support": 100.0
+    }
+  }
+}

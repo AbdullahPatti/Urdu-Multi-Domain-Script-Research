@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "C_Politics_Sports_Health_Family",
+  "target": "E_Inter_Faith_Sectarian_Ethnic",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.72,
+  "accuracy": 0.72,
+  "classification_report": {
+    "0": {
+      "precision": 0.72,
+      "recall": 0.72,
+      "f1-score": 0.72,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.72,
+      "recall": 0.72,
+      "f1-score": 0.72,
+      "support": 25.0
+    },
+    "accuracy": 0.72,
+    "macro avg": {
+      "precision": 0.72,
+      "recall": 0.72,
+      "f1-score": 0.72,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.72,
+      "recall": 0.72,
+      "f1-score": 0.72,
+      "support": 50.0
+    }
+  }
+}

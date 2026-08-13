@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "B_Social_Media_Hate_Speech",
+  "target": "C_Politics_Sports_Health_Family",
+  "type": "CROSS-DOMAIN",
+  "train_size": 10000,
+  "test_size": 340,
+  "macro_f1": 0.6733,
+  "accuracy": 0.6735,
+  "classification_report": {
+    "0": {
+      "precision": 0.519650655021834,
+      "recall": 0.9916666666666667,
+      "f1-score": 0.6819484240687679,
+      "support": 120.0
+    },
+    "1": {
+      "precision": 0.990990990990991,
+      "recall": 0.5,
+      "f1-score": 0.6646525679758308,
+      "support": 220.0
+    },
+    "accuracy": 0.6735294117647059,
+    "macro avg": {
+      "precision": 0.7553208230064126,
+      "recall": 0.7458333333333333,
+      "f1-score": 0.6733004960222994,
+      "support": 340.0
+    },
+    "weighted avg": {
+      "precision": 0.8246355782959944,
+      "recall": 0.6735294117647059,
+      "f1-score": 0.670756987773338,
+      "support": 340.0
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "D_Electronics_Gaming_Delivery",
+  "target": "A_Daraz_Ecommerce",
+  "type": "CROSS-DOMAIN",
+  "train_size": 8000,
+  "test_size": 3398,
+  "macro_f1": 0.454,
+  "accuracy": 0.5424,
+  "classification_report": {
+    "0": {
+      "precision": 0.6135593220338983,
+      "recall": 0.20756880733944955,
+      "f1-score": 0.3101970865467009,
+      "support": 872.0
+    },
+    "1": {
+      "precision": 0.19947159841479525,
+      "recall": 0.6138211382113821,
+      "f1-score": 0.30109670987038883,
+      "support": 492.0
+    },
+    "2": {
+      "precision": 0.8558842039018251,
+      "recall": 0.6686332350049164,
+      "f1-score": 0.7507590394700524,
+      "support": 2034.0
+    },
+    "accuracy": 0.5423778693349028,
+    "macro avg": {
+      "precision": 0.5563050414501728,
+      "recall": 0.49667439351858267,
+      "f1-score": 0.45401761196238066,
+      "support": 3398.0
+    },
+    "weighted avg": {
+      "precision": 0.6986557463125223,
+      "recall": 0.5423778693349028,
+      "f1-score": 0.5725942692781169,
+      "support": 3398.0
+    }
+  }
+}

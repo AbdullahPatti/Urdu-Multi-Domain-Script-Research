@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "E_Inter_Faith_Sectarian_Ethnic",
+  "target": "E_Inter_Faith_Sectarian_Ethnic",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.7565,
+  "accuracy": 0.76,
+  "classification_report": {
+    "0": {
+      "precision": 0.7096774193548387,
+      "recall": 0.88,
+      "f1-score": 0.7857142857142857,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.8421052631578947,
+      "recall": 0.64,
+      "f1-score": 0.7272727272727273,
+      "support": 25.0
+    },
+    "accuracy": 0.76,
+    "macro avg": {
+      "precision": 0.7758913412563667,
+      "recall": 0.76,
+      "f1-score": 0.7564935064935066,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.7758913412563666,
+      "recall": 0.76,
+      "f1-score": 0.7564935064935066,
+      "support": 50.0
+    }
+  }
+}

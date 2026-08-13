@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "A_Mixed_Public_Discourse",
+  "target": "C_YouTube_Entertainment",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 100,
+  "macro_f1": 0.5175,
+  "accuracy": 0.58,
+  "classification_report": {
+    "0": {
+      "precision": 0.7857142857142857,
+      "recall": 0.22,
+      "f1-score": 0.34375,
+      "support": 50.0
+    },
+    "1": {
+      "precision": 0.5465116279069767,
+      "recall": 0.94,
+      "f1-score": 0.6911764705882353,
+      "support": 50.0
+    },
+    "accuracy": 0.58,
+    "macro avg": {
+      "precision": 0.6661129568106312,
+      "recall": 0.58,
+      "f1-score": 0.5174632352941176,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.6661129568106312,
+      "recall": 0.58,
+      "f1-score": 0.5174632352941176,
+      "support": 100.0
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "D_Utilities_Apps_Courses",
+  "target": "B_Social_Media_Politics_Drama",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 100,
+  "macro_f1": 0.4277,
+  "accuracy": 0.49,
+  "classification_report": {
+    "0": {
+      "precision": 0.47058823529411764,
+      "recall": 0.16,
+      "f1-score": 0.23880597014925373,
+      "support": 50.0
+    },
+    "1": {
+      "precision": 0.4939759036144578,
+      "recall": 0.82,
+      "f1-score": 0.6165413533834586,
+      "support": 50.0
+    },
+    "accuracy": 0.49,
+    "macro avg": {
+      "precision": 0.48228206945428775,
+      "recall": 0.49,
+      "f1-score": 0.4276736617663562,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.48228206945428764,
+      "recall": 0.49,
+      "f1-score": 0.4276736617663562,
+      "support": 100.0
+    }
+  }
+}

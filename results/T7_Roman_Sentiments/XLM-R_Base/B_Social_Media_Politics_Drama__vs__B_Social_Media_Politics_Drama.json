@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "B_Social_Media_Politics_Drama",
+  "target": "B_Social_Media_Politics_Drama",
+  "type": "IN-DOMAIN",
+  "train_size": 8000,
+  "test_size": 2200,
+  "macro_f1": 0.833,
+  "accuracy": 0.8332,
+  "classification_report": {
+    "0": {
+      "precision": 0.8326996197718631,
+      "recall": 0.8209934395501406,
+      "f1-score": 0.826805096743747,
+      "support": 1067.0
+    },
+    "1": {
+      "precision": 0.8336236933797909,
+      "recall": 0.8446601941747572,
+      "f1-score": 0.8391056554142919,
+      "support": 1133.0
+    },
+    "accuracy": 0.8331818181818181,
+    "macro avg": {
+      "precision": 0.8331616565758271,
+      "recall": 0.8328268168624489,
+      "f1-score": 0.8329553760790195,
+      "support": 2200.0
+    },
+    "weighted avg": {
+      "precision": 0.833175517679946,
+      "recall": 0.8331818181818181,
+      "f1-score": 0.8331398844590777,
+      "support": 2200.0
+    }
+  }
+}

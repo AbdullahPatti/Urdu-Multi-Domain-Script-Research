@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "A_Twitter_Social_Media",
+  "target": "A_Twitter_Social_Media",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.5074,
+  "accuracy": 0.52,
+  "classification_report": {
+    "0": {
+      "precision": 0.5294117647058824,
+      "recall": 0.36,
+      "f1-score": 0.42857142857142855,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.5151515151515151,
+      "recall": 0.68,
+      "f1-score": 0.5862068965517241,
+      "support": 25.0
+    },
+    "accuracy": 0.52,
+    "macro avg": {
+      "precision": 0.5222816399286987,
+      "recall": 0.52,
+      "f1-score": 0.5073891625615763,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.5222816399286988,
+      "recall": 0.52,
+      "f1-score": 0.5073891625615763,
+      "support": 50.0
+    }
+  }
+}

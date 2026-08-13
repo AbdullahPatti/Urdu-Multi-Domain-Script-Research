@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "B_Consumer_Electronics_Gaming",
+  "target": "A_Twitter_Political_Social",
+  "type": "CROSS-DOMAIN",
+  "train_size": 1160,
+  "test_size": 3580,
+  "macro_f1": 0.414,
+  "accuracy": 0.4514,
+  "classification_report": {
+    "0": {
+      "precision": 0.3848531684698609,
+      "recall": 0.9317118802619271,
+      "f1-score": 0.5447087776866284,
+      "support": 1069.0
+    },
+    "1": {
+      "precision": 0.73,
+      "recall": 0.16367713004484305,
+      "f1-score": 0.2673992673992674,
+      "support": 1338.0
+    },
+    "2": {
+      "precision": 0.5794797687861272,
+      "recall": 0.34185848252344414,
+      "f1-score": 0.43002680965147455,
+      "support": 1173.0
+    },
+    "accuracy": 0.45139664804469276,
+    "macro avg": {
+      "precision": 0.5647776457519961,
+      "recall": 0.4790824976100714,
+      "f1-score": 0.4140449515791234,
+      "support": 3580.0
+    },
+    "weighted avg": {
+      "precision": 0.577619498849276,
+      "recall": 0.45139664804469276,
+      "f1-score": 0.403490321466035,
+      "support": 3580.0
+    }
+  }
+}

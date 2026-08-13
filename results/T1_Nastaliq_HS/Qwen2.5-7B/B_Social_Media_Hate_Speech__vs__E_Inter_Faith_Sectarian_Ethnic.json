@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "B_Social_Media_Hate_Speech",
+  "target": "E_Inter_Faith_Sectarian_Ethnic",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.49,
+  "accuracy": 0.58,
+  "classification_report": {
+    "0": {
+      "precision": 0.5434782608695652,
+      "recall": 1.0,
+      "f1-score": 0.704225352112676,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 0.16,
+      "f1-score": 0.27586206896551724,
+      "support": 25.0
+    },
+    "accuracy": 0.58,
+    "macro avg": {
+      "precision": 0.7717391304347826,
+      "recall": 0.58,
+      "f1-score": 0.4900437105390966,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.7717391304347825,
+      "recall": 0.58,
+      "f1-score": 0.4900437105390967,
+      "support": 50.0
+    }
+  }
+}

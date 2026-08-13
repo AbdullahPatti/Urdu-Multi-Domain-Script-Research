@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "D_Electronics_Gaming_Delivery",
+  "target": "B_Restaurant_Food",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 65,
+  "macro_f1": 0.4855,
+  "accuracy": 0.6154,
+  "classification_report": {
+    "0": {
+      "precision": 0.45454545454545453,
+      "recall": 0.625,
+      "f1-score": 0.5263157894736842,
+      "support": 8.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 0.08333333333333333,
+      "f1-score": 0.15384615384615385,
+      "support": 24.0
+    },
+    "2": {
+      "precision": 0.6346153846153846,
+      "recall": 1.0,
+      "f1-score": 0.7764705882352941,
+      "support": 33.0
+    },
+    "accuracy": 0.6153846153846154,
+    "macro avg": {
+      "precision": 0.6963869463869464,
+      "recall": 0.5694444444444445,
+      "f1-score": 0.4855441771850441,
+      "support": 65.0
+    },
+    "weighted avg": {
+      "precision": 0.7473641742872512,
+      "recall": 0.6153846153846154,
+      "f1-score": 0.5157902064594134,
+      "support": 65.0
+    }
+  }
+}

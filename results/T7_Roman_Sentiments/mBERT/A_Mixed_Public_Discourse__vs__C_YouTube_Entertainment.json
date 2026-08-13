@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "A_Mixed_Public_Discourse",
+  "target": "C_YouTube_Entertainment",
+  "type": "CROSS-DOMAIN",
+  "train_size": 8000,
+  "test_size": 4067,
+  "macro_f1": 0.7445,
+  "accuracy": 0.7605,
+  "classification_report": {
+    "0": {
+      "precision": 0.7637969094922737,
+      "recall": 0.6138379657007688,
+      "f1-score": 0.680655737704918,
+      "support": 1691.0
+    },
+    "1": {
+      "precision": 0.7588626292466765,
+      "recall": 0.86489898989899,
+      "f1-score": 0.8084185680566484,
+      "support": 2376.0
+    },
+    "accuracy": 0.7605114334890583,
+    "macro avg": {
+      "precision": 0.7613297693694752,
+      "recall": 0.7393684777998794,
+      "f1-score": 0.7445371528807831,
+      "support": 4067.0
+    },
+    "weighted avg": {
+      "precision": 0.7609142318764539,
+      "recall": 0.7605114334890583,
+      "f1-score": 0.7552966240869469,
+      "support": 4067.0
+    }
+  }
+}

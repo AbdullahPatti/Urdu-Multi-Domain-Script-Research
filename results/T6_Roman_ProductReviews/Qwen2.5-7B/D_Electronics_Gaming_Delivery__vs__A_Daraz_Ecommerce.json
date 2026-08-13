@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "D_Electronics_Gaming_Delivery",
+  "target": "A_Daraz_Ecommerce",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.3301,
+  "accuracy": 0.4242,
+  "classification_report": {
+    "0": {
+      "precision": 0.6363636363636364,
+      "recall": 0.21212121212121213,
+      "f1-score": 0.3181818181818182,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.5,
+      "recall": 0.06060606060606061,
+      "f1-score": 0.10810810810810811,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.39285714285714285,
+      "recall": 1.0,
+      "f1-score": 0.5641025641025641,
+      "support": 33.0
+    },
+    "accuracy": 0.42424242424242425,
+    "macro avg": {
+      "precision": 0.5097402597402597,
+      "recall": 0.42424242424242425,
+      "f1-score": 0.3301308301308301,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.5097402597402597,
+      "recall": 0.42424242424242425,
+      "f1-score": 0.33013083013083017,
+      "support": 99.0
+    }
+  }
+}

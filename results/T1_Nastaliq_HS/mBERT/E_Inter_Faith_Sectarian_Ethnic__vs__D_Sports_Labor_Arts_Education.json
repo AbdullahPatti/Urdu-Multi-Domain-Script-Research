@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "E_Inter_Faith_Sectarian_Ethnic",
+  "target": "D_Sports_Labor_Arts_Education",
+  "type": "CROSS-DOMAIN",
+  "train_size": 10000,
+  "test_size": 340,
+  "macro_f1": 0.4629,
+  "accuracy": 0.5647,
+  "classification_report": {
+    "0": {
+      "precision": 0.5345911949685535,
+      "recall": 1.0,
+      "f1-score": 0.6967213114754098,
+      "support": 170.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 0.12941176470588237,
+      "f1-score": 0.22916666666666666,
+      "support": 170.0
+    },
+    "accuracy": 0.5647058823529412,
+    "macro avg": {
+      "precision": 0.7672955974842768,
+      "recall": 0.5647058823529412,
+      "f1-score": 0.46294398907103823,
+      "support": 340.0
+    },
+    "weighted avg": {
+      "precision": 0.7672955974842767,
+      "recall": 0.5647058823529412,
+      "f1-score": 0.4629439890710382,
+      "support": 340.0
+    }
+  }
+}

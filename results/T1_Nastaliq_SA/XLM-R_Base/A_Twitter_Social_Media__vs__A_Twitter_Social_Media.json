@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "A_Twitter_Social_Media",
+  "target": "A_Twitter_Social_Media",
+  "type": "IN-DOMAIN",
+  "train_size": 783,
+  "test_size": 196,
+  "macro_f1": 0.6362,
+  "accuracy": 0.6378,
+  "classification_report": {
+    "0": {
+      "precision": 0.6330275229357798,
+      "recall": 0.69,
+      "f1-score": 0.6602870813397129,
+      "support": 100.0
+    },
+    "1": {
+      "precision": 0.6436781609195402,
+      "recall": 0.5833333333333334,
+      "f1-score": 0.6120218579234973,
+      "support": 96.0
+    },
+    "accuracy": 0.6377551020408163,
+    "macro avg": {
+      "precision": 0.6383528419276601,
+      "recall": 0.6366666666666667,
+      "f1-score": 0.636154469631605,
+      "support": 196.0
+    },
+    "weighted avg": {
+      "precision": 0.6382441619482339,
+      "recall": 0.6377551020408163,
+      "f1-score": 0.6366469719113624,
+      "support": 196.0
+    }
+  }
+}

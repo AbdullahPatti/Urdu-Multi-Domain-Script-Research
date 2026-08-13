@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "D_Utilities_Apps_Courses",
+  "target": "B_Social_Media_Politics_Drama",
+  "type": "CROSS-DOMAIN",
+  "train_size": 8000,
+  "test_size": 2200,
+  "macro_f1": 0.8218,
+  "accuracy": 0.8223,
+  "classification_report": {
+    "0": {
+      "precision": 0.830078125,
+      "recall": 0.7966260543580131,
+      "f1-score": 0.8130081300813008,
+      "support": 1067.0
+    },
+    "1": {
+      "precision": 0.8154761904761905,
+      "recall": 0.8464254192409533,
+      "f1-score": 0.8306626245127761,
+      "support": 1133.0
+    },
+    "accuracy": 0.8222727272727273,
+    "macro avg": {
+      "precision": 0.8227771577380952,
+      "recall": 0.8215257367994833,
+      "f1-score": 0.8218353772970384,
+      "support": 2200.0
+    },
+    "weighted avg": {
+      "precision": 0.8225581287202381,
+      "recall": 0.8222727272727273,
+      "f1-score": 0.8221001947135106,
+      "support": 2200.0
+    }
+  }
+}

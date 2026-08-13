@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "E_Socioeconomic_Agricultural",
+  "target": "D_Governance_Political",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.5989,
+  "accuracy": 0.64,
+  "classification_report": {
+    "0": {
+      "precision": 0.8888888888888888,
+      "recall": 0.32,
+      "f1-score": 0.47058823529411764,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.5853658536585366,
+      "recall": 0.96,
+      "f1-score": 0.7272727272727273,
+      "support": 25.0
+    },
+    "accuracy": 0.64,
+    "macro avg": {
+      "precision": 0.7371273712737128,
+      "recall": 0.64,
+      "f1-score": 0.5989304812834224,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.7371273712737128,
+      "recall": 0.64,
+      "f1-score": 0.5989304812834224,
+      "support": 50.0
+    }
+  }
+}

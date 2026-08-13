@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "A_Twitter_Political_Social",
+  "target": "C_Public_Civic_Services",
+  "type": "CROSS-DOMAIN",
+  "train_size": 8000,
+  "test_size": 290,
+  "macro_f1": 0.6731,
+  "accuracy": 0.6828,
+  "classification_report": {
+    "0": {
+      "precision": 0.6666666666666666,
+      "recall": 0.9183673469387755,
+      "f1-score": 0.7725321888412017,
+      "support": 98.0
+    },
+    "1": {
+      "precision": 0.6506024096385542,
+      "recall": 0.5567010309278351,
+      "f1-score": 0.6,
+      "support": 97.0
+    },
+    "2": {
+      "precision": 0.75,
+      "recall": 0.5684210526315789,
+      "f1-score": 0.6467065868263473,
+      "support": 95.0
+    },
+    "accuracy": 0.6827586206896552,
+    "macro avg": {
+      "precision": 0.6890896921017403,
+      "recall": 0.6811631434993966,
+      "f1-score": 0.673079591889183,
+      "support": 290.0
+    },
+    "weighted avg": {
+      "precision": 0.6885923002354245,
+      "recall": 0.6827586206896552,
+      "f1-score": 0.6736044146722094,
+      "support": 290.0
+    }
+  }
+}

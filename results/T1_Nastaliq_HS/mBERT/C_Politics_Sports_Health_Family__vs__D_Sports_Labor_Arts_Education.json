@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "C_Politics_Sports_Health_Family",
+  "target": "D_Sports_Labor_Arts_Education",
+  "type": "CROSS-DOMAIN",
+  "train_size": 1360,
+  "test_size": 340,
+  "macro_f1": 0.8294,
+  "accuracy": 0.8294,
+  "classification_report": {
+    "0": {
+      "precision": 0.8218390804597702,
+      "recall": 0.8411764705882353,
+      "f1-score": 0.8313953488372093,
+      "support": 170.0
+    },
+    "1": {
+      "precision": 0.8373493975903614,
+      "recall": 0.8176470588235294,
+      "f1-score": 0.8273809523809523,
+      "support": 170.0
+    },
+    "accuracy": 0.8294117647058824,
+    "macro avg": {
+      "precision": 0.8295942390250658,
+      "recall": 0.8294117647058823,
+      "f1-score": 0.8293881506090808,
+      "support": 340.0
+    },
+    "weighted avg": {
+      "precision": 0.8295942390250658,
+      "recall": 0.8294117647058824,
+      "f1-score": 0.8293881506090809,
+      "support": 340.0
+    }
+  }
+}

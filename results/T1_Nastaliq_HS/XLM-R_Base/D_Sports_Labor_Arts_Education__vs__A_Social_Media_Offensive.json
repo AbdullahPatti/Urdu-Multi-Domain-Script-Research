@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "D_Sports_Labor_Arts_Education",
+  "target": "A_Social_Media_Offensive",
+  "type": "CROSS-DOMAIN",
+  "train_size": 1360,
+  "test_size": 4352,
+  "macro_f1": 0.4274,
+  "accuracy": 0.4864,
+  "classification_report": {
+    "0": {
+      "precision": 0.9424083769633508,
+      "recall": 0.13991449669646328,
+      "f1-score": 0.2436548223350254,
+      "support": 2573.0
+    },
+    "1": {
+      "precision": 0.44256926952141057,
+      "recall": 0.9876335019673974,
+      "f1-score": 0.6112367368237954,
+      "support": 1779.0
+    },
+    "accuracy": 0.48644301470588236,
+    "macro avg": {
+      "precision": 0.6924888232423807,
+      "recall": 0.5637739993319304,
+      "f1-score": 0.42744577957941043,
+      "support": 4352.0
+    },
+    "weighted avg": {
+      "precision": 0.7380853594681275,
+      "recall": 0.48644301470588236,
+      "f1-score": 0.3939140654130405,
+      "support": 4352.0
+    }
+  }
+}

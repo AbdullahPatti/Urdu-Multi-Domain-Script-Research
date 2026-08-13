@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "A_Social_Media_Offensive",
+  "target": "A_Social_Media_Offensive",
+  "type": "IN-DOMAIN",
+  "train_size": 10000,
+  "test_size": 4352,
+  "macro_f1": 0.8287,
+  "accuracy": 0.835,
+  "classification_report": {
+    "0": {
+      "precision": 0.8546845124282982,
+      "recall": 0.8686358336572095,
+      "f1-score": 0.861603700848111,
+      "support": 2573.0
+    },
+    "1": {
+      "precision": 0.8054116292458261,
+      "recall": 0.7863968521641371,
+      "f1-score": 0.7957906712172924,
+      "support": 1779.0
+    },
+    "accuracy": 0.8350183823529411,
+    "macro avg": {
+      "precision": 0.8300480708370621,
+      "recall": 0.8275163429106733,
+      "f1-score": 0.8286971860327017,
+      "support": 4352.0
+    },
+    "weighted avg": {
+      "precision": 0.8345428628001691,
+      "recall": 0.8350183823529411,
+      "f1-score": 0.8347008102890058,
+      "support": 4352.0
+    }
+  }
+}

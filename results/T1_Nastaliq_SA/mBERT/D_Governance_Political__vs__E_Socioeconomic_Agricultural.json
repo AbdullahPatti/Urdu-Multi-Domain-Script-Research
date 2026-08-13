@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "D_Governance_Political",
+  "target": "E_Socioeconomic_Agricultural",
+  "type": "CROSS-DOMAIN",
+  "train_size": 685,
+  "test_size": 500,
+  "macro_f1": 0.7328,
+  "accuracy": 0.742,
+  "classification_report": {
+    "0": {
+      "precision": 0.6763848396501457,
+      "recall": 0.928,
+      "f1-score": 0.7824620573355818,
+      "support": 250.0
+    },
+    "1": {
+      "precision": 0.8853503184713376,
+      "recall": 0.556,
+      "f1-score": 0.683046683046683,
+      "support": 250.0
+    },
+    "accuracy": 0.742,
+    "macro avg": {
+      "precision": 0.7808675790607417,
+      "recall": 0.742,
+      "f1-score": 0.7327543701911324,
+      "support": 500.0
+    },
+    "weighted avg": {
+      "precision": 0.7808675790607417,
+      "recall": 0.742,
+      "f1-score": 0.7327543701911324,
+      "support": 500.0
+    }
+  }
+}

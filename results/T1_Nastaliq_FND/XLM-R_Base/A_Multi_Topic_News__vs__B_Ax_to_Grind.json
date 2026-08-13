@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_FND",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "A_Multi_Topic_News",
+  "target": "B_Ax_to_Grind",
+  "type": "CROSS-DOMAIN",
+  "train_size": 638,
+  "test_size": 2017,
+  "macro_f1": 0.3328,
+  "accuracy": 0.4988,
+  "classification_report": {
+    "0": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 1011.0
+    },
+    "1": {
+      "precision": 0.49876053544868615,
+      "recall": 1.0,
+      "f1-score": 0.6655640092623222,
+      "support": 1006.0
+    },
+    "accuracy": 0.49876053544868615,
+    "macro avg": {
+      "precision": 0.24938026772434307,
+      "recall": 0.5,
+      "f1-score": 0.3327820046311611,
+      "support": 2017.0
+    },
+    "weighted avg": {
+      "precision": 0.24876207172106013,
+      "recall": 0.49876053544868615,
+      "f1-score": 0.3319570616350501,
+      "support": 2017.0
+    }
+  }
+}

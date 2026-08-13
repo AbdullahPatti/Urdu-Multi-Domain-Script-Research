@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "C_Politics_Sports_Health_Family",
+  "target": "E_Inter_Faith_Sectarian_Ethnic",
+  "type": "CROSS-DOMAIN",
+  "train_size": 1360,
+  "test_size": 4352,
+  "macro_f1": 0.4926,
+  "accuracy": 0.5101,
+  "classification_report": {
+    "0": {
+      "precision": 0.7657266811279827,
+      "recall": 0.26926010678871093,
+      "f1-score": 0.3984198645598194,
+      "support": 2622.0
+    },
+    "1": {
+      "precision": 0.441399416909621,
+      "recall": 0.8751445086705202,
+      "f1-score": 0.5868217054263566,
+      "support": 1730.0
+    },
+    "accuracy": 0.5101102941176471,
+    "macro avg": {
+      "precision": 0.6035630490188019,
+      "recall": 0.5722023077296156,
+      "f1-score": 0.49262078499308803,
+      "support": 4352.0
+    },
+    "weighted avg": {
+      "precision": 0.6368006317029445,
+      "recall": 0.5101102941176471,
+      "f1-score": 0.47331305957340153,
+      "support": 4352.0
+    }
+  }
+}

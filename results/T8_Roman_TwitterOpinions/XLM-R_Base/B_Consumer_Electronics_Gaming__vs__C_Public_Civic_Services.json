@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "B_Consumer_Electronics_Gaming",
+  "target": "C_Public_Civic_Services",
+  "type": "CROSS-DOMAIN",
+  "train_size": 1160,
+  "test_size": 290,
+  "macro_f1": 0.6272,
+  "accuracy": 0.6414,
+  "classification_report": {
+    "0": {
+      "precision": 0.5187165775401069,
+      "recall": 0.9897959183673469,
+      "f1-score": 0.6807017543859649,
+      "support": 98.0
+    },
+    "1": {
+      "precision": 0.9285714285714286,
+      "recall": 0.5360824742268041,
+      "f1-score": 0.6797385620915033,
+      "support": 97.0
+    },
+    "2": {
+      "precision": 0.7872340425531915,
+      "recall": 0.3894736842105263,
+      "f1-score": 0.5211267605633803,
+      "support": 95.0
+    },
+    "accuracy": 0.6413793103448275,
+    "macro avg": {
+      "precision": 0.7448406828882423,
+      "recall": 0.6384506922682257,
+      "f1-score": 0.6271890256802829,
+      "support": 290.0
+    },
+    "weighted avg": {
+      "precision": 0.7437685765962491,
+      "recall": 0.6413793103448275,
+      "f1-score": 0.62810501622835,
+      "support": 290.0
+    }
+  }
+}

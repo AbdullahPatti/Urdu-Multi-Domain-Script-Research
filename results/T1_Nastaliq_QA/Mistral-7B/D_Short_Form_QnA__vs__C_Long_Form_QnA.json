@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_QA",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "D_Short_Form_QnA",
+  "target": "C_Long_Form_QnA",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.458,
+  "accuracy": 0.46,
+  "classification_report": {
+    "0": {
+      "precision": 0.45454545454545453,
+      "recall": 0.4,
+      "f1-score": 0.425531914893617,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.4642857142857143,
+      "recall": 0.52,
+      "f1-score": 0.49056603773584906,
+      "support": 25.0
+    },
+    "accuracy": 0.46,
+    "macro avg": {
+      "precision": 0.4594155844155844,
+      "recall": 0.46,
+      "f1-score": 0.45804897631473307,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.45941558441558444,
+      "recall": 0.46,
+      "f1-score": 0.458048976314733,
+      "support": 50.0
+    }
+  }
+}

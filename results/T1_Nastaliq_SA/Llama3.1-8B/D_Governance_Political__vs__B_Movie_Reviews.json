@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "D_Governance_Political",
+  "target": "B_Movie_Reviews",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.5544,
+  "accuracy": 0.6,
+  "classification_report": {
+    "0": {
+      "precision": 0.5609756097560976,
+      "recall": 0.92,
+      "f1-score": 0.696969696969697,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.7777777777777778,
+      "recall": 0.28,
+      "f1-score": 0.4117647058823529,
+      "support": 25.0
+    },
+    "accuracy": 0.6,
+    "macro avg": {
+      "precision": 0.6693766937669376,
+      "recall": 0.6000000000000001,
+      "f1-score": 0.554367201426025,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.6693766937669378,
+      "recall": 0.6,
+      "f1-score": 0.5543672014260249,
+      "support": 50.0
+    }
+  }
+}

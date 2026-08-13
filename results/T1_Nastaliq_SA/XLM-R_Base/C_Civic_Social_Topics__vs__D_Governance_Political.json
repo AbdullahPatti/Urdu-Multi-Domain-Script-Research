@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "C_Civic_Social_Topics",
+  "target": "D_Governance_Political",
+  "type": "CROSS-DOMAIN",
+  "train_size": 129,
+  "test_size": 294,
+  "macro_f1": 0.3542,
+  "accuracy": 0.4864,
+  "classification_report": {
+    "0": {
+      "precision": 0.5,
+      "recall": 0.033112582781456956,
+      "f1-score": 0.062111801242236024,
+      "support": 151.0
+    },
+    "1": {
+      "precision": 0.4859154929577465,
+      "recall": 0.965034965034965,
+      "f1-score": 0.6463700234192038,
+      "support": 143.0
+    },
+    "accuracy": 0.48639455782312924,
+    "macro avg": {
+      "precision": 0.49295774647887325,
+      "recall": 0.49907377390821095,
+      "f1-score": 0.3542409123307199,
+      "support": 294.0
+    },
+    "weighted avg": {
+      "precision": 0.4931493724250264,
+      "recall": 0.48639455782312924,
+      "f1-score": 0.3462918208725299,
+      "support": 294.0
+    }
+  }
+}

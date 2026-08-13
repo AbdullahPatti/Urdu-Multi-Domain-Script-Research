@@ -1,0 +1,3 @@
+model,task,avg_SS,avg_ST,avg_SD,WSD,avg_TD,WTD
+XLM-R_Base,T6_Roman_ProductReviews,0.604,0.3585,0.2455,0.4507,0.2455,0.6135
+mBERT,T6_Roman_ProductReviews,0.6322,0.3907,0.2415,0.5387,0.2415,0.4679

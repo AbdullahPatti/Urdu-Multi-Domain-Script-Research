@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "D_Governance_Political",
+  "target": "D_Governance_Political",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.6999,
+  "accuracy": 0.7,
+  "classification_report": {
+    "0": {
+      "precision": 0.7083333333333334,
+      "recall": 0.68,
+      "f1-score": 0.6938775510204082,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.6923076923076923,
+      "recall": 0.72,
+      "f1-score": 0.7058823529411765,
+      "support": 25.0
+    },
+    "accuracy": 0.7,
+    "macro avg": {
+      "precision": 0.7003205128205128,
+      "recall": 0.7,
+      "f1-score": 0.6998799519807923,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.7003205128205129,
+      "recall": 0.7,
+      "f1-score": 0.6998799519807923,
+      "support": 50.0
+    }
+  }
+}

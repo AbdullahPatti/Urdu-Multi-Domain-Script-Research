@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "A_Daraz_Ecommerce",
+  "target": "B_Restaurant_Food",
+  "type": "CROSS-DOMAIN",
+  "train_size": 8000,
+  "test_size": 150,
+  "macro_f1": 0.5295,
+  "accuracy": 0.66,
+  "classification_report": {
+    "0": {
+      "precision": 0.3125,
+      "recall": 0.625,
+      "f1-score": 0.4166666666666667,
+      "support": 8.0
+    },
+    "1": {
+      "precision": 0.2857142857142857,
+      "recall": 0.5833333333333334,
+      "f1-score": 0.3835616438356164,
+      "support": 24.0
+    },
+    "2": {
+      "precision": 0.9411764705882353,
+      "recall": 0.6779661016949152,
+      "f1-score": 0.7881773399014779,
+      "support": 118.0
+    },
+    "accuracy": 0.66,
+    "macro avg": {
+      "precision": 0.5131302521008404,
+      "recall": 0.6287664783427496,
+      "f1-score": 0.5294685501345869,
+      "support": 150.0
+    },
+    "weighted avg": {
+      "precision": 0.8027731092436975,
+      "recall": 0.66,
+      "f1-score": 0.7036249259584169,
+      "support": 150.0
+    }
+  }
+}

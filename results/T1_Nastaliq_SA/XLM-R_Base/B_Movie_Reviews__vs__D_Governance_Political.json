@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "B_Movie_Reviews",
+  "target": "D_Governance_Political",
+  "type": "CROSS-DOMAIN",
+  "train_size": 7356,
+  "test_size": 294,
+  "macro_f1": 0.8571,
+  "accuracy": 0.8571,
+  "classification_report": {
+    "0": {
+      "precision": 0.8707482993197279,
+      "recall": 0.847682119205298,
+      "f1-score": 0.8590604026845637,
+      "support": 151.0
+    },
+    "1": {
+      "precision": 0.8435374149659864,
+      "recall": 0.8671328671328671,
+      "f1-score": 0.8551724137931035,
+      "support": 143.0
+    },
+    "accuracy": 0.8571428571428571,
+    "macro avg": {
+      "precision": 0.8571428571428572,
+      "recall": 0.8574074931690825,
+      "f1-score": 0.8571164082388336,
+      "support": 294.0
+    },
+    "weighted avg": {
+      "precision": 0.8575130732565135,
+      "recall": 0.8571428571428571,
+      "f1-score": 0.8571693060468807,
+      "support": 294.0
+    }
+  }
+}

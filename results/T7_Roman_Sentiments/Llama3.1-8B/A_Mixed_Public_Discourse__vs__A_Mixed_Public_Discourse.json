@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "A_Mixed_Public_Discourse",
+  "target": "A_Mixed_Public_Discourse",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 100,
+  "macro_f1": 0.5072,
+  "accuracy": 0.59,
+  "classification_report": {
+    "0": {
+      "precision": 1.0,
+      "recall": 0.18,
+      "f1-score": 0.3050847457627119,
+      "support": 50.0
+    },
+    "1": {
+      "precision": 0.5494505494505495,
+      "recall": 1.0,
+      "f1-score": 0.7092198581560284,
+      "support": 50.0
+    },
+    "accuracy": 0.59,
+    "macro avg": {
+      "precision": 0.7747252747252747,
+      "recall": 0.59,
+      "f1-score": 0.5071523019593701,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.7747252747252747,
+      "recall": 0.59,
+      "f1-score": 0.5071523019593701,
+      "support": 100.0
+    }
+  }
+}

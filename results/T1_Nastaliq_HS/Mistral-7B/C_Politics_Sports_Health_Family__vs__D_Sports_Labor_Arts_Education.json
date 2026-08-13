@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "C_Politics_Sports_Health_Family",
+  "target": "D_Sports_Labor_Arts_Education",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.8164,
+  "accuracy": 0.82,
+  "classification_report": {
+    "0": {
+      "precision": 0.9444444444444444,
+      "recall": 0.68,
+      "f1-score": 0.7906976744186046,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.75,
+      "recall": 0.96,
+      "f1-score": 0.8421052631578947,
+      "support": 25.0
+    },
+    "accuracy": 0.82,
+    "macro avg": {
+      "precision": 0.8472222222222222,
+      "recall": 0.8200000000000001,
+      "f1-score": 0.8164014687882497,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.8472222222222223,
+      "recall": 0.82,
+      "f1-score": 0.8164014687882496,
+      "support": 50.0
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "A_Twitter_Social_Media",
+  "target": "C_Civic_Social_Topics",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 33,
+  "macro_f1": 0.818,
+  "accuracy": 0.8182,
+  "classification_report": {
+    "0": {
+      "precision": 0.8235294117647058,
+      "recall": 0.8235294117647058,
+      "f1-score": 0.8235294117647058,
+      "support": 17.0
+    },
+    "1": {
+      "precision": 0.8125,
+      "recall": 0.8125,
+      "f1-score": 0.8125,
+      "support": 16.0
+    },
+    "accuracy": 0.8181818181818182,
+    "macro avg": {
+      "precision": 0.8180147058823529,
+      "recall": 0.8180147058823529,
+      "f1-score": 0.8180147058823529,
+      "support": 33.0
+    },
+    "weighted avg": {
+      "precision": 0.8181818181818182,
+      "recall": 0.8181818181818182,
+      "f1-score": 0.8181818181818182,
+      "support": 33.0
+    }
+  }
+}

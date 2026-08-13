@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_QA",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "B_General_Knowledge",
+  "target": "C_Long_Form_QnA",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.8782,
+  "accuracy": 0.88,
+  "classification_report": {
+    "0": {
+      "precision": 1.0,
+      "recall": 0.76,
+      "f1-score": 0.8636363636363636,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.8064516129032258,
+      "recall": 1.0,
+      "f1-score": 0.8928571428571429,
+      "support": 25.0
+    },
+    "accuracy": 0.88,
+    "macro avg": {
+      "precision": 0.9032258064516129,
+      "recall": 0.88,
+      "f1-score": 0.8782467532467533,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.9032258064516128,
+      "recall": 0.88,
+      "f1-score": 0.8782467532467533,
+      "support": 50.0
+    }
+  }
+}

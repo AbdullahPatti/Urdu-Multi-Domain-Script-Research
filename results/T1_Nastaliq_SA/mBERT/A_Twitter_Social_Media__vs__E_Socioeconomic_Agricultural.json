@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "A_Twitter_Social_Media",
+  "target": "E_Socioeconomic_Agricultural",
+  "type": "CROSS-DOMAIN",
+  "train_size": 783,
+  "test_size": 500,
+  "macro_f1": 0.8153,
+  "accuracy": 0.818,
+  "classification_report": {
+    "0": {
+      "precision": 0.7556270096463023,
+      "recall": 0.94,
+      "f1-score": 0.8377896613190731,
+      "support": 250.0
+    },
+    "1": {
+      "precision": 0.9206349206349206,
+      "recall": 0.696,
+      "f1-score": 0.7927107061503417,
+      "support": 250.0
+    },
+    "accuracy": 0.818,
+    "macro avg": {
+      "precision": 0.8381309651406115,
+      "recall": 0.818,
+      "f1-score": 0.8152501837347074,
+      "support": 500.0
+    },
+    "weighted avg": {
+      "precision": 0.8381309651406114,
+      "recall": 0.818,
+      "f1-score": 0.8152501837347075,
+      "support": 500.0
+    }
+  }
+}

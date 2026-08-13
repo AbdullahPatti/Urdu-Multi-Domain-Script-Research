@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "C_YouTube_Entertainment",
+  "target": "D_Utilities_Apps_Courses",
+  "type": "CROSS-DOMAIN",
+  "train_size": 8000,
+  "test_size": 2200,
+  "macro_f1": 0.6986,
+  "accuracy": 0.6995,
+  "classification_report": {
+    "0": {
+      "precision": 0.700990099009901,
+      "recall": 0.6635426429240863,
+      "f1-score": 0.6817525276841598,
+      "support": 1067.0
+    },
+    "1": {
+      "precision": 0.6983193277310924,
+      "recall": 0.733451015004413,
+      "f1-score": 0.7154541541110633,
+      "support": 1133.0
+    },
+    "accuracy": 0.6995454545454546,
+    "macro avg": {
+      "precision": 0.6996547133704967,
+      "recall": 0.6984968289642497,
+      "f1-score": 0.6986033408976116,
+      "support": 2200.0
+    },
+    "weighted avg": {
+      "precision": 0.6996146518013144,
+      "recall": 0.6995454545454546,
+      "f1-score": 0.6991088652940152,
+      "support": 2200.0
+    }
+  }
+}

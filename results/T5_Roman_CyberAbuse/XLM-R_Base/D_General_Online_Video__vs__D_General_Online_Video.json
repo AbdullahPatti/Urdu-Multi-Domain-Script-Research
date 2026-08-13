@@ -1,0 +1,39 @@
+{
+  "task": "T5_Roman_CyberAbuse",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "D_General_Online_Video",
+  "target": "D_General_Online_Video",
+  "type": "IN-DOMAIN",
+  "train_size": 960,
+  "test_size": 240,
+  "macro_f1": 0.9916,
+  "accuracy": 0.9917,
+  "classification_report": {
+    "0": {
+      "precision": 0.9821428571428571,
+      "recall": 1.0,
+      "f1-score": 0.990990990990991,
+      "support": 110.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 0.9846153846153847,
+      "f1-score": 0.9922480620155039,
+      "support": 130.0
+    },
+    "accuracy": 0.9916666666666667,
+    "macro avg": {
+      "precision": 0.9910714285714286,
+      "recall": 0.9923076923076923,
+      "f1-score": 0.9916195265032475,
+      "support": 240.0
+    },
+    "weighted avg": {
+      "precision": 0.9918154761904762,
+      "recall": 0.9916666666666667,
+      "f1-score": 0.9916719044626021,
+      "support": 240.0
+    }
+  }
+}

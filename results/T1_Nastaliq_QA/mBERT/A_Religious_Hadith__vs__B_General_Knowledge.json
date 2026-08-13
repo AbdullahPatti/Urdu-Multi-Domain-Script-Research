@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_QA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "A_Religious_Hadith",
+  "target": "B_General_Knowledge",
+  "type": "CROSS-DOMAIN",
+  "train_size": 1312,
+  "test_size": 2328,
+  "macro_f1": 0.6381,
+  "accuracy": 0.6753,
+  "classification_report": {
+    "0": {
+      "precision": 0.6068062827225131,
+      "recall": 0.9957044673539519,
+      "f1-score": 0.7540663630448926,
+      "support": 1164.0
+    },
+    "1": {
+      "precision": 0.9880382775119617,
+      "recall": 0.3548109965635739,
+      "f1-score": 0.5221238938053098,
+      "support": 1164.0
+    },
+    "accuracy": 0.6752577319587629,
+    "macro avg": {
+      "precision": 0.7974222801172375,
+      "recall": 0.6752577319587629,
+      "f1-score": 0.6380951284251012,
+      "support": 2328.0
+    },
+    "weighted avg": {
+      "precision": 0.7974222801172374,
+      "recall": 0.6752577319587629,
+      "f1-score": 0.6380951284251012,
+      "support": 2328.0
+    }
+  }
+}

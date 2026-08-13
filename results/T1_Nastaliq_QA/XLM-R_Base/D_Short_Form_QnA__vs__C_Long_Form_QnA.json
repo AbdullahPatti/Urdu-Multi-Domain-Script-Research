@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_QA",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "D_Short_Form_QnA",
+  "target": "C_Long_Form_QnA",
+  "type": "CROSS-DOMAIN",
+  "train_size": 2768,
+  "test_size": 224,
+  "macro_f1": 0.4211,
+  "accuracy": 0.5045,
+  "classification_report": {
+    "0": {
+      "precision": 0.5185185185185185,
+      "recall": 0.125,
+      "f1-score": 0.2014388489208633,
+      "support": 112.0
+    },
+    "1": {
+      "precision": 0.5025380710659898,
+      "recall": 0.8839285714285714,
+      "f1-score": 0.6407766990291263,
+      "support": 112.0
+    },
+    "accuracy": 0.5044642857142857,
+    "macro avg": {
+      "precision": 0.5105282947922541,
+      "recall": 0.5044642857142857,
+      "f1-score": 0.42110777397499477,
+      "support": 224.0
+    },
+    "weighted avg": {
+      "precision": 0.5105282947922541,
+      "recall": 0.5044642857142857,
+      "f1-score": 0.4211077739749948,
+      "support": 224.0
+    }
+  }
+}

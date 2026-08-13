@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "D_Mixed_Social_Commentary",
+  "target": "C_Public_Civic_Services",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.8163,
+  "accuracy": 0.8283,
+  "classification_report": {
+    "0": {
+      "precision": 0.8918918918918919,
+      "recall": 1.0,
+      "f1-score": 0.9428571428571428,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.9,
+      "recall": 0.5454545454545454,
+      "f1-score": 0.6792452830188679,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.7380952380952381,
+      "recall": 0.9393939393939394,
+      "f1-score": 0.8266666666666667,
+      "support": 33.0
+    },
+    "accuracy": 0.8282828282828283,
+    "macro avg": {
+      "precision": 0.8433290433290433,
+      "recall": 0.8282828282828283,
+      "f1-score": 0.8162563641808925,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.8433290433290432,
+      "recall": 0.8282828282828283,
+      "f1-score": 0.8162563641808925,
+      "support": 99.0
+    }
+  }
+}

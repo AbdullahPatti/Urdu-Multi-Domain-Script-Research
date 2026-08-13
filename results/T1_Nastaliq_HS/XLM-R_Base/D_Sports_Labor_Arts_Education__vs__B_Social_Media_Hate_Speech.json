@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "D_Sports_Labor_Arts_Education",
+  "target": "B_Social_Media_Hate_Speech",
+  "type": "CROSS-DOMAIN",
+  "train_size": 1360,
+  "test_size": 5233,
+  "macro_f1": 0.3941,
+  "accuracy": 0.5272,
+  "classification_report": {
+    "0": {
+      "precision": 0.8406593406593407,
+      "recall": 0.05889145496535797,
+      "f1-score": 0.11007194244604317,
+      "support": 2598.0
+    },
+    "1": {
+      "precision": 0.5159374381310632,
+      "recall": 0.9889943074003795,
+      "f1-score": 0.6781160551652355,
+      "support": 2635.0
+    },
+    "accuracy": 0.5272310338238104,
+    "macro avg": {
+      "precision": 0.6782983893952019,
+      "recall": 0.5239428811828688,
+      "f1-score": 0.39409399880563933,
+      "support": 5233.0
+    },
+    "weighted avg": {
+      "precision": 0.6771504140088513,
+      "recall": 0.5272310338238104,
+      "f1-score": 0.39610218074435616,
+      "support": 5233.0
+    }
+  }
+}

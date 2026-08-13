@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "D_Electronics_Gaming_Delivery",
+  "target": "B_Restaurant_Food",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 65,
+  "macro_f1": 0.3992,
+  "accuracy": 0.5385,
+  "classification_report": {
+    "0": {
+      "precision": 0.2857142857142857,
+      "recall": 0.75,
+      "f1-score": 0.41379310344827586,
+      "support": 8.0
+    },
+    "1": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1-score": 0.0,
+      "support": 24.0
+    },
+    "2": {
+      "precision": 0.7073170731707317,
+      "recall": 0.8787878787878788,
+      "f1-score": 0.7837837837837838,
+      "support": 33.0
+    },
+    "accuracy": 0.5384615384615384,
+    "macro avg": {
+      "precision": 0.3310104529616725,
+      "recall": 0.5429292929292929,
+      "f1-score": 0.3991922957440199,
+      "support": 65.0
+    },
+    "weighted avg": {
+      "precision": 0.3942642723130528,
+      "recall": 0.5384615384615384,
+      "f1-score": 0.4488493798838626,
+      "support": 65.0
+    }
+  }
+}

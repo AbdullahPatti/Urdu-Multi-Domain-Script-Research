@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "B_Consumer_Electronics_Gaming",
+  "target": "D_Mixed_Social_Commentary",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.8478,
+  "accuracy": 0.8485,
+  "classification_report": {
+    "0": {
+      "precision": 0.9615384615384616,
+      "recall": 0.7575757575757576,
+      "f1-score": 0.847457627118644,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.896551724137931,
+      "recall": 0.7878787878787878,
+      "f1-score": 0.8387096774193549,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1-score": 0.8571428571428571,
+      "support": 33.0
+    },
+    "accuracy": 0.8484848484848485,
+    "macro avg": {
+      "precision": 0.8693633952254642,
+      "recall": 0.8484848484848485,
+      "f1-score": 0.8477700538936187,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.8693633952254642,
+      "recall": 0.8484848484848485,
+      "f1-score": 0.8477700538936187,
+      "support": 99.0
+    }
+  }
+}

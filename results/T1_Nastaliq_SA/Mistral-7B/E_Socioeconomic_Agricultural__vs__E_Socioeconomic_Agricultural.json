@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "E_Socioeconomic_Agricultural",
+  "target": "E_Socioeconomic_Agricultural",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.9199,
+  "accuracy": 0.92,
+  "classification_report": {
+    "0": {
+      "precision": 0.8888888888888888,
+      "recall": 0.96,
+      "f1-score": 0.9230769230769231,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.9565217391304348,
+      "recall": 0.88,
+      "f1-score": 0.9166666666666666,
+      "support": 25.0
+    },
+    "accuracy": 0.92,
+    "macro avg": {
+      "precision": 0.9227053140096618,
+      "recall": 0.9199999999999999,
+      "f1-score": 0.9198717948717949,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.9227053140096618,
+      "recall": 0.92,
+      "f1-score": 0.9198717948717947,
+      "support": 50.0
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "task": "T6_Roman_ProductReviews",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "D_Electronics_Gaming_Delivery",
+  "target": "D_Electronics_Gaming_Delivery",
+  "type": "IN-DOMAIN",
+  "train_size": 8000,
+  "test_size": 5618,
+  "macro_f1": 0.6554,
+  "accuracy": 0.6757,
+  "classification_report": {
+    "0": {
+      "precision": 0.7074898785425101,
+      "recall": 0.6756887385210246,
+      "f1-score": 0.6912237330037083,
+      "support": 2069.0
+    },
+    "1": {
+      "precision": 0.5524816924328723,
+      "recall": 0.5267649340574089,
+      "f1-score": 0.5393169181890389,
+      "support": 1289.0
+    },
+    "2": {
+      "precision": 0.7123912142561127,
+      "recall": 0.7606194690265486,
+      "f1-score": 0.7357158142520864,
+      "support": 2260.0
+    },
+    "accuracy": 0.675685297258811,
+    "macro avg": {
+      "precision": 0.6574542617438316,
+      "recall": 0.6543577138683274,
+      "f1-score": 0.6554188218149446,
+      "support": 5618.0
+    },
+    "weighted avg": {
+      "precision": 0.6738963340101888,
+      "recall": 0.675685297258811,
+      "f1-score": 0.674268271865443,
+      "support": 5618.0
+    }
+  }
+}

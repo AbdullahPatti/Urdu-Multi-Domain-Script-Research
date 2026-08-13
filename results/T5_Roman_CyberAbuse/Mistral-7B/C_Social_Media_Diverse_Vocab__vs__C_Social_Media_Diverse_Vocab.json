@@ -1,0 +1,39 @@
+{
+  "task": "T5_Roman_CyberAbuse",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "C_Social_Media_Diverse_Vocab",
+  "target": "C_Social_Media_Diverse_Vocab",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 100,
+  "macro_f1": 0.8699,
+  "accuracy": 0.87,
+  "classification_report": {
+    "0": {
+      "precision": 0.8936170212765957,
+      "recall": 0.84,
+      "f1-score": 0.865979381443299,
+      "support": 50.0
+    },
+    "1": {
+      "precision": 0.8490566037735849,
+      "recall": 0.9,
+      "f1-score": 0.8737864077669902,
+      "support": 50.0
+    },
+    "accuracy": 0.87,
+    "macro avg": {
+      "precision": 0.8713368125250903,
+      "recall": 0.87,
+      "f1-score": 0.8698828946051447,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.8713368125250903,
+      "recall": 0.87,
+      "f1-score": 0.8698828946051447,
+      "support": 100.0
+    }
+  }
+}

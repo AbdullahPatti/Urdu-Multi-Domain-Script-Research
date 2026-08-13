@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "A_Twitter_Political_Social",
+  "target": "D_Mixed_Social_Commentary",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.6663,
+  "accuracy": 0.6869,
+  "classification_report": {
+    "0": {
+      "precision": 1.0,
+      "recall": 0.7575757575757576,
+      "f1-score": 0.8620689655172413,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.7692307692307693,
+      "recall": 0.30303030303030304,
+      "f1-score": 0.43478260869565216,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.5409836065573771,
+      "recall": 1.0,
+      "f1-score": 0.7021276595744681,
+      "support": 33.0
+    },
+    "accuracy": 0.6868686868686869,
+    "macro avg": {
+      "precision": 0.7700714585960488,
+      "recall": 0.6868686868686869,
+      "f1-score": 0.6663264112624538,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.7700714585960488,
+      "recall": 0.6868686868686869,
+      "f1-score": 0.6663264112624538,
+      "support": 99.0
+    }
+  }
+}

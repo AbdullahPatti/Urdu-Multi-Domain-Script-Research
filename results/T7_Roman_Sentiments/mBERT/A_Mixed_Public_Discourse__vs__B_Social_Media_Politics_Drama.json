@@ -1,0 +1,39 @@
+{
+  "task": "T7_Roman_Sentiments",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "A_Mixed_Public_Discourse",
+  "target": "B_Social_Media_Politics_Drama",
+  "type": "CROSS-DOMAIN",
+  "train_size": 8000,
+  "test_size": 2200,
+  "macro_f1": 0.7501,
+  "accuracy": 0.7505,
+  "classification_report": {
+    "0": {
+      "precision": 0.7471374045801527,
+      "recall": 0.7338331771321462,
+      "f1-score": 0.7404255319148936,
+      "support": 1067.0
+    },
+    "1": {
+      "precision": 0.7534722222222222,
+      "recall": 0.766107678729038,
+      "f1-score": 0.7597374179431072,
+      "support": 1133.0
+    },
+    "accuracy": 0.7504545454545455,
+    "macro avg": {
+      "precision": 0.7503048134011874,
+      "recall": 0.7499704279305921,
+      "f1-score": 0.7500814749290003,
+      "support": 2200.0
+    },
+    "weighted avg": {
+      "precision": 0.7503998356658185,
+      "recall": 0.7504545454545455,
+      "f1-score": 0.7503711532194236,
+      "support": 2200.0
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_QA",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "B_General_Knowledge",
+  "target": "D_Short_Form_QnA",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.8358,
+  "accuracy": 0.84,
+  "classification_report": {
+    "0": {
+      "precision": 0.7575757575757576,
+      "recall": 1.0,
+      "f1-score": 0.8620689655172413,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 0.68,
+      "f1-score": 0.8095238095238095,
+      "support": 25.0
+    },
+    "accuracy": 0.84,
+    "macro avg": {
+      "precision": 0.8787878787878788,
+      "recall": 0.8400000000000001,
+      "f1-score": 0.8357963875205254,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.8787878787878788,
+      "recall": 0.84,
+      "f1-score": 0.8357963875205254,
+      "support": 50.0
+    }
+  }
+}

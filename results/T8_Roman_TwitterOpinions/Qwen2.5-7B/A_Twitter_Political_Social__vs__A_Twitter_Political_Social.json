@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Qwen2.5-7B",
+  "model_id": "Qwen/Qwen2.5-7B-Instruct",
+  "source": "A_Twitter_Political_Social",
+  "target": "A_Twitter_Political_Social",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.37,
+  "accuracy": 0.4444,
+  "classification_report": {
+    "0": {
+      "precision": 0.6923076923076923,
+      "recall": 0.2727272727272727,
+      "f1-score": 0.391304347826087,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.75,
+      "recall": 0.09090909090909091,
+      "f1-score": 0.16216216216216217,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.3902439024390244,
+      "recall": 0.9696969696969697,
+      "f1-score": 0.5565217391304348,
+      "support": 33.0
+    },
+    "accuracy": 0.4444444444444444,
+    "macro avg": {
+      "precision": 0.6108505315822389,
+      "recall": 0.4444444444444445,
+      "f1-score": 0.3699960830395613,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.6108505315822389,
+      "recall": 0.4444444444444444,
+      "f1-score": 0.36999608303956133,
+      "support": 99.0
+    }
+  }
+}

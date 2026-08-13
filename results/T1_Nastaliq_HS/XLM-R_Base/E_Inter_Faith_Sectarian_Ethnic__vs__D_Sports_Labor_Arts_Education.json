@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_HS",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "E_Inter_Faith_Sectarian_Ethnic",
+  "target": "D_Sports_Labor_Arts_Education",
+  "type": "CROSS-DOMAIN",
+  "train_size": 10000,
+  "test_size": 340,
+  "macro_f1": 0.4357,
+  "accuracy": 0.55,
+  "classification_report": {
+    "0": {
+      "precision": 0.5263157894736842,
+      "recall": 1.0,
+      "f1-score": 0.6896551724137931,
+      "support": 170.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 0.1,
+      "f1-score": 0.18181818181818182,
+      "support": 170.0
+    },
+    "accuracy": 0.55,
+    "macro avg": {
+      "precision": 0.763157894736842,
+      "recall": 0.55,
+      "f1-score": 0.4357366771159875,
+      "support": 340.0
+    },
+    "weighted avg": {
+      "precision": 0.763157894736842,
+      "recall": 0.55,
+      "f1-score": 0.4357366771159875,
+      "support": 340.0
+    }
+  }
+}

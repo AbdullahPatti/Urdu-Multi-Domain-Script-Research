@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "mBERT",
+  "model_id": "bert-base-multilingual-cased",
+  "source": "C_Civic_Social_Topics",
+  "target": "D_Governance_Political",
+  "type": "CROSS-DOMAIN",
+  "train_size": 129,
+  "test_size": 294,
+  "macro_f1": 0.5469,
+  "accuracy": 0.5748,
+  "classification_report": {
+    "0": {
+      "precision": 0.6857142857142857,
+      "recall": 0.31788079470198677,
+      "f1-score": 0.4343891402714932,
+      "support": 151.0
+    },
+    "1": {
+      "precision": 0.5401785714285714,
+      "recall": 0.8461538461538461,
+      "f1-score": 0.659400544959128,
+      "support": 143.0
+    },
+    "accuracy": 0.5748299319727891,
+    "macro avg": {
+      "precision": 0.6129464285714286,
+      "recall": 0.5820173204279164,
+      "f1-score": 0.5468948426153106,
+      "support": 294.0
+    },
+    "weighted avg": {
+      "precision": 0.6149265063168124,
+      "recall": 0.5748299319727891,
+      "f1-score": 0.5438334629596966,
+      "support": 294.0
+    }
+  }
+}

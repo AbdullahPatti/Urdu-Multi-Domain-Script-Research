@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_FND",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "C_General_Pakistani_News",
+  "target": "A_Multi_Topic_News",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.3316,
+  "accuracy": 0.4,
+  "classification_report": {
+    "0": {
+      "precision": 0.43902439024390244,
+      "recall": 0.72,
+      "f1-score": 0.5454545454545454,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.2222222222222222,
+      "recall": 0.08,
+      "f1-score": 0.11764705882352941,
+      "support": 25.0
+    },
+    "accuracy": 0.4,
+    "macro avg": {
+      "precision": 0.33062330623306235,
+      "recall": 0.39999999999999997,
+      "f1-score": 0.3315508021390374,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.33062330623306235,
+      "recall": 0.4,
+      "f1-score": 0.33155080213903737,
+      "support": 50.0
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "D_Mixed_Social_Commentary",
+  "target": "B_Consumer_Electronics_Gaming",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.7814,
+  "accuracy": 0.7879,
+  "classification_report": {
+    "0": {
+      "precision": 0.8387096774193549,
+      "recall": 0.7878787878787878,
+      "f1-score": 0.8125,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 0.95,
+      "recall": 0.5757575757575758,
+      "f1-score": 0.7169811320754716,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.6875,
+      "recall": 1.0,
+      "f1-score": 0.8148148148148148,
+      "support": 33.0
+    },
+    "accuracy": 0.7878787878787878,
+    "macro avg": {
+      "precision": 0.8254032258064515,
+      "recall": 0.787878787878788,
+      "f1-score": 0.7814319822967621,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.8254032258064516,
+      "recall": 0.7878787878787878,
+      "f1-score": 0.7814319822967621,
+      "support": 99.0
+    }
+  }
+}

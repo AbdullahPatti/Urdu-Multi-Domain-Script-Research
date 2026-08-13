@@ -1,0 +1,39 @@
+{
+  "task": "T5_Roman_CyberAbuse",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "D_General_Online_Video",
+  "target": "A_YouTube_Comments",
+  "type": "CROSS-DOMAIN",
+  "k_shot": 5,
+  "test_size": 100,
+  "macro_f1": 0.8271,
+  "accuracy": 0.83,
+  "classification_report": {
+    "0": {
+      "precision": 0.7619047619047619,
+      "recall": 0.96,
+      "f1-score": 0.8495575221238938,
+      "support": 50.0
+    },
+    "1": {
+      "precision": 0.9459459459459459,
+      "recall": 0.7,
+      "f1-score": 0.8045977011494253,
+      "support": 50.0
+    },
+    "accuracy": 0.83,
+    "macro avg": {
+      "precision": 0.853925353925354,
+      "recall": 0.83,
+      "f1-score": 0.8270776116366596,
+      "support": 100.0
+    },
+    "weighted avg": {
+      "precision": 0.853925353925354,
+      "recall": 0.83,
+      "f1-score": 0.8270776116366596,
+      "support": 100.0
+    }
+  }
+}

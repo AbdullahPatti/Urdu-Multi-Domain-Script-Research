@@ -1,0 +1,45 @@
+{
+  "task": "T8_Roman_TwitterOpinions",
+  "model": "Llama3.1-8B",
+  "model_id": "meta-llama/Llama-3.1-8B-Instruct",
+  "source": "D_Mixed_Social_Commentary",
+  "target": "D_Mixed_Social_Commentary",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 99,
+  "macro_f1": 0.83,
+  "accuracy": 0.8283,
+  "classification_report": {
+    "0": {
+      "precision": 0.9642857142857143,
+      "recall": 0.8181818181818182,
+      "f1-score": 0.8852459016393442,
+      "support": 33.0
+    },
+    "1": {
+      "precision": 1.0,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.8,
+      "support": 33.0
+    },
+    "2": {
+      "precision": 0.673469387755102,
+      "recall": 1.0,
+      "f1-score": 0.8048780487804879,
+      "support": 33.0
+    },
+    "accuracy": 0.8282828282828283,
+    "macro avg": {
+      "precision": 0.8792517006802721,
+      "recall": 0.8282828282828283,
+      "f1-score": 0.8300413168066108,
+      "support": 99.0
+    },
+    "weighted avg": {
+      "precision": 0.879251700680272,
+      "recall": 0.8282828282828283,
+      "f1-score": 0.8300413168066108,
+      "support": 99.0
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_SA",
+  "model": "XLM-R_Base",
+  "model_id": "xlm-roberta-base",
+  "source": "C_Civic_Social_Topics",
+  "target": "A_Twitter_Social_Media",
+  "type": "CROSS-DOMAIN",
+  "train_size": 129,
+  "test_size": 196,
+  "macro_f1": 0.3951,
+  "accuracy": 0.4745,
+  "classification_report": {
+    "0": {
+      "precision": 0.44,
+      "recall": 0.11,
+      "f1-score": 0.176,
+      "support": 100.0
+    },
+    "1": {
+      "precision": 0.47953216374269003,
+      "recall": 0.8541666666666666,
+      "f1-score": 0.6142322097378277,
+      "support": 96.0
+    },
+    "accuracy": 0.4744897959183674,
+    "macro avg": {
+      "precision": 0.45976608187134504,
+      "recall": 0.4820833333333333,
+      "f1-score": 0.3951161048689138,
+      "support": 196.0
+    },
+    "weighted avg": {
+      "precision": 0.45936269244539923,
+      "recall": 0.4744897959183674,
+      "f1-score": 0.3906443476266911,
+      "support": 196.0
+    }
+  }
+}

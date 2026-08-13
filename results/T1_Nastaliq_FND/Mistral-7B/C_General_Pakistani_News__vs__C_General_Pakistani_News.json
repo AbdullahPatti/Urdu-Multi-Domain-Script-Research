@@ -1,0 +1,39 @@
+{
+  "task": "T1_Nastaliq_FND",
+  "model": "Mistral-7B",
+  "model_id": "mistralai/Mistral-7B-Instruct-v0.3",
+  "source": "C_General_Pakistani_News",
+  "target": "C_General_Pakistani_News",
+  "type": "IN-DOMAIN",
+  "k_shot": 5,
+  "test_size": 50,
+  "macro_f1": 0.6528,
+  "accuracy": 0.68,
+  "classification_report": {
+    "0": {
+      "precision": 0.6153846153846154,
+      "recall": 0.96,
+      "f1-score": 0.75,
+      "support": 25.0
+    },
+    "1": {
+      "precision": 0.9090909090909091,
+      "recall": 0.4,
+      "f1-score": 0.5555555555555556,
+      "support": 25.0
+    },
+    "accuracy": 0.68,
+    "macro avg": {
+      "precision": 0.7622377622377623,
+      "recall": 0.6799999999999999,
+      "f1-score": 0.6527777777777778,
+      "support": 50.0
+    },
+    "weighted avg": {
+      "precision": 0.7622377622377623,
+      "recall": 0.68,
+      "f1-score": 0.6527777777777777,
+      "support": 50.0
+    }
+  }
+}
