@@ -225,25 +225,6 @@ def results_tables(mac):
 
     # per-target Target Drop table (Calderon: is the target intrinsically hard?)
     pdm = pd.read_csv(ANALYSIS / "table_per_domain.csv")
-    for tid in TASK_ORDER:
-        g = pdm[pdm.task == tid]
-        if g.empty:
-            continue
-        doms = list(dict.fromkeys(g.domain))
-        models = [m for m in MODEL_ORDER if m in set(g.model)]
-        hdr = " & ".join(f"\\multicolumn{{2}}{{c}}{{{m}}}" for m in models)
-        sub = " & ".join("TT & $\\Delta_T$" for _ in models)
-        lines = []
-        for d in doms:
-            cells = []
-            for m in models:
-                r = g[(g.domain == d) & (g.model == m)].iloc[0]
-                cells += [f"{r['SS=TT']:.3f}", f"{100 * r.dT_target:.1f}"]
-            lines.append(f"{d} & " + " & ".join(cells) + " \\\\")
-        (OUT / f"per_target_{tid}.tex").write_text(
-            "\\begin{tabular}{l" + "rr" * len(models) + "}\n\\toprule\n"
-            f"Target & {hdr} \\\\\n & {sub} \\\\\n\\midrule\n" + "\n".join(lines)
-            + "\n\\bottomrule\n\\end{tabular}\n", encoding="utf-8")
 
     # per-target tables, one per script, all matrices stacked
     for script, tids in (("nastaliq", TASK_ORDER[:4]), ("roman", TASK_ORDER[4:])):

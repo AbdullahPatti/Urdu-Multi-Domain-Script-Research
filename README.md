@@ -37,7 +37,7 @@ length-only baselines, and Holm-corrected paired bootstrap tests.
 | `pipeline/make_release.py`, `scripts/rebuild.py` | public release; rebuild of the four sources that state no licence |
 | `runs/` | per-cell predictions of every model, seed and shift |
 | `analysis/` | aggregated results and audits |
-| `Working/` | notebooks from an earlier stage of the project (not used for the reported results) |
+| `scripts/make_arxiv.py` | builds the arXiv source package of the paper |
 
 ## Reproducing the results
 

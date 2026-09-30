@@ -10,7 +10,12 @@
 \usepackage[a4paper,top=2.2cm,bottom=2.4cm,left=1.8cm,right=1.8cm,columnsep=0.75cm]{geometry}
 \usepackage{amsmath}
 \usepackage{fontspec}
-\usepackage{libertinus-otf}   % Libertinus Serif/Sans/Math: a modern, readable typeface
+\usepackage{unicode-math}
+% Libertinus Serif/Sans/Mono/Math, loaded by file name (required by arXiv's XeLaTeX)
+\setmainfont{LibertinusSerif}[Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic,BoldItalicFont=*-BoldItalic]
+\setsansfont{LibertinusSans}[Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,ItalicFont=*-Italic]
+\setmonofont{LibertinusMono}[Extension=.otf,UprightFont=*-Regular,Scale=0.92]
+\setmathfont{LibertinusMath-Regular.otf}
 \usepackage{array,booktabs,tabularx,multirow}
 \usepackage{graphicx}
 \usepackage{xcolor}

@@ -1,0 +1,407 @@
+\begin{thebibliography}{54}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Adnan855570}(2025)]{adnan2025urduhate}
+{Adnan855570}.
+\newblock {U}rdu hate speech.
+\newblock Hugging Face dataset,
+  \url{https://huggingface.co/datasets/Adnan855570/Urdu_Hate_Speech}, 2025.
+\newblock Licence: MIT. Accessed 30 September 2026.
+
+\bibitem[Akram et~al.(2023)Akram, Shahzad, and Bashir]{akram2023isehate}
+Muhammad~Hammad Akram, Khurram Shahzad, and Maryam Bashir.
+\newblock {ISE-Hate}: A benchmark corpus for inter-faith, sectarian, and ethnic
+  hatred detection on social media in {U}rdu.
+\newblock \emph{Information Processing \& Management}, 60\penalty0
+  (3):\penalty0 103270, 2023.
+
+\bibitem[Amjad et~al.(2020)Amjad, Sidorov, Zhila, G{\'o}mez-Adorno, Voronkov,
+  and Gelbukh]{amjad2020bend}
+Maaz Amjad, Grigori Sidorov, Alisa Zhila, Helena G{\'o}mez-Adorno, Ilia
+  Voronkov, and Alexander Gelbukh.
+\newblock ``{B}end the truth'': Benchmark dataset for fake news detection in
+  {U}rdu language and its evaluation.
+\newblock \emph{Journal of Intelligent \& Fuzzy Systems}, 39\penalty0
+  (2):\penalty0 2457--2469, 2020.
+\newblock \doi{10.3233/JIFS-179905}.
+
+\bibitem[{ayeshasameer}()]{ayeshasameer2024romanurdu}
+{ayeshasameer}.
+\newblock roman-urdu-sentiment-analysis.
+\newblock Hugging Face dataset,
+  \url{https://huggingface.co/datasets/ayeshasameer/roman-urdu-sentiment-analysis},
+  MIT licence.
+\newblock Accessed 2026.
+
+\bibitem[Bali et~al.(2014)Bali, Sharma, Choudhury, and Vyas]{bali2014borrowing}
+Kalika Bali, Jatin Sharma, Monojit Choudhury, and Yogarshi Vyas.
+\newblock ``{I} am borrowing ya mixing?'' an analysis of {E}nglish-{H}indi code
+  mixing in {F}acebook.
+\newblock In \emph{Proceedings of the First Workshop on Computational
+  Approaches to Code Switching}, pages 116--126, 2014.
+
+\bibitem[Ben-David et~al.(2010)Ben-David, Blitzer, Crammer, Kulesza, Pereira,
+  and Vaughan]{bendavid2010theory}
+Shai Ben-David, John Blitzer, Koby Crammer, Alex Kulesza, Fernando Pereira, and
+  Jennifer~Wortman Vaughan.
+\newblock A theory of learning from different domains.
+\newblock \emph{Machine Learning}, 79\penalty0 (1--2):\penalty0 151--175, 2010.
+
+\bibitem[Bender and Friedman(2018)]{bender2018data}
+Emily~M. Bender and Batya Friedman.
+\newblock Data statements for natural language processing: Toward mitigating
+  system bias and enabling better science.
+\newblock \emph{Transactions of the Association for Computational Linguistics},
+  6:\penalty0 587--604, 2018.
+
+\bibitem[Blitzer et~al.(2006)Blitzer, McDonald, and Pereira]{blitzer2006scl}
+John Blitzer, Ryan McDonald, and Fernando Pereira.
+\newblock Domain adaptation with structural correspondence learning.
+\newblock In \emph{Proceedings of the 2006 Conference on Empirical Methods in
+  Natural Language Processing}, pages 120--128, 2006.
+
+\bibitem[Blitzer et~al.(2007)Blitzer, Dredze, and
+  Pereira]{blitzer2007biographies}
+John Blitzer, Mark Dredze, and Fernando Pereira.
+\newblock Biographies, {B}ollywood, boom-boxes and blenders: Domain adaptation
+  for sentiment classification.
+\newblock In \emph{Proceedings of the 45th Annual Meeting of the Association of
+  Computational Linguistics}, pages 440--447, 2007.
+
+\bibitem[Bowman and Dahl(2021)]{bowman2021fix}
+Samuel~R. Bowman and George Dahl.
+\newblock What will it take to fix benchmarking in natural language
+  understanding?
+\newblock In \emph{Proceedings of the 2021 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 4843--4855, 2021.
+
+\bibitem[Broder(1997)]{broder1997resemblance}
+Andrei~Z. Broder.
+\newblock On the resemblance and containment of documents.
+\newblock In \emph{Proceedings of Compression and Complexity of Sequences},
+  pages 21--29, 1997.
+
+\bibitem[Brown et~al.(2020)]{brown2020gpt3}
+Tom Brown et~al.
+\newblock Language models are few-shot learners.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~33, pages 1877--1901, 2020.
+
+\bibitem[Calderon et~al.(2024)Calderon, Porat, Ben-David, Chapanin, Gekhman,
+  Oved, Shalumov, and Reichart]{calderon2024measuring}
+Nitay Calderon, Naveh Porat, Eyal Ben-David, Alexander Chapanin, Zorik Gekhman,
+  Nadav Oved, Vitaly Shalumov, and Roi Reichart.
+\newblock Measuring the robustness of {NLP} models to domain shifts.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2024}, pages 126--154, 2024.
+\newblock URL \url{https://aclanthology.org/2024.findings-emnlp.7/}.
+
+\bibitem[Conneau et~al.(2020)Conneau, Khandelwal, Goyal, Chaudhary, Wenzek,
+  Guzm{\'a}n, Grave, Ott, Zettlemoyer, and Stoyanov]{conneau2020xlmr}
+Alexis Conneau, Kartikay Khandelwal, Naman Goyal, Vishrav Chaudhary, Guillaume
+  Wenzek, Francisco Guzm{\'a}n, Edouard Grave, Myle Ott, Luke Zettlemoyer, and
+  Veselin Stoyanov.
+\newblock Unsupervised cross-lingual representation learning at scale.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association
+  for Computational Linguistics}, pages 8440--8451, 2020.
+
+\bibitem[Daud et~al.(2017)Daud, Khan, and Che]{daud2017urdu}
+Ali Daud, Wahab Khan, and Dunren Che.
+\newblock {U}rdu language processing: A survey.
+\newblock \emph{Artificial Intelligence Review}, 47:\penalty0 279--311, 2017.
+\newblock \doi{10.1007/s10462-016-9482-x}.
+
+\bibitem[Dettmers et~al.(2023)Dettmers, Pagnoni, Holtzman, and
+  Zettlemoyer]{dettmers2023qlora}
+Tim Dettmers, Artidoro Pagnoni, Ari Holtzman, and Luke Zettlemoyer.
+\newblock {QLoRA}: Efficient finetuning of quantized {LLMs}.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~36, 2023.
+
+\bibitem[Devlin et~al.(2019)Devlin, Chang, Lee, and Toutanova]{devlin2019bert}
+Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova.
+\newblock {BERT}: Pre-training of deep bidirectional transformers for language
+  understanding.
+\newblock In \emph{Proceedings of the 2019 Conference of the North American
+  Chapter of the Association for Computational Linguistics: Human Language
+  Technologies}, pages 4171--4186, 2019.
+
+\bibitem[Dodge et~al.(2020)Dodge, Ilharco, Schwartz, Farhadi, Hajishirzi, and
+  Smith]{dodge2020finetuning}
+Jesse Dodge, Gabriel Ilharco, Roy Schwartz, Ali Farhadi, Hannaneh Hajishirzi,
+  and Noah Smith.
+\newblock Fine-tuning pretrained language models: Weight initializations, data
+  orders, and early stopping.
+\newblock \emph{arXiv preprint arXiv:2002.06305}, 2020.
+
+\bibitem[Dror et~al.(2018)Dror, Baumer, Shlomov, and
+  Reichart]{dror2018hitchhiker}
+Rotem Dror, Gili Baumer, Segev Shlomov, and Roi Reichart.
+\newblock The hitchhiker's guide to testing statistical significance in natural
+  language processing.
+\newblock In \emph{Proceedings of the 56th Annual Meeting of the Association
+  for Computational Linguistics}, pages 1383--1392, 2018.
+
+\bibitem[Elangovan et~al.(2021)Elangovan, He, and
+  Verspoor]{elangovan2021memorization}
+Aparna Elangovan, Jiayuan He, and Karin Verspoor.
+\newblock Memorization vs. generalization: Quantifying data leakage in {NLP}
+  performance evaluation.
+\newblock In \emph{Proceedings of the 16th Conference of the European Chapter
+  of the Association for Computational Linguistics: Main Volume}, pages
+  1325--1335, 2021.
+\newblock URL \url{https://aclanthology.org/2021.eacl-main.113/}.
+
+\bibitem[Ganin et~al.(2016)Ganin, Ustinova, Ajakan, Germain, Larochelle,
+  Laviolette, Marchand, and Lempitsky]{ganin2016dann}
+Yaroslav Ganin, Evgeniya Ustinova, Hana Ajakan, Pascal Germain, Hugo
+  Larochelle, Fran{\c{c}}ois Laviolette, Mario Marchand, and Victor Lempitsky.
+\newblock Domain-adversarial training of neural networks.
+\newblock \emph{Journal of Machine Learning Research}, 17\penalty0
+  (59):\penalty0 1--35, 2016.
+
+\bibitem[Gebru et~al.(2021)Gebru, Morgenstern, Vecchione, Vaughan, Wallach,
+  Daum{\'e}~III, and Crawford]{gebru2021datasheets}
+Timnit Gebru, Jamie Morgenstern, Briana Vecchione, Jennifer~Wortman Vaughan,
+  Hanna Wallach, Hal Daum{\'e}~III, and Kate Crawford.
+\newblock Datasheets for datasets.
+\newblock \emph{Communications of the ACM}, 64\penalty0 (12):\penalty0 86--92,
+  2021.
+
+\bibitem[Grattafiori et~al.(2024)]{grattafiori2024llama3}
+Aaron Grattafiori et~al.
+\newblock The {Llama} 3 herd of models.
+\newblock \emph{arXiv preprint arXiv:2407.21783}, 2024.
+
+\bibitem[Gururangan et~al.(2020)Gururangan, Marasovi{\'c}, Swayamdipta, Lo,
+  Beltagy, Downey, and Smith]{gururangan2020dont}
+Suchin Gururangan, Ana Marasovi{\'c}, Swabha Swayamdipta, Kyle Lo, Iz~Beltagy,
+  Doug Downey, and Noah~A. Smith.
+\newblock Don't stop pretraining: Adapt language models to domains and tasks.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association
+  for Computational Linguistics}, pages 8342--8360, 2020.
+
+\bibitem[Haroon(2026)]{haroon2026crossdataset}
+Muhammad~Abdullah Haroon.
+\newblock Cross-dataset generalization in {U}rdu fake news detection: An
+  empirical study with {XLM-RoBERTa} and a length confound analysis.
+\newblock SSRN preprint,
+  \url{https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6890779}, 2026.
+
+\bibitem[Harris et~al.(2023)Harris, Liu, Hadi, and Cao]{harris2023axtogrind}
+Sheetal Harris, Jinshuo Liu, Hassan~Jalil Hadi, and Yue Cao.
+\newblock Ax-to-grind {U}rdu: Benchmark dataset for {U}rdu fake news detection.
+\newblock In \emph{2023 IEEE 22nd International Conference on Trust, Security
+  and Privacy in Computing and Communications (TrustCom)}. IEEE, 2023.
+\newblock arXiv:2403.14037.
+
+\bibitem[Hartvigsen et~al.(2022)Hartvigsen, Gabriel, Palangi, Sap, Ray, and
+  Kamar]{hartvigsen2022toxigen}
+Thomas Hartvigsen, Saadia Gabriel, Hamid Palangi, Maarten Sap, Dipankar Ray,
+  and Ece Kamar.
+\newblock {ToxiGen}: A large-scale machine-generated dataset for adversarial
+  and implicit hate speech detection.
+\newblock In \emph{Proceedings of the 60th Annual Meeting of the Association
+  for Computational Linguistics}, pages 3309--3326, 2022.
+
+\bibitem[Hendrycks et~al.(2020)Hendrycks, Liu, Wallace, Dziedzic, Krishnan, and
+  Song]{hendrycks2020pretrained}
+Dan Hendrycks, Xiaoyuan Liu, Eric Wallace, Adam Dziedzic, Rishabh Krishnan, and
+  Dawn Song.
+\newblock Pretrained transformers improve out-of-distribution robustness.
+\newblock In \emph{Proceedings of the 58th Annual Meeting of the Association
+  for Computational Linguistics}, pages 2744--2751, 2020.
+\newblock URL \url{https://aclanthology.org/2020.acl-main.244/}.
+
+\bibitem[Jiang et~al.(2023)]{jiang2023mistral}
+Albert~Q. Jiang et~al.
+\newblock Mistral {7B}.
+\newblock \emph{arXiv preprint arXiv:2310.06825}, 2023.
+
+\bibitem[Kakwani et~al.(2020)Kakwani, Kunchukuttan, Golla, N.C., Bhattacharyya,
+  Khapra, and Kumar]{kakwani2020indicnlpsuite}
+Divyanshu Kakwani, Anoop Kunchukuttan, Satish Golla, Gokul N.C., Avik
+  Bhattacharyya, Mitesh~M. Khapra, and Pratyush Kumar.
+\newblock {IndicNLPSuite}: Monolingual corpora, evaluation benchmarks and
+  pre-trained multilingual language models for {I}ndian languages.
+\newblock In \emph{Findings of the Association for Computational Linguistics:
+  EMNLP 2020}, pages 4948--4961, 2020.
+
+\bibitem[Khan et~al.(2022)Khan, Amjad, Ashraf, and Chang]{khan2022multiclass}
+Lal Khan, Ammar Amjad, Noman Ashraf, and Hsien-Tsung Chang.
+\newblock Multi-class sentiment analysis of {U}rdu text using multilingual
+  {BERT}.
+\newblock \emph{Scientific Reports}, 12:\penalty0 5436, 2022.
+\newblock \doi{10.1038/s41598-022-09381-9}.
+
+\bibitem[Khan and Nizami(2020)]{khan2020usc}
+Muhammad~Yaseen Khan and Muhammad~Suffian Nizami.
+\newblock {U}rdu sentiment corpus (v1.0): Linguistic exploration and
+  visualization of labeled dataset for {U}rdu sentiment analysis.
+\newblock In \emph{2020 International Conference on Information Science and
+  Communication Technology (ICISCT)}. IEEE, 2020.
+
+\bibitem[Khanuja et~al.(2021)]{khanuja2021muril}
+Simran Khanuja et~al.
+\newblock {MuRIL}: Multilingual representations for {I}ndian languages.
+\newblock \emph{arXiv preprint arXiv:2103.10730}, 2021.
+
+\bibitem[Koehn(2004)]{koehn2004significance}
+Philipp Koehn.
+\newblock Statistical significance tests for machine translation evaluation.
+\newblock In \emph{Proceedings of the 2004 Conference on Empirical Methods in
+  Natural Language Processing}, pages 388--395, 2004.
+
+\bibitem[Koh et~al.(2021)]{koh2021wilds}
+Pang~Wei Koh et~al.
+\newblock {WILDS}: A benchmark of in-the-wild distribution shifts.
+\newblock In \emph{Proceedings of the 38th International Conference on Machine
+  Learning}, volume 139 of \emph{PMLR}, pages 5637--5664, 2021.
+
+\bibitem[Lee et~al.(2022)Lee, Ippolito, Nystrom, Zhang, Eck, Callison-Burch,
+  and Carlini]{lee2022dedup}
+Katherine Lee, Daphne Ippolito, Andrew Nystrom, Chiyuan Zhang, Douglas Eck,
+  Chris Callison-Burch, and Nicholas Carlini.
+\newblock Deduplicating training data makes language models better.
+\newblock In \emph{Proceedings of the 60th Annual Meeting of the Association
+  for Computational Linguistics}, pages 8424--8445, 2022.
+
+\bibitem[Lu et~al.(2022)Lu, Bartolo, Moore, Riedel, and
+  Stenetorp]{lu2022fantastically}
+Yao Lu, Max Bartolo, Alastair Moore, Sebastian Riedel, and Pontus Stenetorp.
+\newblock Fantastically ordered prompts and where to find them: Overcoming
+  few-shot prompt order sensitivity.
+\newblock In \emph{Proceedings of the 60th Annual Meeting of the Association
+  for Computational Linguistics}, pages 8086--8098, 2022.
+
+\bibitem[Mehmood et~al.(2019)Mehmood, Essam, and Shafi]{mehmood2019rusad}
+Khawar Mehmood, Daryl Essam, and Kamran Shafi.
+\newblock Sentiment analysis system for {R}oman {U}rdu.
+\newblock In \emph{Intelligent Computing (SAI 2018)}, volume 858 of
+  \emph{Advances in Intelligent Systems and Computing}, pages 29--42. Springer,
+  2019.
+\newblock \doi{10.1007/978-3-030-01174-1_3}.
+
+\bibitem[Miller et~al.(2020)Miller, Krauth, Recht, and
+  Schmidt]{miller2020effect}
+John Miller, Karl Krauth, Benjamin Recht, and Ludwig Schmidt.
+\newblock The effect of natural distribution shift on question answering
+  models.
+\newblock In \emph{Proceedings of the 37th International Conference on Machine
+  Learning}, volume 119 of \emph{PMLR}, pages 6905--6916, 2020.
+
+\bibitem[Min et~al.(2022)Min, Lyu, Holtzman, Artetxe, Lewis, Hajishirzi, and
+  Zettlemoyer]{min2022rethinking}
+Sewon Min, Xinxi Lyu, Ari Holtzman, Mikel Artetxe, Mike Lewis, Hannaneh
+  Hajishirzi, and Luke Zettlemoyer.
+\newblock Rethinking the role of demonstrations: What makes in-context learning
+  work?
+\newblock In \emph{Proceedings of the 2022 Conference on Empirical Methods in
+  Natural Language Processing}, pages 11048--11064, 2022.
+
+\bibitem[{mirfan899}({\natexlab{a}})]{mirfan899imdb}
+{mirfan899}.
+\newblock {IMDB} {U}rdu reviews.
+\newblock Hugging Face dataset,
+  \url{https://huggingface.co/datasets/mirfan899/imdb_urdu_reviews},
+  {\natexlab{a}}.
+\newblock Licence: ODbL 1.0. Accessed 30 September 2026.
+
+\bibitem[{mirfan899}({\natexlab{b}})]{mirfan899urdu}
+{mirfan899}.
+\newblock Urdu: Collection of {U}rdu datasets for {POS}, {NER}, sentiment,
+  summarization and {NLP} tasks.
+\newblock GitHub repository, \url{https://github.com/mirfan899/Urdu}, MIT
+  licence, {\natexlab{b}}.
+\newblock Files qa/qa\_ahadis.csv and qa/qa\_gk.csv; accessed 2026.
+
+\bibitem[Mosbach et~al.(2021)Mosbach, Andriushchenko, and
+  Klakow]{mosbach2021stability}
+Marius Mosbach, Maksym Andriushchenko, and Dietrich Klakow.
+\newblock On the stability of fine-tuning {BERT}: Misconceptions, explanations,
+  and strong baselines.
+\newblock In \emph{International Conference on Learning Representations}, 2021.
+
+\bibitem[Pires et~al.(2019)Pires, Schlinger, and
+  Garrette]{pires2019multilingual}
+Telmo Pires, Eva Schlinger, and Dan Garrette.
+\newblock How multilingual is multilingual {BERT}?
+\newblock In \emph{Proceedings of the 57th Annual Meeting of the Association
+  for Computational Linguistics}, pages 4996--5001, 2019.
+
+\bibitem[{Qwen Team}(2024)]{qwen2024qwen25}
+{Qwen Team}.
+\newblock {Qwen2.5} technical report.
+\newblock \emph{arXiv preprint arXiv:2412.15115}, 2024.
+
+\bibitem[Ramponi and Plank(2020)]{ramponi2020neural}
+Alan Ramponi and Barbara Plank.
+\newblock Neural unsupervised domain adaptation in {NLP}---a survey.
+\newblock In \emph{Proceedings of the 28th International Conference on
+  Computational Linguistics}, pages 6838--6855, 2020.
+\newblock URL \url{https://aclanthology.org/2020.coling-main.603/}.
+
+\bibitem[Rizwan et~al.(2020)Rizwan, Shakeel, and Karim]{rizwan2020hate}
+Hammad Rizwan, Muhammad~Haroon Shakeel, and Asim Karim.
+\newblock Hate-speech and offensive language detection in {R}oman {U}rdu.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing}, pages 2512--2522, 2020.
+\newblock URL \url{https://aclanthology.org/2020.emnlp-main.197/}.
+
+\bibitem[Sitaram et~al.(2019)Sitaram, Chandu, Rallabandi, and
+  Black]{sitaram2019survey}
+Sunayana Sitaram, Khyathi~Raghavi Chandu, Sai~Krishna Rallabandi, and Alan~W.
+  Black.
+\newblock A survey of code-switched speech and language processing.
+\newblock \emph{arXiv preprint arXiv:1904.00784}, 2019.
+
+\bibitem[Soomro et~al.(2024)Soomro, Memon, Chandio, Leghari, and
+  Soomro]{soomro2024ruwv}
+Mudasar~Ahmed Soomro, Rafia~Naz Memon, Asghar~Ali Chandio, Mehwish Leghari, and
+  Muhammad~Hanif Soomro.
+\newblock A dataset of {R}oman {U}rdu text with spelling variations for
+  sentence level sentiment analysis.
+\newblock \emph{Data in Brief}, 57:\penalty0 111170, 2024.
+\newblock \doi{10.1016/j.dib.2024.111170}.
+
+\bibitem[Tehreem and Tahir(2021)]{tehreem2021youtube}
+Tooba Tehreem and Hira Tahir.
+\newblock Sentiment analysis for {YouTube} comments in {R}oman {U}rdu.
+\newblock \emph{arXiv preprint arXiv:2102.10075}, 2021.
+
+\bibitem[Wolf et~al.(2020)]{wolf2020transformers}
+Thomas Wolf et~al.
+\newblock Transformers: State-of-the-art natural language processing.
+\newblock In \emph{Proceedings of the 2020 Conference on Empirical Methods in
+  Natural Language Processing: System Demonstrations}, pages 38--45, 2020.
+
+\bibitem[Wu and Dredze(2019)]{wu2019beto}
+Shijie Wu and Mark Dredze.
+\newblock Beto, bentz, becas: The surprising cross-lingual effectiveness of
+  {BERT}.
+\newblock In \emph{Proceedings of the 2019 Conference on Empirical Methods in
+  Natural Language Processing and the 9th International Joint Conference on
+  Natural Language Processing}, pages 833--844, 2019.
+\newblock URL \url{https://aclanthology.org/D19-1077/}.
+
+\bibitem[{yrrebeere}()]{daraz2023kaggle}
+{yrrebeere}.
+\newblock Daraz code-mixed product reviews.
+\newblock Kaggle dataset,
+  \url{https://www.kaggle.com/datasets/yrrebeere/daraz-code-mixed-product-reviews}.
+\newblock Accessed 2026.
+
+\bibitem[Zhao et~al.(2021)Zhao, Wallace, Feng, Klein, and
+  Singh]{zhao2021calibrate}
+Zihao Zhao, Eric Wallace, Shi Feng, Dan Klein, and Sameer Singh.
+\newblock Calibrate before use: Improving few-shot performance of language
+  models.
+\newblock In \emph{Proceedings of the 38th International Conference on Machine
+  Learning}, volume 139 of \emph{PMLR}, pages 12697--12706, 2021.
+
+\end{thebibliography}

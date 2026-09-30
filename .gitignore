@@ -30,3 +30,12 @@ analysis/near_duplicates_v11.csv
 /Nastaliq/
 /Roman/
 /results/
+
+# Not part of the reported study: legacy notebooks, editor settings, archived runs from
+# the superseded LLM protocol, and result cells of excluded candidate domains
+/Working/
+.vscode/
+runs/_archive/
+runs/*/N-FN/**/*FN-C*
+runs/*/N-FN/**/*FN-D*
+runs/*/N-SA/**/*SA-C*
