@@ -179,12 +179,13 @@ current file; `rebuild.py` reports them.
 
 ## Licences
 
-Each domain keeps the licence of its source (table above). The five traced permissive sources are
-MIT or CC BY 4.0. Four published corpora (Urdu Sentiment Corpus, ISE-Hate, Bend the Truth,
-Ax-to-Grind Urdu) state no licence and are distributed through `rebuild.py` only; please cite their
-authors. Generated domains were produced with xAI Grok; its terms ask that such output be
-attributed to Grok and prohibit using it to develop models that compete with xAI. Five organic
-domains were obtained from public uploads whose authors we could not identify; they are released
+Each domain keeps the licence of its source (table above). Traced sources with a permissive
+licence are released under MIT, CC BY 4.0 or ODbL 1.0. Four published corpora (Urdu Sentiment
+Corpus, ISE-Hate, Bend the Truth, Ax-to-Grind Urdu) state no licence and are distributed through
+`rebuild.py` only; please cite their authors. Generated domains were produced with xAI Grok; its
+terms ask that such output be attributed to Grok and prohibit using it to develop models that
+compete with xAI. {(dom.licence == "unknown").sum()} organic domains were obtained from public
+uploads whose authors we could not identify; they are released
 for research use and will be removed on request from a rights holder. Our own contributions
 (splits, manifests, audits, generated-data curation) are released under CC BY-NC 4.0.
 
