@@ -47,3 +47,6 @@ paper/*.blg
 paper/*.out
 paper/*.log
 paper/*.xdv
+
+# arXiv package (built by scripts/make_arxiv.py; uploaded to arXiv, not to git)
+/arxiv_submission.zip
