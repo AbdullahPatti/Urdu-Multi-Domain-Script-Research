@@ -25,3 +25,8 @@ release/_src/
 data/
 release/
 analysis/near_duplicates_v11.csv
+
+# Raw source corpora (read locally by build_splits) and pre-revision results: not published
+/Nastaliq/
+/Roman/
+/results/
