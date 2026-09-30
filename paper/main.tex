@@ -1,0 +1,499 @@
+% Domain Robustness of Multilingual NLP Models Across Urdu and Roman Urdu Scripts
+% Build:  E:\tools\tectonic.exe -X compile main.tex      (XeTeX engine; Urdu font in fonts/)
+% Every number is generated: tables/*.tex, tables/macros.tex and tables/values.tex come from
+%   python -m pipeline.analyze; python -m pipeline.errors; python -m pipeline.audit_shortcuts;
+%   python -m pipeline.make_tables --results; python -m pipeline.figures
+% In-text numbers are \val{key} lookups into tables/values.tex; a missing key renders as a red
+% PENDING marker. \pending{...} marks text that still needs author confirmation.
+% Before submission:  grep -n "pending" main.tex  must return nothing.
+\documentclass[12pt,a4paper,twocolumn]{article}
+\usepackage[a4paper,top=2.2cm,bottom=2.4cm,left=1.8cm,right=1.8cm,columnsep=0.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{libertinus-otf}   % Libertinus Serif/Sans/Math: a modern, readable typeface
+\usepackage{array,booktabs,tabularx,multirow}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\definecolor{accent}{HTML}{1F4E8C}   % the one accent colour: links, citations, figures
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[font=small,labelfont={bf,sf},labelsep=period]{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage[explicit]{titlesec}
+\titleformat{\section}{\sffamily\bfseries\large}{\thesection}{0.6em}{#1}
+\titleformat{\subsection}{\sffamily\bfseries\normalsize}{\thesubsection}{0.6em}{#1}
+\titleformat{\paragraph}[runin]{\sffamily\bfseries\small}{}{0pt}{#1}
+\titlespacing*{\section}{0pt}{1.4ex plus 0.5ex}{0.8ex}
+\titlespacing*{\subsection}{0pt}{1.1ex plus 0.4ex}{0.6ex}
+\usepackage[colorlinks=true,linkcolor=accent,citecolor=accent,urlcolor=accent]{hyperref}
+\usepackage{bidi}   % must be loaded last
+
+% float placement: fill pages with floats from the top, no vertical centring of float pages
+\renewcommand{\topfraction}{0.9}\renewcommand{\dbltopfraction}{0.9}
+\renewcommand{\bottomfraction}{0.6}\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.75}\renewcommand{\dblfloatpagefraction}{0.75}
+\setcounter{topnumber}{3}\setcounter{dbltopnumber}{3}\setcounter{totalnumber}{5}
+\makeatletter
+\setlength{\@fptop}{0pt}\setlength{\@fpsep}{14pt plus 1fil}\setlength{\@fpbot}{0pt plus 1fil}
+\setlength{\@dblfptop}{0pt}\setlength{\@dblfpsep}{14pt plus 1fil}\setlength{\@dblfpbot}{0pt plus 1fil}
+\makeatother
+\setlength{\textfloatsep}{12pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{12pt plus 2pt minus 2pt}
+
+\setlength{\emergencystretch}{3em}
+\captionsetup[table]{position=top,skip=4pt}
+\newfontfamily\urdufont[Path=fonts/,Script=Arabic,Scale=0.95]{NotoNastaliqUrdu.ttf}
+\newcommand{\ur}[1]{\RL{\urdufont #1}}
+\newcommand{\pending}[1]{{\color{red}[PENDING: #1]}}
+\newcommand{\dS}{\Delta_S}
+\newcommand{\dT}{\Delta_T}
+\input{tables/macros.tex}
+\input{tables/values.tex}
+\makeatletter\g@addto@macro\UrlBreaks{\do-\do/}\makeatother
+\newcommand{\val}[1]{\ifcsname v@#1\endcsname\csname v@#1\endcsname\else\pending{#1}\fi}
+\newcommand{\repo}{\url{https://github.com/AbdullahPatti/Urdu-Multi-Domain-Script-Research}}
+
+\title{Domain Robustness of Multilingual NLP Models\\Across Urdu and Roman Urdu Scripts}
+\author{Muhammad Abdullah Haroon \and Maryam Bashir\\[4pt]
+\small FAST School of Computing, National University of Computer and Emerging Sciences\\
+\small (FAST-NUCES), Lahore, Pakistan\\
+\small \texttt{l230734@lhr.nu.edu.pk}, \texttt{maryam.bashir@lhr.nu.edu.pk}}
+\date{}
+
+\begin{document}
+\twocolumn[{%
+\maketitle
+\vspace{-1.5em}
+\begin{center}\begin{minipage}{0.88\textwidth}
+\small
+{\sffamily\bfseries Abstract.}
+Urdu classifiers are almost always trained and tested on a single corpus, so little is known about how they behave when the data source changes. We study this question with a benchmark of \NumDomains{} Urdu classification datasets (\NumTotal{} labelled examples) arranged into \NumMatrices{} domain-transfer matrices over four task types (sentiment and polarity, abusive language, fake news, and question--answer pair validation) in two scripts, Nastaliq and Roman Urdu. The datasets were selected from a larger pool by explicit inclusion criteria: we exclude domains that duplicate another domain, domains whose label can be read off the origin of an item, and domains too small to evaluate, and we split every domain so that no near-duplicate item or question crosses from training to test. Following \citet{calderon2024measuring}, we evaluate two fine-tuned encoders (XLM-R, mBERT) and three few-shot instruction-tuned LLMs (Llama-3.1-8B, Qwen2.5-7B, Mistral-7B) on all \NumShifts{} source-to-target shifts, with three seeds or demonstration draws, three baselines and paired bootstrap tests. Fine-tuned encoders lose \val{all.ft.dSmin}--\val{all.ft.dSmax} macro-F1 points when moved to another domain, and in \val{all.ft.posdTmin}--\val{all.ft.posdTmax}\% of shifts a model trained on the target does better, so these losses are robustness failures rather than moves to harder domains. Few-shot LLMs lose far less; their cross-domain F1 is significantly higher in \val{boot.llmbetter} of \val{boot.n} comparisons after Holm correction and significantly lower in \val{boot.ftbetter}, all in QA validation. The largest failures of both families arise where two domains attach the same label to different kinds of text. Fake news does not transfer usefully for either family. Data, code and prompts are available at \repo.
+
+
+\medskip
+\noindent\textbf{Keywords:} domain robustness; Urdu; Roman Urdu; low-resource NLP; benchmark construction; shortcut learning; in-context learning.
+\end{minipage}\end{center}
+\vspace{1.2em}
+}]
+
+% =====================================================================
+\section{Introduction}
+Urdu is spoken by more than 230 million people, yet its NLP resources are fragmented and small compared with those of high-resource languages \citep{daud2017urdu}. Most Urdu classifiers are trained and tested on a random split of one corpus. Such an evaluation measures how well a model fits one distribution; it does not tell a practitioner whether the model will keep working when the data source changes (a new platform, topic or publisher) while the language, script and task stay the same. This property, \emph{domain robustness}, has been studied extensively for English \citep{blitzer2007biographies,hendrycks2020pretrained,ramponi2020neural}. Most recently, \citet{calderon2024measuring} evaluated fine-tuned models and few-shot LLMs over more than 14{,}000 domain shifts in seven English tasks and showed that the usual measure, the drop from in-domain to cross-domain performance, overstates robustness problems unless it is read together with a second measure that asks whether the target domain is simply harder.
+
+No comparable study exists for Urdu, and Urdu adds a complication English lacks: it is written in two scripts that occupy different niches. Nastaliq (Perso-Arabic, right-to-left) dominates edited text such as news, whereas Roman Urdu (Latin, left-to-right) dominates informal online text, has no standard spelling (\textit{bohat}, \textit{bht} and \textit{bohot} all mean ``very'') and mixes freely with English \citep{bali2014borrowing,sitaram2019survey}. Table~\ref{tab:examples} shows one example of each task type. Because the two scripts come with different sources, registers and available tasks, we treat them as separate evaluation tracks.
+
+Building a multi-domain benchmark from public Urdu corpora raises a second problem, which is the focus of our data work. Public corpora overlap, some are published in forms in which the label follows the source of an item, and domains expanded with LLM-generated text contain templated near-duplicates. Each of these makes cross-domain scores look better or worse than they are. We therefore select domains by stated criteria and split them so that such artefacts cannot reach the test data.
+
+We ask four research questions:
+\begin{description}[leftmargin=1.2cm,labelwidth=1cm,itemsep=1pt,font=\normalfont\bfseries]
+\item[RQ1] How much do multilingual models lose when an Urdu classifier is moved to another domain of the same task, and is the loss a robustness failure or a move to a harder domain?
+\item[RQ2] Does the English finding that few-shot LLMs transfer better than fine-tuned encoders hold for Urdu and Roman Urdu?
+\item[RQ3] What causes the largest failures?
+\item[RQ4] Do the answers change when LLM-generated domains are excluded?
+\end{description}
+
+\paragraph{Contributions.}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item \textbf{A multi-domain Urdu benchmark} of \NumDomains{} labelled datasets in two scripts (\NumTotal{} examples), each with a documented origin, licence and class distribution, and splits that are free of exact and near-duplicate train--test overlap.
+\item \textbf{A set of inclusion criteria and audits} for building such benchmarks from public and generated corpora: detection of duplicated domains, a single-phrase shortcut audit that finds labels predictable from the origin of an item, question-grouped splitting for pair tasks, and cluster-aware splitting for generated text. We report how many candidate domains each criterion removes.
+\item \textbf{A domain-robustness evaluation following \citet{calderon2024measuring}}, with in-domain, cross-domain and target in-domain scores, Source and Target Drop per shift, majority, random and length-only baselines, two degeneracy guards, three seeds, and Holm-corrected paired bootstrap tests.
+\item \textbf{A replication} of the fine-tuned versus few-shot comparison in a new language and script setting, with an error analysis that traces the largest failures to differences in what a label means from one domain to another.
+\end{enumerate}
+
+\begin{table*}[t]
+\centering\small\renewcommand{\arraystretch}{1.35}
+\caption{One example from each task type, in the script(s) in which the benchmark covers it. Items are quoted exactly from the test or training split of the named domain (IDs as in Table~\ref{tab:datasets}); the English glosses are ours. Nastaliq is written right to left in a cursive, largely standardised spelling. Roman Urdu is written left to right with phonetic, non-standard spelling (\textit{bhut} for \textit{bohat} ``very'', \textit{neext}) and frequent English words (\textit{project}, \textit{bro}).}
+\label{tab:examples}
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}p{1.3cm}>{\raggedright\arraybackslash}p{5.2cm}>{\raggedright\arraybackslash}p{4.3cm}>{\raggedright\arraybackslash}p{2.3cm}}
+\toprule
+Matrix & Domain & Item & English gloss & Label \\
+\midrule
+Nastaliq sentiment & SA-E & \ur{کسانوں کی محنت رنگ لائی اور حالیہ دنوں میں فصل کی پیداوار ریکارڈ سطح پر پہنچ گئی} & The farmers' hard work paid off, and crop output has recently reached a record level. & Positive \\
+Roman sentiment & SA-B & \textit{theek he . bohat acha ha} & It's fine. Very good. & Positive \\
+Roman 3-class polarity & PR-D & \textit{mashallah bhut achy shyr hai} & Mashallah, a very good couplet. & Positive \\
+Roman 3-class polarity & PR-D & \textit{main bhi tumhe nahi usko bol raha hu} & I'm not saying it to you either, I'm saying it to him. & Neutral \\
+Nastaliq hate speech & HS-A & \ur{سندھ کا پیسہ کہاں گیا؟ جواب دو چوروں نا اہلوں} & Where did Sindh's money go? Answer, you thieves, you incompetents. & Hate/offensive \\
+Roman cyber abuse & CA-A & \textit{good luck for neext project bro} & Good luck for the next project, bro. & Normal \\
+Nastaliq fake news & FN-B & \ur{لاپتہ پاکستانی کوہ پیما زندہ مل گیا ہے۔} & The missing Pakistani mountaineer has been found alive. & Fake \\
+Nastaliq QA validation & QA-D & \ur{سوال: حقیقت میں انٹرنیٹ کیا ہے؟} \newline \ur{جواب: دنیا بھر کے کمپیوٹرز کا نیٹ ورک} & Q: What actually is the internet? \newline A: A network of computers around the world. & Valid pair \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+% =====================================================================
+\section{Background and related work}
+
+\subsection{Terminology and problem formulation}\label{sec:terminology}
+A \emph{domain} is a data source for a fixed language, script and task \citep{calderon2024measuring}: two domains share the label set and differ only in where their text comes from (platform, publisher, topic or collection effort). For a task with domains $\mathcal{D}=\{D_1,\dots,D_n\}$, let $F(i\to j)$ denote the macro-F1 on the test split of $D_j$ of a model trained (or prompted) with data from $D_i$. A \emph{shift} is an ordered pair $(i,j)$ with $i\neq j$; a task with $n$ domains has $n(n-1)$ shifts. The quantities computed from $F$ are defined in Section~\ref{sec:metrics}.
+
+\subsection{Domain robustness and distribution shift}
+Models degrade under distribution shift \citep{bendavid2010theory,koh2021wilds}, and in NLP such shifts arise from topic, genre, platform and annotation conventions \citep{blitzer2007biographies,miller2020effect}. Adaptation methods range from feature correspondence \citep{blitzer2006scl} and adversarial training \citep{ganin2016dann} to continued pretraining \citep{gururangan2020dont}; \citet{ramponi2020neural} survey them. Pretrained transformers are more robust than earlier architectures but still degrade \citep{hendrycks2020pretrained}. \citet{calderon2024measuring} show that the conventional Source Drop conflates genuine robustness failures with shifts to intrinsically harder targets, introduce the Target Drop to separate the two, and find that few-shot LLMs often transfer better than fine-tuned models while fine-tuned models are stronger in-domain. We adopt their framework.
+
+\subsection{Multilingual encoders and few-shot LLMs}
+mBERT \citep{devlin2019bert} and XLM-R \citep{conneau2020xlmr} transfer across languages \citep{pires2019multilingual,wu2019beto}, and region-specific encoders such as IndicBERT \citep{kakwani2020indicnlpsuite} and MuRIL \citep{khanuja2021muril} cover Urdu and transliterated text. Instruction-tuned LLMs classify from in-context demonstrations without weight updates \citep{brown2020gpt3}; their accuracy is sensitive to demonstration choice, order and label calibration \citep{zhao2021calibrate,lu2022fantastically,min2022rethinking}, which is why we use several demonstration draws.
+
+\subsection{Urdu and Roman Urdu NLP}
+Urdu resources exist for sentiment \citep{khan2020usc,khan2022multiclass}, abusive and hateful language \citep{akram2023isehate}, and fake news \citep{amjad2020bend,harris2023axtogrind}; Roman Urdu resources cover sentiment \citep{mehmood2019rusad,tehreem2021youtube} and hate speech \citep{rizwan2020hate}. These corpora differ in annotation guidelines and are almost always evaluated on a random split of one source. Cross-dataset transfer for Urdu fake news alone is studied by \citet{haroon2026crossdataset}, who also report that article length separates fake from real items in some of these corpora.
+
+\subsection{Leakage, shortcuts and synthetic data}
+Train--test overlap inflates reported scores and is a known threat to NLP evaluation \citep{elangovan2021memorization,lee2022dedup,bowman2021fix}; near-duplicates are commonly detected with MinHash \citep{broder1997resemblance}. Classifiers also exploit superficial cues that correlate with the label in a given dataset, which makes in-domain scores optimistic and cross-domain scores hard to interpret. Machine-generated data is increasingly used to build classification corpora, including for hate speech \citep{hartvigsen2022toxigen}, and it brings its own regularities. Section~\ref{sec:construction} shows how each of these arises when public and generated Urdu corpora are combined.
+
+% =====================================================================
+\section{Benchmark construction}\label{sec:construction}
+
+\subsection{Task types and domains}\label{sec:domains}
+We collected \NumDomainsVten{} candidate datasets for four task types in the two scripts; the \NumDomains{} that meet the inclusion criteria of Section~\ref{sec:criteria} form the benchmark (Table~\ref{tab:datasets}, Figure~\ref{fig:overview}). Domains are grouped into \NumMatrices{} \emph{transfer matrices}. All domains in a matrix share one label space, so every source$\rightarrow$target pair inside a matrix is a valid shift.
+
+\paragraph{Sentiment and polarity.} \emph{Nastaliq Sentiment} (binary) has three domains: SA-A, tweets from the Urdu Sentiment Corpus \citep{khan2020usc}; SA-B, English IMDB movie reviews machine-translated into Urdu, whose content is almost entirely about Hollywood films; and SA-E, generated sentences on socio-economic and agricultural themes. \emph{Roman Sentiment} (binary) has three: SA-A, mixed public discourse from a public Hugging Face release \citep{ayeshasameer2024romanurdu}; SA-B, the RUSAD reviews spanning sports, software, food, drama and politics \citep{mehmood2019rusad}; and SA-C, YouTube comments on entertainment content. \emph{Roman 3-class polarity} (negative/neutral/positive) combines two collections that share a label space. The first contains reviews and comments: PR-A, Daraz e-commerce reviews \citep{daraz2023kaggle}, which are code-mixed and often entirely English; PR-B, restaurant reviews; and PR-D, Roman Urdu reviews and comments from seven online sources \citep{soomro2024ruwv}, mostly on entertainment, politics and religion, whose five classes we merge into three. The second contains generated social-media opinions: TW-B on consumer electronics and gaming, TW-C on public and civic services, and TW-D on mixed social commentary. Domain IDs follow the candidate pool, so gaps in the lettering mark excluded candidates.
+
+\paragraph{Abusive language.} \emph{Nastaliq Hate Speech} (normal vs.\ hate/offensive) has four domains: HS-A, the tweets of the ISE-Hate corpus \citep{akram2023isehate}; HS-B, an independently annotated hate-speech corpus; and HS-C and HS-D, generated text on politics, sports, health and family, and on sports, labour, arts and education. \emph{Roman Cyber Abuse} (normal vs.\ abusive) has four: CA-A, YouTube comments; CA-B, generated comments aimed at content creators; CA-C, generated social-media abuse with diverse regional vocabulary; and CA-D, generated video comments.
+
+\paragraph{Fake news.} \emph{Nastaliq Fake News} (fake vs.\ real) has two domains: FN-A, the ``Bend the Truth'' corpus, in which journalists wrote fabricated counterparts of business, health, showbiz, sports and technology news \citep{amjad2020bend}; and FN-B, Ax-to-Grind Urdu, news and circulating claims from Pakistani and Indian outlets across fifteen topics \citep{harris2023axtogrind}.
+
+\paragraph{QA pair validation.} \emph{Nastaliq QA} is a binary sequence-pair task, not generative QA. The input is a question and a candidate answer, labelled \emph{valid} if the answer belongs to the question and \emph{invalid} if it is a distractor drawn from another question of the same domain. QA-A (questions on Hadith texts) and QA-B (general-knowledge trivia) come from a public collection of Urdu datasets \citep{mirfan899urdu}; QA-C (long explanatory answers) and QA-D (short factual answers) are generated. Encoders read the question and answer as a sentence pair, LLMs answer with a label word, and the metric is macro-F1 as in every other matrix.
+
+Appendix Table~\ref{tab:provenance} gives the source, URL and licence of every domain. For each cited source we confirmed the origin by matching our files against the public release. Five organic domains (Nastaliq SA-B and HS-B; Roman SA-C, CA-A and PR-B) came from public uploads whose original authors we could not identify; they are marked \emph{untraced}.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/overview.pdf}
+\caption{Size of every domain (training and test items, log scale), grouped by transfer matrix and coloured by data origin. Exact counts and class distributions are in Table~\ref{tab:datasets}.}
+\label{fig:overview}
+\end{figure*}
+
+\begin{table*}[t]
+\centering\scriptsize\setlength{\tabcolsep}{3.2pt}
+\caption{The benchmark. $C$: number of classes; test distribution in label order (binary: negative/normal/fake/invalid first; 3-class: negative/neutral/positive). Origin: \emph{organic} (public corpus of native text), \emph{translated} (machine-translated from English), \emph{generated} (LLM-generated, Section~\ref{sec:collection}) or \emph{uncertain}. Near-dup.\,\%: share of test items of a random split that near-duplicated a training item (character 5-gram Jaccard $\geq 0.8$). Split: \emph{random} = stratified random split with leaking items removed; \emph{cluster} = split so that near-duplicate clusters do not straddle train and test (Section~\ref{sec:splits}).}
+\label{tab:datasets}
+\input{tables/datasets.tex}
+\end{table*}
+
+\subsection{Generated domains}\label{sec:collection}
+Most task types have too few public Urdu corpora to form three or more domains. For the missing domains the first author generated data with xAI Grok. Each prompt described the target domain in detail (topic, platform, register and label definitions) and included examples from existing public datasets of the same task, and asked for new labelled items in that domain. Claude and ChatGPT were tried first and discarded because their Urdu and Roman Urdu output was judged less natural. The first author, a native Urdu speaker, read all generated items and removed or corrected unnatural or mislabelled ones. No second annotator was involved, and neither the prompts nor the number of removed items were recorded. None of the three evaluated LLMs was used for generation.
+
+Rather than rely on a recollection of how much of each domain was generated, we measured generation signals directly (Appendix Table~\ref{tab:synth-audit}): the share of items with a near-duplicate variant inside the domain, lexical diversity, and the variability of item length. The two groups separate cleanly on length: every generated domain has a coefficient of variation of item length of at most \GenLenCVMax{}, and every organic domain at least \OrgLenCVMin{}; generated domains also reach template rates of up to \GenTemplateMax\%. The signals are uniform across each generated domain, so we treat all \NumSynthDomains{} such domains (\NumSynthRows{} examples, \PctSynth\% of the benchmark) as generated in full. The share is concentrated: generated domains are one of three in Nastaliq sentiment, two of four in hate speech and QA, three of four in Roman cyber abuse and three of six in 3-class polarity, and none in fake news or Roman binary sentiment. Roman CA-A is recorded as organic but shows augmentation-like noise (inserted emoticons, repeated punctuation, misspellings) and a 13\% near-duplicate rate, so we label it \emph{uncertain}.
+
+\subsection{Inclusion criteria}\label{sec:criteria}
+A candidate domain enters the benchmark only if it meets three criteria. Table~\ref{tab:dropped} lists the \NumDropped{} candidates that fail them.
+
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item \textbf{Distinct source.} A domain must not repeat the text of another domain of the same matrix. Three candidates did: an ISE-Hate Level-1 file \citep{akram2023isehate} that annotates the same tweet pool as HS-A, a political-tweet file identical to Nastaliq SA-A, and a second copy of the RUSAD corpus. Every shift between such a pair is effectively in-domain. Where only part of a domain overlapped another (e.g.\ 84\% of Nastaliq SA-A tweets also occurred in SA-B), the shared texts were removed from the larger domain.
+\item \textbf{Label not predictable from origin.} A domain is excluded when its label can be read off where an item came from. Two candidates were distributed with each class taken from a different source: in one Roman opinion candidate every positive and negative item is a RUSAD review while every neutral item comes elsewhere, and in one Nastaliq fake-news candidate the fake items are largely fact-check verdicts and the real items ordinary news. To find less obvious cases we ran a \emph{single-phrase shortcut audit} on every domain: for each word n-gram ($n\leq 3$) we compute the difference between its document frequency in one class and in the others, and inspect the top phrases (Appendix Table~\ref{tab:shortcuts}). In one further fake-news candidate the dateline token ``92'' (from ``92 News'') occurs in \val{sc.N-FN.FN-D.in}\% of real items and \val{sc.N-FN.FN-D.out}\% of fake items, so a model could classify it by recognising the outlet. All three were excluded. In the included domains the highest-scoring phrases are content words, such as \textit{nahi} (``not'') for negative opinions, with one exception discussed in Section~\ref{sec:limitations}.
+\item \textbf{Minimum size.} A domain needs at least 100 test items. One generated sentiment candidate had 33.
+\end{enumerate}
+
+\begin{table*}[t]
+\centering\small
+\caption{Candidate domains excluded by the inclusion criteria of Section~\ref{sec:criteria}.}
+\label{tab:dropped}
+\resizebox{\textwidth}{!}{\input{tables/dropped.tex}}
+\end{table*}
+
+\subsection{Leakage-aware splits}\label{sec:splits}
+Domains distributed with an official split (Nastaliq SA-B, FN-A and Roman SA-A) keep it. The other non-QA domains were split 80/20 at random, stratified by label (seed 42), after removing test items whose text also occurred in training. Exact de-duplication is not enough for generated text. MinHash near-duplicate detection \citep{broder1997resemblance} (character 5-grams, verified Jaccard $\geq 0.8$) showed that in the generated non-QA domains 27--91\% of test items of a random split near-duplicated a training item, against at most 7\% in any organic domain except CA-A (13\%). The duplicates are the same sentence with a filler added or swapped (\textit{``\dots hain bhai''} vs.\ \textit{``\dots hain bhai ok''}), a form of train--test leakage \citep{elangovan2021memorization}. For the \NumResplit{} domains in which more than 10\% of test items leaked, near-duplicates were grouped into clusters and the domain was split 80/20 so that whole clusters fall on one side (stratified group split, seed 42); elsewhere the leaking test items were removed.
+
+Pair tasks need a further step. A random split of question--answer pairs places the same question in training and test: in our QA domains this happened for 28--84\% of test questions. QA domains are therefore split by \emph{question group}: rows are linked when their questions are identical or near-duplicates, or when they share a distinctive answer of four or more words, and whole groups are assigned to training or test (80/20, seed 42). Pairs are then built inside each split, every question with its own answer (valid) and with an answer from a different group (invalid), so classes are balanced and no distractor answers a duplicate of the question.
+
+After these steps no test item in any domain has an exact or near-duplicate in its training split. Fine-tuning holds out a further 10\% of the source training split, stratified by label, for early stopping (Section~\ref{sec:ft}). The build is deterministic: rebuilding under different Python hash seeds produces byte-identical files.
+
+\subsection{Licensing and release}\label{sec:licensing}
+Appendix Table~\ref{tab:provenance} lists the licence of every source. Five sources are released under MIT or CC BY 4.0. Four published corpora (the Urdu Sentiment Corpus, ISE-Hate, Bend the Truth and Ax-to-Grind Urdu) are publicly available but state no licence; for these we distribute a script that downloads the original files and rebuilds our splits, unless the authors grant permission to redistribute. Generated domains are released with attribution to xAI Grok, as its terms of service request. The five untraced domains have no identifiable licence; we release them for research use and will remove any of them on request from a rights holder. The splits, build scripts, audits, model predictions and prompts are available at \repo{} and on Zenodo.
+
+% =====================================================================
+\section{Methodology}\label{sec:method}
+
+\subsection{Evaluation design}
+For every matrix with domains $D_1,\dots,D_n$ we train (or prompt) one model per source domain $D_i$ and evaluate it on the test split of every domain $D_j$ of the matrix, filling an $n\times n$ matrix of macro-F1 scores $F(i\to j)$. The diagonal gives in-domain performance and the off-diagonal cells give the \NumShifts{} cross-domain shifts across the seven matrices. Transfer is evaluated only inside a matrix, where the label space is identical, and scores are never pooled across scripts.
+
+\subsection{Metrics}\label{sec:metrics}
+All scores are macro-averaged F1 over the $C$ classes of the matrix, $\text{F1}_\text{macro}=\frac{1}{C}\sum_{c}\frac{2P_cR_c}{P_c+R_c}$, which weights minority classes equally and is needed for the imbalanced abusive-language and fake-news domains. Following \citet{calderon2024measuring}, for a shift $(i,j)$:
+\begin{align}
+\text{SS}_i &= F(i\to i), \qquad \text{TT}_j = F(j\to j),\\
+\text{ST}_{ij} &= F(i\to j),\\
+\dS(i,j) &= \text{SS}_i - \text{ST}_{ij},\\
+\dT(i,j) &= \text{TT}_j - \text{ST}_{ij}.
+\end{align}
+The Source Drop $\dS$ measures how much a model loses when it is moved away from its own domain; the Target Drop $\dT$ measures how far it falls short of a model trained on the target itself. A shift with $\dS>0$ but $\dT\le 0$ is a move to a \emph{harder} target: the source model does as well there as the target's own model, so the loss reflects target difficulty rather than a robustness failure.
+
+Averaged over all $n(n-1)$ shifts of a complete matrix, $\overline{\dS}=\overline{\dT}$ exactly, because each domain is a source in $n-1$ shifts and a target in $n-1$ shifts. A matrix-level mean Target Drop therefore adds nothing to the mean Source Drop. The Target Drop is informative \emph{per shift} and \emph{per target domain}, and we report it in three ways: the worst-case drops over shifts, $\text{WSD}=\max_{i\neq j}\dS(i,j)$ and $\text{WTD}=\max_{i\neq j}\dT(i,j)$; the percentage of shifts with a positive Target Drop and the percentage of harder-target shifts; and, per target domain $j$, $\text{TT}_j$ with the mean $\dT$ over all sources (Tables~\ref{tab:pertarget-n} and~\ref{tab:pertarget-r}).
+
+\paragraph{Relative robustness.} $\%\text{Rob}=100\cdot\overline{\text{ST}}/\overline{\text{SS}}$ is the share of in-domain performance retained across domains. Drops are reported in percentage points (pp) of macro-F1, and every claim about \%Rob is accompanied by the absolute ST it is computed from.
+
+\subsection{Baselines and degeneracy guards}\label{sec:guard}
+Every results table includes a majority-class baseline (the macro-F1 of always predicting the target's most frequent class) and a uniform-random baseline (its expected macro-F1, $\frac{1}{C}\sum_c \frac{2p_c/C}{p_c+1/C}$ for class priors $p_c$), each averaged over the target domains. It also includes a \emph{length-only} shortcut baseline: a logistic regression on the logarithms of an item's character and word counts, trained on each source domain and evaluated on every target exactly like the models. In a matrix in which this baseline performs well, labels are partly predictable from length, and a model's advantage over it is the part of its performance that length cannot explain.
+
+A model near the floor of the metric has little to lose, so its $\%\text{Rob}$ approaches 100\% without reflecting robustness. Two guards address this. First, $\%\text{Rob}$ is suppressed (n/a$^\dagger$) when $\overline{\text{SS}}$ is less than 0.05 above the uniform-random baseline, and whenever $\%\text{Rob}\geq 100\%$. Second, $\%\text{Rob}$ is marked $^\ddagger$ when $\overline{\text{SS}}$ does not exceed the in-domain score of the length-only baseline, because such a model has not shown that it learned more than text length.
+
+\subsection{Fine-tuned encoders}\label{sec:ft}
+We fine-tune XLM-R base (\nolinkurl{xlm-roberta-base}, 278M parameters) \citep{conneau2020xlmr} and mBERT (\nolinkurl{bert-base-multilingual-cased}, 178M) \citep{devlin2019bert} with a linear classification head using Hugging Face Transformers \citep{wolf2020transformers}. Training data per source is capped at 8{,}000 examples by stratified sampling (fixed across seeds), and 10\% is held out for validation. We use AdamW with learning rate $2\times10^{-5}$, linear warm-up over 10\% of steps, weight decay 0.01, batch size 16, at most 5 epochs, and early stopping with patience 2 on validation macro-F1, keeping the best epoch. Inputs are truncated to 128 tokens, or 256 for fake news and QA; QA pairs are encoded as sentence pairs. Each configuration is run with three seeds (13, 42, 87), which vary initialisation, data order and the validation split \citep{dodge2020finetuning,mosbach2021stability}. Training depends only on the source domain, so each (model, seed, source) is trained once and evaluated on every target of its matrix. Hyperparameters were fixed in advance and not tuned per domain.
+
+\subsection{Few-shot LLMs}\label{sec:llm}
+We evaluate Llama-3.1-8B-Instruct \citep{grattafiori2024llama3}, Qwen2.5-7B-Instruct \citep{qwen2024qwen25} and Mistral-7B-Instruct-v0.3 \citep{jiang2023mistral}, loaded with 4-bit NF4 quantisation \citep{dettmers2023qlora}. The prompt (Appendix~\ref{app:prompt}), formatted with each model's chat template, states the task and script, lists the allowed labels, and gives five demonstrations per class sampled from the source training split and shuffled; the test item follows. Each text in the prompt is truncated to the same token budget as the encoders, so the test item is never cut from the prompt. Decoding is greedy with at most six new tokens. The prediction is the earliest whole-word label name in the output; outputs that name no label are counted as errors and reported as the parse-failure rate. Every configuration is repeated with three demonstration draws (seeds 13, 42, 87). LLMs are evaluated on a fixed stratified sample of up to 300 test items per target domain, identical across sources, models and seeds; whenever the two families are compared directly, fine-tuned predictions are restricted to the same items.
+
+\paragraph{In-domain means something different for the two families.} For a fine-tuned model, SS versus ST contrasts learned weights applied inside and outside their training distribution. For a few-shot LLM the weights never change: SS versus ST contrasts demonstrations drawn from the target domain with demonstrations drawn from another domain. The two relative-robustness figures therefore answer different questions (sensitivity to the training data versus sensitivity to the source of the demonstrations), and the two families also see very different amounts of source data (up to 8{,}000 training items against ten or fifteen demonstrations). Following \citet{calderon2024measuring}, we compare them as two practical ways of building a classifier from source-domain data, not as a like-for-like measurement of one mechanism.
+
+\subsection{Variance and significance}\label{sec:stats}
+Every aggregate is computed per seed and reported as mean $\pm$ standard deviation over the three seeds (or demonstration draws). Differences between a fine-tuned model and an LLM are tested with a paired bootstrap \citep{koehn2004significance,dror2018hitchhiker}: test items are resampled with replacement within each target domain, the same resample is applied to both systems, and mean ST (averaged over seeds and shifts) is recomputed 5{,}000 times. We report 95\% confidence intervals and two-sided $p$-values, and because the \val{boot.n} comparisons form one family of tests, we control the family-wise error rate with the Holm--Bonferroni procedure. A difference is called significant only when its Holm-adjusted $p$ is below 0.05. Differences between models of the same family are not tested and are described only as numbers.
+
+\subsection{Control for synthetic data}\label{sec:organic-method}
+To test whether generated domains drive the conclusions (RQ4), we recompute every aggregate on the submatrix of \emph{organic} domains (native Urdu text from public corpora, excluding generated, machine-translated and uncertain domains) for each matrix that retains at least two of them.
+
+% =====================================================================
+\section{Experimental setup}\label{sec:setup}
+All experiments ran on one workstation: Intel Core i7-13700 (16 cores), 32\,GB RAM, NVIDIA RTX A4000 (16\,GB), PyTorch 2.14 with CUDA 12.6, Transformers 4.57 and bitsandbytes 0.50. The evaluation comprises \val{compute.ftruns} fine-tuning runs (two encoders, three seeds, \NumDomains{} source domains), which produce \val{compute.ftcells} scored matrix cells, and \val{compute.llmcells} LLM matrix cells (three models, three demonstration draws). Fine-tuning took \val{compute.fthours} GPU-hours of training and LLM inference \val{compute.llmhours} GPU-hours. To make LLM inference feasible, the prompt prefix shared by all test items of a (source, demonstration draw) pair is encoded once and its attention cache reused. On a check of 32 fake-news items per model, predictions with and without the cache agreed on all 96 items.
+
+% =====================================================================
+\section{Results}\label{sec:results}
+Figure~\ref{fig:ssst} summarises in-domain and cross-domain scores for every model and matrix; Tables~\ref{tab:res-nsa}--\ref{tab:res-rp3} give the full aggregates, Figures~\ref{fig:mat-n} and~\ref{fig:mat-r} the transfer matrices, and Figure~\ref{fig:forest} the paired tests between the two families.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/ss_st.pdf}
+\caption{In-domain (open markers) and cross-domain (filled markers) macro-F1 for every model and matrix, as means over three seeds or demonstration draws; the line between the two markers is the mean Source Drop. Blue: fine-tuned encoders; orange: few-shot LLMs; marker shape identifies the model. Seed standard deviations are in Tables~\ref{tab:res-nsa}--\ref{tab:res-rp3}. Dashed line: uniform-random baseline; dotted line: cross-domain score of the length-only baseline.}
+\label{fig:ssst}
+\end{figure*}
+
+\subsection{Nastaliq track}\label{sec:res-n}
+\paragraph{Sentiment (Table~\ref{tab:res-nsa}).} The encoders reach SS of \val{N-SA.XLM-R.SS}\,$\pm$\,\val{N-SA.XLM-R.SSsd} (XLM-R) and \val{N-SA.mBERT.SS}\,$\pm$\,\val{N-SA.mBERT.SSsd} (mBERT) and keep \val{range.N-SA.ft.rob}\% of it across domains (ST \val{range.N-SA.ft.ST}). The LLMs score slightly lower in-domain (SS \val{range.N-SA.llm.SS}) but lose almost nothing (ST \val{range.N-SA.llm.ST}). XLM-R's cross-domain score varies across seeds (SD \val{N-SA.XLM-R.STsd}), mostly on shifts into the translated movie reviews.
+
+\paragraph{Hate speech (Table~\ref{tab:res-nhs}).} The encoders score SS \val{range.N-HS.ft.SS} but ST only \val{range.N-HS.ft.ST}, a mean Source Drop of \val{range.N-HS.ft.dS} pp and a worst single-shift Target Drop of \val{N-HS.XLM-R.WTD} pp for XLM-R. The LLMs are weaker in-domain (SS \val{range.N-HS.llm.SS}) and reach ST \val{range.N-HS.llm.ST}. Across domains XLM-R does not differ significantly from any LLM, whereas mBERT is significantly below all three, by $\val{boot.N-HS.mBERT.Llama-3.1-8B.diff}$ to $\val{boot.N-HS.mBERT.Qwen2.5-7B.diff}$ pp. Apart from QA, hate speech is the Nastaliq matrix with the smallest difference between the families.
+
+\paragraph{Fake news (Table~\ref{tab:res-nfn}).} Fine-tuned encoders fit each fake-news domain (SS \val{N-FN.XLM-R.SS}\,$\pm$\,\val{N-FN.XLM-R.SSsd} for XLM-R, \val{N-FN.mBERT.SS}\,$\pm$\,\val{N-FN.mBERT.SSsd} for mBERT) but transfer below chance: ST is \val{range.N-FN.ft.ST}, against a uniform-random baseline of \val{N-FN.rand} and a length-only cross-domain score of \val{N-FN.Length-only.ST}. XLM-R's high seed variance comes from FN-A, whose training split has 634 items. Among the LLMs only Llama-3.1-8B clears both the random and the length-only baseline in-domain (SS \val{N-FN.Llama-3.1-8B.SS} against \val{N-FN.lenSS}); Qwen2.5-7B and Mistral-7B do not, and their \%Rob is suppressed. Llama-3.1-8B's cross-domain score (\val{N-FN.Llama-3.1-8B.ST}) is significantly higher than that of both encoders (Figure~\ref{fig:forest}), but it is still close to chance. Neither family provides a fake-news classifier that transfers between these two corpora.
+
+\paragraph{QA pair validation (Table~\ref{tab:res-nqa}).} QA is the one matrix in which fine-tuning also wins across domains. The encoders reach SS \val{range.N-QA.ft.SS} and ST \val{range.N-QA.ft.ST}, and both exceed Llama-3.1-8B (ST \val{N-QA.Llama-3.1-8B.ST}) and Mistral-7B (ST \val{N-QA.Mistral-7B.ST}) significantly, by $\val{boot.N-QA.XLM-R.Llama-3.1-8B.diff}$ to $\val{boot.N-QA.mBERT.Mistral-7B.diff}$ pp. Qwen2.5-7B (SS \val{N-QA.Qwen2.5-7B.SS}, ST \val{N-QA.Qwen2.5-7B.ST}) is significantly above XLM-R ($\val{boot.N-QA.XLM-R.Qwen2.5-7B.diff}$ pp, \val{boot.N-QA.XLM-R.Qwen2.5-7B.p}) and does not differ significantly from mBERT. The length-only baseline is at chance (SS \val{N-QA.lenSS}), as expected for balanced pairs whose distractors come from the same domain.
+
+\subsection{Roman Urdu track}\label{sec:res-r}
+\paragraph{Sentiment, binary (Table~\ref{tab:res-rsa}).} The encoders are close in-domain (SS \val{R-SA.XLM-R.SS} and \val{R-SA.mBERT.SS}) and lose \val{range.R-SA.ft.dS} pp across domains (ST \val{range.R-SA.ft.ST}). The LLMs are slightly weaker in-domain (SS \val{range.R-SA.llm.SS}) and lose \val{range.R-SA.llm.dS} pp, so their ST (\val{range.R-SA.llm.ST}) is significantly higher than that of both encoders in all six comparisons ($\val{boot.R-SA.XLM-R.Mistral-7B.diff}$ to $\val{boot.R-SA.mBERT.Qwen2.5-7B.diff}$ pp).
+
+\paragraph{Cyber abuse (Table~\ref{tab:res-rca}).} In-domain scores are close to perfect for the encoders (SS \val{R-CA.XLM-R.SS} and \val{R-CA.mBERT.SS}), and ST is \val{range.R-CA.ft.ST}. No test item has a near-duplicate in training, so the high in-domain scores are not caused by leakage; they indicate that these domains are easy to fit, which is consistent with the uniform style of the three generated domains and the augmentation-like noise of CA-A. The length-only baseline reaches SS \val{R-CA.lenSS} and ST \val{R-CA.Length-only.ST}, the highest of any matrix. XLM-R does not differ significantly from any LLM across domains; mBERT is significantly below Qwen2.5-7B and Mistral-7B.
+
+\paragraph{3-class polarity (Table~\ref{tab:res-rp3}).} This matrix has the largest fine-tuned losses in the Roman track: SS \val{range.R-P3.ft.SS}, ST \val{range.R-P3.ft.ST}, a mean Source Drop of \val{range.R-P3.ft.dS} pp and a worst Target Drop of \val{R-P3.XLM-R.WTD} pp (XLM-R). The LLMs have similar in-domain scores (SS \val{range.R-P3.llm.SS}) but keep them (ST \val{range.R-P3.llm.ST}), and their advantage over the encoders is the largest in the study, from $\val{boot.R-P3.XLM-R.Llama-3.1-8B.diff}$ to $\val{boot.R-P3.mBERT.Qwen2.5-7B.diff}$ pp, significant in all six comparisons.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/matrices_nastaliq.pdf}
+\caption{Nastaliq transfer matrices: macro-F1 of a model trained or prompted on the row domain and tested on the column domain, mean over three seeds or demonstration draws. The diagonal (bold) is in-domain performance; darker cells are higher.}
+\label{fig:mat-n}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/matrices_roman.pdf}
+\caption{Roman Urdu transfer matrices; layout as in Figure~\ref{fig:mat-n}.}
+\label{fig:mat-r}
+\end{figure*}
+
+\begin{table*}[t]\centering\small
+\caption{Nastaliq Sentiment (3 domains, 6 shifts). Macro-F1, mean$\pm$SD over 3 seeds (fine-tuned) or 3 demonstration draws (LLMs). $\overline{\Delta_S}$, WSD and WTD in pp; $\Delta_T{>}0$\,\%: share of shifts with positive Target Drop; Harder-tgt\,\%: share with $\Delta_S>0$ and $\Delta_T\le 0$. $^\dagger$: \%Rob suppressed (SS within 0.05 of random, or \%Rob $\geq$ 100); $^\ddagger$: SS not above the length-only baseline (Section~\ref{sec:guard}). Drops and \%Rob are computed from unrounded scores, so they can differ by 0.1 from differences of the displayed values.}
+\label{tab:res-nsa}\resizebox{\textwidth}{!}{\input{tables/results_N-SA.tex}}
+\end{table*}
+\begin{table*}[t]\centering\small
+\caption{Nastaliq Hate Speech (4 domains, 12 shifts). Columns as in Table~\ref{tab:res-nsa}.}
+\label{tab:res-nhs}\resizebox{\textwidth}{!}{\input{tables/results_N-HS.tex}}
+\end{table*}
+\begin{table*}[t]\centering\small
+\caption{Nastaliq Fake News (2 domains, 2 shifts). Columns as in Table~\ref{tab:res-nsa}.}
+\label{tab:res-nfn}\resizebox{\textwidth}{!}{\input{tables/results_N-FN.tex}}
+\end{table*}
+\begin{table*}[t]\centering\small
+\caption{Nastaliq QA Pair Validation (4 domains, 12 shifts). Columns as in Table~\ref{tab:res-nsa}.}
+\label{tab:res-nqa}\resizebox{\textwidth}{!}{\input{tables/results_N-QA.tex}}
+\end{table*}
+\begin{table*}[t]\centering\small
+\caption{Roman Sentiment, binary (3 domains, 6 shifts). Columns as in Table~\ref{tab:res-nsa}.}
+\label{tab:res-rsa}\resizebox{\textwidth}{!}{\input{tables/results_R-SA.tex}}
+\end{table*}
+\begin{table*}[t]\centering\small
+\caption{Roman Cyber Abuse (4 domains, 12 shifts). Columns as in Table~\ref{tab:res-nsa}.}
+\label{tab:res-rca}\resizebox{\textwidth}{!}{\input{tables/results_R-CA.tex}}
+\end{table*}
+\begin{table*}[t]\centering\small
+\caption{Roman 3-class Polarity: reviews and social-media opinions (6 domains, 30 shifts). Columns as in Table~\ref{tab:res-nsa}.}
+\label{tab:res-rp3}\resizebox{\textwidth}{!}{\input{tables/results_R-P3.tex}}
+\end{table*}
+
+% =====================================================================
+\section{Analysis and discussion}\label{sec:analysis}
+
+\subsection{Robustness failures or harder targets? (RQ1)}\label{sec:td}
+Figure~\ref{fig:drops} plots the Source Drop of every shift against its Target Drop. For the fine-tuned encoders, \val{all.ft.posdTmin}--\val{all.ft.posdTmax}\% of shifts per matrix have a positive Target Drop, and at most \val{all.ft.hardermax}\% are harder-target shifts. Their Source Drops of \val{all.ft.dSmin}--\val{all.ft.dSmax} pp are therefore not explained by moving to difficult domains: in almost every shift, a model trained on the target does better there.
+
+The per-target view (Tables~\ref{tab:pertarget-n} and~\ref{tab:pertarget-r}) makes this concrete for hate speech and fake news. XLM-R trained on the generated HS-C or HS-D scores TT of \val{pt.N-HS.XLM-R.HS-C.TT} and \val{pt.N-HS.XLM-R.HS-D.TT} on its own domain, while models from the other sources fall short by \val{pt.N-HS.XLM-R.HS-C.dT} and \val{pt.N-HS.XLM-R.HS-D.dT} pp on average. XLM-R trained on FN-B scores \val{pt.N-FN.XLM-R.FN-B.TT} there, and the FN-A model falls short by \val{pt.N-FN.XLM-R.FN-B.dT} pp. These targets are not intrinsically hard; the source models fail on them, which indicates that each model learns cues specific to its own source.
+
+One target behaves differently. On Roman PR-B, XLM-R's own TT is \val{pt.R-P3.XLM-R.PR-B.TT}, below the random baseline of the matrix, and models from other sources do better there (mean $\dT$ \val{pt.R-P3.XLM-R.PR-B.dT} pp). Its test split has 8 negative items out of 148, and its training split is similarly skewed, so PR-B is a hard target for reasons of class balance rather than content; it accounts for most of the harder-target shifts of the fine-tuned models.
+
+For the LLMs the picture is flatter, with \val{all.llm.posdTmin}--\val{all.llm.posdTmax}\% of shifts with a positive Target Drop and up to \val{all.llm.hardermax}\% harder-target shifts. Their largest per-target drops fall on the generated hate-speech domains (HS-C: \val{pt.N-HS.Llama-3.1-8B.HS-C.dT} pp for Llama-3.1-8B, \val{pt.N-HS.Qwen2.5-7B.HS-C.dT} pp for Qwen2.5-7B), where demonstrations from the target itself are needed to convey what the domain counts as hateful (Section~\ref{sec:errors}).
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/source_vs_target_drop.pdf}
+\caption{Source Drop against Target Drop for every shift (one point per shift and model, means over seeds). Points in the shaded lower-right region are harder-target shifts: the source model loses performance but matches or beats the target's own model.}
+\label{fig:drops}
+\end{figure*}
+
+\begin{table*}[t]\centering\scriptsize\setlength{\tabcolsep}{4pt}
+\caption{Per-target in-domain score TT$_j$ and mean Target Drop $\overline{\Delta_T}$ (pp, mean over all source domains) for the Nastaliq matrices. A negative $\overline{\Delta_T}$ means that models from other domains do better on the target than its own model.}
+\label{tab:pertarget-n}\resizebox{\textwidth}{!}{\input{tables/per_target_nastaliq.tex}}
+\end{table*}
+\begin{table*}[t]\centering\scriptsize\setlength{\tabcolsep}{4pt}
+\caption{As Table~\ref{tab:pertarget-n}, for the Roman Urdu matrices.}
+\label{tab:pertarget-r}\resizebox{\textwidth}{!}{\input{tables/per_target_roman.tex}}
+\end{table*}
+
+\subsection{Fine-tuned encoders versus few-shot LLMs (RQ2)}\label{sec:ftllm}
+Figure~\ref{fig:forest} and Table~\ref{tab:boot} give all \val{boot.n} paired comparisons of cross-domain F1. After Holm correction the few-shot LLM is significantly better in \val{boot.llmbetter}, the fine-tuned encoder in \val{boot.ftbetter}, and \val{boot.ns} differences are not significant. Fine-tuned encoders are stronger in-domain than every LLM in \val{all.ftSSwins} of the \NumMatrices{} matrices. This reproduces the pattern reported for English by \citet{calderon2024measuring}, with two qualifications. First, the four comparisons won by fine-tuning are all in QA validation, where the encoders read the question and answer as a sentence pair and generalise across QA domains better than Llama-3.1-8B and Mistral-7B. Second, the LLM advantage in fake news is an advantage over a below-chance transfer and does not make the LLMs usable there.
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/forest.pdf}
+\caption{Difference in mean cross-domain macro-F1 between each fine-tuned encoder and each LLM, with 95\% paired bootstrap confidence intervals (5{,}000 resamples). Filled markers: significant after Holm correction over all \val{boot.n} comparisons; orange: the LLM is better; blue: the fine-tuned encoder is better; open grey: not significant.}
+\label{fig:forest}
+\end{figure*}
+
+\begin{table*}[t]\centering\scriptsize\setlength{\tabcolsep}{4pt}
+\caption{Paired bootstrap comparison of mean cross-domain F1 (ST), fine-tuned encoder minus few-shot LLM, in pp with 95\% confidence intervals (5{,}000 resamples of test items per target, shared by both systems; fine-tuned predictions restricted to the LLM evaluation sample). Negative values favour the LLM. $^{*}$: Holm-adjusted $p<0.05$ over all \val{boot.n} comparisons.}
+\label{tab:boot}\resizebox{\textwidth}{!}{\input{tables/bootstrap.tex}}
+\end{table*}
+
+\paragraph{Are low LLM scores a prompting artefact?} Parse failures are rare (Table~\ref{tab:parse}): at most \val{pf.nonmistralmax}\% of items for Llama-3.1-8B and Qwen2.5-7B in any matrix. Mistral-7B is the exception on the two binary sentiment matrices, with \val{pf.N-SA.Mistral-7B}\% (Nastaliq) and \val{pf.R-SA.Mistral-7B}\% (Roman) unparseable outputs. These outputs are almost all ``Neutral'', often followed by a justification: the model declines to choose between the two allowed labels rather than producing malformed text. They count as errors, so Mistral-7B's sentiment scores are a lower bound for this prompt. Elsewhere, low LLM scores are not caused by unparseable outputs.
+
+\begin{table}[t]\centering\small
+\caption{LLM parse-failure rate (\% of all evaluated items, over all shifts and demonstration draws): outputs that name none of the allowed labels. They are scored as errors.}
+\label{tab:parse}\resizebox{\columnwidth}{!}{\input{tables/parse_failures.tex}}
+\end{table}
+
+\subsection{Label granularity: binary versus three-class polarity}\label{sec:granularity}
+Roman Sentiment and Roman 3-class polarity are the same task type with different label sets, and the label set accounts for much of the difference between their scores. The random baseline is \val{R-SA.rand} for the binary matrix and \val{R-P3.rand} for the three-class matrix. XLM-R scores SS \val{R-SA.XLM-R.SS} on binary sentiment against \val{R-P3.XLM-R.SS} on three-class polarity, and its mean Source Drop rises from \val{R-SA.XLM-R.dS} to \val{R-P3.XLM-R.dS} pp. The LLMs, whose in-domain scores fall by a similar amount, keep their Source Drop small in both matrices (\val{range.R-SA.llm.dS} and \val{range.R-P3.llm.dS} pp).
+
+Inside the three-class matrix, the collection of origin matters as much as the label set. XLM-R reaches a mean ST of \val{R-P3.XLM-R.withinTW} on shifts between the three generated opinion domains, \val{R-P3.XLM-R.across} between reviews and opinions, and \val{R-P3.XLM-R.withinPR} between the three organic review domains. The generated opinion domains share a generator and transfer well among themselves; the organic review domains (e-commerce, restaurants and general comments) differ in platform, class balance and the amount of English, and transfer worst. The LLMs show the same order (Qwen2.5-7B: \val{R-P3.Qwen2.5-7B.withinTW}, \val{R-P3.Qwen2.5-7B.across} and \val{R-P3.Qwen2.5-7B.withinPR}) at a higher level.
+
+\subsection{Organic-only analysis (RQ4)}\label{sec:organic}
+Table~\ref{tab:organic} repeats the analysis on the organic submatrices. Nastaliq sentiment (one organic domain) and Roman cyber abuse (none) drop out; fake news and Roman binary sentiment are organic throughout and are unchanged. The answer to RQ2 holds: in every remaining matrix the fine-tuned encoders retain less of their in-domain score than the LLMs, except in QA, where Llama-3.1-8B retains only \val{org.N-QA.Llama-3.1-8B.rob}\% (ST \val{org.N-QA.Llama-3.1-8B.ST}). Fake news remains the matrix with the lowest fine-tuned retention (\val{org.N-FN.XLM-R.rob}\% for XLM-R) and binary sentiment the highest (\val{org.R-SA.XLM-R.rob}\%). One result changes. On its two organic domains, hate speech is no longer among the least robust matrices for fine-tuned models (\val{org.N-HS.XLM-R.rob}\% against \val{N-HS.XLM-R.rob}\% on all four domains), because its largest drops involve the generated HS-C and HS-D. Part of the low hate-speech robustness of the full matrix is thus a property of the generated domains.
+
+\begin{table*}[t]\centering\small
+\caption{Organic-only analysis: aggregates recomputed on the submatrix of organic domains (listed in brackets) for matrices with at least two. Symbols as in Table~\ref{tab:res-nsa}.}
+\label{tab:organic}\resizebox{\textwidth}{!}{\input{tables/organic.tex}}
+\end{table*}
+
+\subsection{Nastaliq versus Roman Urdu}\label{sec:script}
+The two tracks share only two task types (sentiment and abusive language) and differ in sources and registers, so script effects cannot be separated from source effects, and we compare them only descriptively. For sentiment, fine-tuned retention is \val{range.N-SA.ft.rob}\% in Nastaliq and \val{range.R-SA.ft.rob}\% in Roman Urdu. For abusive language it is lower in Nastaliq (\val{range.N-HS.ft.rob}\%) than in Roman Urdu (\val{range.R-CA.ft.rob}\%), but the Nastaliq matrix combines two organic tweet corpora with two generated domains that label mild criticism as hateful (Section~\ref{sec:errors}), while three of the four Roman domains are generated with a shared style. These data do not support a claim that either script is harder to transfer across.
+
+\subsection{What causes the largest failures? (RQ3)}\label{sec:errors}
+For each matrix we examine the \emph{worst-transferring shift}: the source$\rightarrow$target pair with the largest Target Drop for XLM-R, so that the target's own model does well and the failure cannot be attributed to a hard target. Figure~\ref{fig:conf} shows confusion matrices for that shift, and Table~\ref{tab:errcat} breaks down every XLM-R error on it. An item counts as an error when at least two of the three seeds misclassify it. Instead of labelling errors by hand, we measure three properties of each error and of each correctly classified item of the same target: whether its length lies outside the 5th--95th percentile of the source training split, whether more than half of its word types never occur in the source training split, and whether the target's own XLM-R also misclassifies it. A property that is much more frequent among errors than among correct items is a candidate explanation.
+
+\begin{figure*}[p]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/confusion_worst.pdf}
+\caption{Confusion matrices (row-normalised, \%, summed over three seeds) for the worst-transferring shift of each matrix. Left: XLM-R trained on the target (in-domain reference). Middle: XLM-R trained on the source. Right: the few-shot LLM with the highest mean ST in the matrix, prompted with source demonstrations, on its evaluation sample; n/p = unparseable output. Darker cells hold more items.}
+\label{fig:conf}
+\end{figure*}
+
+\begin{table*}[t]\centering\scriptsize\setlength{\tabcolsep}{3pt}
+\caption{Measured breakdown of XLM-R errors on the worst-transferring shift of each matrix. Errors: items misclassified by at least two of three seeds, out of all test items of the target. Main confusion: most frequent true$\rightarrow$predicted pair and its share of errors. The last three columns give the percentage of errors (err) and of correctly classified items (ok) with each property: length outside the source's 5th--95th percentile; more than half of word types unseen in the source training data; also misclassified by the target's own XLM-R.}
+\label{tab:errcat}\resizebox{\textwidth}{!}{\input{tables/error_categories.tex}}
+\end{table*}
+
+\paragraph{Collapse to one class.} In the worst shifts of three matrices the source model assigns one class to nearly every target item (Figure~\ref{fig:conf}). All \val{err.N-HS.nerr} errors of the HS-A model on HS-C are hate items labelled \emph{normal}; all \val{err.N-FN.nerr} errors of the FN-A model on FN-B are fake items labelled \emph{real}; and the PR-B model predicts \emph{positive} for every TW-D item. In two further matrices one class dominates the predictions: the Nastaliq tweet model labels most translated movie reviews \emph{negative}, and the QA-D model accepts most invalid QA-A pairs. For PR-B the training data explain the collapse, since 79\% of its items are positive. The few-shot LLM avoids the collapse in every case except hate speech, where it also labels almost all HS-C hate items as normal.
+
+\paragraph{What the measured properties show.} Vocabulary and length rarely separate errors from correct items. In the sentiment, fake-news and QA shifts most target items lie outside the source's length range whether they are classified correctly or not, so length describes the whole target rather than the errors. In hate speech and cyber abuse, errors and correct items do not differ on either property. The one clear signal is in Roman binary sentiment, where \val{err.R-SA.hardin.err}\% of errors are also misclassified by the target's own model against \val{err.R-SA.hardin.ok}\% of correct items; many of these errors are items that are ambiguous or mislabelled in SA-A itself. Taken together, the worst failures reflect differences in what a label means and how often each class occurs, more than unfamiliar words.
+
+\paragraph{Examples.} Table~\ref{tab:errex} shows misclassified items drawn at random from those that all three seeds get wrong and the target's own model gets right (six candidates per shift). None of the six sampled HS-C errors contains a slur, insult or threat: they are mild criticism of leaders, players or online behaviour, labelled hateful by the generated HS-C domain. Hateful HS-A tweets, such as the example in Table~\ref{tab:examples}, contain insults, so a model trained on HS-A, and an LLM given HS-A demonstrations, calls the HS-C items normal. The two domains share a label name but not a label definition. In fake news, the six sampled FN-B errors are short claims as they circulated on social media (a funeral presented as a protest, a map said to show a wrong border), whereas the fake items of FN-A are full fabricated articles of several hundred words written by journalists \citep{amjad2020bend}. A model that learned what a fabricated article looks like in FN-A has no basis for judging a one-line claim. The Roman sentiment and polarity examples are unambiguous complaints predicted as positive, and in cyber abuse a friendly CA-A comment with a misspelling and an emoticon (\textit{vidiyo}, \textit{:)}) is predicted abusive, which is consistent with the augmentation-like noise that led us to mark CA-A as uncertain.
+
+\begin{table*}[t]\centering\small\renewcommand{\arraystretch}{1.3}
+\caption{Misclassified items on the worst-transferring shifts (XLM-R, wrong for all three seeds, correct for the target's own model), with English glosses by the authors. Drawn at random (seed 0) from all items of at most 22 words that meet these conditions; the complete candidate list is released.}
+\label{tab:errex}
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{5.0cm}>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{2.1cm}}
+\toprule
+Shift & Item & Gloss & Gold $\rightarrow$ pred. \\
+\midrule
+HS-A$\rightarrow$HS-C & \ur{حالیہ دنوں میں اس رہنما کے بیانات میں تضاد واضح ہے} & Lately, this leader's statements have been clearly contradictory. & Hate $\rightarrow$ Normal \\
+HS-A$\rightarrow$HS-C & \ur{اکثر آن لائن ماحول میں برداشت کی کمی نظر آتی ہے} & Online spaces often show a lack of tolerance. & Hate $\rightarrow$ Normal \\
+FN-A$\rightarrow$FN-B & \ur{دہلی میں این آر سی مخالف مظاہرے کے طور پر سلیمانی کا جنازہ نکلا۔} & Soleimani's funeral procession shown as an anti-NRC protest in Delhi. & Fake $\rightarrow$ Real \\
+FN-A$\rightarrow$FN-B & \ur{ہندوستان کا وائرل نقشہ جموں و کشمیر کی غلط تقسیم کو ظاہر کرتا ہے۔} & India's viral map shows a wrong division of Jammu and Kashmir. & Fake $\rightarrow$ Real \\
+SA-C$\rightarrow$SA-A & \textit{bhut bekar delivery ha} & The delivery is very bad. & Negative $\rightarrow$ Positive \\
+CA-B$\rightarrow$CA-A & \textit{tera kontent bakwas hy bhai} & Your content is rubbish, brother. & Abusive $\rightarrow$ Normal \\
+CA-B$\rightarrow$CA-A & \textit{Aray mujhe ye vidiyo pasand aaya :)} & Oh, I liked this video :) & Normal $\rightarrow$ Abusive \\
+PR-B$\rightarrow$TW-D & \textit{Honestly app bar bar crash karti hai update ke baad bhi} & Honestly, the app keeps crashing even after the update. & Negative $\rightarrow$ Positive \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+% =====================================================================
+\section{Limitations}\label{sec:limitations}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+\item \textbf{Generated data.} \NumSynthDomains{} domains (\PctSynth\% of the benchmark) are LLM-generated, concentrated in hate speech, QA, cyber abuse and 3-class polarity. Cluster-aware splitting removes template leakage, but generated text carries a style signature that affects transfer: the generated opinion domains transfer well among themselves, in cyber abuse the label is partly predictable from length, and the shortcut audit shows that in HS-C the verb \ur{ہے} (``is'') occurs in \val{sc.N-HS.HS-C.in}\% of normal items against \val{sc.N-HS.HS-C.out}\% of hate items, a trace of how the two classes were generated. The organic-only analysis bounds these effects but cannot be run for Nastaliq sentiment or Roman cyber abuse. Generation prompts and the number of removed items were not recorded, and generated items were checked by one person.
+\item \textbf{Provenance.} Five organic domains come from public uploads whose original authors could not be identified, so their annotation quality and licences are unverified.
+\item \textbf{Fake news.} Only two fake-news domains meet the inclusion criteria, so this matrix has two shifts and its conclusions rest on one pair of corpora.
+\item \textbf{Imbalanced domains.} Roman PR-B has 8 negative test items, so scores involving it are noisy; the per-target tables identify it.
+\item \textbf{Models and prompts.} We test 7--8B LLMs in 4-bit precision with one prompt template, and encoders with one fixed set of hyperparameters; larger models, other prompts and tuned encoders may behave differently. Public organic corpora may also have been part of the LLMs' pretraining data, which would favour the LLMs on those domains.
+\item \textbf{LLM evaluation sample.} LLMs are scored on up to 300 items per target domain; the bootstrap intervals quantify this uncertainty for the family comparison, but differences within a family are not tested.
+\item \textbf{Error analysis.} The error categories are computed from the data, and the qualitative reading rests on a small random sample of examples rather than on a manual annotation of many errors.
+\item \textbf{Two tracks, not a script comparison.} The scripts differ in sources and task coverage, so the tracks are not directly comparable.
+\end{enumerate}
+
+\section{Ethics statement}
+The benchmark contains offensive, hateful and sectarian text collected from public online sources, released to support moderation research; releases carry content warnings. Automated hate-speech and fake-news classifiers can suppress legitimate speech, especially that of minorities, and should not be deployed without human review. Sectarian and ethnic hate in the Pakistani context is particularly sensitive, and models trained on these data could also be misused to probe moderation systems. Our observation that sampled items of a generated hate-speech domain label mild criticism of public figures as hateful is a further reason not to deploy a classifier trained on them. No crowd workers or external annotators were employed: all generated text, including generated hateful and abusive items, was read and checked by the first author, so questions of annotator compensation do not arise. Repeated exposure to such material is nevertheless a burden that future extensions with external annotators should plan for.
+
+\section{Data statement}
+Following \citet{bender2018data} and \citet{gebru2021datasheets}: \textbf{Language varieties:} Urdu in Perso-Arabic script (\texttt{urd-Arab}) and Roman Urdu (\texttt{urd-Latn}), mostly Pakistani usage, with frequent English code-mixing in the Roman track and some Punjabi in Nastaliq tweets. \textbf{Speakers:} authors of public tweets, YouTube comments, product and restaurant reviews, and news articles; generated text in \NumSynthDomains{} domains. \textbf{Annotation:} original corpus labels for organic data; labels for generated data were assigned in the generation prompt and checked by the first author, a native Urdu speaker. \textbf{Distribution:} GitHub (\repo), Zenodo (DOI \href{https://doi.org/10.5281/zenodo.23053495}{10.5281/zenodo.23053495}) and Hugging Face.
+
+\section{Conclusion}
+In conclusion, Urdu classifiers are far less robust to a change of data source than their in-domain scores suggest, and the English finding of \citet{calderon2024measuring} carries over to both Urdu scripts. Fine-tuned XLM-R and mBERT are the stronger in-domain classifiers in \val{all.ftSSwins} of \NumMatrices{} matrices but lose \val{all.ft.dSmin}--\val{all.ft.dSmax} pp of macro-F1 on another domain, and in most shifts they do worse than a model trained on the target, so the loss is a robustness failure rather than a move to a harder domain. Few-shot LLMs lose much less and are significantly stronger across domains in \val{boot.llmbetter} of \val{boot.n} comparisons. The exceptions are informative: fine-tuning transfers better in QA validation, neither family transfers usefully in fake news, and the largest failures of both families occur where two domains attach the same label to different kinds of text, a problem that robustness to vocabulary or spelling would not solve. Reaching these conclusions required choosing domains by explicit criteria. Duplicated domains, labels that follow the origin of an item, question-level overlap and template near-duplicates each change cross-domain scores, and we recommend the audits released with this benchmark to anyone combining public and generated corpora into a multi-domain evaluation.
+
+\section*{Acknowledgments}
+We thank the FAST School of Computing, FAST-NUCES Lahore, for computing facilities, and the creators of the public corpora this benchmark builds on.
+
+\bibliographystyle{plainnat}
+\bibliography{refs}
+
+\onecolumn
+\appendix
+\section{Evidence of LLM generation in each domain}\label{app:synth}
+This appendix supports the origin labels in Table~\ref{tab:datasets}. For every candidate domain it reports three signals that separate LLM-generated from human-written text in our data: templated near-duplicates, lexical diversity and the variability of item length (Section~\ref{sec:collection}).
+\begin{table}[H]\centering\scriptsize
+\caption{Generation signals for all \NumDomainsVten{} candidate domains (train and test pooled). Template\,\%: items with a near-duplicate variant (character 5-gram Jaccard $\geq 0.8$) inside the domain. Distinct-2: distinct word bigrams per bigram in a 500-item sample. Len.\,CV: coefficient of variation of item length in words. Seed\,\%: items near-duplicating an item of another domain of the same script. QA items are question--answer pairs, whose shared questions raise Template\,\% by construction.}
+\label{tab:synth-audit}
+\resizebox{\textwidth}{!}{\input{tables/synthetic_audit.tex}}
+\end{table}
+
+\clearpage
+\section{Does a single phrase reveal the label?}\label{app:shortcuts}
+This appendix supports the second inclusion criterion (Section~\ref{sec:criteria}). For each included domain it shows the phrase whose frequency differs most between classes. A content word is expected; a dateline, byline or other source marker would mean that the label can be read off the origin of an item.
+\begin{table}[H]\centering\scriptsize
+\caption{For every included domain, the word n-gram ($n\leq3$, at least 20 occurrences) with the largest difference in document frequency between one class and the others. Content words are expected; source boilerplate (datelines, bylines) would indicate that the label follows the origin of an item.}
+\label{tab:shortcuts}
+\input{tables/shortcuts.tex}
+\end{table}
+
+\clearpage
+\section{Source, URL and licence of each domain}\label{app:prov}
+This appendix lists where each domain comes from, how its origin was confirmed, and the licence under which it is distributed (Section~\ref{sec:licensing}).
+\begin{table}[H]\centering\scriptsize
+\caption{Source and licence of every domain. Verified: our files were matched against the public release (content or file identity). Untraced: obtained from a public upload whose original author could not be identified. Generated: produced by the first author with xAI Grok (Section~\ref{sec:collection}).}
+\label{tab:provenance}
+\resizebox{\textwidth}{!}{\input{tables/provenance.tex}}
+\end{table}
+
+\clearpage
+\section{Prompt used for the few-shot LLMs}\label{app:prompt}
+The user message sent to every LLM, before the model's chat template is applied. \texttt{<INSTRUCTION>} is ``Classify the sentiment of the text.'', ``Decide whether the text is abusive or hateful.'', ``Decide whether the news text is real or fake.'' or ``Decide whether the answer is a valid answer to the question.''; \texttt{<SCRIPT>} is ``Nastaliq (Perso-Arabic) script'' or ``Roman (Latin) script''; \texttt{<LABELS>} lists the label words of the matrix (e.g.\ ``Negative or Positive'', ``Negative, Neutral or Positive''). Each demonstration and the test item are rendered as \texttt{Text: \dots}, or as \texttt{Question: \dots} and \texttt{Answer: \dots} lines for QA, followed by \texttt{Label:}.
+\begin{verbatim}
+<INSTRUCTION> The text is Urdu written in <SCRIPT>. Answer with exactly
+one word: <LABELS>.
+
+Examples:
+
+Text: <demonstration 1>
+Label: <label 1>
+
+... (5 demonstrations per class, shuffled)
+
+Now classify:
+
+Text: <test item>
+Label:
+\end{verbatim}
+
+\end{document}

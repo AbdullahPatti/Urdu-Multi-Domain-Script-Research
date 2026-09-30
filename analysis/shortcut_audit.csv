@@ -1,0 +1,166 @@
+﻿task,domain,included,rank,phrase,class,df_in_class,df_other,diff
+N-SA,SA-A,True,1,پر,Negative,0.171,0.09,0.081
+N-SA,SA-A,True,2,اللہ,Positive,0.069,0.008,0.061
+N-SA,SA-A,True,3,نہیں,Negative,0.133,0.082,0.051
+N-SA,SA-A,True,4,اور,Positive,0.189,0.141,0.048
+N-SA,SA-A,True,5,میں,Negative,0.335,0.289,0.046
+N-SA,SA-B,True,1,خراب,Negative,0.264,0.075,0.189
+N-SA,SA-B,True,2,خوفناک,Negative,0.29,0.106,0.184
+N-SA,SA-B,True,3,بہترین,Positive,0.309,0.126,0.183
+N-SA,SA-B,True,4,کوئی,Negative,0.524,0.345,0.179
+N-SA,SA-B,True,5,عمدہ,Positive,0.282,0.104,0.178
+N-SA,SA-E,True,1,دیا,Negative,0.453,0.047,0.406
+N-SA,SA-E,True,2,کر دیا,Negative,0.313,0.033,0.28
+N-SA,SA-E,True,3,سے,Positive,0.463,0.245,0.218
+N-SA,SA-E,True,4,کر,Negative,0.402,0.201,0.201
+N-SA,SA-E,True,5,اور,Positive,0.365,0.169,0.196
+N-SA,SA-D,False,1,پر,Negative,0.17,0.09,0.081
+N-SA,SA-D,False,2,اللہ,Positive,0.071,0.008,0.063
+N-SA,SA-D,False,3,نہیں,Negative,0.132,0.084,0.049
+N-SA,SA-D,False,4,میں,Negative,0.337,0.288,0.049
+N-SA,SA-D,False,5,اور,Positive,0.188,0.14,0.048
+N-SA,SA-C,False,1,کر,Negative,0.383,0.086,0.296
+N-SA,SA-C,False,2,دیا,Negative,0.519,0.296,0.222
+N-SA,SA-C,False,3,کر دیا,Negative,0.259,0.049,0.21
+N-SA,SA-C,False,4,میں,Negative,0.42,0.247,0.173
+N-SA,SA-C,False,5,کے,Negative,0.531,0.37,0.16
+N-HS,HS-A,True,1,کو,Hate,0.389,0.301,0.088
+N-HS,HS-A,True,2,قادیانی,Hate,0.091,0.016,0.075
+N-HS,HS-A,True,3,اور,Hate,0.329,0.263,0.067
+N-HS,HS-A,True,4,شیعہ,Hate,0.061,0.001,0.06
+N-HS,HS-A,True,5,ضامن,Hate,0.055,0.0,0.055
+N-HS,HS-B,True,1,میں,Normal,0.348,0.248,0.1
+N-HS,HS-B,True,2,خان,Normal,0.11,0.048,0.063
+N-HS,HS-B,True,3,کی,Normal,0.38,0.319,0.061
+N-HS,HS-B,True,4,کے,Normal,0.402,0.342,0.06
+N-HS,HS-B,True,5,اور,Normal,0.289,0.229,0.06
+N-HS,HS-C,True,1,ہے,Normal,0.973,0.447,0.526
+N-HS,HS-C,True,2,ہیں,Hate,0.247,0.027,0.221
+N-HS,HS-C,True,3,کرنا,Normal,0.213,0.0,0.213
+N-HS,HS-C,True,4,اس,Hate,0.254,0.063,0.19
+N-HS,HS-C,True,5,کے ساتھ,Normal,0.16,0.0,0.16
+N-HS,HS-D,True,1,صرف,Hate,0.28,0.0,0.28
+N-HS,HS-D,True,2,ہے,Normal,0.634,0.362,0.272
+N-HS,HS-D,True,3,اس,Hate,0.324,0.076,0.248
+N-HS,HS-D,True,4,نہیں,Hate,0.231,0.0,0.231
+N-HS,HS-D,True,5,اور,Normal,0.273,0.081,0.192
+N-HS,HS-E,False,1,کو,Hate,0.389,0.304,0.085
+N-HS,HS-E,False,2,قادیانی,Hate,0.094,0.016,0.078
+N-HS,HS-E,False,3,اور,Hate,0.331,0.264,0.067
+N-HS,HS-E,False,4,شیعہ,Hate,0.064,0.002,0.061
+N-HS,HS-E,False,5,کافر,Hate,0.063,0.005,0.058
+N-FN,FN-A,True,1,ہے۔,Real,0.418,0.253,0.165
+N-FN,FN-A,True,2,دو,Real,0.261,0.1,0.16
+N-FN,FN-A,True,3,ہیں۔,Real,0.341,0.19,0.151
+N-FN,FN-A,True,4,تین,Real,0.176,0.04,0.136
+N-FN,FN-A,True,5,اس لیے,Fake,0.195,0.079,0.117
+N-FN,FN-B,True,1,نہیں,Fake,0.326,0.098,0.227
+N-FN,FN-B,True,2,،,Fake,0.235,0.028,0.206
+N-FN,FN-B,True,3,لئے,Fake,0.208,0.018,0.19
+N-FN,FN-B,True,4,کے لئے,Fake,0.204,0.017,0.186
+N-FN,FN-B,True,5,یہ,Fake,0.275,0.099,0.176
+N-FN,FN-C,False,1,ہے۔,Fake,0.283,0.0,0.282
+N-FN,FN-C,False,2,نہیں,Fake,0.277,0.037,0.241
+N-FN,FN-C,False,3,کے,Fake,0.643,0.415,0.228
+N-FN,FN-C,False,4,ویڈیو,Fake,0.241,0.03,0.211
+N-FN,FN-C,False,5,تصویر,Fake,0.177,0.003,0.174
+N-FN,FN-D,False,1,92,Real,0.896,0.035,0.861
+N-FN,FN-D,False,2,92 نیوز,Real,0.867,0.032,0.835
+N-FN,FN-D,False,3,نیوز,Real,0.875,0.081,0.793
+N-FN,FN-D,False,4,تفصیلات,Fake,0.593,0.03,0.563
+N-FN,FN-D,False,5,تفصیلات کے,Fake,0.348,0.003,0.345
+N-QA,QA-A,True,1,وہ,Invalid,0.398,0.333,0.064
+N-QA,QA-A,True,2,کہا,Invalid,0.385,0.332,0.053
+N-QA,QA-A,True,3,کہا ہم سے,Invalid,0.237,0.184,0.053
+N-QA,QA-A,True,4,ہم,Invalid,0.425,0.375,0.05
+N-QA,QA-A,True,5,رضی الله عنہ,Valid,0.412,0.362,0.05
+N-QA,QA-B,True,1,ہے,Valid,0.52,0.509,0.012
+N-QA,QA-B,True,2,میں,Valid,0.3,0.291,0.009
+N-QA,QA-B,True,3,بڑا,Valid,0.044,0.037,0.007
+N-QA,QA-B,True,4,قومی,Invalid,0.085,0.078,0.007
+N-QA,QA-B,True,5,نہیں,Valid,0.08,0.073,0.007
+N-QA,QA-C,True,1,پیدا,Valid,0.129,0.091,0.037
+N-QA,QA-C,True,2,ہو,Valid,0.143,0.118,0.025
+N-QA,QA-C,True,3,کے لیے,Invalid,0.28,0.257,0.023
+N-QA,QA-C,True,4,معتدل,Invalid,0.052,0.029,0.023
+N-QA,QA-C,True,5,محفوظ,Invalid,0.095,0.071,0.023
+N-QA,QA-D,True,1,ہے,Valid,0.303,0.277,0.026
+N-QA,QA-D,True,2,اور,Invalid,0.32,0.302,0.018
+N-QA,QA-D,True,3,سے,Invalid,0.208,0.192,0.015
+N-QA,QA-D,True,4,کے,Valid,0.151,0.139,0.011
+N-QA,QA-D,True,5,زیادہ,Invalid,0.034,0.024,0.009
+R-SA,SA-A,True,1,ha,Positive,0.198,0.129,0.069
+R-SA,SA-A,True,2,nahi,Negative,0.099,0.034,0.065
+R-SA,SA-A,True,3,acha,Positive,0.076,0.013,0.063
+R-SA,SA-A,True,4,ke,Positive,0.149,0.089,0.06
+R-SA,SA-A,True,5,mein,Positive,0.124,0.075,0.049
+R-SA,SA-B,True,1,ko,Negative,0.318,0.176,0.142
+R-SA,SA-B,True,2,nahi,Negative,0.177,0.069,0.108
+R-SA,SA-B,True,3,ki,Negative,0.297,0.2,0.097
+R-SA,SA-B,True,4,hai,Negative,0.349,0.261,0.088
+R-SA,SA-B,True,5,to,Negative,0.229,0.151,0.078
+R-SA,SA-C,True,1,baap,Negative,0.169,0.001,0.168
+R-SA,SA-C,True,2,hota,Negative,0.116,0.002,0.114
+R-SA,SA-C,True,3,tum,Negative,0.092,0.002,0.09
+R-SA,SA-C,True,4,song,Positive,0.09,0.0,0.09
+R-SA,SA-C,True,5,baap baap,Negative,0.081,0.0,0.081
+R-SA,SA-D,False,1,ko,Negative,0.319,0.176,0.142
+R-SA,SA-D,False,2,nahi,Negative,0.177,0.069,0.108
+R-SA,SA-D,False,3,ki,Negative,0.298,0.199,0.098
+R-SA,SA-D,False,4,hai,Negative,0.348,0.261,0.088
+R-SA,SA-D,False,5,to,Negative,0.229,0.151,0.078
+R-CA,CA-A,True,1,hai,Abusive,0.221,0.107,0.114
+R-CA,CA-A,True,2,faltu,Abusive,0.101,0.0,0.101
+R-CA,CA-A,True,3,tu,Abusive,0.09,0.013,0.077
+R-CA,CA-A,True,4,kar,Abusive,0.116,0.045,0.071
+R-CA,CA-A,True,5,tumhara,Normal,0.078,0.014,0.064
+R-CA,CA-B,True,1,nahi,Abusive,0.278,0.031,0.247
+R-CA,CA-B,True,2,raha,Abusive,0.194,0.017,0.177
+R-CA,CA-B,True,3,hain,Normal,0.19,0.021,0.169
+R-CA,CA-B,True,4,kar,Abusive,0.165,0.0,0.165
+R-CA,CA-B,True,5,kiya,Normal,0.212,0.061,0.151
+R-CA,CA-C,True,1,nahi,Abusive,0.301,0.0,0.301
+R-CA,CA-C,True,2,bhi,Abusive,0.209,0.033,0.175
+R-CA,CA-C,True,3,hai,Abusive,0.471,0.35,0.121
+R-CA,CA-C,True,4,raha,Abusive,0.17,0.053,0.117
+R-CA,CA-C,True,5,raha hai,Abusive,0.146,0.032,0.114
+R-CA,CA-D,True,1,hai,Abusive,0.726,0.333,0.393
+R-CA,CA-D,True,2,content,Abusive,0.385,0.056,0.328
+R-CA,CA-D,True,3,hai yaar,Abusive,0.297,0.022,0.275
+R-CA,CA-D,True,4,lol,Abusive,0.248,0.0,0.248
+R-CA,CA-D,True,5,nice,Normal,0.225,0.0,0.225
+R-P3,PR-A,True,1,but,Neutral,0.533,0.067,0.466
+R-P3,PR-A,True,2,not,Negative,0.304,0.067,0.238
+R-P3,PR-A,True,3,is,Neutral,0.424,0.234,0.19
+R-P3,PR-A,True,4,not,Neutral,0.261,0.105,0.155
+R-P3,PR-A,True,5,good,Neutral,0.322,0.204,0.118
+R-P3,PR-B,True,1,quality,Negative,0.357,0.115,0.242
+R-P3,PR-B,True,2,to,Negative,0.5,0.271,0.229
+R-P3,PR-B,True,3,not,Negative,0.333,0.119,0.214
+R-P3,PR-B,True,4,not,Neutral,0.31,0.098,0.212
+R-P3,PR-B,True,5,of,Negative,0.429,0.218,0.21
+R-P3,PR-D,True,1,allah,Positive,0.129,0.027,0.102
+R-P3,PR-D,True,2,hai,Neutral,0.311,0.233,0.078
+R-P3,PR-D,True,3,ky,Negative,0.182,0.117,0.065
+R-P3,PR-D,True,4,lanat,Negative,0.055,0.002,0.053
+R-P3,PR-D,True,5,ke,Positive,0.13,0.077,0.053
+R-P3,TW-B,True,1,raha,Negative,0.273,0.041,0.232
+R-P3,TW-B,True,2,theek,Neutral,0.239,0.027,0.212
+R-P3,TW-B,True,3,nahi,Negative,0.312,0.101,0.21
+R-P3,TW-B,True,4,ho,Negative,0.265,0.113,0.152
+R-P3,TW-B,True,5,ho raha,Negative,0.151,0.0,0.151
+R-P3,TW-C,True,1,nahi,Negative,0.557,0.023,0.534
+R-P3,TW-C,True,2,se,Positive,0.503,0.137,0.366
+R-P3,TW-C,True,3,hai,Positive,0.612,0.346,0.266
+R-P3,TW-C,True,4,gaya hai,Positive,0.224,0.0,0.224
+R-P3,TW-C,True,5,gaya,Positive,0.224,0.0,0.224
+R-P3,TW-D,True,1,nahi,Negative,0.523,0.085,0.438
+R-P3,TW-D,True,2,ke,Negative,0.392,0.15,0.241
+R-P3,TW-D,True,3,itni,Negative,0.24,0.0,0.24
+R-P3,TW-D,True,4,gai,Negative,0.182,0.0,0.182
+R-P3,TW-D,True,5,hai,Negative,0.565,0.421,0.144
+R-P3,TW-A,False,1,.,Negative,0.3,0.102,0.198
+R-P3,TW-A,False,2,ko,Negative,0.319,0.142,0.177
+R-P3,TW-A,False,3,hai,Negative,0.349,0.177,0.172
+R-P3,TW-A,False,4,nahi,Negative,0.177,0.048,0.129
+R-P3,TW-A,False,5,to,Negative,0.229,0.105,0.124

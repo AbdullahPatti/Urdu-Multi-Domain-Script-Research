@@ -1,0 +1,14 @@
+\begin{tabular}{llccllll}
+\toprule
+Matrix & Shift & TT / ST & Errors & Main confusion (\%) & Length shift & Unseen vocab. & Hard in-domain \\
+ & & & & & err / ok & err / ok & err / ok \\
+\midrule
+Sentiment (N) & SA-A$\rightarrow$SA-B & 0.79 / 0.51 & 663/1,638 & Positive$\rightarrow$Negative (93) & 100 / 100 & 3 / 1 & 22 / 17 \\
+Hate Speech (N) & HS-A$\rightarrow$HS-C & 1.00 / 0.29 & 216/340 & Hate$\rightarrow$Normal (100) & 0 / 0 & 0 / 0 & 0 / 0 \\
+Fake News (N) & FN-A$\rightarrow$FN-B & 0.94 / 0.38 & 772/1,645 & Fake$\rightarrow$Real (100) & 78 / 99 & 0 / 0 & 7 / 4 \\
+QA Validation (N) & QA-D$\rightarrow$QA-A & 0.97 / 0.51 & 110/250 & Invalid$\rightarrow$Valid (100) & 100 / 100 & 99 / 100 & 5 / 1 \\
+Sentiment (binary) (R) & SA-C$\rightarrow$SA-A & 0.82 / 0.63 & 773/2,140 & Negative$\rightarrow$Positive (50) & 22 / 16 & 49 / 45 & 29 / 11 \\
+Cyber Abuse (R) & CA-B$\rightarrow$CA-A & 1.00 / 0.72 & 234/866 & Abusive$\rightarrow$Normal (66) & 20 / 21 & 44 / 48 & 0 / 0 \\
+3-class Polarity (R) & PR-B$\rightarrow$TW-D & 0.97 / 0.17 & 213/320 & Negative$\rightarrow$Positive (52) & 0 / 0 & 95 / 83 & 5 / 0 \\
+\bottomrule
+\end{tabular}

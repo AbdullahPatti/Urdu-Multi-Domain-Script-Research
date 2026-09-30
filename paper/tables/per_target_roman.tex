@@ -1,0 +1,26 @@
+\begin{tabular}{lrrrrrrrrrr}
+\toprule
+Target & \multicolumn{2}{c}{XLM-R} & \multicolumn{2}{c}{mBERT} & \multicolumn{2}{c}{Llama-3.1-8B} & \multicolumn{2}{c}{Qwen2.5-7B} & \multicolumn{2}{c}{Mistral-7B} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-9}\cmidrule(lr){10-11}
+ & TT & $\overline{\Delta_T}$ & TT & $\overline{\Delta_T}$ & TT & $\overline{\Delta_T}$ & TT & $\overline{\Delta_T}$ & TT & $\overline{\Delta_T}$ \\
+\midrule
+\multicolumn{11}{l}{\textit{Sentiment (binary)}} \\
+SA-A & 0.817 & 13.2 & 0.807 & 16.0 & 0.811 & 1.4 & 0.812 & 1.6 & 0.799 & -0.3 \\
+SA-B & 0.822 & 10.9 & 0.817 & 15.2 & 0.809 & 1.1 & 0.833 & 0.9 & 0.800 & 1.2 \\
+SA-C & 0.926 & 16.3 & 0.925 & 19.3 & 0.834 & 3.7 & 0.806 & 2.0 & 0.795 & 3.1 \\
+\midrule
+\multicolumn{11}{l}{\textit{Cyber Abuse}} \\
+CA-A & 0.997 & 22.3 & 0.993 & 24.7 & 0.904 & 2.7 & 0.878 & -0.8 & 0.923 & 4.0 \\
+CA-B & 0.995 & 18.1 & 1.000 & 19.9 & 0.834 & 3.7 & 0.828 & -0.9 & 0.765 & -5.9 \\
+CA-C & 0.991 & 14.0 & 0.999 & 20.0 & 0.802 & 4.5 & 0.849 & 2.2 & 0.866 & 7.3 \\
+CA-D & 0.986 & 8.1 & 1.000 & 12.9 & 0.923 & 2.9 & 0.978 & 5.8 & 0.962 & 3.2 \\
+\midrule
+\multicolumn{11}{l}{\textit{3-class Polarity}} \\
+PR-A & 0.860 & 37.3 & 0.841 & 46.5 & 0.779 & 3.6 & 0.777 & 0.7 & 0.798 & 2.8 \\
+PR-B & 0.294 & -14.9 & 0.404 & 4.9 & 0.511 & 3.1 & 0.548 & 7.8 & 0.475 & 2.6 \\
+PR-D & 0.621 & 28.9 & 0.601 & 31.8 & 0.557 & 5.5 & 0.556 & 4.4 & 0.598 & 7.6 \\
+TW-B & 0.905 & 41.3 & 0.808 & 39.6 & 0.799 & 11.2 & 0.793 & 3.4 & 0.793 & 8.7 \\
+TW-C & 0.885 & 43.2 & 0.998 & 60.6 & 0.778 & 13.8 & 0.917 & 6.4 & 0.790 & 6.9 \\
+TW-D & 0.970 & 45.5 & 0.763 & 32.7 & 0.897 & 7.6 & 0.903 & 1.6 & 0.904 & 4.1 \\
+\bottomrule
+\end{tabular}

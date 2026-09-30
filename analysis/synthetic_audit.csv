@@ -1,0 +1,34 @@
+﻿domain,name,n,card_synth_pct,template_rate,distinct2,len_mean,len_cv,seed_match,round_size,class_counts
+Nas SA-A,Twitter Social Media,979,0,0.016,0.893,17.6,0.41,1.0,False,499/480
+Nas SA-B,Movie Reviews,9163,0,0.003,0.472,269.5,0.82,0.089,False,4537/4626
+Nas SA-C,Civic Social Topics,162,25,0.0,0.731,11.5,0.15,0.0,False,81/81
+Nas SA-D,Governance Political,978,0,0.014,0.884,17.6,0.41,1.0,False,499/479
+Nas SA-E,Socioeconomic Agricultural,2382,20,0.596,0.215,16.7,0.15,0.0,False,1188/1194
+Nas HS-A,Social Media Offensive,21631,0,0.048,0.846,23.8,0.6,1.0,False,12785/8846
+Nas HS-B,Social Media Hate Speech,24927,0,0.274,0.855,20.7,0.67,0.001,False,12030/12897
+Nas HS-C,Politics Sports Health Family,1700,70,0.277,0.18,11.1,0.15,0.013,True,600/1100
+Nas HS-D,Sports Labor Arts Education,1700,70,0.412,0.245,11.9,0.17,0.003,True,850/850
+Nas HS-E,Inter Faith Sectarian Ethnic,21629,0,0.048,0.835,23.8,0.6,1.0,False,13034/8595
+Nas FN-A,Multi Topic News,899,0,0.029,0.45,341.0,0.75,0.378,False,400/499
+Nas FN-B,Ax to Grind,9812,0,0.13,0.649,75.9,1.98,0.045,False,4909/4903
+Nas FN-C,General Pakistani News,23171,0,0.003,0.792,15.7,0.3,0.002,False,12159/11012
+Nas FN-D,Fact Checking Platform,13388,0,0.004,0.548,153.0,0.46,0.0,False,6711/6677
+Nas QA-A,Religious Hadith,1580,0,0.508,0.295,88.4,0.52,0.0,False,820/760
+Nas QA-B,General Knowledge,11306,0,0.213,0.442,16.0,0.33,0.0,False,5805/5501
+Nas QA-C,Long Form QnA,1120,60,0.518,0.099,60.3,0.09,0.0,False,560/560
+Nas QA-D,Short Form QnA,3460,50,0.232,0.295,13.3,0.17,0.0,False,1730/1730
+Rom CA-A,YouTube Comments,4868,0,0.259,0.564,6.1,0.29,0.064,False,2415/2453
+Rom CA-B,Content Creator Comments,1300,65,0.675,0.286,7.8,0.18,0.0,True,580/720
+Rom CA-C,Social Media Diverse Vocab,1300,65,0.632,0.323,7.9,0.17,0.0,True,600/700
+Rom CA-D,General Online Video,1200,65,0.533,0.234,6.6,0.22,0.196,True,550/650
+Rom PR-A,Daraz Ecommerce,16944,0,0.029,0.816,14.4,0.92,0.005,False,4355/2458/10131
+Rom PR-B,Restaurant Food,750,0,0.005,0.743,22.3,0.65,0.004,True,42/117/591
+Rom PR-D,Electronics Gaming Delivery,26666,0,0.232,0.926,13.9,1.1,0.028,False,9742/6325/10599
+Rom SA-A,Mixed Public Discourse,21444,0,0.005,0.95,11.9,0.98,0.028,False,9979/11465
+Rom SA-B,Social Media Politics Drama,10993,0,0.016,0.887,25.2,1.18,1.0,False,5297/5696
+Rom SA-C,YouTube Entertainment,20070,0,0.06,0.943,6.4,0.98,0.011,False,8405/11665
+Rom SA-D,Utilities Apps Courses,10993,0,0.016,0.887,25.2,1.18,1.0,False,5297/5696
+Rom TW-A,Twitter Political Social,17884,0,0.01,0.913,19.7,1.27,0.618,False,5294/6899/5691
+Rom TW-B,Consumer Electronics Gaming,1450,70,0.932,0.177,10.2,0.15,0.0,True,491/477/482
+Rom TW-C,Public Civic Services,1450,70,0.919,0.187,9.6,0.13,0.0,True,490/483/477
+Rom TW-D,Mixed Social Commentary,1600,65,0.924,0.228,10.5,0.12,0.0,True,549/516/535

@@ -1,0 +1,41 @@
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llllrrrllrl}
+\toprule
+Script & Transfer matrix & ID & Domain & $C$ & $N_\text{train}$ & $N_\text{test}$ & Test dist. & Origin & Near-dup.\,\% & Split \\
+\midrule
+Nastaliq & Sentiment & SA-A & Twitter Social Media & 2 & 781 & 194 & 99/95 & organic & 1.0 & original \\
+ &  & SA-B & Movie Reviews & 2 & 6,695 & 1,638 & 808/830 & translated & 0.1 & original \\
+ &  & SA-E & Socioeconomic Agricultural & 2 & 1,629 & 407 & 203/204 & generated & 43.0 & cluster \\
+\midrule
+ & Hate Speech & HS-A & Social Media Offensive & 2 & 17,152 & 4,133 & 2452/1681 & organic & 1.8 & original \\
+ &  & HS-B & Social Media Hate Speech & 2 & 18,486 & 3,540 & 1304/2236 & organic & 7.4 & original \\
+ &  & HS-C & Politics Sports Health Family & 2 & 1,360 & 340 & 120/220 & generated & 27.1 & cluster \\
+ &  & HS-D & Sports Labor Arts Education & 2 & 1,356 & 339 & 169/170 & generated & 38.6 & cluster \\
+\midrule
+ & Fake News & FN-A & Multi Topic News & 2 & 634 & 260 & 112/148 & organic & 0.0 & original \\
+ &  & FN-B & Ax to Grind & 2 & 7,217 & 1,645 & 789/856 & organic & 1.2 & original \\
+\midrule
+ & QA Validation & QA-A & Religious Hadith & 2 & 992 & 250 & 125/125 & organic & 0.0 & original \\
+ &  & QA-B & General Knowledge & 2 & 7,564 & 1,889 & 946/943 & organic & 0.2 & original \\
+ &  & QA-C & Long Form QnA & 2 & 896 & 224 & 112/112 & generated & 0.0 & original \\
+ &  & QA-D & Short Form QnA & 2 & 2,764 & 691 & 348/343 & generated & 0.7 & original \\
+\midrule
+Roman & Sentiment (binary) & SA-A & Mixed Public Discourse & 2 & 19,262 & 2,140 & 1001/1139 & organic & 0.4 & original \\
+ &  & SA-B & Social Media Politics Drama & 2 & 8,781 & 2,163 & 1049/1114 & organic & 1.3 & original \\
+ &  & SA-C & YouTube Entertainment & 2 & 15,587 & 3,759 & 1630/2129 & organic & 0.7 & original \\
+\midrule
+ & Cyber Abuse & CA-A & YouTube Comments & 2 & 3,469 & 866 & 418/448 & uncertain & 13.2 & cluster \\
+ &  & CA-B & Content Creator Comments & 2 & 1,040 & 260 & 116/144 & generated & 63.5 & cluster \\
+ &  & CA-C & Social Media Diverse Vocab & 2 & 1,040 & 260 & 120/140 & generated & 59.6 & cluster \\
+ &  & CA-D & General Online Video & 2 & 960 & 240 & 110/130 & generated & 51.2 & cluster \\
+\midrule
+ & 3-class Polarity & PR-A & Daraz Ecommerce & 3 & 13,489 & 3,294 & 850/487/1957 & organic & 1.4 & original \\
+ &  & PR-B & Restaurant Food & 3 & 600 & 148 & 8/23/117 & organic & 1.3 & original \\
+ &  & PR-D & General Social Comments & 3 & 19,349 & 4,026 & 1380/1158/1488 & organic & 0.3 & original \\
+ &  & TW-B & Consumer Electronics Gaming & 3 & 1,160 & 290 & 98/96/96 & generated & 90.7 & cluster \\
+ &  & TW-C & Public Civic Services & 3 & 1,160 & 290 & 98/96/96 & generated & 88.6 & cluster \\
+ &  & TW-D & Mixed Social Commentary & 3 & 1,280 & 320 & 110/103/107 & generated & 90.6 & cluster \\
+\midrule
+\multicolumn{5}{l}{Total (26 domains)} & 154,703 & 33,606 & & & & \\
+\bottomrule
+\end{tabular}}

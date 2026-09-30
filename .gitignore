@@ -10,3 +10,18 @@ results/**/hf_upload_xlmr/
 *.safetensors
 *.pt
 *.bin
+
+# Trainer scratch dirs
+runs/**/_tmp/
+
+# Private: supervisor reviews and correspondence (never publish)
+Context/
+# Local logs
+logs/
+release/_src/
+
+# Benchmark text: released on Hugging Face / Zenodo, not in git. data/ also holds the
+# full text of corpora whose authors state no licence (see paper, Section 3.5).
+data/
+release/
+analysis/near_duplicates_v11.csv

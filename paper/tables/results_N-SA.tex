@@ -1,0 +1,16 @@
+\begin{tabular}{lcccccccc}
+\toprule
+Model & SS & ST & $\overline{\Delta_S}$ & WSD & WTD & $\Delta_T{>}0$\,\% & Harder-tgt\,\% & \%Rob \\
+\midrule
+Majority class & 0.336 & -- & -- & -- & -- & -- & -- & -- \\
+Uniform random & 0.500 & -- & -- & -- & -- & -- & -- & -- \\
+Length-only (shortcut) & 0.552 & 0.432 & 11.9 & 27.0 & 21.3 & 100.0 & 0.0 & 78.4 \\
+\midrule
+XLM-R (fine-tuned) & 0.813\,$\pm$\,0.011 & 0.636\,$\pm$\,0.074 & 17.8 & 43.3 & 33.7 & 94.4 & 5.6 & 78.1 \\
+mBERT (fine-tuned) & 0.805\,$\pm$\,0.003 & 0.567\,$\pm$\,0.008 & 23.7 & 58.8 & 35.3 & 100.0 & 0.0 & 70.5 \\
+\midrule
+Llama-3.1-8B (few-shot) & 0.792\,$\pm$\,0.024 & 0.790\,$\pm$\,0.010 & 0.2 & 32.2 & 3.4 & 44.4 & 22.2 & 99.8 \\
+Qwen2.5-7B (few-shot) & 0.777\,$\pm$\,0.011 & 0.752\,$\pm$\,0.009 & 2.5 & 28.7 & 10.6 & 72.2 & 0.0 & 96.8 \\
+Mistral-7B (few-shot) & 0.691\,$\pm$\,0.019 & 0.679\,$\pm$\,0.018 & 1.2 & 30.2 & 6.5 & 66.7 & 11.1 & 98.3 \\
+\bottomrule
+\end{tabular}

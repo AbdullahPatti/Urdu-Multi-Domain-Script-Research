@@ -1,0 +1,31 @@
+﻿task,src,tgt,row,text,gold,pred,len,oov
+N-HS,HS-A,HS-C,100,اکثر آن لائن ماحول میں برداشت کی کمی نظر آتی ہے,Hate,Normal,11,0.0
+N-HS,HS-A,HS-C,66,حالیہ دنوں میں اس رہنما کے بیانات میں تضاد واضح ہے,Hate,Normal,11,0.0
+N-HS,HS-A,HS-C,233,حالیہ دنوں میں اس کھلاڑی نے توقعات پر پورا نہیں اترا,Hate,Normal,11,0.0
+N-HS,HS-A,HS-C,118,اکثر سوشل میڈیا پر اصل بات چیت کی بجائے لڑائی زیادہ ہوتی ہے,Hate,Normal,13,0.08
+N-HS,HS-A,HS-C,17,حالیہ دنوں میں اس نظام میں طاقتور لوگوں کو زیادہ فائدہ پہنچتا ہے,Hate,Normal,13,0.0
+N-HS,HS-A,HS-C,47,حالیہ دنوں میں ملازمین کے مسائل پر توجہ نہیں دی جاتی,Hate,Normal,11,0.0
+N-FN,FN-A,FN-B,1338,متن کے ساتھ بینر رکھنے والے پاکستان لوگوں کی تصویر - ہم کشمیر نہیں چاہتے ہیں۔ ہمیں ہمیں ہائیڈروکسی کلوروکوئن دیں ,Fake,Real,21,0.2
+N-FN,FN-A,FN-B,142, دہلی میں این آر سی مخالف مظاہرے کے طور پر سلیمانی کا جنازہ نکلا۔,Fake,Real,14,0.21
+N-FN,FN-A,FN-B,1609,سندھ ہائی کورٹ کے رجسٹرار کا دعویٰ ہے کہ میڈیا پر گردش کرنے والا لاڑکانہ جج کا استعفیٰ خط 'جعلی' ہے,Fake,Real,21,0.21
+N-FN,FN-A,FN-B,1595,سادھوی پرگیہ کے 'متنازع بیان' کے پیچھے کی حقیقت جانیں۔,Fake,Real,10,0.56
+N-FN,FN-A,FN-B,925, ہندوستان کا وائرل نقشہ جموں و کشمیر کی غلط تقسیم کو ظاہر کرتا ہے۔,Fake,Real,14,0.14
+N-FN,FN-A,FN-B,1462, ابھینندن ورتھمان کی طبی چھٹی کو سوشل میڈیا پر کیسے موڑ دیا گیا۔,Fake,Real,13,0.15
+R-SA,SA-C,SA-A,1108,han yr itni jalde q khatam krdia plz Phr sy lgao plz,Negative,Positive,12,0.36
+R-SA,SA-C,SA-A,2074,"Masoom tw nai kher, lekin is waley kaam mei interest naaai",Negative,Positive,11,0.36
+R-SA,SA-C,SA-A,831,Bas mujhe yehi darr tha ke kya main is role ko kar paonga,Negative,Positive,13,0.54
+R-SA,SA-C,SA-A,2095,"Shadi kay baad bhi Benazer, Benazir Bhutto kehlati rahein",Positive,Negative,9,0.67
+R-SA,SA-C,SA-A,788,bhut bekar delivery ha,Negative,Positive,4,0.0
+R-SA,SA-C,SA-A,2,Hmara channel e ni ara,Negative,Positive,5,0.2
+R-CA,CA-B,CA-A,858,Yaar achaah laga dekh kar bro,Normal,Abusive,6,0.17
+R-CA,CA-B,CA-A,381,tera kontent bakwas hy bhai,Abusive,Normal,5,0.6
+R-CA,CA-B,CA-A,467,Bhai ganday jokes mat maar,Abusive,Normal,5,0.8
+R-CA,CA-B,CA-A,257,Bhai tera accent ajeeb hai bhai,Abusive,Normal,6,0.5
+R-CA,CA-B,CA-A,817,Aray mujhe ye vidiyo pasand aaya :),Normal,Abusive,7,0.57
+R-CA,CA-B,CA-A,698,Haye bakwas editing,Abusive,Normal,3,0.33
+R-P3,PR-B,TW-D,165,Honestly app bar bar crash karti hai update ke baad bhi,Negative,Positive,11,0.5
+R-P3,PR-B,TW-D,12,Aray news abhi developing hai confirm hona baqi hai bhai,Neutral,Positive,10,1.0
+R-P3,PR-B,TW-D,266,Yaar queue itni lambi thi ke time waste ho gaya ok,Negative,Positive,11,0.73
+R-P3,PR-B,TW-D,137,queue itni lambi thi ke time waste ho gaya bro,Negative,Positive,10,0.8
+R-P3,PR-B,TW-D,99,Yaar route alternative use kiya traffic avoid karne ke liye ok,Neutral,Positive,11,0.73
+R-P3,PR-B,TW-D,248,Acha app bar bar crash karti hai update ke baad bhi lol,Negative,Positive,12,0.64
