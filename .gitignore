@@ -39,3 +39,11 @@ runs/_archive/
 runs/*/N-FN/**/*FN-C*
 runs/*/N-FN/**/*FN-D*
 runs/*/N-SA/**/*SA-C*
+
+# LaTeX build intermediates
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.out
+paper/*.log
+paper/*.xdv
