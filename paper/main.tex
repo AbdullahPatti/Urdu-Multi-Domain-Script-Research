@@ -10,7 +10,12 @@
 % Before submission:  grep -n "pending" main.tex  must return nothing.
 \documentclass[acmsmall,screen]{acmart}
 \acmJournal{TALLIP}
-\setcopyright{acmlicensed}
+% Submission version: ACM assigns the DOI, copyright block and reference format on
+% acceptance, so they are switched off here instead of showing placeholders.
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\acmDOI{}
 \acmYear{2026}
 
 \usepackage{array,booktabs,tabularx,multirow}
