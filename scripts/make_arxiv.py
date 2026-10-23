@@ -20,7 +20,7 @@ tex = (PAPER / "main.tex").read_text(encoding="utf-8")
 # drop the leading block of build comments; keep everything from \documentclass on
 tex = tex[tex.index(r"\documentclass"):]
 # use the processed bibliography directly, so no BibTeX run is needed on arXiv
-bib_cmds = "\\bibliographystyle{plainnat}\n\\bibliography{refs}"
+bib_cmds = "\\bibliographystyle{ACM-Reference-Format}\n\\bibliography{refs}"
 assert bib_cmds in tex
 tex = tex.replace(bib_cmds, "\\input{main.bbl}")
 needed = set(re.findall(r"\\input\{([^}]+)\}", tex)) | set(re.findall(r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}", tex))

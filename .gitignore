@@ -50,3 +50,9 @@ paper/*.xdv
 
 # arXiv package (built by scripts/make_arxiv.py; uploaded to arXiv, not to git)
 /arxiv_submission.zip
+comment.cut
+
+# Private: supervisor's final review (same rule as Context/)
+/final_review.txt
+# Copy sent to the second annotator (same files as analysis/second_annotator/)
+analysis/second_annotator/for_Abdul_Rehman.zip

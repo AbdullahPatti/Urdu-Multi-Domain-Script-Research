@@ -152,7 +152,7 @@ DROPPED_V11 = {
     # real items and 3.5% of fake items ("web desk" bylines), so the label is read off the source
     "Nastaliq/Fake News Detection/Domain_D_Fact_Checking_Platform": "real items carry an outlet dateline (\"92 News\", 90% of real vs 3.5% of fake items), so the label is predictable from the source",
     # minimum size criterion: at least 100 test items
-    "Nastaliq/Sentiment Analysis/Domain_C_Civic_Social_Topics": "too small to evaluate (162 items, 33 in test; minimum is 100 test items)",
+    "Nastaliq/Sentiment Analysis/Domain_C_Civic_Social_Topics": "generated; too small to evaluate (162 items, 33 in test; minimum is 100 test items)",
 }
 
 

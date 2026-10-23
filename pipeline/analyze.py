@@ -28,6 +28,11 @@ from pipeline.common import load_split
 from pipeline.config import ANALYSIS, DOMAIN_BY_KEY, RUNS, TASKS, TASK_BY_ID
 
 DEGEN_MARGIN = 0.05
+# Domains that fail the per-class minimum of the inclusion criteria (MIN_TEST_PER_CLASS
+# test items in every class) but were part of the evaluated matrices; every aggregate of
+# their matrix is also reported without them.
+MIN_TEST_PER_CLASS = 30
+SENSITIVITY = {"R-P3": ["PR-B"]}
 N_BOOT = 5000
 FT_ORDER = ["XLM-R", "mBERT"]
 LLM_ORDER = ["Llama-3.1-8B", "Qwen2.5-7B", "Mistral-7B"]
@@ -221,6 +226,7 @@ def main():
     df = load_runs()
     rng = np.random.default_rng(0)
     main_rows, organic_rows, dom_rows, parse_rows, boot_rows, base_rows = [], [], [], [], [], []
+    sens_rows = []
     for task in TASKS:
         if not (df.task == task.tid).any():
             continue
@@ -238,6 +244,14 @@ def main():
             ot = apply_guard(summarize(df, task, restrict=organic), br)
             ot["domains"] = ",".join(organic)
             organic_rows.append(ot)
+        if task.tid in SENSITIVITY:
+            keep = [DOMAIN_BY_KEY[k].sid for k in task.domains if DOMAIN_BY_KEY[k].sid not in SENSITIVITY[task.tid]]
+            sl = matrix_stats(lm.loc[keep, keep])
+            st_ = apply_guard(pd.concat([summarize(df, task, restrict=keep), pd.DataFrame([{
+                "task": task.tid, "family": "baseline", "model": "Length-only", "n_seeds": 1,
+                **sl, **{c + "_sd": 0.0 for c in sl}}])], ignore_index=True), br)
+            st_["domains"] = ",".join(keep)
+            sens_rows.append(st_)
         for (fam, model), g in df[df.task == task.tid].groupby(["family", "model"]):
             mats = [matrix(gs, task) for _, gs in g.groupby("seed")]
             mean_m = sum(mats) / len(mats)
@@ -255,6 +269,8 @@ def main():
     pd.concat(main_rows).to_csv(ANALYSIS / "table_main.csv", index=False)
     if organic_rows:
         pd.concat(organic_rows).to_csv(ANALYSIS / "table_organic_only.csv", index=False)
+    if sens_rows:
+        pd.concat(sens_rows).to_csv(ANALYSIS / "table_sensitivity.csv", index=False)
     pd.concat(dom_rows).to_csv(ANALYSIS / "table_per_domain.csv", index=False)
     pd.DataFrame(base_rows).to_csv(ANALYSIS / "baselines.csv", index=False)
     if parse_rows:

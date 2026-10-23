@@ -12,7 +12,7 @@ import json
 import numpy as np
 import pandas as pd
 
-from pipeline.config import ANALYSIS, DOMAINS, DROPPED_V11, ROOT, TASKS, TASK_BY_ID
+from pipeline.config import ANALYSIS, DOMAIN_BY_KEY, DOMAINS, DROPPED_V11, ROOT, TASKS, TASK_BY_ID
 
 OUT = ROOT / "paper" / "tables"
 TASK_ORDER = ["N-SA", "N-HS", "N-FN", "N-QA", "R-SA", "R-CA", "R-P3"]
@@ -65,7 +65,7 @@ def dataset_tables():
         "NumDomains": len(rows), "NumDomainsVten": len(DOMAINS), "NumDropped": len(DROPPED_V11),
         "NumTrain": fmt_int(tot_tr), "NumTest": fmt_int(tot_te), "NumTotal": fmt_int(total),
         "NumTotalVten": fmt_int(v10), "NumExactRemovedVten": "4,196",
-        "NumSynthDomains": n_synth_domains, "NumSynthRows": fmt_int(synth_rows),
+        "NumSynthDomains": n_synth_domains, "NumPublicDomains": len(rows) - n_synth_domains, "NumSynthRows": fmt_int(synth_rows),
         "PctSynth": f"{100 * synth_rows / total:.1f}",
         "NumResplit": sum(r["split"] == "cluster" for r in rows),
         "NumNastaliqDomains": sum(r["script"] == "Nastaliq" for r in rows),
@@ -112,7 +112,7 @@ def synthetic_audit_table():
     dropped = {f"{d.script[:3]} {d.sid}" for d in DOMAINS if d.key in DROPPED_V11}
     lines = []
     for r in a.itertuples():
-        o = "excluded" if r.domain in dropped else origin[r.domain]
+        o = f"{origin[r.domain]}, excluded" if r.domain in dropped else origin[r.domain]
         lines.append(f"{r.domain} & {r.name} & {fmt_int(r.n)} & {100 * r.template_rate:.1f} & "
                      f"{r.distinct2:.2f} & {r.len_cv:.2f} & {100 * r.seed_match:.1f} & {o} \\\\")
     (OUT / "synthetic_audit.tex").write_text(
@@ -136,10 +136,11 @@ def length_ss(tid, domains=None):
 
 def rob_str(model, r, len_ss):
     """%Rob with the two guards: dagger = SS within 0.05 of uniform random or %Rob >= 100
-    (analyze.apply_guard); double dagger = SS not above the length-only shortcut's SS."""
-    if r.degenerate:
-        return "n/a$^\\dagger$"
+    (analyze.apply_guard); double dagger = SS not above the length-only shortcut's SS.
+    Both marks are shown when both guards apply."""
     below_len = model != "Length-only" and r.SS <= len_ss
+    if r.degenerate:
+        return "n/a$^{\\dagger\\ddagger}$" if below_len else "n/a$^\\dagger$"
     return f"{100 * r.rob:.1f}" + ("$^\\ddagger$" if below_len else "")
 
 
@@ -198,6 +199,7 @@ def fmt(x, sd=None, pct=False):
 
 def results_tables(mac):
     main = pd.read_csv(ANALYSIS / "table_main.csv")
+    sens = pd.read_csv(ANALYSIS / "table_sensitivity.csv")
     base = pd.read_csv(ANALYSIS / "baselines.csv").set_index("task")
     for tid in TASK_ORDER:
         g = main[main.task == tid].set_index("model")
@@ -218,6 +220,25 @@ def results_tables(mac):
                 f"{fmt(r.harder_target, pct=True)} & {rob} \\\\")
             if m in ("Length-only", "mBERT"):
                 lines.append("\\midrule")
+        # sensitivity: the same matrix without the domains that fail the per-class minimum
+        gs = sens[sens.task == tid].set_index("model")
+        if not gs.empty:
+            keep = gs.domains.iloc[0].split(",")
+            gone = [DOMAIN_BY_KEY[k].sid for k in TASK_BY_ID[tid].domains if DOMAIN_BY_KEY[k].sid not in keep]
+            lines.append("\\midrule")
+            lines.append(f"\\multicolumn{{9}}{{l}}{{\\textit{{Without {', '.join(gone)} "
+                         f"({len(keep)} domains, {len(keep) * (len(keep) - 1)} shifts)}}}} \\\\")
+            lines.append("\\midrule")
+            for m in MODEL_ORDER:
+                if m not in gs.index:
+                    continue
+                r = gs.loc[m]
+                lines.append(
+                    f"{MODEL_LABEL[m]} & {fmt(r.SS, r.SS_sd)} & {fmt(r.ST, r.ST_sd)} & {100 * r.dS:.1f} & "
+                    f"{100 * r.WSD:.1f} & {100 * r.WTD:.1f} & {fmt(r.pos_dT, pct=True)} & "
+                    f"{fmt(r.harder_target, pct=True)} & {rob_str(m, r, length_ss(tid, keep))} \\\\")
+                if m in ("Length-only", "mBERT"):
+                    lines.append("\\midrule")
         (OUT / f"results_{tid}.tex").write_text(
             "\\begin{tabular}{lcccccccc}\n\\toprule\n"
             "Model & SS & ST & $\\overline{\\Delta_S}$ & WSD & WTD & $\\Delta_T{>}0$\\,\\% & Harder-tgt\\,\\% & \\%Rob \\\\\n"
@@ -401,6 +422,18 @@ def value_table():
         v[f"{r.task}.maj"], v[f"{r.task}.rand"] = f"{r.majority:.3f}", f"{r.random:.3f}"
     for r in pd.read_csv(ANALYSIS / "table_organic_only.csv").itertuples():
         put_stats(f"org.{r.task}.{r.model}", r)
+    sens = pd.read_csv(ANALYSIS / "table_sensitivity.csv")
+    for r in sens.itertuples():
+        put_stats(f"sens.{r.task}.{r.model}", r)
+    for tid, g in sens.groupby("task"):
+        for fam in ("ft", "llm"):
+            s = g[g.family == fam]
+            v[f"range.sens.{tid}.{fam}.SS"] = f"{s.SS.min():.3f}--{s.SS.max():.3f}"
+            v[f"range.sens.{tid}.{fam}.ST"] = f"{s.ST.min():.3f}--{s.ST.max():.3f}"
+            v[f"range.sens.{tid}.{fam}.dS"] = f"{pp(s.dS.min())}--{pp(s.dS.max())}"
+            v[f"range.sens.{tid}.{fam}.harder"] = f"{100 * s.harder_target.min():.0f}--{100 * s.harder_target.max():.0f}"
+    ft = main[main.family == "ft"]
+    v["all.ft.hardermaxnoPRB"] = f"{100 * max(ft[ft.task != 'R-P3'].harder_target.max(), sens[sens.family == 'ft'].harder_target.max()):.0f}"
     bt = pd.read_csv(ANALYSIS / "bootstrap_ft_vs_llm.csv")
     for r in bt.itertuples():
         k = f"boot.{r.task}.{r.a}.{r.b}"
@@ -434,8 +467,42 @@ def value_table():
     for k, x in compute_stats().items():
         v[f"compute.{k}"] = str(x)
     v.update(shortcuts_table())
-    body = "\n".join(f"\\expandafter\\def\\csname v@{k}\\endcsname{{{x}}}" for k, x in sorted(v.items()))
+    v.update(annotation_table())
+    body ="\n".join(f"\\expandafter\\def\\csname v@{k}\\endcsname{{{x}}}" for k, x in sorted(v.items()))
     (OUT / "values.tex").write_text(body + "\n", encoding="utf-8")
+    return v
+
+
+def annotation_table():
+    """Second-annotator check of the generated domains (scripts/make_annotation_sample.py).
+    Returns no keys until the sheet has been scored, so the paper text that reports it
+    (guarded by \\ifcsname v@ann.all.kappa) stays out of the PDF until then."""
+    p = ANALYSIS / "second_annotator" / "agreement.csv"
+    if not p.exists():
+        (OUT / "annotation.tex").write_text("", encoding="utf-8")
+        return {}
+    a = pd.read_csv(p)
+    lines = [f"{r.domain} & {r.n} & {100 * r.agreement:.1f} & {r.kappa:.2f} \\\\"
+             for r in a[a.domain != "ALL"].itertuples()]
+    r = a[a.domain == "ALL"].iloc[0]
+    lines += ["\\midrule", f"All & {r.n} & {100 * r.agreement:.1f} & {r.kappa:.2f} \\\\"]
+    (OUT / "annotation.tex").write_text(
+        "\\begin{tabular}{lrrr}\n\\toprule\nDomain & $N$ & Agreement\\,\\% & $\\kappa$ \\\\\n\\midrule\n"
+        + "\n".join(lines) + "\n\\bottomrule\n\\end{tabular}\n", encoding="utf-8")
+    # direction of the disagreements: how many times the annotator chose the milder label
+    sa = ANALYSIS / "second_annotator"
+    m = (pd.read_excel(sa / "answer" / "sheet.xlsx", dtype=str, keep_default_na=False)
+         .assign(item_id=lambda d: d.item_id.astype(int))
+         .merge(pd.read_csv(sa / "key.csv", encoding="utf-8-sig"), on="item_id"))
+    m = m[m.annotator_label.str.strip() != ""]
+    dis = m[m.annotator_label.str.strip().str.lower() != m.gold.str.lower()]
+    milder = {("hate", "normal"), ("abusive", "normal"), ("negative", "neutral"), ("positive", "neutral")}
+    n_mild = sum((g.lower(), x.strip().lower()) in milder for g, x in zip(dis.gold, dis.annotator_label))
+    v = {"ann.all.n": str(int(r.n)), "ann.all.agree": f"{100 * r.agreement:.1f}",
+         "ann.all.kappa": f"{r.kappa:.2f}",
+         "ann.dom.kappamin": f"{a[a.domain != 'ALL'].kappa.min():.2f}",
+         "ann.dom.kappamax": f"{a[a.domain != 'ALL'].kappa.max():.2f}",
+         "ann.dis.n": str(len(dis)), "ann.dis.milder": str(n_mild)}
     return v
 
 

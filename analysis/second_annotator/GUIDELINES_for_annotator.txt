@@ -1,0 +1,48 @@
+Labelling guide: second-annotator check of generated Urdu data
+
+Thank you for helping. The file sheet.xlsx has 330 short items in Urdu (Nastaliq) and
+Roman Urdu. Each one was written by an AI system (Grok) and given a label. We want to
+know whether an independent native speaker agrees with those labels. You will not see
+the original labels. That is deliberate, so please don't ask about them until you finish.
+
+Content warning: some items are hateful, abusive or insulting, including about religion,
+ethnicity and public figures. You can take breaks or stop at any time.
+
+What to fill in (three columns; the first two have drop-down lists):
+
+1. annotator_label: the label you think is correct, chosen from allowed_labels.
+2. natural: "yes" if a real person could plausibly have written this text (on social
+   media, in a review, in a quiz and so on), "no" if it reads as artificial or machine-like.
+3. comment: optional. Use it when an item is unclear, could fit two labels, or has a
+   language problem.
+
+Work alone. Don't discuss items with anyone, including me, until the sheet is finished.
+If an item is unclear, choose the label that fits best and explain in the comment. Please
+don't leave any item without a label.
+
+What the labels mean
+
+Sentiment (Negative / Positive)
+  Does the text express a negative or a positive view?
+
+3-class polarity (Negative / Neutral / Positive)
+  Neutral means no clear opinion: a fact, a question, or a mixed or balanced remark.
+
+Hate speech (Normal / Hate)
+  Hate: the text attacks, insults, demeans or threatens a person or group, or uses slurs.
+  Criticism, complaint or disagreement on its own, without an attack, is Normal.
+
+Cyber abuse (Normal / Abusive)
+  Abusive: the text insults, harasses, swears at or threatens someone (for example a
+  content creator or another commenter). Rude but non-abusive feedback is Normal.
+
+QA pair validation (Invalid / Valid)
+  Each item has a question and an answer. Valid: the answer actually answers this
+  question (even if briefly). Invalid: the answer belongs to a different question.
+
+When you finish
+  Save the file as sheet.xlsx (keep the Excel format, don't convert it to CSV) and send it back.
+  It should take about 2 to 3 hours. You can do it in several sittings.
+
+Your name will appear in the paper as the second annotator and in the acknowledgments.
+Tell me if you would rather not be named.
